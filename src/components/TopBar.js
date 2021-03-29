@@ -28,6 +28,7 @@ export default function TopBar(props) {
           <IconButton aria-label="home page" color="inherit" href="/">
             <HomeIcon />
           </IconButton>
+          {props.isAuthenticated ? null : <Button disabled color="inherit" href="/register">Register</Button>}
           {props.isAuthenticated ? null : <Button color="inherit" href="/login">Login</Button>}
           {props.isAuthenticated ? <Button color="inherit" href="/update_password">Update Password</Button> : null}
           {props.isAuthenticated ? <Button color="inherit" onClick={() => props.logout()}>Logout</Button> : null}

@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import authReducer from './store/authReducer';
 import reportWebVitals from './reportWebVitals';
+import {Container} from "@material-ui/core";
 
 
 const reducer = combineReducers({ auth: authReducer }); // Using Combine Reducers here although only one reducer is present.
@@ -20,7 +21,9 @@ const store = createStore(reducer, composeEnhanced(applyMiddleware(thunk))); // 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+        <Container maxWidth="xl">
+            <App />
+        </Container>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
