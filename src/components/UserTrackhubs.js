@@ -9,6 +9,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Chips from "./Chips";
 
 const useStyles = makeStyles({
     table: {
@@ -26,30 +29,44 @@ export default function UserTrackhubs(props) {
         <Container component="main" maxWidth="lg">
 
             <Typography component="h1" variant="h5">
-                Your track collections
-            </Typography>
+                Your Track Collections
+            </Typography><br/>
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell>#</TableCell>
-                            <TableCell align="right">Hub</TableCell>
-                            <TableCell align="right">Assembly</TableCell>
-                            <TableCell align="right">Schema</TableCell>
-                            <TableCell align="right">Created</TableCell>
+                            <TableCell align="center">Hub</TableCell>
+                            <TableCell align="center">Assembly</TableCell>
+                            <TableCell align="center">Schema</TableCell>
+                            <TableCell align="center">Created</TableCell>
+                            <TableCell align="center">Updated</TableCell>
+                            <TableCell align="center">Status</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {UserHubs.map((hub) => (
-                            <TableRow key={hub.hub_id}>
-                                <TableCell component="th" scope="row">
-                                    {hub.hub_id}
-                                </TableCell>
-                                <TableCell align="right">{hub.name}</TableCell>
-                                <TableCell align="right">{hub.fat}</TableCell>
-                                <TableCell align="right">{hub.carbs}</TableCell>
-                                <TableCell align="right">{hub.protein}</TableCell>
-                            </TableRow>
+                            hub.trackdbs.map((trackdb) => (
+                                <TableRow key={trackdb.trackdb_id}>
+                                    <TableCell component="th" scope="row">
+                                        {trackdb.trackdb_id}
+                                    </TableCell>
+                                    <TableCell align="center">{hub.name}</TableCell>
+                                    <TableCell align="center">{trackdb.assembly}</TableCell>
+                                    <TableCell align="center">{trackdb.schema}</TableCell>
+                                    <TableCell align="center">{trackdb.created}</TableCell>
+                                    <TableCell align="center">{trackdb.updated}</TableCell>
+                                    <TableCell align="center">
+                                        <Chips trackdbStatus={trackdb.status}></Chips>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <VisibilityIcon color="disabled"/>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <DeleteIcon color="disabled"/>
+                                    </TableCell>
+                                </TableRow>
+                            ))
                         ))}
                     </TableBody>
                 </Table>

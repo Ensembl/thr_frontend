@@ -2,9 +2,10 @@ import React from "react";
 import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 import Login from "./components/Login";
 import Home from "./components/Home";
-import User from "./components/User";
+import UserTabs from "./components/UserTabs";
 import PasswordUpdate from "./components/PasswordUpdate";
 import Register from "./components/Register";
+import User from "./components/User";
 
 
 // A wrapper for <Route> that redirects to the login screen if you're not yet authenticated.
