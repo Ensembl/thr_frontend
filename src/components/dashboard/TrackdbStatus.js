@@ -17,14 +17,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Chips({trackdbStatus}) {
+export default function TrackdbStatus({trackdbStatus}) {
     const classes = useStyles();
     let status;
 
     // TODO: Work on this after doing the appropriate changes to the API
-    if (trackdbStatus == '' || trackdbStatus == undefined) {
-        status = <Chip icon={<ErrorOutlineIcon/>} label="Unknown"/>
-    } else if (trackdbStatus == 'ok') {
+    if (trackdbStatus === '' || trackdbStatus === undefined) {
+        status = <Chip icon={<ErrorOutlineIcon/>} label="Unchecked"/>
+    } else if (trackdbStatus === 'ok') {
         status = <Chip
             icon={<CheckCircleOutlineIcon/>}
             label="All is Well"
@@ -33,7 +33,7 @@ export default function Chips({trackdbStatus}) {
             color="primary"
             clickable
         />
-    } else if (trackdbStatus == 'error') {
+    } else if (trackdbStatus === 'error') {
         status = <Chip
             icon={<HighlightOffIcon/>}
             label="Remote Data Unavailable"

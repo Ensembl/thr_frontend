@@ -10,8 +10,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Chips from "./Chips";
+import Chips from "./TrackdbStatus";
+import * as settings from "../../settings";
+import axios from "axios";
+import AlertDialog from "./DeleteTrackdbAlert";
 
 const useStyles = makeStyles({
     table: {
@@ -23,7 +25,32 @@ const useStyles = makeStyles({
 export default function UserTrackhubs(props) {
     const classes = useStyles();
 
-    const {UserHubs} = props;
+    const {userHubs} = props;
+
+    const handleDeleteTrackdb = trackdb_id => {
+
+        console.log("trackdb_id --> ", trackdb_id)
+
+        const token = localStorage.getItem('token');
+        const apiUrlDeleteTrackdb = `${settings.API_SERVER}/api/trackdboooo/${trackdb_id}`;
+
+        console.log("apiUrlDeleteTrackdb --> ", apiUrlDeleteTrackdb)
+
+        axios.delete(apiUrlDeleteTrackdb, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${token}`
+                }
+            }
+        )
+        .then(response => {
+            // console.log("getUserHubs response ---> ", response)
+            this.setState({userHubs: response.data});
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    }
 
     return (
         <Container component="main" maxWidth="lg">
@@ -45,7 +72,7 @@ export default function UserTrackhubs(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {UserHubs.map((hub) => (
+                        {userHubs.map((hub) => (
                             hub.trackdbs.map((trackdb) => (
                                 <TableRow key={trackdb.trackdb_id}>
                                     <TableCell component="th" scope="row">
@@ -63,7 +90,7 @@ export default function UserTrackhubs(props) {
                                         <VisibilityIcon color="disabled"/>
                                     </TableCell>
                                     <TableCell align="center">
-                                        <DeleteIcon color="disabled"/>
+                                        <AlertDialog trackdbId={trackdb.trackdb_id}></AlertDialog>
                                     </TableCell>
                                 </TableRow>
                             ))

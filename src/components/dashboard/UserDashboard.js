@@ -6,11 +6,11 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Breadcrumbs from "./Breadcrumbs";
+import Breadcrumbs from "../Breadcrumbs";
 import UserProfile from "./UserProfile";
 import UserTrackhubs from "./UserTrackhubs";
 import {withStyles} from "@material-ui/core/styles";
-import * as settings from "../settings";
+import * as settings from "../../settings";
 import axios from "axios";
 import SubmitHub from "./SubmitHub";
 
@@ -54,14 +54,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-class User extends Component {
+class UserDashboard extends Component {
 
     constructor() {
         super();
         this.state = {
             userInfo: [],
-            UserHubs: [],
-            value: 0
+            userHubs: [],
+            value: 1
         };
     }
 
@@ -98,8 +98,8 @@ class User extends Component {
             }
         )
         .then(response => {
-            console.log("getUserHubs response ---> ", response)
-            this.setState({UserHubs: response.data});
+            // console.log("getUserHubs response ---> ", response)
+            this.setState({userHubs: response.data});
         })
         .catch(err => {
             console.log(err)
@@ -113,7 +113,6 @@ class User extends Component {
 
     render() {
         const {classes} = this.props;
-        console.log('this.state.UserHubs -->', this.state.UserHubs)
         const handleChange = (event, newValue) => {
             this.setState({
                 value: newValue
@@ -134,7 +133,7 @@ class User extends Component {
                     <UserProfile userInfo = {this.state.userInfo}></UserProfile>
                 </TabPanel>
                 <TabPanel value={this.state.value} index={1}>
-                    <UserTrackhubs UserHubs = {this.state.UserHubs}></UserTrackhubs>
+                    <UserTrackhubs userHubs = {this.state.userHubs}></UserTrackhubs>
                 </TabPanel>
                 <TabPanel value={this.state.value} index={2}>
                     <SubmitHub></SubmitHub>
@@ -144,4 +143,4 @@ class User extends Component {
     }
 }
 
-export default withStyles(useStyles)(User);
+export default withStyles(useStyles)(UserDashboard);
