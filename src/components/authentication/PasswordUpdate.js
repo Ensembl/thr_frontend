@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.success.main,
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -124,13 +124,14 @@ function PasswordUpdate(props) {
             helperText={new_password1 !== new_password2 ? "Passwords don't match" : null}
           />
           <Button
+            disabled
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
           >
-            Update Password
+            Update
           </Button>
         </form>
       </div>
