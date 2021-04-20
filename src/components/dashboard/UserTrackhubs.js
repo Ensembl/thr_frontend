@@ -35,6 +35,9 @@ const useStyles = makeStyles({
     table: {
         minWidth: 650,
     },
+    root: {
+        marginTop: '30px'
+    }
 });
 
 
@@ -59,61 +62,62 @@ export default function UserTrackhubs(props) {
                 }
             }
         )
-        .then(response => {
-            // console.log("getUserHubs response ---> ", response)
-            this.setState({userHubs: response.data});
-        })
-        .catch(err => {
-            console.log(err)
-        });
+            .then(response => {
+                // console.log("getUserHubs response ---> ", response)
+                this.setState({userHubs: response.data});
+            })
+            .catch(err => {
+                console.log(err)
+            });
     }
 
     return (
         <Container component="main" maxWidth="lg">
-
-            <Typography component="h1" variant="h5">
-                Your Track Collections
-            </Typography><br/>
-            <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>#</TableCell>
-                            <TableCell align="center">Hub</TableCell>
-                            <TableCell align="center">Assembly</TableCell>
-                            <TableCell align="center">Schema</TableCell>
-                            <TableCell align="center">Created</TableCell>
-                            <TableCell align="center">Updated</TableCell>
-                            <TableCell align="center">Status</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {userHubs.map((hub) => (
-                            hub.trackdbs.map((trackdb) => (
-                                <TableRow key={trackdb.trackdb_id}>
-                                    <TableCell component="th" scope="row">
-                                        {trackdb.trackdb_id}
-                                    </TableCell>
-                                    <TableCell align="center">{hub.name}</TableCell>
-                                    <TableCell align="center">{trackdb.assembly}</TableCell>
-                                    <TableCell align="center">{trackdb.schema}</TableCell>
-                                    <TableCell align="center">{trackdb.created}</TableCell>
-                                    <TableCell align="center">{trackdb.updated}</TableCell>
-                                    <TableCell align="center">
-                                        <Chips trackdbStatus={trackdb.status}></Chips>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                        <VisibilityIcon color="disabled"/>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                        <AlertDialog trackdbId={trackdb.trackdb_id}></AlertDialog>
-                                    </TableCell>
-                                </TableRow>
-                            ))
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <div className={classes.root}>
+                <Typography component="h1" variant="h5">
+                    Your Track Collections
+                </Typography><br/>
+                <TableContainer component={Paper}>
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>#</TableCell>
+                                <TableCell align="center">Hub</TableCell>
+                                <TableCell align="center">Assembly</TableCell>
+                                <TableCell align="center">Schema</TableCell>
+                                <TableCell align="center">Created</TableCell>
+                                <TableCell align="center">Updated</TableCell>
+                                <TableCell align="center">Status</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {userHubs.map((hub) => (
+                                hub.trackdbs.map((trackdb) => (
+                                    <TableRow key={trackdb.trackdb_id}>
+                                        <TableCell component="th" scope="row">
+                                            {trackdb.trackdb_id}
+                                        </TableCell>
+                                        <TableCell align="center">{hub.name}</TableCell>
+                                        <TableCell align="center">{trackdb.assembly}</TableCell>
+                                        <TableCell align="center">{trackdb.schema}</TableCell>
+                                        <TableCell align="center">{trackdb.created}</TableCell>
+                                        <TableCell align="center">{trackdb.updated}</TableCell>
+                                        <TableCell align="center">
+                                            <Chips trackdbStatus={trackdb.status.message}></Chips>
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <VisibilityIcon color="disabled"/>
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <AlertDialog trackdbId={trackdb.trackdb_id}></AlertDialog>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
         </Container>
     );
 }

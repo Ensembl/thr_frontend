@@ -22,13 +22,14 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Breadcrumbs from "../Breadcrumbs";
+import MainBreadcrumbs from "../Breadcrumbs";
 import UserProfile from "./UserProfile";
 import UserTrackhubs from "./UserTrackhubs";
 import {withStyles} from "@material-ui/core/styles";
 import * as settings from "../../settings";
 import axios from "axios";
 import SubmitHub from "./SubmitHub";
+import Paper from '@material-ui/core/Paper';
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -42,8 +43,10 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box p={3}>
-                    <Typography>{children}</Typography>
+                // Edited the original template to fix warnings
+                // https://github.com/mui-org/material-ui/issues/21015#issuecomment-663208786
+                <Box>
+                    {children}
                 </Box>
             )}
         </div>
@@ -137,14 +140,14 @@ class UserDashboard extends Component {
 
         return (
             <div className={classes.root}>
-                <Breadcrumbs></Breadcrumbs>
-                <AppBar position="static">
+                <MainBreadcrumbs></MainBreadcrumbs>
+                <Paper square>
                     <Tabs value={this.state.value} onChange={handleChange} aria-label="simple tabs example">
                         <Tab label="Profile" {...a11yProps(0)} />
                         <Tab label="My track collections" {...a11yProps(1)} />
                         <Tab label="Submit/Update" {...a11yProps(2)} />
                     </Tabs>
-                </AppBar>
+                </Paper>
                 <TabPanel value={this.state.value} index={0}>
                     <UserProfile userInfo = {this.state.userInfo}></UserProfile>
                 </TabPanel>

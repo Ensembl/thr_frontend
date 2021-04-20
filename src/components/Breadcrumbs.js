@@ -18,19 +18,36 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
+import {makeStyles} from "@material-ui/core/styles";
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        margin: "10px",
+        padding: "6px 12px",
+        border: "1px solid #cccccc",
+        borderRadius: "4px",
+        backgroundColor: "#f5f5f5",
+        // color: "#555555",
+        fontSize: "14px",
+    },
+}));
+
 
 function handleClick(event) {
-  event.preventDefault();
-  console.info('You clicked a breadcrumb.');
+    event.preventDefault();
+    console.info('You clicked a breadcrumb.');
 }
 
-export default function SimpleBreadcrumbs() {
-  return (
-    <Breadcrumbs color="primary" aria-label="breadcrumb">
-      <Link color="inherit" href="#" onClick={handleClick}>
-        Home
-      </Link>
-      <Typography color="textPrimary">Dashboard</Typography>
-    </Breadcrumbs>
-  );
+export default function MainBreadcrumbs() {
+    const classes = useStyles();
+
+    return (
+        <Breadcrumbs color="primary" aria-label="breadcrumb" className={classes.root}>
+            <Link color="inherit" href="#" onClick={handleClick}>
+                Home
+            </Link>
+            <Typography color="textPrimary">Dashboard</Typography>
+        </Breadcrumbs>
+    );
 }

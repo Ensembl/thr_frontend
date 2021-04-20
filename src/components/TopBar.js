@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    fontWeight: 800,
+    fontStyle: "italic",
+    textDecoration: "none !important",
   },
 }));
 
@@ -39,7 +42,7 @@ export default function TopBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            The Track Hub Registry
+            <a href="/">The Track Hub Registry</a>
           </Typography>
           <IconButton aria-label="home page" color="inherit" href="/">
             <HomeIcon />

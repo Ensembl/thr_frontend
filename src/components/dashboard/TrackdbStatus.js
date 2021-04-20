@@ -30,16 +30,27 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(0.5),
         },
     },
+    status_error: {
+        backgroundColor: theme.palette.error.main,
+        color: "white"
+    },
+    status_success: {
+        backgroundColor: theme.palette.success.main,
+        color: "white"
+    },
+    status_unchecked: {
+        backgroundColor: theme.palette.default.main,
+        color: "white"
+    }
 }));
 
 export default function TrackdbStatus({trackdbStatus}) {
     const classes = useStyles();
     let status;
 
-    // TODO: Work on this after doing the appropriate changes to the API
-    if (trackdbStatus === '' || trackdbStatus === undefined) {
+    if (trackdbStatus === "" || trackdbStatus === undefined) {
         status = <Chip icon={<ErrorOutlineIcon/>} label="Unchecked"/>
-    } else if (trackdbStatus === 'ok') {
+    } else if (trackdbStatus === 'All is Well') {
         status = <Chip
             icon={<CheckCircleOutlineIcon/>}
             label="All is Well"
@@ -48,14 +59,11 @@ export default function TrackdbStatus({trackdbStatus}) {
             color="primary"
             clickable
         />
-    } else if (trackdbStatus === 'error') {
+    } else if (trackdbStatus === "Remote Data Unavailable") {
         status = <Chip
-            icon={<HighlightOffIcon/>}
+            className={classes.status_error}
+            icon={<HighlightOffIcon className={classes.status_error}/>}
             label="Remote Data Unavailable"
-            component="a"
-            href="#"
-            color="secondary"
-            clickable
         />
     }
 

@@ -25,22 +25,23 @@ import Avatar from "@material-ui/core/Avatar";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.dark,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    paper: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop: '30px'
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.primary.dark,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
 }));
 
 const handleSubmit = (e) => {
@@ -56,7 +57,7 @@ const UserProfile = (props) => {
             <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <AccountCircleIcon />
+                    <AccountCircleIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Profile
@@ -64,30 +65,35 @@ const UserProfile = (props) => {
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <TextField
                         disabled
-                        id="standard-basic"
+                        id="username"
                         label="Username"
                         value={userInfo.username || ''}
                         fullWidth
                         margin="normal"
                     />
                     <TextField
-                        disabled
-                        id="standard-basic"
+                        id="firstname"
                         label="First Name"
                         value={userInfo.first_name || ''}
                         fullWidth
                         margin="normal"
                     />
                     <TextField
-                        disabled
-                        id="standard-basic"
+                        id="lastname"
                         label="Last Name"
                         value={userInfo.last_name || ''}
                         fullWidth
                         margin="normal"
                     />
                     <TextField
-                        id="standard-basic"
+                        id="affiliation"
+                        label="Affiliation"
+                        value={userInfo.affiliation || ''}
+                        fullWidth
+                        margin="normal"
+                    />
+                    <TextField
+                        id="email"
                         label="Email"
                         value={userInfo.email || ''}
                         fullWidth

@@ -22,10 +22,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DeleteIcon from "@material-ui/icons/Delete";
 import * as settings from "../../settings";
 import axios from "axios";
+import {makeStyles} from "@material-ui/core/styles";
 
-// TODO: Check this out
-// Remain on same TabPanel after Refresh on React
-// https://stackoverflow.com/questions/66717404/remain-on-same-tabpanel-after-refresh-on-react
 
 export default function DeleteTrackdbAlert({trackdbId}) {
 
@@ -62,8 +60,8 @@ export default function DeleteTrackdbAlert({trackdbId}) {
     return (
         <div>
             {/*<DeleteIcon onClick={() => handleDeleteTrackdb(trackdb.trackdb_id)}/>*/}
-            <Button color="secondary" onClick={handleClickOpen}>
-                <DeleteIcon></DeleteIcon>
+            <Button onClick={handleClickOpen}>
+                <DeleteIcon style={{ color: 'red' }}></DeleteIcon>
             </Button>
             <Dialog
                 open={open}
@@ -73,10 +71,10 @@ export default function DeleteTrackdbAlert({trackdbId}) {
             >
                 <DialogTitle id="alert-dialog-title">{"Delete this trackdb?"}</DialogTitle>
                 <DialogActions>
-                    <Button onClick={handleYes} color="primary">
+                    <Button onClick={handleYes} style={{ color: 'red' }}>
                         Yes
                     </Button>
-                    <Button onClick={handleClose} color="contrast" autoFocus>
+                    <Button onClick={handleClose} color="default" autoFocus>
                         Cancel
                     </Button>
                 </DialogActions>

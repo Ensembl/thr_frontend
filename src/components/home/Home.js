@@ -20,17 +20,36 @@ import NestedGrid from "./NestedGrid";
 import SearchForm from "./SearchForm";
 import Divider from "@material-ui/core/Divider";
 import {makeStyles} from "@material-ui/core/styles";
+import {Paper} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     main: {
-        padding: '2px 4px',
+        padding: '50px',
+        paddingTop: '5px',
         alignItems: 'center',
-        width: '70%',
+        width: '90%',
+        marginTop: '30px',
         margin: 'auto',
         textAlign: "center",
+        backgroundColor: "white"
+    },
+    title: {
+        fontWeight: 300,
+        lineHeight: '75px',
+        fontSize: '68px'
+    },
+    subtitle: {
+        fontWeight: 300,
+        lineHeight: '29px',
+        fontSize: '26px'
+    },
+    description: {
+        fontWeight: 300,
+        lineHeight: '26px',
+        fontSize: '18px'
     },
     divider: {
-        height: 2,
+        height: 1,
         margin: 'auto',
         width: 200,
     },
@@ -44,20 +63,22 @@ function Home() {
             <CssBaseline/>
             <div>
                 <div className={classes.main}>
-                    <h1>The Track Hub Registry</h1>
-                    <h3>A global centralised collection of publicly accessible track hubs</h3>
-                    <p>
+                    <h1 className={classes.title}>The Track Hub Registry</h1>
+                    <h3 className={classes.subtitle}>A global centralised collection of publicly accessible track
+                        hubs</h3>
+
+                    <Divider className={classes.divider} orientation="horizontal"/>
+
+                    <p className={classes.description}>
                         The goal of the Track Hub Registry is to allow third parties to advertise <a
                         href="http://genome.ucsc.edu/goldenPath/help/hgTrackHubHelp.html#Intro" target="_blank">track
-                        hubs</a>, and to make it easier for researchers around the world to discover and use track hubs
+                        hubs</a>, and to make it easier for researchers around the world to discover and use track
+                        hubs
                         containing different types of genomic research data.
                     </p>
+                    <SearchForm></SearchForm>
                 </div>
-
                 <br/>
-                <SearchForm></SearchForm>
-                <br/>
-                <Divider className={classes.divider} orientation="horizontal"/>
                 <br/>
                 <NestedGrid></NestedGrid>
             </div>

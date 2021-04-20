@@ -25,7 +25,7 @@ import thunk from 'redux-thunk';
 import authReducer from './store/authReducer';
 import reportWebVitals from './reportWebVitals';
 import {Container} from "@material-ui/core";
-
+import 'typeface-open-sans';
 
 const reducer = combineReducers({ auth: authReducer }); // Using Combine Reducers here although only one reducer is present.
 // Official explanation here: https://react-redux.js.org/using-react-redux/connect-mapstate#mapstatetoprops-will-not-run-if-the-store-state-is-the-same
