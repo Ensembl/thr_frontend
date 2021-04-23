@@ -70,48 +70,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-const getUserHubs = () => {
-    const token = localStorage.getItem('token');
-    const apiUrlUserHubs = `${settings.API_SERVER}/api/trackhub/`;
-
-    axios.get(apiUrlUserHubs, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Token ${token}`
-            }
-        }
-    )
-        .then(response => {
-            // console.log("getUserHubs response ---> ", response)
-            this.setState({userHubs: response.data});
-        })
-        .catch(err => {
-            console.log(err)
-        });
-}
-
 export default function UserDashboard() {
     const classes = useStyles();
     const [value, setValue] = React.useState(1);
 
     const token = localStorage.getItem('token');
     const header = {'Content-Type': 'application/json', 'Authorization': `Token ${token}`}
-
-    // Get the user profile info
-    const apiUrlUserInfo = `${settings.API_SERVER}/api/user/`;
-    const [userInfo, setUserInfo] = React.useState([])
-
-    useEffect(() => {
-        axios.get(apiUrlUserInfo, {headers: header})
-            .then(response => {
-                // console.log("getUserInfo response ---> ", response)
-                setUserInfo(response.data);
-            })
-            .catch(err => {
-                console.log(err)
-            });
-    }, [])
 
     // Get the user track collections
     const apiUrlUserHubs = `${settings.API_SERVER}/api/trackhub/`;
@@ -142,7 +106,7 @@ export default function UserDashboard() {
                 </Tabs>
             </Paper>
             <TabPanel value={value} index={0}>
-                <UserProfile userInfo={userInfo}></UserProfile>
+                <UserProfile></UserProfile>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <UserTrackhubs userHubs={userHubs}></UserTrackhubs>
