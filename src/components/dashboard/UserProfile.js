@@ -199,7 +199,11 @@ const UserProfile = () => {
                     //  1. refresh the page after update
                     //  2. show alert after every update click
                     //  3. auto hide 'success' alert message after few seconds?
-                    message && <Alerts message={message}></Alerts>
+                    message &&
+                    <Alerts
+                        messageType={'success'}
+                        message={message.success}
+                    ></Alerts>
                 }
             </div>
         </Container>
