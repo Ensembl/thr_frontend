@@ -32,23 +32,23 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(1),
     },
     paperContent: {
-        margin: '15px',
+        margin: "15px",
         fontWeight: 300,
     },
     title: {
         fontWeight: 300,
-        lineHeight: '35px',
-        fontSize: '32px',
+        lineHeight: "35px",
+        fontSize: "32px",
     },
     quote: {
-        lineHeight: '26px',
-        fontSize: '19px',
+        lineHeight: "26px",
+        fontSize: "19px",
         fontStyle: "italic",
     },
     text: {
         fontWeight: 300,
-        lineHeight: '26px',
-        fontSize: '14px',
+        lineHeight: "26px",
+        fontSize: "14px",
     },
     largeIcon: {
         fontSize: 40,

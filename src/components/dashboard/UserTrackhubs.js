@@ -26,10 +26,11 @@ import Paper from '@material-ui/core/Paper';
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import Chips from "./TrackdbStatus";
+import Chips from "./TrackdbStatusChip";
 import * as settings from "../../settings";
 import axios from "axios";
 import AlertDialog from "./DeleteTrackdbAlert";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles({
     table: {
@@ -106,7 +107,9 @@ export default function UserTrackhubs(props) {
                                             <Chips trackdbStatus={trackdb.status.message}></Chips>
                                         </TableCell>
                                         <TableCell align="center">
-                                            <VisibilityIcon color="disabled"/>
+                                            <Link to={`/trackhub_view/${trackdb.trackdb_id}`} target="_blank">
+                                                <VisibilityIcon color="primary"/>
+                                            </Link>
                                         </TableCell>
                                         <TableCell align="center">
                                             <AlertDialog trackdbId={trackdb.trackdb_id}></AlertDialog>

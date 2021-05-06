@@ -28,26 +28,19 @@ const useStyles = makeStyles((theme) => ({
         border: "1px solid #cccccc",
         borderRadius: "4px",
         backgroundColor: "#f5f5f5",
-        // color: "#555555",
         fontSize: "14px",
     },
 }));
 
-
-function handleClick(event) {
-    event.preventDefault();
-    console.info('You clicked a breadcrumb.');
-}
-
-export default function MainBreadcrumbs() {
+export default function MainBreadcrumb(props) {
     const classes = useStyles();
+
+    const { item } = props
 
     return (
         <Breadcrumbs color="primary" aria-label="breadcrumb" className={classes.root}>
-            <Link color="inherit" href="#" onClick={handleClick}>
-                Home
-            </Link>
-            <Typography color="textPrimary">Dashboard</Typography>
+            <Link color="inherit" href="/">Home</Link>
+            <Typography color="textPrimary">{ item }</Typography>
         </Breadcrumbs>
     );
 }

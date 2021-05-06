@@ -21,6 +21,8 @@ import Home from "./components/home/Home";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
 import Register from "./components/authentication/Register";
 import UserDashboard from "./components/dashboard/UserDashboard";
+import MainView from "./components/trackhub_view/MainView";
+import NotFound from "./components/NotFound";
 
 
 // A wrapper for <Route> that redirects to the login screen if you're not yet authenticated.
@@ -52,12 +54,19 @@ function Urls(props) {
                     <Home exact path="/"> <Home {...props} /></Home>
                     <Route exact path="/login/"> <Login {...props} /></Route>
                     <Route exact path="/register/"> <Register {...props} /></Route>
+                    {/*
+                    more details here: https://stackoverflow.com/a/53694210/4488332
+                    and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/
+                    */}
+                    <Route path="/trackhub_view/:id" component={MainView}></Route>
                     <PrivateRoute exact path="/update_password/" isAuthenticated={props.isAuthenticated}>
                         <PasswordUpdate {...props}/>
                     </PrivateRoute>
                     <PrivateRoute exact path="/user/" isAuthenticated={props.isAuthenticated}>
                         <UserDashboard {...props}/>
                     </PrivateRoute>
+                    <Route path="/404" component={NotFound}/>
+                    <Redirect to="/404"/>
                 </Switch>
             </BrowserRouter>
         </div>

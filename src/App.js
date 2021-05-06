@@ -24,7 +24,8 @@ import './static/css/style.css';
 
 import {ThemeProvider} from '@material-ui/styles';
 // Fix findDOMNode is deprecated in StrictMode: https://stackoverflow.com/q/61220424/4488332
-import {unstable_createMuiStrictModeTheme as createMuiTheme} from '@material-ui/core/styles';
+// import {unstable_createMuiStrictModeTheme as createMuiTheme} from '@material-ui/core/styles';
+import {createMuiTheme} from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
     palette: {

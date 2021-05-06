@@ -17,59 +17,44 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        justifyContent: 'center',
         flexWrap: 'wrap',
         '& > *': {
             margin: theme.spacing(0.5),
         },
+        marginBottom: "15px"
     },
-    status_error: {
-        backgroundColor: theme.palette.error.main,
+    tag_info: {
+        backgroundColor: theme.palette.info.main,
         color: "white"
     },
-    status_success: {
+    tag_success: {
         backgroundColor: theme.palette.success.main,
         color: "white"
     },
-    status_unchecked: {
-        backgroundColor: theme.palette.default.main,
-        color: "white"
-    }
 }));
 
-export default function TrackdbStatus({trackdbStatus}) {
+export default function Tags(props) {
     const classes = useStyles();
-    let status;
-
-    if (trackdbStatus === "" || trackdbStatus === undefined) {
-        status = <Chip icon={<ErrorOutlineIcon/>} label="Unchecked"/>
-    } else if (trackdbStatus === 'All is Well') {
-        status = <Chip
-            icon={<CheckCircleOutlineIcon/>}
-            label="All is Well"
-            component="a"
-            href="#"
-            color="primary"
-            clickable
-        />
-    } else if (trackdbStatus === "Remote Data Unavailable") {
-        status = <Chip
-            className={classes.status_error}
-            icon={<HighlightOffIcon className={classes.status_error}/>}
-            label="Remote Data Unavailable"
-        />
-    }
+    const {hubName, speciesScientificName, assemblyAccession} = props
 
     return (
         <div className={classes.root}>
-            {status}
+            <Chip
+                label={hubName}
+                color="primary"
+            />
+            <Chip
+                className={classes.tag_success}
+                label={speciesScientificName}
+            />
+            <Chip
+                className={classes.tag_info}
+                label={assemblyAccession}
+            />
         </div>
     );
 }
