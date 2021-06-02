@@ -20,7 +20,6 @@ import NestedGrid from "./NestedGrid";
 import SearchForm from "./SearchForm";
 import Divider from "@material-ui/core/Divider";
 import {makeStyles} from "@material-ui/core/styles";
-import {Paper} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     main: {
@@ -76,11 +75,11 @@ function Home() {
                         hubs
                         containing different types of genomic research data.
                     </p>
-                    <SearchForm></SearchForm>
+                    <SearchForm/>
                 </div>
                 <br/>
                 <br/>
-                <NestedGrid></NestedGrid>
+                <NestedGrid/>
             </div>
         </React.Fragment>
     )

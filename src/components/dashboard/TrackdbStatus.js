@@ -52,12 +52,9 @@ export default function TrackdbStatus({trackdbStatus}) {
         status = <Chip icon={<ErrorOutlineIcon/>} label="Unchecked"/>
     } else if (trackdbStatus === 'All is Well') {
         status = <Chip
-            icon={<CheckCircleOutlineIcon/>}
+            className={classes.status_success}
+            icon={<CheckCircleOutlineIcon className={classes.status_success}/>}
             label="All is Well"
-            component="a"
-            href="#"
-            color="primary"
-            clickable
         />
     } else if (trackdbStatus === "Remote Data Unavailable") {
         status = <Chip

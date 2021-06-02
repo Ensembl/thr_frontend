@@ -21,6 +21,7 @@ import Home from "./components/home/Home";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
 import Register from "./components/authentication/Register";
 import UserDashboard from "./components/dashboard/UserDashboard";
+import SearchResult from "./components/trackhub_search/SearchResult";
 
 
 // A wrapper for <Route> that redirects to the login screen if you're not yet authenticated.
@@ -49,9 +50,10 @@ function Urls(props) {
         <div>
             <BrowserRouter>
                 <Switch>
-                    <Home exact path="/"> <Home {...props} /></Home>
+                    <Route exact path="/"> <Home {...props} /></Route>
                     <Route exact path="/login/"> <Login {...props} /></Route>
                     <Route exact path="/register/"> <Register {...props} /></Route>
+                    <Route exact path="/search" component={SearchResult}></Route>
                     <PrivateRoute exact path="/update_password/" isAuthenticated={props.isAuthenticated}>
                         <PasswordUpdate {...props}/>
                     </PrivateRoute>
