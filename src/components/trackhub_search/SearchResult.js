@@ -19,6 +19,7 @@ import Trackdb from './Trackdb';
 import axios from "axios";
 import * as settings from "../../settings";
 import Grid from "@material-ui/core/Grid";
+import Facets from "./Facets";
 
 const SearchResult = ({location}) => {
 
@@ -35,6 +36,7 @@ const SearchResult = ({location}) => {
 
     const [loading, setLoading] = useState(true);
     const [trackdbs, setTrackdbs] = useState([]);
+    const [facets, setFacets] = useState([]);
     const [totalEntries, setTotalEntries] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
 
@@ -47,6 +49,7 @@ const SearchResult = ({location}) => {
         )
             .then(response => {
                 setTrackdbs(response.data.items);
+                setFacets(response.data.facets)
                 setTotalEntries(response.data.total_entries)
                 setLoading(false);
             })
@@ -78,7 +81,7 @@ const SearchResult = ({location}) => {
                         <Grid container spacing={3}>
                             <Grid item xs={3}>
                                 <h1>Filters</h1>
-                                {/*TODO: Facets will be here*/}
+                                <Facets urlParams={urlParams} facetsFilters={facets}></Facets>
                             </Grid>
                             <Grid item xs={9}>
                                 <h1>Search results</h1>

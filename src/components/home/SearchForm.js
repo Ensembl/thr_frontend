@@ -51,7 +51,7 @@ const SearchForm = () => {
 
     const history = useHistory()
 
-    const handleSearch = (e) => {
+    const handleSearch = () => {
         if(searchValue){
             history.push(`/search?q=${searchValue}`)
         } else {
