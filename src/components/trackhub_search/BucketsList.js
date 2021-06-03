@@ -37,6 +37,7 @@ export default function BucketsList({params, facetFilterInfo, filterName}) {
     const history = useHistory()
 
     const handleFilterLinks = (filterValue) => {
+        params.delete('page')
         if(params.has(filterName)){
             history.push(`/search?${params.toString()}`)
         } else {

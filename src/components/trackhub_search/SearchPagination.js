@@ -14,41 +14,51 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
-import {useHistory} from "react-router-dom";
+import {useHistory} from 'react-router-dom';
+import Pagination from '@material-ui/lab/Pagination';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        '& > *': {
-            margin: theme.spacing(0.5),
-        },
+        margin: "auto",
     },
 }));
 
-export default function CurrentFiltersChips({params, filter}) {
+export default function SearchPagination({params, totalEntries}) {
     const classes = useStyles();
 
-    const history = useHistory()
+    const [page, setPage] = React.useState(1);
 
-    const handleDelete = filter => {
-        params.delete(filter)
-        params.delete('page')
-        history.push(`/search?${params.toString()}`)
+    // number of items in each page
+    const PAGE_SIZE = 5
+    // total pages
+    const count = Math.ceil(totalEntries / PAGE_SIZE)
+
+    const pageValue = parseInt(params.get('page')) || 1
+
+    let history = useHistory()
+
+    const handlePageChange = (event, value) => {
+        setPage(value);
+        params.set('page', value);
+        history.push(`/search?${params.toString()}`);
     };
+
+    useEffect(() => {
+        setPage(pageValue);
+    }, [pageValue])
 
     return (
         <div className={classes.root}>
-            <Chip
-                avatar={<Avatar style={{ color: 'white' }}>{filter.charAt(0).toUpperCase()}</Avatar>}
-                label={params.get(filter)}
-                onDelete={() => handleDelete(filter)}
+            <Pagination
+                className="my-3"
+                count={count}
+                page={page}
+                siblingCount={1}
+                shape="rounded"
                 color="primary"
-                variant="outlined"
+                onChange={handlePageChange}
             />
         </div>
     );

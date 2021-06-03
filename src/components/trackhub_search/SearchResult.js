@@ -20,6 +20,7 @@ import axios from "axios";
 import * as settings from "../../settings";
 import Grid from "@material-ui/core/Grid";
 import Facets from "./Facets";
+import SearchPagination from "./SearchPagination";
 
 const SearchResult = ({location}) => {
 
@@ -32,6 +33,7 @@ const SearchResult = ({location}) => {
         'hub': params.get('hub'),
         'assembly': params.get('assembly'),
         'type': params.get('type'),
+        'page': params.get('page') || 1,
     }
 
     const [loading, setLoading] = useState(true);
@@ -41,7 +43,7 @@ const SearchResult = ({location}) => {
     const [errorMessage, setErrorMessage] = useState(null);
 
     useEffect(() => {
-        axios.post(`${settings.API_SERVER}/api/search/`, currentFilters, {
+        axios.post(`${settings.API_SERVER}/api/search/?page=${currentFilters.page}`, currentFilters, {
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -54,16 +56,16 @@ const SearchResult = ({location}) => {
                 setLoading(false);
             })
             .catch(err => {
-                setErrorMessage(Error);
+                setErrorMessage(err.toString());
                 setLoading(false);
-                console.log(err)
             });
     }, [
         currentFilters.query,
         currentFilters.species,
         currentFilters.assembly,
         currentFilters.hub,
-        currentFilters.type
+        currentFilters.type,
+        currentFilters.page
     ]);
 
     return (
@@ -74,14 +76,14 @@ const SearchResult = ({location}) => {
                     loading && !errorMessage ? (
                         <span>loading...</span>
                     ) : errorMessage ? (
-                        <div>{errorMessage}</div>
+                        <h2>{errorMessage}</h2>
                     ) : !totalEntries ? (
                         <h1>No results! Try with another query.</h1>
                     ) : (
                         <Grid container spacing={3}>
                             <Grid item xs={3}>
                                 <h1>Filters</h1>
-                                <Facets urlParams={urlParams} facetsFilters={facets}></Facets>
+                                <Facets params={params} facetsFilters={facets}></Facets>
                             </Grid>
                             <Grid item xs={9}>
                                 <h1>Search results</h1>
@@ -92,6 +94,7 @@ const SearchResult = ({location}) => {
                                     ))
                                 }
                             </Grid>
+                            <SearchPagination params={params} totalEntries={totalEntries}/>
                         </Grid>
                     )
                 }

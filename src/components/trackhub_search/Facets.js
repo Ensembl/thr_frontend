@@ -44,10 +44,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Facets({urlParams, facetsFilters}) {
+export default function Facets({params, facetsFilters}) {
     const classes = useStyles();
-
-    const params = new URLSearchParams(urlParams)
 
     const filtersNames = ['q', 'species', 'assembly', 'hub', 'type']
 
