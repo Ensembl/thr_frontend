@@ -31,6 +31,7 @@ import TrackdbStatusChip from "../dashboard/TrackdbStatusChip";
 import CloseIcon from '@material-ui/icons/Close';
 import Moment from 'react-moment'
 import Button from "@material-ui/core/Button";
+import GenomeBrowsersLinks from "./GenomeBrowsersLinks";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
         float: "right",
         fontSize: "12px",
         borderRadius: "0px"
+    },
+    browserView: {
+        float: "right",
+        marginTop: "-70px"
     },
     divider: {
         marginBottom: "15px"
@@ -114,6 +119,13 @@ export default function TrackHubPanels({trackDbInfo}) {
                                             )
                                         }
                                     </ul>
+                                </div>
+                                <div className={classes.browserView}>
+                                    <GenomeBrowsersLinks
+                                        trackdbBrowserLinks={trackDbInfo.browser_links}
+                                        assemblyAccession={trackDbInfo.assembly.accession}
+                                        hubUrl={trackDbInfo.hub.url}
+                                    />
                                 </div>
                                 <div>Source URL:
                                     <Button

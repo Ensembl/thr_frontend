@@ -19,7 +19,7 @@ import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 import Login from "./components/authentication/Login";
 import Home from "./components/home/Home";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
-import Register from "./components/authentication/Register";
+// import Register from "./components/authentication/Register";
 import UserDashboard from "./components/dashboard/UserDashboard";
 import MainView from "./components/trackhub_view/MainView";
 import NotFound from "./components/NotFound";
@@ -53,7 +53,7 @@ function Urls(props) {
                 <Switch>
                     <Home exact path="/"> <Home {...props} /></Home>
                     <Route exact path="/login/"> <Login {...props} /></Route>
-                    <Route exact path="/register/"> <Register {...props} /></Route>
+                    {/*<Route exact path="/register/"> <Register {...props} /></Route>*/}
                     {/*
                     more details here: https://stackoverflow.com/a/53694210/4488332
                     and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/
