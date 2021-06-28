@@ -17,7 +17,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-// import * as serviceWorker from './serviceWorker';
 
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -44,8 +43,6 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// serviceWorker.unregister();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

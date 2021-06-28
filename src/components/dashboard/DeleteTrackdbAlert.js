@@ -34,7 +34,6 @@ export default function DeleteTrackdbAlert({trackdbId}) {
     const handleClose = () => setOpen(false);
 
     const handleYes = () => {
-
         const token = localStorage.getItem('token');
         const apiUrlDeleteTrackdb = `${settings.API_SERVER}/api/trackdb/${trackdbId}`;
 
@@ -59,7 +58,6 @@ export default function DeleteTrackdbAlert({trackdbId}) {
 
     return (
         <div>
-            {/*<DeleteIcon onClick={() => handleDeleteTrackdb(trackdb.trackdb_id)}/>*/}
             <Button onClick={handleClickOpen}>
                 <DeleteIcon style={{ color: 'red' }}></DeleteIcon>
             </Button>
