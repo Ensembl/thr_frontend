@@ -20,7 +20,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import MainBreadcrumbs from "../Breadcrumbs";
+import MainBreadcrumbs from "../MainBreadcrumb";
 import Paper from "@material-ui/core/Paper";
 import UserProfile from "./UserProfile";
 import UserTrackhubs from "./UserTrackhubs";
@@ -100,7 +100,7 @@ export default function UserDashboard() {
 
     return (
         <div className={classes.root}>
-            <MainBreadcrumbs></MainBreadcrumbs>
+            <MainBreadcrumbs item="Dashboard"></MainBreadcrumbs>
             <Paper square>
                 <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
                     <Tab label="Profile" {...a11yProps(0)} />
