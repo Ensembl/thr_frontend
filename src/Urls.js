@@ -19,7 +19,7 @@ import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 import Login from "./components/authentication/Login";
 import Home from "./components/home/Home";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
-import Register from "./components/authentication/Register";
+// import Register from "./components/authentication/Register";
 import UserDashboard from "./components/dashboard/UserDashboard";
 import SearchResult from "./components/trackhub_search/SearchResult";
 
@@ -52,7 +52,7 @@ function Urls(props) {
                 <Switch>
                     <Route exact path="/"> <Home {...props} /></Route>
                     <Route exact path="/login/"> <Login {...props} /></Route>
-                    <Route exact path="/register/"> <Register {...props} /></Route>
+                    {/*<Route exact path="/register/"> <Register {...props} /></Route>*/}
                     <Route exact path="/search" component={SearchResult}></Route>
                     <PrivateRoute exact path="/update_password/" isAuthenticated={props.isAuthenticated}>
                         <PasswordUpdate {...props}/>
