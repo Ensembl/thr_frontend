@@ -15,27 +15,24 @@
  */
 
 import React from 'react';
-import TopBar from "./TopBar"
-import Footer from "./Footer"
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Box from "@material-ui/core/Box";
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
+  },
+}));
 
-function Layout(props) {
-    return (
-        <React.Fragment>
-            <CssBaseline />
-            <TopBar {...props} />
-            {/* Whenever Layout component is invoked {props.children} will also be displayed
-            {props.children} can be Home, Login or Register (etc) component depending on the provided route */}
-            <div>
-                {props.children}
-            </div>
-            <Box mt={8}>
-                <Footer />
-            </Box>
-        </React.Fragment>
-    )
+export default function WithDataLoading() {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <CircularProgress />
+    </div>
+  );
 }
-
-export default Layout

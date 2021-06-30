@@ -15,27 +15,12 @@
  */
 
 import React from 'react';
-import TopBar from "./TopBar"
-import Footer from "./Footer"
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Box from "@material-ui/core/Box";
 
 
-function Layout(props) {
+function NotFound() {
     return (
-        <React.Fragment>
-            <CssBaseline />
-            <TopBar {...props} />
-            {/* Whenever Layout component is invoked {props.children} will also be displayed
-            {props.children} can be Home, Login or Register (etc) component depending on the provided route */}
-            <div>
-                {props.children}
-            </div>
-            <Box mt={8}>
-                <Footer />
-            </Box>
-        </React.Fragment>
-    )
-}
+      <h1>Page not found!</h1>
+    );
+  }
 
-export default Layout
+export default NotFound

@@ -26,10 +26,11 @@ import Paper from '@material-ui/core/Paper';
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import Chips from "./TrackdbStatus";
+import Chips from "./TrackdbStatusChip";
 import * as settings from "../../settings";
 import axios from "axios";
 import AlertDialog from "./DeleteTrackdbAlert";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles({
     table: {
@@ -45,31 +46,6 @@ export default function UserTrackhubs(props) {
     const classes = useStyles();
 
     const {userHubs} = props;
-
-    const handleDeleteTrackdb = trackdb_id => {
-
-        console.log("trackdb_id --> ", trackdb_id)
-
-        const token = localStorage.getItem('token');
-        const apiUrlDeleteTrackdb = `${settings.API_SERVER}/api/trackdboooo/${trackdb_id}`;
-
-        console.log("apiUrlDeleteTrackdb --> ", apiUrlDeleteTrackdb)
-
-        axios.delete(apiUrlDeleteTrackdb, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Token ${token}`
-                }
-            }
-        )
-            .then(response => {
-                // console.log("getUserHubs response ---> ", response)
-                this.setState({userHubs: response.data});
-            })
-            .catch(err => {
-                console.log(err)
-            });
-    }
 
     return (
         <Container component="main" maxWidth="lg">
@@ -106,7 +82,9 @@ export default function UserTrackhubs(props) {
                                             <Chips trackdbStatus={trackdb.status.message}></Chips>
                                         </TableCell>
                                         <TableCell align="center">
-                                            <VisibilityIcon color="disabled"/>
+                                            <Link to={`/trackhub_view/${trackdb.trackdb_id}`} target="_blank">
+                                                <VisibilityIcon color="primary"/>
+                                            </Link>
                                         </TableCell>
                                         <TableCell align="center">
                                             <AlertDialog trackdbId={trackdb.trackdb_id}></AlertDialog>
