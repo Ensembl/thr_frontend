@@ -21,6 +21,7 @@ import Home from "./components/home/Home";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
 // import Register from "./components/authentication/Register";
 import UserDashboard from "./components/dashboard/UserDashboard";
+import SearchResult from "./components/trackhub_search/SearchResult";
 import MainView from "./components/trackhub_view/MainView";
 import NotFound from "./components/NotFound";
 
@@ -53,6 +54,7 @@ function Urls(props) {
                 <Switch>
                     <Route exact path="/"> <Home {...props} /></Route>
                     <Route exact path="/login/"> <Login {...props} /></Route>
+                    <Route exact path="/search" component={SearchResult}></Route>
                     {/*<Route exact path="/register/"> <Register {...props} /></Route>*/}
                     {/*
                     more details here: https://stackoverflow.com/a/53694210/4488332
