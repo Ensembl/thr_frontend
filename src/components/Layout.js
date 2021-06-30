@@ -26,6 +26,8 @@ function Layout(props) {
         <React.Fragment>
             <CssBaseline />
             <TopBar {...props} />
+            {/* Whenever Layout component is invoked {props.children} will also be displayed
+            {props.children} can be Home, Login or Register (etc) component depending on the provided route */}
             <div>
                 {props.children}
             </div>

@@ -26,6 +26,7 @@ import {ThemeProvider} from '@material-ui/styles';
 // Fix findDOMNode is deprecated in StrictMode: https://stackoverflow.com/q/61220424/4488332
 import {unstable_createMuiStrictModeTheme as createMuiTheme} from '@material-ui/core/styles';
 
+// The main colours and fonts used in the application
 const theme = createMuiTheme({
     palette: {
         default: {

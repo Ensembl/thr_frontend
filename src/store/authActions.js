@@ -64,7 +64,7 @@ export const authLogout = () => {
     if (token === undefined) {
         localStorage.removeItem('expirationDate');
     } else {
-        axios.post(`${settings.API_SERVER}/api/user/logout`, {}, {
+        axios.post(`${settings.API_SERVER}/api/logout`, {}, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Token ${token}`
@@ -104,7 +104,7 @@ export const authCheckTimeout = expirationTime => {
 export const authLogin = (username, password) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post(`${settings.API_SERVER}/api/user/login`, {
+        axios.post(`${settings.API_SERVER}/api/login`, {
             username: username,
             password: password
         })

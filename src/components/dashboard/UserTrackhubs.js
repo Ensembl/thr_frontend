@@ -46,31 +46,6 @@ export default function UserTrackhubs(props) {
 
     const {userHubs} = props;
 
-    const handleDeleteTrackdb = trackdb_id => {
-
-        console.log("trackdb_id --> ", trackdb_id)
-
-        const token = localStorage.getItem('token');
-        const apiUrlDeleteTrackdb = `${settings.API_SERVER}/api/trackdboooo/${trackdb_id}`;
-
-        console.log("apiUrlDeleteTrackdb --> ", apiUrlDeleteTrackdb)
-
-        axios.delete(apiUrlDeleteTrackdb, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Token ${token}`
-                }
-            }
-        )
-            .then(response => {
-                // console.log("getUserHubs response ---> ", response)
-                this.setState({userHubs: response.data});
-            })
-            .catch(err => {
-                console.log(err)
-            });
-    }
-
     return (
         <Container component="main" maxWidth="lg">
             <div className={classes.root}>

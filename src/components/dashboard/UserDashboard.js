@@ -14,22 +14,19 @@
  * limitations under the License.
  */
 
-import React, {Component} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {makeStyles} from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import MainBreadcrumbs from "../Breadcrumbs";
+import Paper from "@material-ui/core/Paper";
 import UserProfile from "./UserProfile";
 import UserTrackhubs from "./UserTrackhubs";
-import {withStyles} from "@material-ui/core/styles";
+import SubmitHub from "./SubmitHub";
 import * as settings from "../../settings";
 import axios from "axios";
-import SubmitHub from "./SubmitHub";
-import Paper from '@material-ui/core/Paper';
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -73,93 +70,53 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-class UserDashboard extends Component {
+export default function UserDashboard() {
+    const classes = useStyles();
 
-    constructor() {
-        super();
-        this.state = {
-            userInfo: [],
-            userHubs: [],
-            value: 1
-        };
-    }
+    // set default value to 1 which is the 'UserTrackhubs' Tab
+    const [value, setValue] = React.useState(1);
 
-    getUserInfo() {
-        const token = localStorage.getItem('token');
-        const apiUrlTrackdbs = `${settings.API_SERVER}/api/search/trackdb/1/`;
-        const apiUrlUserInfo = `${settings.API_SERVER}/api/user/`;
+    // get token from localStorage and prepare the header
+    const token = localStorage.getItem('token');
+    const header = {'Content-Type': 'application/json', 'Authorization': `Token ${token}`}
 
-        axios.get(apiUrlUserInfo, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Token ${token}`
-                }
-            }
-        )
-        .then(response => {
-            console.log("getUserInfo response ---> ", response)
-            this.setState({userInfo: response.data});
-        })
-        .catch(err => {
-            console.log(err)
-        });
-    }
+    const apiUrlUserHubs = `${settings.API_SERVER}/api/trackhub/`;
+    const [userHubs, setUserHubs] = React.useState([])
 
-    getUserHubs() {
-        const token = localStorage.getItem('token');
-        const apiUrlUserHubs = `${settings.API_SERVER}/api/trackhub/`;
-
-        axios.get(apiUrlUserHubs, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Token ${token}`
-                }
-            }
-        )
-        .then(response => {
-            // console.log("getUserHubs response ---> ", response)
-            this.setState({userHubs: response.data});
-        })
-        .catch(err => {
-            console.log(err)
-        });
-    }
-
-    componentDidMount() {
-        this.getUserInfo()
-        this.getUserHubs()
-    }
-
-    render() {
-        const {classes} = this.props;
-        const handleChange = (event, newValue) => {
-            this.setState({
-                value: newValue
+    // Get the user track collections
+    useEffect(() => {
+        axios.get(apiUrlUserHubs, {headers: header})
+            .then(response => {
+                setUserHubs(response.data);
             })
-        };
+            .catch(err => {
+                console.log(err)
+            });
+    }, [])
 
-        return (
-            <div className={classes.root}>
-                <MainBreadcrumbs></MainBreadcrumbs>
-                <Paper square>
-                    <Tabs value={this.state.value} onChange={handleChange} aria-label="simple tabs example">
-                        <Tab label="Profile" {...a11yProps(0)} />
-                        <Tab label="My track collections" {...a11yProps(1)} />
-                        <Tab label="Submit/Update" {...a11yProps(2)} />
-                    </Tabs>
-                </Paper>
-                <TabPanel value={this.state.value} index={0}>
-                    <UserProfile userInfo = {this.state.userInfo}></UserProfile>
-                </TabPanel>
-                <TabPanel value={this.state.value} index={1}>
-                    <UserTrackhubs userHubs = {this.state.userHubs}></UserTrackhubs>
-                </TabPanel>
-                <TabPanel value={this.state.value} index={2}>
-                    <SubmitHub></SubmitHub>
-                </TabPanel>
-            </div>
-        )
-    }
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    return (
+        <div className={classes.root}>
+            <MainBreadcrumbs></MainBreadcrumbs>
+            <Paper square>
+                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+                    <Tab label="Profile" {...a11yProps(0)} />
+                    <Tab label="My track collections" {...a11yProps(1)} />
+                    <Tab label="Submit/Update" {...a11yProps(2)} />
+                </Tabs>
+            </Paper>
+            <TabPanel value={value} index={0}>
+                <UserProfile></UserProfile>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <UserTrackhubs userHubs={userHubs}></UserTrackhubs>
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                <SubmitHub></SubmitHub>
+            </TabPanel>
+        </div>
+    );
 }
-
-export default withStyles(useStyles)(UserDashboard);
