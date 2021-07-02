@@ -19,7 +19,7 @@ import Paper from '@material-ui/core/Paper';
 import {makeStyles} from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
-import TrackdbStatus from "../dashboard/TrackdbStatus";
+import TrackdbStatusChip from "../dashboard/TrackdbStatusChip";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -90,7 +90,7 @@ const Trackdb = ({trackdb}) => {
                             <strong>Assembly:</strong> {trackdb.assembly.accession} - {trackdb.assembly.name}
                         </div>
                         <div className={classes.stautsInfo}>
-                            <TrackdbStatus trackdbStatus={trackdb.status.message} ></TrackdbStatus>
+                            <TrackdbStatusChip trackdbStatus={trackdb.status.message} ></TrackdbStatusChip>
                             <Button
                                 className={classes.chipContent}
                                 size="small"
