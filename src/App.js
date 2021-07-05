@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import Urls from './Urls';
 import Layout from './components/Layout';
-import {connect} from 'react-redux';
-import * as actions from './store/authActions';
+
+import {Router, Route, Switch, Redirect, BrowserRouter} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {history} from './_helpers';
+import {alertActions} from './_actions';
+import {PrivateRoute} from './_components';
 
 import './static/css/style.css';
 
@@ -26,6 +30,14 @@ import {ThemeProvider} from '@material-ui/styles';
 // Fix findDOMNode is deprecated in StrictMode: https://stackoverflow.com/q/61220424/4488332
 // import {unstable_createMuiStrictModeTheme as createMuiTheme} from '@material-ui/core/styles';
 import {createMuiTheme} from '@material-ui/core/styles';
+import Home from "./components/home/Home";
+import Login from "./components/authentication/Login";
+import SearchResult from "./components/trackhub_search/SearchResult";
+import MainView from "./components/trackhub_view/MainView";
+import PasswordUpdate from "./components/authentication/PasswordUpdate";
+import UserDashboard from "./components/dashboard/UserDashboard";
+import NotFound from "./components/NotFound";
+import Alert from "@material-ui/lab/Alert";
 
 // The main colours and fonts used in the application
 const theme = createMuiTheme({
@@ -59,36 +71,47 @@ const theme = createMuiTheme({
 
 function App(props) {
 
-    // Similar to componentDidMount and componentDidUpdate:
-    React.useEffect(() => {
-        props.setAuthenticatedIfRequired();
+    const alert = useSelector(state => state.alert);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        history.listen((location, action) => {
+            // clear alert on location change
+            dispatch(alertActions.clear());
+        });
     }, []);
 
     return (
         <ThemeProvider theme={theme}>
             <div className="App">
                 <Layout {...props}>
-                    <Urls {...props}/>
+
+                    <br/>
+                    {alert.message &&
+                        <Alert severity={alert.type} >{alert.message}</Alert>
+                    }
+                    <Router history={history}>
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route exact path="/login" component={Login} />
+                            <Route exact path="/search" component={SearchResult} />
+                            {/*<Route exact path="/register/"> <Register {...props} /></Route>*/}
+                            {/*
+                                more details here: https://stackoverflow.com/a/53694210/4488332
+                                and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/
+                            */}
+                            <Route path="/trackhub_view/:id" component={MainView} />
+                            <PrivateRoute exact path="/update_password" component={PasswordUpdate} />
+                            <PrivateRoute exact path="/user" component={UserDashboard} />
+                            <Route path="/404" component={NotFound} />
+                            <Redirect from="*" to="/404" />
+                        </Switch>
+                    </Router>
+
                 </Layout>
             </div>
         </ThemeProvider>
     );
 }
 
-//This means that one or more of the redux states in the store are available as props
-const mapStateToProps = (state) => {
-    return {
-        isAuthenticated: state.auth.token !== null && typeof state.auth.token !== 'undefined',
-        token: state.auth.token
-    }
-}
-
-//This means that one or more of the redux actions in the form of dispatch(action) combinations are available as props
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setAuthenticatedIfRequired: () => dispatch(actions.authCheckState()),
-        logout: () => dispatch(actions.authLogout())
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
