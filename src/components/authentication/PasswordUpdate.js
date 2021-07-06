@@ -72,6 +72,9 @@ function PasswordUpdate(props) {
     };
 
     const handleSubmit = e => {
+
+        let user = JSON.parse(localStorage.getItem('user'));
+
         e.preventDefault();
         if (new_password1 !== new_password2) {
             alert("Passwords don't match")
@@ -84,7 +87,7 @@ function PasswordUpdate(props) {
             axios.put(`${settings.API_SERVER}/api/change_password`, passwordData, {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Token ${props.token}`
+                        'Authorization': `Token ${user.token}`
                     }
                 }
             )
@@ -149,7 +152,7 @@ function PasswordUpdate(props) {
                         helperText={new_password1 !== new_password2 ? "Passwords don't match" : null}
                     />
                     <Button
-                        disabled
+                        // disabled
                         type="submit"
                         fullWidth
                         variant="contained"

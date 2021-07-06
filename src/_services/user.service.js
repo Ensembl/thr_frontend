@@ -5,10 +5,7 @@ export const userService = {
     login,
     logout,
     register,
-    getAll,
-    getById,
-    update,
-    delete: _delete
+    update
 };
 
 function login(username, password) {
@@ -33,24 +30,6 @@ function logout() {
     localStorage.removeItem('user');
 }
 
-function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
-
-    return fetch(`${settings.API_SERVER}/users`, requestOptions).then(handleResponse);
-}
-
-function getById(id) {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
-
-    return fetch(`${settings.API_SERVER}/users/${id}`, requestOptions).then(handleResponse);
-}
-
 function register(user) {
     const requestOptions = {
         method: 'POST',
@@ -69,16 +48,6 @@ function update(user) {
     };
 
     return fetch(`${settings.API_SERVER}/users/${user.id}`, requestOptions).then(handleResponse);;
-}
-
-// prefixed function name with underscore because delete is a reserved word in javascript
-function _delete(id) {
-    const requestOptions = {
-        method: 'DELETE',
-        headers: authHeader()
-    };
-
-    return fetch(`${settings.API_SERVER}/users/${id}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

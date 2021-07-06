@@ -21,6 +21,7 @@ import MainBreadcrumb from "../MainBreadcrumb";
 import * as settings from "../../settings";
 import axios from "axios";
 import Tags from "./Tags";
+import {Alert} from "@material-ui/lab";
 
 
 function MainView(props) {
@@ -30,11 +31,11 @@ function MainView(props) {
 
     useEffect(() => {
         const apiUrlGeneralInfo = `${settings.API_SERVER}/api/trackdb/${trackdb_id}`;
-        const token = localStorage.getItem('token');
-        const header = {'Content-Type': 'application/json', 'Authorization': `Token ${token}`}
+        const user = JSON.parse(localStorage.getItem('user'));
+        const header = {'Content-Type': 'application/json', 'Authorization': `Token ${user.token}`}
         axios.get(apiUrlGeneralInfo, {headers: header})
             .then(response => {
-                console.log(response.data);
+                console.log('trackdb info --> ', response.data);
                 setTrackDbInfo(response.data);
             })
             .catch(err => {
@@ -44,11 +45,11 @@ function MainView(props) {
 
     if (trackDbInfo === undefined) {
         // TODO: Manage the non existent trackdb id
-        // const message = "This trackdb doesn't exist! Please Make sure that you entered the right ID"
         return <>
-            Loading...
-            <WithDataLoading></WithDataLoading>
-            {/*<Alerts messageType="Error" message={message}></Alerts>*/}
+            <br/>
+            <Alert severity="error" >
+                This trackdb doesn't exist! Please Make sure that you entered the right ID
+            </Alert>
         </>;
     }
 
