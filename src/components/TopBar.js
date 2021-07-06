@@ -54,7 +54,7 @@ export default function TopBar(props) {
                     <IconButton aria-label="home page" color="inherit" href="/">
                         <HomeIcon/>
                     </IconButton>
-                    {isLoggedIn ? null : <Button disabled color="inherit" href="/register">Register</Button>}
+                    {isLoggedIn ? null : <Button color="inherit" href="/register">Register</Button>}
                     {isLoggedIn ? null : <Button color="inherit" href="/login">Login</Button>}
                     {isLoggedIn ? <Button color="inherit" href="/user">Dashboard</Button> : null}
                     {isLoggedIn ?

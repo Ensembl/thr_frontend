@@ -32,6 +32,7 @@ import {ThemeProvider} from '@material-ui/styles';
 import {createMuiTheme} from '@material-ui/core/styles';
 import Home from "./components/home/Home";
 import Login from "./components/authentication/Login";
+import Register from "./components/authentication/Register";
 import SearchResult from "./components/trackhub_search/SearchResult";
 import MainView from "./components/trackhub_view/MainView";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
@@ -95,7 +96,7 @@ function App(props) {
                             <Route exact path="/" component={Home} />
                             <Route exact path="/login" component={Login} />
                             <Route exact path="/search" component={SearchResult} />
-                            {/*<Route exact path="/register/"> <Register {...props} /></Route>*/}
+                            <Route exact path="/register" component={Register} />
                             {/*
                                 more details here: https://stackoverflow.com/a/53694210/4488332
                                 and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/

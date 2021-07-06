@@ -58,7 +58,7 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`${settings.API_SERVER}/users/register`, requestOptions).then(handleResponse);
+    return fetch(`${settings.API_SERVER}/api/register`, requestOptions).then(handleResponse);
 }
 
 function update(user) {
@@ -83,7 +83,10 @@ function _delete(id) {
 
 function handleResponse(response) {
     return response.text().then(text => {
+        console.log('text --> ', text)
         const data = text && JSON.parse(text);
+        console.log('data --> ', data)
+
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
@@ -91,8 +94,8 @@ function handleResponse(response) {
                 window.location.reload();
             }
 
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
+            // const error = (data && data.message) || response.statusText;
+            return Promise.reject(data);
         }
 
         return data;

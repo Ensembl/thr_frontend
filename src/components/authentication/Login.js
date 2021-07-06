@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    signup: {
+        textAlign: "right"
+    },
 }));
 
 function Login() {
@@ -134,6 +137,9 @@ function Login() {
                     >
                         Login
                     </Button>
+                    <div className={classes.signup}>
+                        No account yet? <Link to='/register'>Register</Link>
+                    </div>
                 </form>
             </div>
         </Container>

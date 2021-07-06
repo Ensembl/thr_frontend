@@ -50,12 +50,16 @@ function register(user) {
                     dispatch(success());
                     history.push('/login');
                     dispatch(alertActions.success('Registration successful'));
-                },
-                error => {
-                    dispatch(failure(error.toString()));
-                    dispatch(alertActions.error(error.toString()));
                 }
-            );
+                ,
+                error => {
+                    console.log('error --> ', error)
+                    // dispatch(failure(error.toString()));
+                    // dispatch(alertActions.error(error.toString()));
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
+                }
+            )
     };
 
     function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
