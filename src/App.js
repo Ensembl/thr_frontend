@@ -38,7 +38,6 @@ import MainView from "./components/trackhub_view/MainView";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
 import UserDashboard from "./components/dashboard/UserDashboard";
 import NotFound from "./components/NotFound";
-import Alert from "@material-ui/lab/Alert";
 
 // The main colours and fonts used in the application
 const theme = createMuiTheme({
@@ -72,7 +71,6 @@ const theme = createMuiTheme({
 
 function App(props) {
 
-    const alert = useSelector(state => state.alert);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -87,25 +85,21 @@ function App(props) {
             <div className="App">
                 <Layout {...props}>
 
-                    <br/>
-                    {alert.message &&
-                        <Alert severity={alert.type} >{alert.message}</Alert>
-                    }
                     <Router history={history}>
                         <Switch>
-                            <Route exact path="/" component={Home} />
-                            <Route exact path="/login" component={Login} />
-                            <Route exact path="/search" component={SearchResult} />
-                            <Route exact path="/register" component={Register} />
+                            <Route exact path="/" component={Home}/>
+                            <Route exact path="/login" component={Login}/>
+                            <Route exact path="/search" component={SearchResult}/>
+                            <Route exact path="/register" component={Register}/>
                             {/*
                                 more details here: https://stackoverflow.com/a/53694210/4488332
                                 and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/
                             */}
-                            <Route path="/trackhub_view/:id" component={MainView} />
-                            <PrivateRoute exact path="/update_password" component={PasswordUpdate} />
-                            <PrivateRoute exact path="/user" component={UserDashboard} />
-                            <Route path="/404" component={NotFound} />
-                            <Redirect from="*" to="/404" />
+                            <Route path="/trackhub_view/:id" component={MainView}/>
+                            <PrivateRoute exact path="/update_password" component={PasswordUpdate}/>
+                            <PrivateRoute exact path="/user" component={UserDashboard}/>
+                            <Route path="/404" component={NotFound}/>
+                            <Redirect from="*" to="/404"/>
                         </Switch>
                     </Router>
 

@@ -22,10 +22,8 @@ function login(username, password, from) {
                     history.push(from);
                 },
                 error => {
-                    // TODO: customize the error message in the backend
-                    let errorMessage = error.toString() == 'Bad Request' ? 'Incorrect username or/and password' : error.toString()
-                    dispatch(failure(errorMessage));
-                    dispatch(alertActions.error(errorMessage));
+                    dispatch(failure(error));
+                    dispatch(alertActions.error(error));
                 }
             );
     };
@@ -49,13 +47,10 @@ function register(user) {
                 user => { 
                     dispatch(success());
                     history.push('/login');
-                    dispatch(alertActions.success('Registration successful'));
+                    dispatch(alertActions.success('{"success": "Registration successful"}'));
                 }
                 ,
                 error => {
-                    console.log('error --> ', error)
-                    // dispatch(failure(error.toString()));
-                    // dispatch(alertActions.error(error.toString()));
                     dispatch(failure(error));
                     dispatch(alertActions.error(error));
                 }

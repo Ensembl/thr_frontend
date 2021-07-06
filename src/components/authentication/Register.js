@@ -82,6 +82,10 @@ export default function Register() {
     const registering = useSelector(state => state.registration.registering);
     const dispatch = useDispatch();
 
+    const alert = useSelector(state => state.alert);
+
+    let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
+
     // reset login status
     useEffect(() => {
         dispatch(userActions.logout());
@@ -144,7 +148,10 @@ export default function Register() {
                                 cannot
                                 be changed.</FormHelperText>
                             {submitted && !user.username &&
-                            <Alert severity="error">Username is required</Alert>
+                                <Alert severity="error">Username is required</Alert>
+                            }
+                            {alertMessageObject.username &&
+                                <Alert severity={alert.type} >{alertMessageObject.username[0]}</Alert>
                             }
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -162,6 +169,9 @@ export default function Register() {
                             <FormHelperText>A valid email account the Registry can communicate with.</FormHelperText>
                             {submitted && !user.email &&
                             <Alert severity="error">Email is required</Alert>
+                            }
+                            {alertMessageObject.email &&
+                                <Alert severity={alert.type} >{alertMessageObject.email[0]}</Alert>
                             }
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -202,6 +212,9 @@ export default function Register() {
                             <FormHelperText>Confirm the password.</FormHelperText>
                             {submitted && !user.password2 &&
                             <Alert severity="error">Password confirmation is required</Alert>
+                            }
+                            {alertMessageObject.password &&
+                                <Alert severity={alert.type} >{alertMessageObject.password}</Alert>
                             }
                         </Grid>
                         <Grid item xs={12} sm={6}>

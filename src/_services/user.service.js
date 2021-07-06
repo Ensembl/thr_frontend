@@ -83,9 +83,7 @@ function _delete(id) {
 
 function handleResponse(response) {
     return response.text().then(text => {
-        console.log('text --> ', text)
         const data = text && JSON.parse(text);
-        console.log('data --> ', data)
 
         if (!response.ok) {
             if (response.status === 401) {
@@ -94,8 +92,9 @@ function handleResponse(response) {
                 window.location.reload();
             }
 
-            // const error = (data && data.message) || response.statusText;
-            return Promise.reject(data);
+            // in case there is an error we send text containing all of them to the UI
+            // there, it's parsed to JSON and showed as desired
+            return Promise.reject(text);
         }
 
         return data;

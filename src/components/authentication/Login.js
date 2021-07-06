@@ -65,6 +65,9 @@ function Login() {
     const dispatch = useDispatch();
     const location = useLocation();
 
+    const alert = useSelector(state => state.alert);
+    let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
+
     // reset login status
     useEffect(() => {
         dispatch(userActions.logout());
@@ -90,13 +93,18 @@ function Login() {
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
             <div className={classes.paper}>
+                {alertMessageObject && alertMessageObject.success &&
+                    <Alert severity={alert.type} >{alertMessageObject.success}</Alert>
+                }
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Login
                 </Typography>
-
+                {alertMessageObject && alertMessageObject.non_field_errors &&
+                    <Alert severity={alert.type} >{alertMessageObject.non_field_errors[0]}</Alert>
+                }
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <TextField
                         variant="outlined"
