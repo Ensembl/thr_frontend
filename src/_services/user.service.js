@@ -5,7 +5,7 @@ export const userService = {
     login,
     logout,
     register,
-    update
+    changePassword
 };
 
 function login(username, password) {
@@ -40,14 +40,22 @@ function register(user) {
     return fetch(`${settings.API_SERVER}/api/register`, requestOptions).then(handleResponse);
 }
 
-function update(user) {
+function changePassword(old_password, new_password1, new_password2) {
+    let user = JSON.parse(localStorage.getItem('user'));
     const requestOptions = {
         method: 'PUT',
-        headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${user.token}`
+        },
+        body: JSON.stringify({ old_password, new_password1, new_password2 })
     };
 
-    return fetch(`${settings.API_SERVER}/users/${user.id}`, requestOptions).then(handleResponse);;
+    return fetch(`${settings.API_SERVER}/api/change_password`, requestOptions)
+        .then(handleResponse)
+        .then(user => {
+            return user;
+        });
 }
 
 function handleResponse(response) {
