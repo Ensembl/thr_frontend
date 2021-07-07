@@ -78,6 +78,9 @@ export default function Register() {
         check_interval: 'automatic',
         continuous_alert: false,
     });
+    const password = user.password;
+    const password2 = user.password2;
+
     const [submitted, setSubmitted] = useState(false);
     const registering = useSelector(state => state.registration.registering);
     const dispatch = useDispatch();
@@ -148,10 +151,10 @@ export default function Register() {
                                 cannot
                                 be changed.</FormHelperText>
                             {submitted && !user.username &&
-                                <Alert severity="error">Username is required</Alert>
+                            <Alert severity="error">Username is required</Alert>
                             }
                             {alertMessageObject.username &&
-                                <Alert severity={alert.type} >{alertMessageObject.username[0]}</Alert>
+                            <Alert severity={alert.type}>{alertMessageObject.username[0]}</Alert>
                             }
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -171,7 +174,7 @@ export default function Register() {
                             <Alert severity="error">Email is required</Alert>
                             }
                             {alertMessageObject.email &&
-                                <Alert severity={alert.type} >{alertMessageObject.email[0]}</Alert>
+                            <Alert severity={alert.type}>{alertMessageObject.email[0]}</Alert>
                             }
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -188,6 +191,8 @@ export default function Register() {
                                 required
                                 onChange={handleChange}
                                 value={user.password || ''}
+                                error={password !== password2}
+                                helperText={password !== password2 ? "Passwords don't match" : null}
                             />
                             <FormHelperText>Password for authenticating with the REST API and the web interface. No
                                 special
@@ -208,13 +213,15 @@ export default function Register() {
                                 required
                                 onChange={handleChange}
                                 value={user.password2 || ''}
+                                error={password !== password2}
+                                helperText={password !== password2 ? "Passwords don't match" : null}
                             />
                             <FormHelperText>Confirm the password.</FormHelperText>
                             {submitted && !user.password2 &&
                             <Alert severity="error">Password confirmation is required</Alert>
                             }
                             {alertMessageObject.password &&
-                                <Alert severity={alert.type} >{alertMessageObject.password}</Alert>
+                            <Alert severity={alert.type}>{alertMessageObject.password}</Alert>
                             }
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -262,8 +269,11 @@ export default function Register() {
                                 name="agreement"
                                 inputProps={{'aria-label': 'primary checkbox'}}
                                 color={"primary"}
-                                onChange={handleChange}
-                                value={user.agreement || false}
+                                onChange={e => {
+                                    setUser(user => ({...user, agreement: e.target.checked}))
+                                    // console.log('user.agreement --> ', user.agreement)
+                                }}
+                                checked={user.agreement}
                             /> Accept privacy policy *
                             <Tooltip title={privacyText} placement={"top"}>
                                 <InfoIcon fontSize={"small"} color={"primary"} y={100}/>
@@ -300,9 +310,11 @@ export default function Register() {
                             <Checkbox
                                 id="continuous_alert"
                                 name="continuous_alert"
-                                // checked={profileInfo.continuous_alert || false}
-                                // value={profileInfo.continuous_alert}
-                                // onChange={e => setProfileInfo({...profileInfo, continuous_alert: e.target.checked})}
+                                onChange={e => {
+                                    setUser(user => ({...user, continuous_alert: e.target.checked}))
+                                    // console.log('user.continuous_alert --> ', user.continuous_alert)
+                                }}
+                                checked={user.continuous_alert}
                                 inputProps={{'aria-label': 'primary checkbox'}}
                             /> Receive continuous alerts
                             <FormHelperText>Tick this if you want to receive an alert in case of problems each time the

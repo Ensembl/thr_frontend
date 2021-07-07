@@ -35,7 +35,7 @@ function MainView(props) {
         const header = {'Content-Type': 'application/json', 'Authorization': `Token ${user.token}`}
         axios.get(apiUrlGeneralInfo, {headers: header})
             .then(response => {
-                console.log('trackdb info --> ', response.data);
+                // console.log('trackdb info --> ', response.data);
                 setTrackDbInfo(response.data);
             })
             .catch(err => {
@@ -46,10 +46,12 @@ function MainView(props) {
     if (trackDbInfo === undefined) {
         // TODO: Manage the non existent trackdb id
         return <>
-            <br/>
-            <Alert severity="error" >
-                This trackdb doesn't exist! Please Make sure that you entered the right ID
-            </Alert>
+            Loading...
+            <WithDataLoading></WithDataLoading>
+            {/*<br/>*/}
+            {/*<Alert severity="error" >*/}
+            {/*    This trackdb doesn't exist! Please Make sure that you entered the right ID*/}
+            {/*</Alert>*/}
         </>;
     }
 
