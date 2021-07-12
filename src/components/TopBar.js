@@ -45,7 +45,8 @@ export default function TopBar(props) {
           <Typography variant="h6" className={classes.title}>
             <a href="/">The Track Hub Registry</a>
           </Typography>
-          <SearchForm/>
+          {/*TODO: figure out why search form isn't working here*/}
+          {/*<SearchForm/>*/}
           <IconButton aria-label="home page" color="inherit" href="/">
             <HomeIcon />
           </IconButton>

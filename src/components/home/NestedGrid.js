@@ -22,7 +22,6 @@ import PublishIcon from '@material-ui/icons/Publish';
 import {Equalizer, Search} from "@material-ui/icons";
 import Chart from "./Chart";
 import {Button} from "@material-ui/core";
-import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -63,7 +62,7 @@ export default function NestedGrid() {
     function FormRow() {
         return (
             <React.Fragment>
-                <Grid item xs={4}>
+                <Grid item sm={12} lg={4}>
                     <Paper className={classes.paper} elevation={3}>
                         <div className={classes.paperContent}>
                             <h1 className={classes.title}>
@@ -84,7 +83,7 @@ export default function NestedGrid() {
                         </div>
                     </Paper>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item sm={12} lg={4}>
                     <Paper className={classes.paper} elevation={3}>
                         <div className={classes.paperContent}>
                             <h1 className={classes.title}>
@@ -104,15 +103,13 @@ export default function NestedGrid() {
                         </div>
                     </Paper>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item sm={12} lg={4}>
                     <Paper className={classes.paper} elevation={3}>
                         <div className={classes.paperContent}>
                             <h1 className={classes.title}>
                                 <Equalizer className={classes.largeIcon} y={10}/> Stats
                             </h1>
-                            <p className={classes.text}>A brief summary of the data content, hover over the column for
-                                exact
-                                numbers.</p>
+                            <p className={classes.text}>A brief summary of the data content, hover over the column for exact numbers.</p>
                             <Chart></Chart>
                         </div>
                     </Paper>
