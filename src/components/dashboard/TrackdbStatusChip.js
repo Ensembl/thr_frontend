@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         color: "white"
     },
     status_unchecked: {
-        backgroundColor: theme.palette.default.main,
+        backgroundColor: theme.palette.default,
         color: "white"
     }
 }));

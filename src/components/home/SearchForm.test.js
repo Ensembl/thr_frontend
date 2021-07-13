@@ -67,7 +67,6 @@ describe('SearchForm tests', () => {
         const submitSearchButton = screen.getByLabelText('search');
         expect(submitSearchButton).toBeInTheDocument();
 
-        // const query = 'hg19'
         userEvent.type(screen.getByLabelText("searchBox"), query)
         userEvent.click(submitSearchButton);
 
