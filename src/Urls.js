@@ -23,6 +23,7 @@ import PasswordUpdate from "./components/authentication/PasswordUpdate";
 import UserDashboard from "./components/dashboard/UserDashboard";
 import MainView from "./components/trackhub_view/MainView";
 import NotFound from "./components/NotFound";
+import BiodallianceView from "./components/trackhub_view/BiodallianceView";
 
 
 // A wrapper for <Route> that redirects to the login screen if you're not yet authenticated.
@@ -59,6 +60,7 @@ function Urls(props) {
                     and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/
                     */}
                     <Route path="/trackhub_view/:id" component={MainView}></Route>
+                    <Route path="/biodalliance/view" component={BiodallianceView}></Route>
                     <PrivateRoute exact path="/update_password/" isAuthenticated={props.isAuthenticated}>
                         <PasswordUpdate {...props}/>
                     </PrivateRoute>
