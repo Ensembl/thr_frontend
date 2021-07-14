@@ -224,7 +224,7 @@ export default function TrackHubPanels({trackDbInfo}) {
                                                             {trackDbInfo.assembly.accession}</a>
                                                     </TableCell>
                                                     <TableCell>{trackDbInfo.assembly.name}</TableCell>
-                                                    <TableCell>{trackDbInfo.assembly.mong_name}</TableCell>
+                                                    <TableCell>{trackDbInfo.assembly.common_name}</TableCell>
                                                     <TableCell>{trackDbInfo.assembly.ucsc_synonym}</TableCell>
                                                 </TableRow>
                                             </TableBody>
