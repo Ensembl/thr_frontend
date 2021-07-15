@@ -1,5 +1,4 @@
 import * as settings from "../settings";
-import { authHeader } from '../_helpers';
 
 export const userService = {
     login,
@@ -11,8 +10,8 @@ export const userService = {
 function login(username, password) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({username, password})
     };
 
     return fetch(`${settings.API_SERVER}/api/login`, requestOptions)
@@ -26,14 +25,34 @@ function login(username, password) {
 }
 
 function logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    let user = JSON.parse(localStorage.getItem('user'));
+
+    // log the user out only if he's already logged in
+    if (user && user.token) {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${user.token}`
+            },
+            body: JSON.stringify({})
+        };
+
+        // remove the token for the DB by calling 'logout' API
+        return fetch(`${settings.API_SERVER}/api/logout`, requestOptions)
+            .then(handleResponse)
+            .then(user => {
+                // remove user from local storage to log user out
+                localStorage.removeItem('user');
+                return user;
+            });
+    }
 }
 
 function register(user) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(user)
     };
 
@@ -48,7 +67,7 @@ function changePassword(old_password, new_password1, new_password2) {
             'Content-Type': 'application/json',
             'Authorization': `Token ${user.token}`
         },
-        body: JSON.stringify({ old_password, new_password1, new_password2 })
+        body: JSON.stringify({old_password, new_password1, new_password2})
     };
 
     return fetch(`${settings.API_SERVER}/api/change_password`, requestOptions)
