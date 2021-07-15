@@ -34,13 +34,13 @@ export default function DeleteTrackdbAlert({trackdbId}) {
     const handleClose = () => setOpen(false);
 
     const handleYes = () => {
-        const token = localStorage.getItem('token');
+        let user = JSON.parse(localStorage.getItem('user'));
         const apiUrlDeleteTrackdb = `${settings.API_SERVER}/api/trackdb/${trackdbId}`;
 
         axios.delete(apiUrlDeleteTrackdb, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Token ${token}`
+                    'Authorization': `Token ${user.token}`
                 }
             }
         )

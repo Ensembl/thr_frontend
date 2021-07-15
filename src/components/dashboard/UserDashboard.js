@@ -77,8 +77,8 @@ export default function UserDashboard() {
     const [value, setValue] = React.useState(1);
 
     // get token from localStorage and prepare the header
-    const token = localStorage.getItem('token');
-    const header = {'Content-Type': 'application/json', 'Authorization': `Token ${token}`}
+    const user = JSON.parse(localStorage.getItem('user'));
+    const header = {'Content-Type': 'application/json', 'Authorization': `Token ${user.token}`}
 
     const apiUrlUserHubs = `${settings.API_SERVER}/api/trackhub/`;
     const [userHubs, setUserHubs] = React.useState([])
@@ -87,6 +87,7 @@ export default function UserDashboard() {
     useEffect(() => {
         axios.get(apiUrlUserHubs, {headers: header})
             .then(response => {
+                // console.log('UserHubs --> ', response.data)
                 setUserHubs(response.data);
             })
             .catch(err => {
