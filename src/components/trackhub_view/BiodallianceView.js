@@ -98,55 +98,128 @@ export default function BiodallianceView({location}) {
 
     const assembly = params.get('assembly')
     const name = params.get('name')
-    const url = params.get('url')
-    // console.log('assembly -> ', assembly)
-    // console.log('name -> ', name)
-    // console.log('url -> ', url)
+    const hubUrl = params.get('url')
 
-    // TODO: find a way to get rid of You need to enable JavaScript to run this app and make the script dynamic
-    const scriptStr = `
+    let chr
+    let viewStart
+    let viewEnd
+    let cookieKey
+
+    let coordSystem = {
+        speciesName: 'Human',
+        taxon: 9606,
+        auth: 'GRCh',
+    }
+
+    let genomeSource = {
+        name: 'Genome',
+        tier_type: 'sequence'
+    }
+
+    let geneSource = {
+        name: 'Genes'
+    }
+
+    if (assembly === 'hg19') {
+        chr = 22
+        viewStart = 29890000
+        viewEnd = 30050000
+        cookieKey = 'human37'
+
+        coordSystem.speciesName = 'Human'
+        coordSystem.taxon = 9606
+        coordSystem.auth = 'GRCh'
+        coordSystem.version = '37'
+        coordSystem.ucscName = 'hg19'
+
+        genomeSource.twoBitURI = '//www.biodalliance.org/datasets/hg19.2bit'
+
+        geneSource.desc = 'Gene structures from GENCODE 19'
+        geneSource.bwgURI = '//www.biodalliance.org/datasets/gencode.bb'
+        geneSource.stylesheet_uri = '//www.biodalliance.org/stylesheets/gencode.xml'
+        geneSource.trixURI = '//www.biodalliance.org/datasets/geneIndex.ix'
+
+    } else if (assembly === 'hg38') {
+        chr = 22
+        viewStart = 29890000
+        viewEnd = 30050000
+        cookieKey = 'human38'
+
+        coordSystem.speciesName = 'Human'
+        coordSystem.taxon = 9606
+        coordSystem.auth = 'GRCh'
+        coordSystem.version = '38'
+        coordSystem.ucscName = 'hg38'
+
+        // geneSource.name = 'GENCODEv21'
+        genomeSource.twoBitURI = 'https://www.biodalliance.org/datasets/hg38.2bit'
+
+        geneSource.desc = 'Gene structures from GENCODE 21'
+        geneSource.bwgURI = 'https://www.biodalliance.org/datasets/GRCh38/gencode.v21.annotation.bb'
+        geneSource.stylesheet_uri = '//www.biodalliance.org/datasets/gencode.bb'
+        geneSource.trixURI = 'https://www.biodalliance.org/datasets/GRCh38/gencode.v21.annotation.ix'
+
+    } else if (assembly === 'mm10') {
+        chr = 19
+        viewStart = 30000000
+        viewEnd = 30100000
+        cookieKey = 'mouse38'
+
+        coordSystem.speciesName = 'Mouse'
+        coordSystem.taxon = 10090
+        coordSystem.auth = 'GRCm'
+        coordSystem.version = '38'
+        coordSystem.ucscName = 'mm10'
+
+        genomeSource.twoBitURI = '//www.biodalliance.org/datasets/GRCm38/mm10.2bit'
+
+        geneSource.desc = 'Gene structures from GENCODE M2'
+        geneSource.bwgURI = '//www.biodalliance.org/datasets/GRCm38/gencodeM2.bb'
+        geneSource.stylesheet_uri = '//www.biodalliance.org/stylesheets/gencode.xml'
+        geneSource.trixURI = '//www.biodalliance.org/datasets/GRCm38/gencodeM2.ix'
+    }
+
+    const browserScript = `
         <script language="javascript" src="//www.biodalliance.org/release-0.13/dalliance-compiled.js"></script>
         <script language="javascript">
-            new Browser({
-                chr: '22',
-                viewStart: 30700000,
-                viewEnd: 30900000,
+          new Browser({
+            chr:          ${chr},
+            viewStart:    ${viewStart},
+            viewEnd:      ${viewEnd},
+            cookieKey:    '${cookieKey}',
         
-                coordSystem: {
-                    speciesName: 'Human',
-                    taxon: 9606,
-                    auth: 'GRCh',
-                    version: '37',
-                    ucscName: 'hg19'
-                },
+            coordSystem: {
+              speciesName: '${coordSystem.speciesName}',
+              taxon: ${coordSystem.taxon},
+              auth: '${coordSystem.auth}',
+              version: '${coordSystem.version}',
+              ucscName: '${coordSystem.ucscName}'
+            },
         
-                sources: [{
-                    name: 'Genome',
-                    twoBitURI: '//www.biodalliance.org/datasets/hg19.2bit',
-                    tier_type: 'sequence'
-                },
-                    {
-                        name: 'Genes',
-                        desc: 'Gene structures from GENCODE 19',
-                        bwgURI: '//www.biodalliance.org/datasets/gencode.bb',
-                        stylesheet_uri: '//www.biodalliance.org/stylesheets/gencode.xml',
-                        collapseSuperGroups: true,
-                        trixURI: '//www.biodalliance.org/datasets/geneIndex.ix'
-                    },
-                    {
-                        name: 'Repeats',
-                        desc: 'Repeat annotation from Ensembl',
-                        bwgURI: '//www.biodalliance.org/datasets/repeats.bb',
-                        stylesheet_uri: '//www.biodalliance.org/stylesheets/bb-repeats.xml'
-                    },
-                    {
-                        name: 'Conservation',
-                        desc: 'Conservation',
-                        bwgURI: '//www.biodalliance.org/datasets/phastCons46way.bw',
-                        noDownsample: true
-                    }],
-        
-            });
+            sources: [
+               {
+                  name:                 '${genomeSource.name}',
+                  twoBitURI:            '${genomeSource.twoBitURI}',
+                  tier_type:            '${genomeSource.tier_type}'
+               },
+               {
+                  name:                 '${geneSource.name}',
+                  desc:                 '${geneSource.desc}',
+                  bwgURI:               '${geneSource.bwgURI}',
+                  stylesheet_uri:       '${geneSource.stylesheet_uri}',
+                  collapseSuperGroups:  true,
+                  trixURI:              '${geneSource.trixURI}'
+               },
+            ],
+            
+            uiPrefix: '//www.biodalliance.org/release-0.13/',
+            
+            // setDocumentTitle: false,
+            disablePoweredBy: true,
+            // noTitle: true,
+            
+            hubs: [ '${hubUrl}' ]
+          });
         </script>
         
         <div id="svgHolder"></div>
@@ -169,7 +242,7 @@ export default function BiodallianceView({location}) {
             {
                 status === "ready" && (
                     <div>
-                        <InnerHTML html={scriptStr} />
+                        <InnerHTML html={browserScript}/>
                     </div>
 
                 )
