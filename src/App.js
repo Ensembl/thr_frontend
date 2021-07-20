@@ -24,12 +24,6 @@ import {history} from './_helpers';
 import {alertActions} from './_actions';
 import {PrivateRoute} from './_components';
 
-import './static/css/style.css';
-
-import {ThemeProvider} from '@material-ui/styles';
-// Fix findDOMNode is deprecated in StrictMode: https://stackoverflow.com/q/61220424/4488332
-// import {unstable_createMuiStrictModeTheme as createMuiTheme} from '@material-ui/core/styles';
-import {createMuiTheme} from '@material-ui/core/styles';
 import Home from "./components/home/Home";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
@@ -38,6 +32,14 @@ import MainView from "./components/trackhub_view/MainView";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
 import UserDashboard from "./components/dashboard/UserDashboard";
 import NotFound from "./components/NotFound";
+import BiodallianceView from "./components/trackhub_view/BiodallianceView";
+
+import './static/css/style.css';
+
+import {ThemeProvider} from '@material-ui/styles';
+// Fix findDOMNode is deprecated in StrictMode: https://stackoverflow.com/q/61220424/4488332
+// import {unstable_createMuiStrictModeTheme as createMuiTheme} from '@material-ui/core/styles';
+import {createMuiTheme} from '@material-ui/core/styles';
 
 // The main colours and fonts used in the application
 const theme = createMuiTheme({
@@ -84,7 +86,7 @@ function App(props) {
         <ThemeProvider theme={theme}>
             <div className="App">
                 <Layout {...props}>
-
+                    {/* TODO: move the routing to a separate file*/}
                     <Router history={history}>
                         <Switch>
                             <Route exact path="/" component={Home}/>
@@ -96,6 +98,7 @@ function App(props) {
                                 and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/
                             */}
                             <Route path="/trackhub_view/:id" component={MainView}/>
+                            <Route path="/biodalliance/view" component={BiodallianceView}></Route>
                             <PrivateRoute exact path="/update_password" component={PasswordUpdate}/>
                             <PrivateRoute exact path="/user" component={UserDashboard}/>
                             <Route path="/404" component={NotFound}/>

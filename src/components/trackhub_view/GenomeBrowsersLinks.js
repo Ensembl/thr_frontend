@@ -65,6 +65,10 @@ export default function GenomeBrowsersLinks(props) {
 
     const {trackdbBrowserLinks, assemblyAccession, hubUrl} = props
 
+    console.log('trackdbBrowserLinks --> ', trackdbBrowserLinks)
+    console.log('assemblyAccession --> ', assemblyAccession)
+    console.log('hubUrl --> ', hubUrl)
+
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
