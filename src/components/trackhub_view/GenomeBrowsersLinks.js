@@ -94,7 +94,7 @@ export default function GenomeBrowsersLinks(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                {
+                { trackdbBrowserLinks &&
                     Object.entries(trackdbBrowserLinks).map(
                         ([genomeBrowserName, genomeBrowserLink]) =>
                             <a href={genomeBrowserLink} target="_blank" className={classes.customLink}>

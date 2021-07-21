@@ -90,7 +90,12 @@ const Trackdb = ({trackdb}) => {
                             <strong>Assembly:</strong> {trackdb.assembly.accession} - {trackdb.assembly.name}
                         </div>
                         <div className={classes.stautsInfo}>
-                            <TrackdbStatusChip trackdbStatus={trackdb.status.message} ></TrackdbStatusChip>
+                            {
+                                trackdb.status ?
+                                    <TrackdbStatusChip trackdbStatus={trackdb.status.message} ></TrackdbStatusChip>
+                                    :
+                                    <TrackdbStatusChip trackdbStatus="" ></TrackdbStatusChip>
+                            }
                             <Button
                                 className={classes.chipContent}
                                 size="small"

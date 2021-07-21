@@ -14,22 +14,20 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
+import React, {useState, useEffect} from 'react';
+import {Link, Redirect, useLocation} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 import {makeStyles} from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Alert from '@material-ui/lab/Alert';
 
-import {connect} from 'react-redux';
-import * as actions from '../../store/authActions';
-
-import {useHistory, useLocation} from "react-router-dom";
-
+import {userActions} from '../../_actions';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -49,53 +47,64 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    signup: {
+        textAlign: "right"
+    },
 }));
 
-function Login(props) {
+function Login() {
     const classes = useStyles();
-    const [username, setuserName] = React.useState(null);
-    const [password, setPassword] = React.useState(null);
 
-    let history = useHistory();
-    let location = useLocation();
-    let {from} = location.state || {from: {pathname: "/user"}};
-
-    React.useEffect(() => {
-        if (props.isAuthenticated) {
-            history.replace(from)
-        };
+    const [inputs, setInputs] = useState({
+        username: '',
+        password: ''
     });
+    const [submitted, setSubmitted] = useState(false);
+    const {username, password} = inputs;
+    const loggingIn = useSelector(state => state.authentication.loggingIn);
+    const dispatch = useDispatch();
+    const location = useLocation();
 
+    const alert = useSelector(state => state.alert);
+    let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
 
-    const handleFormFieldChange = (event) => {
-        switch (event.target.id) {
-            case 'username':
-                setuserName(event.target.value);
-                break;
-            case 'password':
-                setPassword(event.target.value);
-                break;
-            default:
-                return null;
-        }
+    // reset login status
+    useEffect(() => {
+        dispatch(userActions.logout());
+    }, []);
 
-    };
+    function handleChange(e) {
+        const {name, value} = e.target;
+        setInputs(inputs => ({...inputs, [name]: value}));
+    }
 
-    const handleSubmit = (e) => {
+    function handleSubmit(e) {
         e.preventDefault();
-        props.onAuth(username, password);
+
+        setSubmitted(true);
+        if (username && password) {
+            // get return url from location state or default to home page
+            const {from} = location.state || {from: {pathname: "/"}};
+            dispatch(userActions.login(username, password, from));
+        }
     }
 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
             <div className={classes.paper}>
+                {alertMessageObject && alertMessageObject.success &&
+                    <Alert severity={alert.type} >{alertMessageObject.success}</Alert>
+                }
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Login
                 </Typography>
+                {alertMessageObject && alertMessageObject.non_field_errors &&
+                    <Alert severity={alert.type} >{alertMessageObject.non_field_errors[0]}</Alert>
+                }
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <TextField
                         variant="outlined"
@@ -103,12 +112,15 @@ function Login(props) {
                         required
                         fullWidth
                         id="username"
-                        label="User Name"
+                        label="Username"
                         name="username"
                         autoComplete="username"
                         autoFocus
-                        onChange={handleFormFieldChange}
+                        onChange={handleChange}
                     />
+                    {submitted && !username &&
+                        <Alert severity="error" >Username is required</Alert>
+                    }
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -119,8 +131,11 @@ function Login(props) {
                         type="password"
                         id="password"
                         autoComplete="current-password"
-                        onChange={handleFormFieldChange}
+                        onChange={handleChange}
                     />
+                    {submitted && !password &&
+                        <Alert severity="error" >Password is required</Alert>
+                    }
                     <Button
                         type="submit"
                         fullWidth
@@ -130,17 +145,13 @@ function Login(props) {
                     >
                         Login
                     </Button>
+                    <div className={classes.signup}>
+                        No account yet? <Link to='/register'>Register</Link>
+                    </div>
                 </form>
             </div>
         </Container>
     );
 }
 
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onAuth: (username, password) => dispatch(actions.authLogin(username, password))
-    }
-}
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;

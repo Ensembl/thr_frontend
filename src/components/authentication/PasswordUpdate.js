@@ -14,13 +14,18 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import * as settings from '../../settings';
 
 import {makeStyles} from '@material-ui/core/styles';
 import {Avatar, Button, Container, CssBaseline, TextField, Typography} from '@material-ui/core';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import {useDispatch, useSelector} from "react-redux";
+import {useLocation} from "react-router-dom";
+import {userActions} from "../../_actions";
+import Alert from "@material-ui/lab/Alert";
+import {AlertTitle} from "@material-ui/lab";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,58 +48,39 @@ const useStyles = makeStyles((theme) => ({
     },
     success: {
         color: theme.palette.success.main,
+    },
+    spacingDown: {
+        marginBottom: '10px'
     }
 }));
 
-function PasswordUpdate(props) {
+function PasswordUpdate() {
     const classes = useStyles();
-    const [old_password, setOldPassword] = React.useState(null);
-    const [new_password1, setNewPassword1] = React.useState(null);
-    const [new_password2, setNewPassword2] = React.useState(null);
-    const [success, setSuccess] = React.useState(false);
 
-    const handleFormFieldChange = (event) => {
-        setSuccess(false);
-        switch (event.target.id) {
-            case 'old_password':
-                setOldPassword(event.target.value);
-                break;
-            case 'new_password1':
-                setNewPassword1(event.target.value);
-                break;
-            case 'new_password2':
-                setNewPassword2(event.target.value);
-                break;
-            default:
-                return null;
-        }
+    const [inputs, setInputs] = useState({
+        old_password: '',
+        new_password1: '',
+        new_password2: ''
+    });
+    const [submitted, setSubmitted] = useState(false);
+    const {old_password, new_password1, new_password2} = inputs;
+    const dispatch = useDispatch();
+    const location = useLocation();
 
-    };
+    const alert = useSelector(state => state.alert);
+    let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
 
-    const handleSubmit = e => {
+    function handleChange(e) {
+        const {name, value} = e.target;
+        setInputs(inputs => ({...inputs, [name]: value}));
+    }
+
+    function handleSubmit(e) {
         e.preventDefault();
-        if (new_password1 !== new_password2) {
-            alert("Passwords don't match")
-        } else {
-            let passwordData = {
-                "old_password": old_password,
-                "new_password1": new_password1,
-                "new_password2": new_password2
-            }
-            axios.put(`${settings.API_SERVER}/api/change_password`, passwordData, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Token ${props.token}`
-                    }
-                }
-            )
-                .then(response => {
-                    setSuccess(true);
-                    console.log(response)
-                })
-                .catch(err => {
-                    console.log(err)
-                });
+
+        setSubmitted(true);
+        if (old_password && new_password1 && new_password2 && new_password1 == new_password2) {
+            dispatch(userActions.changePassword(old_password, new_password1, new_password2));
         }
     }
 
@@ -102,14 +88,27 @@ function PasswordUpdate(props) {
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
             <div className={classes.paper}>
-                {success ? <Typography variant="button" className={classes.success} gutterBottom>Password update
-                    successful!</Typography> : null}
+                {alertMessageObject && alertMessageObject.success &&
+                <Alert severity={alert.type}>{alertMessageObject.success}</Alert>
+                }
                 <Avatar className={classes.avatar}>
                     <VpnKeyIcon/>
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h5" className={classes.spacingDown}>
                     Update Password
                 </Typography>
+                {alertMessageObject && alertMessageObject.non_field_errors &&
+                <Alert severity={alert.type}>
+                    <AlertTitle>Error</AlertTitle>
+                    <ul>
+                        {
+                            alertMessageObject.non_field_errors.map(err =>
+                                <li>{err}</li>
+                            )
+                        }
+                    </ul>
+                </Alert>
+                }
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <TextField
                         variant="outlined"
@@ -120,8 +119,11 @@ function PasswordUpdate(props) {
                         label="Old Password"
                         type="password"
                         id="old_password"
-                        onChange={handleFormFieldChange}
+                        onChange={handleChange}
                     />
+                    {alertMessageObject && alertMessageObject.old_password &&
+                    <Alert severity={alert.type}>{alertMessageObject.old_password[0]}</Alert>
+                    }
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -131,7 +133,7 @@ function PasswordUpdate(props) {
                         label="New Password"
                         type="password"
                         id="new_password1"
-                        onChange={handleFormFieldChange}
+                        onChange={handleChange}
                         error={new_password1 !== new_password2}
                         helperText={new_password1 !== new_password2 ? "Passwords don't match" : null}
                     />
@@ -144,12 +146,15 @@ function PasswordUpdate(props) {
                         label="New Password (Confirmation)"
                         type="password"
                         id="new_password2"
-                        onChange={handleFormFieldChange}
+                        onChange={handleChange}
                         error={new_password1 !== new_password2}
                         helperText={new_password1 !== new_password2 ? "Passwords don't match" : null}
                     />
+                    {alertMessageObject && alertMessageObject.error &&
+                    <Alert severity={alert.type}>{alertMessageObject.error[0]}</Alert>
+                    }
                     <Button
-                        disabled
+                        // disabled
                         type="submit"
                         fullWidth
                         variant="contained"

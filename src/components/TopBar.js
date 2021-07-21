@@ -15,48 +15,54 @@
  */
 
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
+import {AppBar, Toolbar, Typography, Button, IconButton} from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchForm from "./home/SearchForm";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    fontWeight: 800,
-    fontStyle: "italic",
-    textDecoration: "none !important",
-  },
+    root: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        flexGrow: 1,
+        fontWeight: 800,
+        fontStyle: "italic",
+        textDecoration: "none !important",
+    },
 }));
 
 export default function TopBar(props) {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            <a href="/">The Track Hub Registry</a>
-          </Typography>
-          {/*TODO: figure out why search form isn't working here*/}
-          {/*<SearchForm/>*/}
-          <IconButton aria-label="home page" color="inherit" href="/">
-            <HomeIcon />
-          </IconButton>
-          {props.isAuthenticated ? null : <Button disabled color="inherit" href="/register">Register</Button>}
-          {props.isAuthenticated ? null : <Button color="inherit" href="/login">Login</Button>}
-          {props.isAuthenticated ? <Button color="inherit" href="/user">Dashboard</Button> : null}
-          {props.isAuthenticated ? <Button color="inherit" href="/update_password">Update Password</Button> : null}
-          {props.isAuthenticated ? <Button color="inherit" onClick={() => props.logout()}>Logout</Button> : null}
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+    // IDEA: we can store other infos in user object
+    // const user = useSelector(state => state.authentication.user);
+    const isLoggedIn = useSelector(state => state.authentication.loggedIn);
+
+    return (
+        <div className={classes.root}>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="h6" className={classes.title}>
+                        <a href="/">The Track Hub Registry</a>
+                    </Typography>
+                    <SearchForm/>
+                    <IconButton aria-label="home page" color="inherit" href="/">
+                        <HomeIcon/>
+                    </IconButton>
+                    {isLoggedIn ? null : <Button color="inherit" href="/register">Register</Button>}
+                    {isLoggedIn ? null : <Button color="inherit" href="/login">Login</Button>}
+                    {isLoggedIn ? <Button color="inherit" href="/user">Dashboard</Button> : null}
+                    {isLoggedIn ?
+                        <Button color="inherit" href="/update_password">Update Password</Button> : null}
+                    {isLoggedIn ?
+                        <Button color="inherit" href="/login">Logout</Button> : null}
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 }
