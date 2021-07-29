@@ -78,7 +78,10 @@ export default function UserDashboard() {
 
     // get token from localStorage and prepare the header
     const user = JSON.parse(localStorage.getItem('user'));
-    const header = {'Content-Type': 'application/json', 'Authorization': `Token ${user.token}`}
+    let header = {'Content-Type': 'application/json'}
+    if (user && user.token) {
+        header = {'Content-Type': 'application/json', 'Authorization': `Token ${user.token}`}
+    }
 
     const apiUrlUserHubs = `${settings.API_SERVER}/api/trackhub/`;
     const [userHubs, setUserHubs] = React.useState([])
