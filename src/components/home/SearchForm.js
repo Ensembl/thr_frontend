@@ -52,7 +52,7 @@ const SearchForm = () => {
     const history = useHistory()
 
     const handleSearch = () => {
-        if(searchValue){
+        if (searchValue) {
             history.push(`/search?q=${searchValue}`)
         } else {
             history.push(`/search`)
@@ -61,19 +61,20 @@ const SearchForm = () => {
 
     return (
         <>
-            <Paper component="form" className={classes.root}>
-                <InputBase
-                    className={classes.input}
-                    placeholder="Search by keywords: hg19, epigenomics, mouse ..."
-                    inputProps={{'aria-label': 'Search by keywords: hg19, epigenomics, mouse ...'}}
-                    value={searchValue}
-                    onChange={handleSearchInputChanges}
-                    name={'q'}
-                />
-                <IconButton type="submit" onClick={handleSearch} className={classes.iconButton} aria-label="search">
-                    <SearchIcon/>
-                </IconButton>
-            </Paper>
+            <form onSubmit={handleSearch}>
+                <Paper className={classes.root}>
+                    <InputBase
+                        className={classes.input}
+                        placeholder="Search by keywords: hg19, epigenomics, mouse ..."
+                        inputProps={{'aria-label': 'searchBox'}}
+                        value={searchValue}
+                        onChange={handleSearchInputChanges}
+                    />
+                    <IconButton type="submit" className={classes.iconButton} aria-label="search">
+                        <SearchIcon/>
+                    </IconButton>
+                </Paper>
+            </form>
         </>
 
     );
