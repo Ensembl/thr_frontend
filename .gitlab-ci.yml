@@ -1,21 +1,20 @@
 image: node:14.17.3
 
+before_script:
+  # upgrade npm
+  - npm install -g npm@7.11.1
+  - npm -v
+  - npm install
+
 stages:
   - test
 
 lint:
   stage: test
   script:
-    - npm install
     - npm run lint
 
-#test:
-#  stage: test
-#  script:
-#    - npm -v
-#    - npm install
-#    # fix Cannot find module 'moment' from 'node_modules/react-moment/dist/index.js'
-#    - npm uninstall moment
-#    - npm install moment@2.29.0
-#    # run tests
-#    - npm test
+test:
+  stage: test
+  script:
+    - npm test
