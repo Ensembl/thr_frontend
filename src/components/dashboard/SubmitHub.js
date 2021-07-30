@@ -37,20 +37,20 @@ function SubmitHub() {
                 <div>
                     <p>
                         As you are registered with the system, you can start using the <a
-                        href="#">Registration API</a>, which allows you to
-                        use <a href="#">RESTful workflows</a> to
+                        href="/docs/api/registration">Registration API</a>, which allows you to
+                        use <a href="/docs/api/registration#workflow">RESTful workflows</a> to
                         manage your track data hubs with the Registry.
                     </p>
                     <p>Using this API, you can:</p>
                     <ul>
-                        <li><a href="#">register
+                        <li><a href="/docs/api/registration/workflow/thregister">register
                             track data hubs</a> with the registry;
                         </li>
-                        <li><a href="#">list</a> the all
+                        <li><a href="/docs/api/registration/workflow/thlist">list</a> the all
                             your registered track hubs or data bases;
                         </li>
                         <li><a
-                            href="#">get/update/delete</a> a
+                            href="/docs/api/registration/reference">get/update/delete</a> a
                             given track hub in the registry
                         </li>
                     </ul>

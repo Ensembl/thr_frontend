@@ -82,6 +82,7 @@ export default function Register() {
     const password2 = user.password2;
 
     const [submitted, setSubmitted] = useState(false);
+    // eslint-disable-next-line
     const registering = useSelector(state => state.registration.registering);
     const dispatch = useDispatch();
 
@@ -109,7 +110,7 @@ export default function Register() {
     }
 
     const registrationMessageInfo = 'You need to have an account before submitting data. Sign up and start using the ' +
-        'REST API to manage your track hubs with the registry.\n' + '\n' +
+        'REST API to manage your track hubs with the registry.\n\n' +
         'If you do have an account, use the REST API to authenticate and submit/update your track collections.'
 
     const privacyText = 'You agree that we can retain the information entered in this form and use it as necessary' +
@@ -183,10 +184,8 @@ export default function Register() {
                                 name="password"
                                 margin="normal"
                                 fullWidth
-                                name="password"
                                 label="Password"
                                 type="password"
-                                margin="normal"
                                 variant="outlined"
                                 required
                                 onChange={handleChange}
