@@ -28,6 +28,7 @@ RUN apk add --no-cache --virtual .gyp \
         make \
         g++ \
     && npm install \
+    && npm install moment@2.29.0 \
     && apk del .gyp
 
 # copy our react project
