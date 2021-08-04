@@ -1,0 +1,20 @@
+image: node:14.17.3
+
+before_script:
+  # upgrade npm
+  - npm install -g npm@7.11.1
+  - npm -v
+  - npm install
+
+stages:
+  - test
+
+lint:
+  stage: test
+  script:
+    - npm run lint
+
+test:
+  stage: test
+  script:
+    - npm test

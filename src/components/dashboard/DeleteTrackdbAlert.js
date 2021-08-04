@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -22,7 +22,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DeleteIcon from "@material-ui/icons/Delete";
 import * as settings from "../../settings";
 import axios from "axios";
-import {makeStyles} from "@material-ui/core/styles";
 
 
 export default function DeleteTrackdbAlert({trackdbId}) {

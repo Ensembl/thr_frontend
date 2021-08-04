@@ -15,11 +15,13 @@
  */
 
 import React, {useEffect} from 'react';
+// TODO: restructure the code and move router to another .js file
+// eslint-disable-next-line
 import Urls from './Urls';
 import Layout from './components/Layout';
 
-import {Router, Route, Switch, Redirect, BrowserRouter} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import {Router, Route, Switch, Redirect} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 import {history} from './_helpers';
 import {alertActions} from './_actions';
 import {PrivateRoute} from './_components';

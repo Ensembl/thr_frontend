@@ -80,11 +80,11 @@ export default function UserDashboard() {
     const user = JSON.parse(localStorage.getItem('user'));
     const header = {'Content-Type': 'application/json', 'Authorization': `Token ${user.token}`}
 
-    const apiUrlUserHubs = `${settings.API_SERVER}/api/trackhub/`;
     const [userHubs, setUserHubs] = React.useState([])
 
     // Get the user track collections
     useEffect(() => {
+        const apiUrlUserHubs = `${settings.API_SERVER}/api/trackhub/`;
         axios.get(apiUrlUserHubs, {headers: header})
             .then(response => {
                 // console.log('UserHubs --> ', response.data)

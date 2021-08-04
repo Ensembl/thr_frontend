@@ -102,6 +102,7 @@ const UserProfile = () => {
 
     // TODO: Enable the Update button only when profileInfo changes
     // https://stackoverflow.com/a/56882036/4488332
+    // eslint-disable-next-line
     const [updateDisabled, setUpdateDisabled] = useState(false)
 
     const [message, setMessage] = React.useState(undefined);

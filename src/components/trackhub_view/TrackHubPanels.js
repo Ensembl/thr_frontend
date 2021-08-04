@@ -134,6 +134,7 @@ export default function TrackHubPanels({trackDbInfo}) {
                                         variant="outlined"
                                         href={trackDbInfo.source.url}
                                         target="_blank"
+                                        rel="noreferrer"
                                         color="default"
                                     >View
                                     </Button>
@@ -165,6 +166,7 @@ export default function TrackHubPanels({trackDbInfo}) {
                                             variant="outlined"
                                             href={trackDbInfo.hub.url}
                                             target="_blank"
+                                            rel="noreferrer"
                                             color="default"
                                         >View
                                         </Button>
@@ -187,7 +189,7 @@ export default function TrackHubPanels({trackDbInfo}) {
                                     <div>
                                         <strong>
                                             <a href={`http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${trackDbInfo.species.taxon_id}`}
-                                               target="_blank">Taxonomy</a>
+                                               target="_blank" rel="noreferrer">Taxonomy</a>
                                         </strong>
                                         <Chip
                                             label={trackDbInfo.species.taxon_id}
@@ -196,6 +198,7 @@ export default function TrackHubPanels({trackDbInfo}) {
                                             component="a"
                                             href={`http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${trackDbInfo.species.taxon_id}`}
                                             target="_blank"
+                                            rel="noreferrer"
                                             clickable
                                         />
                                     </div>

@@ -27,8 +27,6 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Chips from "./TrackdbStatusChip";
-import * as settings from "../../settings";
-import axios from "axios";
 import AlertDialog from "./DeleteTrackdbAlert";
 import {Link} from "react-router-dom";
 
@@ -82,7 +80,7 @@ export default function UserTrackhubs(props) {
                                             <Chips trackdbStatus={trackdb.status.message}></Chips>
                                         </TableCell>
                                         <TableCell align="center">
-                                            <Link to={`/trackhub_view/${trackdb.trackdb_id}`} target="_blank">
+                                            <Link to={`/trackhub_view/${trackdb.trackdb_id}`} target="_blank" rel="noreferrer">
                                                 <VisibilityIcon color="primary"/>
                                             </Link>
                                         </TableCell>
