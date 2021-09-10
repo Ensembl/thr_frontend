@@ -29,6 +29,7 @@ import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
 
 import {userActions} from '../../_actions';
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -47,21 +48,16 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
-    },
-    signup: {
-        textAlign: "right"
+        float: "right"
     },
 }));
 
-function Login() {
+function ForgotPassword() {
     const classes = useStyles();
 
-    const [inputs, setInputs] = useState({
-        username: '',
-        password: ''
-    });
+    const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
-    const {username, password} = inputs;
+
     const loggingIn = useSelector(state => state.authentication.loggingIn);
     const dispatch = useDispatch();
     const location = useLocation();
@@ -69,24 +65,19 @@ function Login() {
     const alert = useSelector(state => state.alert);
     let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
 
-    // reset login status
-    useEffect(() => {
-        dispatch(userActions.logout());
-    }, []);
-
     function handleChange(e) {
-        const {name, value} = e.target;
-        setInputs(inputs => ({...inputs, [name]: value}));
+        const email = e.target.email.value;
+        setEmail(email);
     }
 
     function handleSubmit(e) {
         e.preventDefault();
 
         setSubmitted(true);
-        if (username && password) {
+        if (email) {
             // get return url from location state or default to home page
-            const {from} = location.state || {from: {pathname: "/"}};
-            dispatch(userActions.login(username, password, from));
+            // const {from} = location.state || {from: {pathname: "/"}};
+            // dispatch(userActions.login(username, password, from));
         }
     }
 
@@ -101,7 +92,7 @@ function Login() {
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Login
+                    Forgot Password
                 </Typography>
                 {alertMessageObject && alertMessageObject.non_field_errors &&
                 <Alert severity={alert.type}>{alertMessageObject.non_field_errors[0]}</Alert>
@@ -112,57 +103,29 @@ function Login() {
                         margin="normal"
                         required
                         fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
-                        autoComplete="username"
+                        id="email"
+                        label="Email"
+                        name="email"
+                        autoComplete="email"
                         autoFocus
                         onChange={handleChange}
                     />
-                    {submitted && !username &&
-                    <Alert severity="error">Username is required</Alert>
-                    }
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        onChange={handleChange}
-                    />
-                    {submitted && !password &&
-                    <Alert severity="error">Password is required</Alert>
+                    <FormHelperText>Please enter the email you used to create your account</FormHelperText>
+                    {submitted && !email &&
+                    <Alert severity="error">Email is required</Alert>
                     }
                     <Button
                         type="submit"
-                        fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
                     >
-                        Login
+                        Send
                     </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link to='/forgot_password' variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <div className={classes.signup}>
-                                No account yet? <Link to='/register'>Register</Link>
-                            </div>
-                        </Grid>
-                    </Grid>
-
                 </form>
             </div>
         </Container>
     );
 }
 
-export default Login;
+export default ForgotPassword;
