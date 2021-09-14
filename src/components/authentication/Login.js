@@ -104,7 +104,14 @@ function Login() {
                     Login
                 </Typography>
                 {alertMessageObject && alertMessageObject.non_field_errors &&
-                <Alert severity={alert.type}>{alertMessageObject.non_field_errors[0]}</Alert>
+                <div>
+                    <br/>
+                    <Alert severity={alert.type}>{alertMessageObject.non_field_errors[0]}</Alert>
+                    <Alert severity="info" className={classes.submit}>
+                        You can <Link to='/forgot_password' variant="body2"> reset your password </Link>
+                        If you already have an account on the previous Track Hub Registry
+                    </Alert>
+                </div>
                 }
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <TextField

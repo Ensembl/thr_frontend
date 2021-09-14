@@ -4,7 +4,10 @@ export const userService = {
     login,
     logout,
     register,
-    changePassword
+    changePassword,
+    forgotPassword,
+    validateResetToken,
+    resetPassword
 };
 
 function login(username, password) {
@@ -75,6 +78,38 @@ function changePassword(old_password, new_password1, new_password2) {
         .then(user => {
             return user;
         });
+}
+
+function forgotPassword(email) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(email)
+    };
+
+    // send verification URL to the provided email
+    return fetch(`${settings.API_SERVER}/api/reset_password_email`, requestOptions).then(handleResponse);
+}
+
+function validateResetToken(uidb64, token) {
+    const requestOptions = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    };
+
+    // send uidb64 and token in params url
+    return fetch(`${settings.API_SERVER}/api/reset_password?uidb64=${uidb64}&token=${token}`, requestOptions).then(handleResponse);
+}
+
+function resetPassword(new_password, new_password_confirm, uidb64, token) {
+    const requestOptions = {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({new_password, new_password_confirm, uidb64, token})
+    };
+
+    // send verification URL to the provided email
+    return fetch(`${settings.API_SERVER}/api/reset_password_complete`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

@@ -15,7 +15,6 @@
  */
 
 import React, {useState, useEffect} from 'react';
-import {Link, Redirect, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -55,19 +54,17 @@ const useStyles = makeStyles((theme) => ({
 function ForgotPassword() {
     const classes = useStyles();
 
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState({email: ''});
     const [submitted, setSubmitted] = useState(false);
 
-    const loggingIn = useSelector(state => state.authentication.loggingIn);
     const dispatch = useDispatch();
-    const location = useLocation();
 
     const alert = useSelector(state => state.alert);
     let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
 
     function handleChange(e) {
-        const email = e.target.email.value;
-        setEmail(email);
+        const email = e.target.value;
+        setEmail({email: email});
     }
 
     function handleSubmit(e) {
@@ -75,9 +72,7 @@ function ForgotPassword() {
 
         setSubmitted(true);
         if (email) {
-            // get return url from location state or default to home page
-            // const {from} = location.state || {from: {pathname: "/"}};
-            // dispatch(userActions.login(username, password, from));
+            dispatch(userActions.forgotPassword(email))
         }
     }
 
@@ -88,11 +83,14 @@ function ForgotPassword() {
                 {alertMessageObject && alertMessageObject.success &&
                 <Alert severity={alert.type}>{alertMessageObject.success}</Alert>
                 }
+                {alertMessageObject && alertMessageObject.error &&
+                <Alert severity={alert.type}>{alertMessageObject.error}</Alert>
+                }
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Forgot Password
+                    Forgot/Reset Password
                 </Typography>
                 {alertMessageObject && alertMessageObject.non_field_errors &&
                 <Alert severity={alert.type}>{alertMessageObject.non_field_errors[0]}</Alert>

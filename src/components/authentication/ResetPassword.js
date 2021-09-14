@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import React, {useState} from 'react';
-import axios from 'axios';
-import * as settings from '../../settings';
+
+import React, {useState, useEffect} from 'react';
+import queryString from 'query-string';
 
 import {makeStyles} from '@material-ui/core/styles';
 import {Avatar, Button, Container, CssBaseline, TextField, Typography} from '@material-ui/core';
@@ -54,20 +54,43 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function ResetPassword() {
+/**
+ * The reset password displays a form for resetting an account password when it receives
+ * a valid password reset token in the url querystring parameters.
+ * The token is validated when the component mounts by calling userActions.validateResetToken(token)
+ * from inside a useEffect() react hook function, the empty dependency array passed to the react hook
+ * makes it run only once when the component mounts.
+ */
+function ResetPassword({history}) {
     const classes = useStyles();
 
-    const [inputs, setInputs] = useState({
-        new_password: '',
-        new_password_confirm: ''
-    });
-    const [submitted, setSubmitted] = useState(false);
-    const {new_password, new_password_confirm} = inputs;
     const dispatch = useDispatch();
     const location = useLocation();
 
+    // get the uidb64 and token from URL
+    const {uidb64, token} = queryString.parse(location.search);
+
+    const [inputs, setInputs] = useState({
+        new_password: '',
+        new_password_confirm: '',
+        uidb64: uidb64,
+        token: token
+    });
+    const [submitted, setSubmitted] = useState(false);
+    const {new_password, new_password_confirm} = inputs;
+
     const alert = useSelector(state => state.alert);
     let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
+
+    useEffect(() => {
+        // get the uidb64 and token from URL
+        const {uidb64, token} = queryString.parse(location.search);
+
+        // remove token from url to prevent http referer leakage
+        history.replace(location.pathname);
+
+        dispatch(userActions.validateResetToken(uidb64, token));
+    }, []);
 
     function handleChange(e) {
         const {name, value} = e.target;
@@ -79,8 +102,7 @@ function ResetPassword() {
 
         setSubmitted(true);
         if (new_password && new_password_confirm && new_password == new_password_confirm) {
-            console.log("new_password && new_password_confirm && new_password == new_password_confirm")
-            // dispatch(userActions.changePassword(new_password1, new_password2));
+            dispatch(userActions.resetPassword(new_password, new_password_confirm, uidb64, token))
         }
     }
 
@@ -90,6 +112,9 @@ function ResetPassword() {
             <div className={classes.paper}>
                 {alertMessageObject && alertMessageObject.success &&
                 <Alert severity={alert.type}>{alertMessageObject.success}</Alert>
+                }
+                {alertMessageObject && alertMessageObject.error &&
+                <Alert severity={alert.type}>{alertMessageObject.error}</Alert>
                 }
                 <Avatar className={classes.avatar}>
                     <VpnKeyIcon/>
@@ -121,6 +146,9 @@ function ResetPassword() {
                         id="new_password"
                         onChange={handleChange}
                     />
+                    {alertMessageObject.new_password &&
+                    <Alert severity={alert.type}>{alertMessageObject.new_password[0]}</Alert>
+                    }
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -134,11 +162,10 @@ function ResetPassword() {
                         error={new_password !== new_password_confirm}
                         helperText={new_password !== new_password_confirm ? "Passwords don't match" : null}
                     />
-                    {alertMessageObject && alertMessageObject.error &&
-                    <Alert severity={alert.type}>{alertMessageObject.error[0]}</Alert>
+                    {alertMessageObject.new_password_confirm &&
+                    <Alert severity={alert.type}>{alertMessageObject.new_password_confirm[0]}</Alert>
                     }
                     <Button
-                        // disabled
                         type="submit"
                         fullWidth
                         variant="contained"
