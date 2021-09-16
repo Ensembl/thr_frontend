@@ -112,6 +112,9 @@ function ForgotPassword() {
                     {submitted && !email &&
                     <Alert severity="error">Email is required</Alert>
                     }
+                    {alertMessageObject.email &&
+                    <Alert severity={alert.type}>{alertMessageObject.email[0]}</Alert>
+                    }
                     <Button
                         type="submit"
                         variant="contained"

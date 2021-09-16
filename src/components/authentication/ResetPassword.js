@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
  * from inside a useEffect() react hook function, the empty dependency array passed to the react hook
  * makes it run only once when the component mounts.
  */
-function ResetPassword({history}) {
+function ResetPassword() {
     const classes = useStyles();
 
     const dispatch = useDispatch();
@@ -85,9 +85,6 @@ function ResetPassword({history}) {
     useEffect(() => {
         // get the uidb64 and token from URL
         const {uidb64, token} = queryString.parse(location.search);
-
-        // remove token from url to prevent http referer leakage
-        history.replace(location.pathname);
 
         dispatch(userActions.validateResetToken(uidb64, token));
     }, []);
