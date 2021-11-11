@@ -97,7 +97,7 @@ export default function GenomeBrowsersLinks(props) {
                 { trackdbBrowserLinks &&
                     Object.entries(trackdbBrowserLinks).map(
                         ([genomeBrowserName, genomeBrowserLink]) =>
-                            <a href={genomeBrowserLink} target="_blank" className={classes.customLink}>
+                            <a href={genomeBrowserLink} target="_blank" rel="noreferrer" className={classes.customLink}>
                                 <StyledMenuItem key={genomeBrowserName}>
                                     <ListItemText primary={genomeBrowserName.toUpperCase()}/>
                                 </StyledMenuItem>
@@ -106,7 +106,7 @@ export default function GenomeBrowsersLinks(props) {
                 }
 
                 <a href={`https://www.ncbi.nlm.nih.gov/genome/gdv/browser/genome/?acc=${assemblyAccession}&hub=${hubUrl}`}
-                   target="_blank" className={classes.customLink}>
+                   target="_blank" rel="noreferrer" className={classes.customLink}>
                     <StyledMenuItem key='NCBI GDV'>
                         <ListItemText primary='NCBI GDV'/>
                     </StyledMenuItem>

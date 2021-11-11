@@ -21,7 +21,6 @@ import MainBreadcrumb from "../MainBreadcrumb";
 import * as settings from "../../settings";
 import axios from "axios";
 import Tags from "./Tags";
-import {Alert} from "@material-ui/lab";
 
 
 function MainView(props) {
@@ -41,7 +40,7 @@ function MainView(props) {
             .catch(err => {
                 console.log(err)
             });
-    }, [])
+    }, [trackdb_id])
 
     if (trackDbInfo === undefined) {
         // TODO: Manage the non existent trackdb id

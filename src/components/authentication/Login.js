@@ -15,7 +15,7 @@
  */
 
 import React, {useState, useEffect} from 'react';
-import {Link, Redirect, useLocation} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';

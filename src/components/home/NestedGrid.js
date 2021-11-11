@@ -22,7 +22,6 @@ import PublishIcon from '@material-ui/icons/Publish';
 import {Equalizer, Search} from "@material-ui/icons";
 import Chart from "./Chart";
 import {Button} from "@material-ui/core";
-import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -74,13 +73,13 @@ export default function NestedGrid() {
                             </p>
                             <p className={classes.text}>
                                 External track hub providers can register and submit their track databases to the
-                                registry. <a href="#">Registration</a> is web-based and done
+                                registry. <a href="/register">Registration</a> is web-based and done
                                 on this site; submission happens programatically via our RESTful API. Once submitted and
                                 successfully validated, the track dbs become available for search by other users
                                 worldwide,
                                 allowing for automatic and rapid integration into a genome browser.
                             </p>
-                            <Button variant="contained" color="primary" href="#">How To Submit</Button>
+                            <Button variant="contained" color="primary" href="/docs/management/overview">How To Submit</Button>
                         </div>
                     </Paper>
                 </Grid>
@@ -95,12 +94,12 @@ export default function NestedGrid() {
                             </p>
                             <p className={classes.text}>
                                 Track hubs can be searched based on metadata information. Free text <a
-                                href="#">search</a> is provided from the search box in the
+                                href="/docs/search">search</a> is provided from the search box in the
                                 header of all track hub Registry web pages and in the middle of this page. Advanced
                                 search
                                 options are available for more specific and customised searches.
                             </p>
-                            <Button variant="contained" color="primary" href="#">Help On Advanced Search</Button>
+                            <Button variant="contained" color="primary" href="/docs/search/advanced">Help On Advanced Search</Button>
                         </div>
                     </Paper>
                 </Grid>

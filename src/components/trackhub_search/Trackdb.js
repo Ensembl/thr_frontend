@@ -75,7 +75,7 @@ const Trackdb = ({trackdb}) => {
             <Paper className={classes.paper} elevation={2}>
                 <div className={classes.paperContent}>
                     <h3 className={classes.PanelTitle}>
-                        <Link to={`/trackhub_view/${trackdb.trackdb_id}`} target={'_blank'}>
+                        <Link to={`/trackhub_view/${trackdb.trackdb_id}`} target={'_blank'} rel="noreferrer">
                             {trackdb.hub.short_label}
                         </Link>
                     </h3>
@@ -102,6 +102,7 @@ const Trackdb = ({trackdb}) => {
                                 variant="outlined"
                                 href={`/trackhub_view/${trackdb.trackdb_id}`}
                                 target="_blank"
+                                rel="noreferrer"
                                 color="default"
                             >View Info
                             </Button>
