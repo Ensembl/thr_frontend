@@ -40,6 +40,8 @@ import MainView from "./components/trackhub_view/MainView";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
 import UserDashboard from "./components/dashboard/UserDashboard";
 import NotFound from "./components/NotFound";
+import About from "./About";
+import Help from "./Help";
 
 // The main colours and fonts used in the application
 const theme = createMuiTheme({
@@ -90,6 +92,8 @@ function App(props) {
                     <Router history={history}>
                         <Switch>
                             <Route exact path="/" component={Home}/>
+                            <Route exact path="/about" component={About}/>
+                            <Route exact path="/help" component={Help}/>
                             <Route exact path="/login" component={Login}/>
                             <Route exact path="/search" component={SearchResult}/>
                             <Route exact path="/register" component={Register}/>

@@ -20,6 +20,7 @@ import {AppBar, Toolbar, Typography, Button, IconButton} from '@material-ui/core
 import HomeIcon from '@material-ui/icons/Home';
 import SearchForm from "./home/SearchForm";
 import {useSelector} from "react-redux";
+import DocsMenu from "./docs/DocsMenu";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,6 +51,11 @@ export default function TopBar(props) {
                     <Typography variant="h6" className={classes.title}>
                         <a href="/">The Track Hub Registry</a>
                     </Typography>
+                    <Button color="inherit" href="/register">Submit data</Button>
+                    <DocsMenu/>
+                    <Button color="inherit" href="/about">About</Button>
+                    <Button color="inherit" href="/help">Help</Button>
+
                     <SearchForm/>
                     <IconButton aria-label="home page" color="inherit" href="/">
                         <HomeIcon/>
