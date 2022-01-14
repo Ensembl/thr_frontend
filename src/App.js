@@ -45,6 +45,10 @@ import Help from "./Help";
 import SearchBasicDocs from "./components/docs/search/SearchBasicDocs";
 import SearchResultsDocs from "./components/docs/search/SearchResultsDocs";
 import SearchAdvancedDocs from "./components/docs/search/SearchAdvancedDocs";
+import OverviewDocs from "./components/docs/management/OverviewDocs";
+import AssemblySupportDocs from "./components/docs/management/AssemblySupportDocs";
+import ModellingDocs from "./components/docs/management/ModellingDocs";
+import DashboardDocs from "./components/docs/management/DashboardDocs";
 
 // The main colours and fonts used in the application
 const theme = createMuiTheme({
@@ -98,6 +102,10 @@ function App(props) {
                             <Route exact path="/docs/search" component={SearchBasicDocs}/>
                             <Route exact path="/docs/search/results" component={SearchResultsDocs}/>
                             <Route exact path="/docs/search/advanced" component={SearchAdvancedDocs}/>
+                            <Route exact path="/docs/management/overview" component={OverviewDocs}/>
+                            <Route exact path="/docs/management/assembly_support" component={AssemblySupportDocs}/>
+                            <Route exact path="/docs/management/modelling" component={ModellingDocs}/>
+                            <Route exact path="/docs/management/dashboard" component={DashboardDocs}/>
                             <Route exact path="/about" component={About}/>
                             <Route exact path="/help" component={Help}/>
                             <Route exact path="/login" component={Login}/>

@@ -61,11 +61,11 @@ export const DocsDropdownMenu = () => {
                     parentMenuOpen={!!menuPosition}
                     onClick={handleItemClick}
                 >
-                    <MenuItem component="a" href="/login">Overview</MenuItem>
-                    <MenuItem component="a" href="/login">Supported Genome Assemblies</MenuItem>
-                    <MenuItem component="a" href="/login">Modelling Track Hubs</MenuItem>
-                    <MenuItem component="a" href="/login">REST API</MenuItem>
-                    <MenuItem component="a" href="/login">Dashboard</MenuItem>
+                    <MenuItem component="a" href="/docs/management/overview">Overview</MenuItem>
+                    <MenuItem component="a" href="/docs/management/assembly_support">Supported Genome Assemblies</MenuItem>
+                    <MenuItem component="a" href="/docs/management/modelling">Modelling Track Hubs</MenuItem>
+                    {/*<MenuItem component="a" href="/docs/api/registration">REST API</MenuItem>*/}
+                    <MenuItem component="a" href="/docs/management/dashboard">Dashboard</MenuItem>
                 </NestedMenuItem>
                 <Divider/>
                 <MenuItem component="a" href="/login">Registry APIs</MenuItem>
