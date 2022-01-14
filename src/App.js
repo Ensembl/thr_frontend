@@ -42,6 +42,9 @@ import UserDashboard from "./components/dashboard/UserDashboard";
 import NotFound from "./components/NotFound";
 import About from "./About";
 import Help from "./Help";
+import SearchBasicDocs from "./components/docs/search/SearchBasicDocs";
+import SearchResultsDocs from "./components/docs/search/SearchResultsDocs";
+import SearchAdvancedDocs from "./components/docs/search/SearchAdvancedDocs";
 
 // The main colours and fonts used in the application
 const theme = createMuiTheme({
@@ -92,6 +95,9 @@ function App(props) {
                     <Router history={history}>
                         <Switch>
                             <Route exact path="/" component={Home}/>
+                            <Route exact path="/docs/search" component={SearchBasicDocs}/>
+                            <Route exact path="/docs/search/results" component={SearchResultsDocs}/>
+                            <Route exact path="/docs/search/advanced" component={SearchAdvancedDocs}/>
                             <Route exact path="/about" component={About}/>
                             <Route exact path="/help" component={Help}/>
                             <Route exact path="/login" component={Login}/>

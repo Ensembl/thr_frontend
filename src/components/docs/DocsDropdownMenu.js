@@ -19,7 +19,7 @@ import {Button, Divider, Menu, MenuItem, Typography} from "@material-ui/core";
 
 import NestedMenuItem from "material-ui-nested-menu-item";
 
-export const NestedMenu = () => {
+export const DocsDropdownMenu = () => {
     const [menuPosition, setMenuPosition] = useState(null);
 
     const handleClick = (e) => {
@@ -53,26 +53,26 @@ export const NestedMenu = () => {
                     parentMenuOpen={!!menuPosition}
                     onClick={handleItemClick}
                 >
-                    <MenuItem onClick={handleItemClick}>Basic Search</MenuItem>
-                    <MenuItem onClick={handleItemClick}>Advanced Search</MenuItem>
+                    <MenuItem component="a" href="/docs/search">Basic Search</MenuItem>
+                    <MenuItem component="a" href="/docs/search/advanced">Advanced Search</MenuItem>
                 </NestedMenuItem>
                 <NestedMenuItem
                     label="Registering/Managing Track Hubs"
                     parentMenuOpen={!!menuPosition}
                     onClick={handleItemClick}
                 >
-                    <MenuItem onClick={handleItemClick}>Overview</MenuItem>
-                    <MenuItem onClick={handleItemClick}>Supported Genome Assemblies</MenuItem>
-                    <MenuItem onClick={handleItemClick}>Modelling Track Hubs</MenuItem>
-                    <MenuItem onClick={handleItemClick}>REST API</MenuItem>
-                    <MenuItem onClick={handleItemClick}>Dashboard</MenuItem>
+                    <MenuItem component="a" href="/login">Overview</MenuItem>
+                    <MenuItem component="a" href="/login">Supported Genome Assemblies</MenuItem>
+                    <MenuItem component="a" href="/login">Modelling Track Hubs</MenuItem>
+                    <MenuItem component="a" href="/login">REST API</MenuItem>
+                    <MenuItem component="a" href="/login">Dashboard</MenuItem>
                 </NestedMenuItem>
                 <Divider/>
-                <MenuItem onClick={handleItemClick}>Registry APIs</MenuItem>
-                <MenuItem onClick={handleItemClick}>TrackDB JSON specification</MenuItem>
+                <MenuItem component="a" href="/login">Registry APIs</MenuItem>
+                <MenuItem component="a" href="/login">TrackDB JSON specification</MenuItem>
             </Menu>
         </div>
     );
 };
 
-export default NestedMenu;
+export default DocsDropdownMenu;
