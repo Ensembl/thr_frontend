@@ -68,8 +68,8 @@ export const DocsDropdownMenu = () => {
                     <MenuItem component="a" href="/docs/management/dashboard">Dashboard</MenuItem>
                 </NestedMenuItem>
                 <Divider/>
-                <MenuItem component="a" href="/login">Registry APIs</MenuItem>
-                <MenuItem component="a" href="/login">TrackDB JSON specification</MenuItem>
+                <MenuItem component="a" href="/docs/apis">Registry APIs</MenuItem>
+                <MenuItem component="a" href="/docs/management/modelling">TrackDB JSON specification</MenuItem>
             </Menu>
         </div>
     );

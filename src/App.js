@@ -49,6 +49,17 @@ import OverviewDocs from "./components/docs/management/OverviewDocs";
 import AssemblySupportDocs from "./components/docs/management/AssemblySupportDocs";
 import ModellingDocs from "./components/docs/management/ModellingDocs";
 import DashboardDocs from "./components/docs/management/DashboardDocs";
+import ThrApisDocs from "./components/docs/apis/ThrApisDocs";
+import InfoApisDocs from "./components/docs/apis/InfoApisDocs";
+import RegistrationApiDocs from "./components/docs/apis/RegistrationApiDocs";
+import LoginWfDocs from "./components/docs/apis/workflow/LoginWfDocs";
+import RegisteringThWfDocs from "./components/docs/apis/workflow/RegisteringThWfDocs";
+import RetrieveThWfDocs from "./components/docs/apis/workflow/RetrieveThWfDocs";
+import UpdateThWfDocs from "./components/docs/apis/workflow/UpdateThWfDocs";
+import DeleteThWfDocs from "./components/docs/apis/workflow/DeleteThWfDocs";
+import LogoutWfDocs from "./components/docs/apis/workflow/LogoutWfDocs";
+import RefApiDocs from "./components/docs/apis/RefApiDocs";
+import SearchApiDocs from "./components/docs/apis/SearchApiDocs";
 
 // The main colours and fonts used in the application
 const theme = createMuiTheme({
@@ -106,6 +117,17 @@ function App(props) {
                             <Route exact path="/docs/management/assembly_support" component={AssemblySupportDocs}/>
                             <Route exact path="/docs/management/modelling" component={ModellingDocs}/>
                             <Route exact path="/docs/management/dashboard" component={DashboardDocs}/>
+                            <Route exact path="/docs/api/info" component={InfoApisDocs}/>
+                            <Route exact path="/docs/apis" component={ThrApisDocs}/>
+                            <Route exact path="/docs/api/registration" component={RegistrationApiDocs}/>
+                            <Route exact path="/docs/api/registration/workflow/login" component={LoginWfDocs}/>
+                            <Route exact path="/docs/api/registration/workflow/thregister" component={RegisteringThWfDocs}/>
+                            <Route exact path="/docs/api/registration/workflow/thlist" component={RetrieveThWfDocs}/>
+                            <Route exact path="/docs/api/registration/workflow/thupdate" component={UpdateThWfDocs}/>
+                            <Route exact path="/docs/api/registration/workflow/thdelete" component={DeleteThWfDocs}/>
+                            <Route exact path="/docs/api/registration/workflow/logout" component={LogoutWfDocs}/>
+                            <Route exact path="/docs/api/registration/reference" component={RefApiDocs}/>
+                            <Route exact path="/docs/api/search" component={SearchApiDocs}/>
                             <Route exact path="/about" component={About}/>
                             <Route exact path="/help" component={Help}/>
                             <Route exact path="/login" component={Login}/>

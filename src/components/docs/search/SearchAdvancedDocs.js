@@ -102,9 +102,9 @@ const SearchAdvancedDocs = () => {
 
                         <h4 id="logical">Logical Operators</h4>
                         <p>
-                            By default, all terms are optional, as long as one term matches. A search for <mark>foo bar
-                            baz</mark> will find any document that contains one or more
-                            of <mark>foo</mark> or <mark>bar</mark> or <mark>baz</mark>. Alternatively, all the familiar
+                            By default, all terms are optional, as long as one term matches. A search for <em>foo bar
+                            baz</em> will find any document that contains one or more
+                            of <em>foo</em> or <em>bar</em> or <em>baz</em>. Alternatively, all the familiar
                             AND, OR and NOT operators (also written &&, || and !) can be used. Using AND instead of the
                             default OR operator in the previous query would force all terms to be required.
                         </p>
