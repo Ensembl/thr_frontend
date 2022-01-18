@@ -23,7 +23,7 @@ import Paper from "@material-ui/core/Paper";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
-import ClippedDrawer from "./ClippedDrawer";
+import ApisDocsMenu from "./ApisDocsMenu";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 
@@ -59,10 +59,8 @@ const InfoApisDocs = () => {
         <>
             <div className={classes.root}>
                 <CssBaseline/>
-                <ClippedDrawer/>
+                <ApisDocsMenu/>
                 <main className={classes.content}>
-                    <br/>
-                    <Toolbar/>
                     <MainBreadcrumb item="Info"/>
                     <br/>
                     <Typography component="h1" variant="h4">

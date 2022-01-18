@@ -15,14 +15,16 @@
  */
 
 import React from 'react';
-import Grid from "@material-ui/core/Grid";
 import SearchDocsMenu from "./SearchDocsMenu";
 import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import MainBreadcrumb from "../../MainBreadcrumb";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%'
+        marginTop: '-30px',
+        display: 'flex',
     },
     heading: {
         fontSize: theme.typography.pxToRem(17),
@@ -38,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
     chipContent: {
         marginLeft: '8px'
     },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+    },
 }));
 
 const SearchBasicDocs = () => {
@@ -46,41 +52,39 @@ const SearchBasicDocs = () => {
     return (
         <>
             <div className={classes.root}>
-                <br/>
-                <Grid container spacing={4}>
-                    <Grid item xs={3}>
-                        <SearchDocsMenu/>
-                    </Grid>
-                    <Grid item xs={9}>
-                        <Typography component="h1" variant="h4">
-                            Basic Track Hub Search
-                        </Typography>
-                        <p>
-                            Full text search is provided from the search box in the header of all Track Hub Registry web
-                            pages and on the home page. Enter search terms within the search input box and hit enter or
-                            click on the spy glass icon. A search term can be a single word or a phrase surrounded by
-                            double quotes, which searches for all the words in the phrase, in the same order.
-                        </p>
-                        <p>
-                            When querying using multiple terms, by default the search application uses the logical
-                            operator OR, so entering <a href="/search?q=GRCm38+mouse">GRCm38
-                            mouse</a> into the search box actually translates to GRCm38 OR mouse which will find any
-                            document that contains one or more of GRCm38 or mouse: some of the results will contain
-                            GRCm38, some will contain mouse and others may contain both, with results of the latter case
-                            being ranked at the top.
-                        </p>
-                        <p>
-                            Read about the <a href="/docs/search/results">search results page</a> to
-                            learn how to filter search results according to different criteria and know how matching
-                            track hubs are displayed and how they can be loaded for display in genome browsers.
-                        </p>
-                        <p>
-                            See <a href="/docs/search/advanced">Advanced Search</a> for more specific
-                            and customised searches using complex queries in the search box.
-                        </p>
+                <CssBaseline/>
+                <SearchDocsMenu/>
+                <main className={classes.content}>
+                    <MainBreadcrumb item="Search"/>
+                    <br/>
 
-                    </Grid>
-                </Grid>
+                    <Typography component="h1" variant="h4">
+                        Basic Track Hub Search
+                    </Typography>
+                    <p>
+                        Full text search is provided from the search box in the header of all Track Hub Registry web
+                        pages and on the home page. Enter search terms within the search input box and hit enter or
+                        click on the spy glass icon. A search term can be a single word or a phrase surrounded by
+                        double quotes, which searches for all the words in the phrase, in the same order.
+                    </p>
+                    <p>
+                        When querying using multiple terms, by default the search application uses the logical
+                        operator OR, so entering <a href="/search?q=GRCm38+mouse">GRCm38
+                        mouse</a> into the search box actually translates to GRCm38 OR mouse which will find any
+                        document that contains one or more of GRCm38 or mouse: some of the results will contain
+                        GRCm38, some will contain mouse and others may contain both, with results of the latter case
+                        being ranked at the top.
+                    </p>
+                    <p>
+                        Read about the <a href="/docs/search/results">search results page</a> to
+                        learn how to filter search results according to different criteria and know how matching
+                        track hubs are displayed and how they can be loaded for display in genome browsers.
+                    </p>
+                    <p>
+                        See <a href="/docs/search/advanced">Advanced Search</a> for more specific
+                        and customised searches using complex queries in the search box.
+                    </p>
+                </main>
             </div>
         </>
     );

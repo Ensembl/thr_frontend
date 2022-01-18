@@ -21,11 +21,13 @@ import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import MainBreadcrumb from "../../MainBreadcrumb";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Toolbar from "@material-ui/core/Toolbar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
-        marginTop: '30px'
+        marginTop: '-30px',
+        display: 'flex',
     },
     item: {
         listStyleType: 'none',
@@ -41,6 +43,10 @@ const useStyles = makeStyles((theme) => ({
         overflowX: 'scroll',
         minWidth: '100px',
     },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+    },
 }));
 
 const AssemblySupportDocs = () => {
@@ -55,14 +61,12 @@ const AssemblySupportDocs = () => {
 
     return (
         <>
-            <MainBreadcrumb item="Track Hub Management"/>
             <div className={classes.root}>
-                <br/>
-                <Grid container spacing={4}>
-                    <Grid item xs={3}>
-                        <ManagementDocsMenu/>
-                    </Grid>
-                    <Grid item xs={9}>
+                <CssBaseline/>
+                <ManagementDocsMenu/>
+                <main className={classes.content}>
+                    <MainBreadcrumb item="Track Hub Management"/>
+                    <br/>
                         <Typography component="h1" variant="h4">
                             Genome Assembly Support
                         </Typography>
@@ -144,9 +148,7 @@ const AssemblySupportDocs = () => {
                             href="/docs/api/registration/reference#post_trackhub_msg_format">submissions
                             API reference</a>.
                         </p>
-
-                    </Grid>
-                </Grid>
+                </main>
             </div>
         </>
     );

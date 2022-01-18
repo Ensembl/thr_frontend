@@ -16,86 +16,134 @@
 
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {Link} from "react-router-dom";
 import {HashLink} from "react-router-hash-link";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import {Collapse, ListSubheader} from "@material-ui/core";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import SearchIcon from '@material-ui/icons/Search';
+import ListItemText from "@material-ui/core/ListItemText";
+import {ExpandLess, ExpandMore} from "@material-ui/icons";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
 
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
+        display: 'flex',
     },
-    heading: {
-        fontSize: theme.typography.pxToRem(17),
-        fontWeight: theme.typography.fontWeightRegular,
-        color: 'white'
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0,
     },
-    summary: {
-        backgroundColor: theme.palette.primary.main,
-        marginBottom: '20px'
+    drawerPaper: {
+        width: drawerWidth,
+    },
+    drawerContainer: {
+        overflow: 'auto',
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+    },
+    nestedLvl1: {
+        paddingLeft: theme.spacing.unit * 5,
+    },
+    nestedLvl2: {
+        paddingLeft: theme.spacing.unit * 10,
     },
     item: {
         listStyleType: 'none',
-        marginBottom: '-10px',
-        marginTop: '-10px'
+        // marginBottom: '-10px',
+        // marginTop: '-10px',
+        textDecoration: 'inherit',
+        color: 'inherit',
+        marginRight: 'auto'
     },
 }));
 
 export default function SearchDocsMenu() {
     const classes = useStyles();
 
-    const handleClick = (event) => {
-        document.querySelector('[id="filter"]').scrollIntoView();
+    const [searchResPageOpen, setSearchResPageOpen] = React.useState(false);
+
+    const handleSearchResPageOpen = () => {
+        setSearchResPageOpen(!searchResPageOpen);
     };
+
 
     return (
         <div className={classes.root}>
 
-            <Accordion defaultExpanded style={{position: 'fixed'}}>
-                <AccordionSummary
-                    className={classes.summary}
-                    aria-controls="current-filters-content"
-                    id="current-filters-header"
-                >
-                    <Typography className={classes.heading}>Search Docs</Typography>
-                </AccordionSummary>
-                <AccordionDetails className={classes.item}>
-                    <Link to="/docs/search">Basic Track Hub Search</Link>
-                </AccordionDetails>
-                <AccordionDetails className={classes.item}>
-                    <Link to="/docs/search/results">Search Results Page</Link>
-                </AccordionDetails>
-                <ul className={classes.item}>
-                    <li>
-                        <AccordionDetails className={classes.item}>
-                            <HashLink to="/docs/search/results#filter">Filtering Results</HashLink>
-                        </AccordionDetails>
-                    </li>
-                    <li>
-                        <AccordionDetails className={classes.item}>
-                            <HashLink to="/docs/search/results#status">Data Tracks Status</HashLink>
-                        </AccordionDetails>
-                    </li>
-                    <li>
-                        <AccordionDetails className={classes.item}>
-                            <HashLink to="/docs/search/results#load">Loading Track Hubs into Genome Browsers</HashLink>
-                        </AccordionDetails>
-                    </li>
-                    <li>
-                        <AccordionDetails className={classes.item}>
-                            <HashLink to="/docs/search/results#view">Viewing more information</HashLink>
-                        </AccordionDetails>
-                    </li>
-                </ul>
-                <AccordionDetails className={classes.item}>
-                    <Link to="/docs/search/advanced">Advanced Search</Link>
-                </AccordionDetails>
-            </Accordion>
+            <Drawer
+                className={classes.drawer}
+                variant="permanent"
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                <Toolbar/>
+                <div className={classes.drawerContainer}>
+                    <List
+                        component="nav"
+                        subheader={<ListSubheader component="div">Search Docs</ListSubheader>}
+                    >
+                        <ListItem button key='basic_search'>
+                            <ListItemIcon><SearchIcon/></ListItemIcon>
+                            <Link to="/docs/search" className={classes.item} underline="none">
+                                <ListItemText primary='Basic Track Hub Search'/>
+                            </Link>
+                        </ListItem>
 
+                        <ListItem button key='search_results' onClick={handleSearchResPageOpen}>
+                            <ListItemIcon><SearchIcon/></ListItemIcon>
+                            <Link to="/docs/search/results" className={classes.item} underline="none">
+                                <ListItemText primary='Search Results Page' onClick={handleSearchResPageOpen}/>
+                            </Link>
+                            {searchResPageOpen ? <ExpandLess/> : <ExpandMore/>}
+                        </ListItem>
+                        <Collapse in={searchResPageOpen} timeout="auto" unmountOnExit>
+                            <List component="div" disablePadding>
+                                <HashLink to="/docs/search/results#filter" className={classes.item} underline="none">
+                                    <ListItem button className={classes.nestedLvl1} key='filter'>
+                                        <ListItemIcon><SearchIcon/></ListItemIcon>
+                                        <ListItemText primary="Filtering Results"/>
+                                    </ListItem>
+                                </HashLink>
+                                <HashLink to="/docs/search/results#status" className={classes.item} underline="none">
+                                    <ListItem button className={classes.nestedLvl1} key='status'>
+                                        <ListItemIcon><SearchIcon/></ListItemIcon>
+                                        <ListItemText primary="Data Tracks Status"/>
+                                    </ListItem>
+                                </HashLink>
+                                <HashLink to="/docs/search/results#load" className={classes.item} underline="none">
+                                    <ListItem button className={classes.nestedLvl1} key='load'>
+                                        <ListItemIcon><SearchIcon/></ListItemIcon>
+                                        <ListItemText primary="Loading Track Hubs into Genome Browsers"/>
+                                    </ListItem>
+                                </HashLink>
+                                <HashLink to="/docs/search/results#view" className={classes.item} underline="none">
+                                    <ListItem button className={classes.nestedLvl1} key='view'>
+                                        <ListItemIcon><SearchIcon/></ListItemIcon>
+                                        <ListItemText primary="Viewing more information"/>
+                                    </ListItem>
+                                </HashLink>
+                            </List>
+                        </Collapse>
+                        {searchResPageOpen ? <Divider/> : <span/>}
+
+                        <ListItem button key='advanced_search'>
+                            <ListItemIcon><SearchIcon/></ListItemIcon>
+                            <Link to="/docs/search/advanced" className={classes.item} underline="none">
+                                <ListItemText primary='Advanced Search'/>
+                            </Link>
+                        </ListItem>
+                    </List>
+                </div>
+            </Drawer>
         </div>
     );
 }

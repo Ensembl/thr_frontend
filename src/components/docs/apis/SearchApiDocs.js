@@ -18,7 +18,7 @@ import React from 'react';
 import {TableCell, TableHead, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import MainBreadcrumb from "../../MainBreadcrumb";
-import ClippedDrawer from "./ClippedDrawer";
+import ApisDocsMenu from "./ApisDocsMenu";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
@@ -59,10 +59,8 @@ const SearchApiDocs = () => {
         <>
             <div className={classes.root}>
                 <CssBaseline/>
-                <ClippedDrawer/>
+                <ApisDocsMenu/>
                 <main className={classes.content}>
-                    <br/>
-                    <Toolbar/>
                     <MainBreadcrumb item="Registration"/>
                     <br/>
                     <Typography id="top" component="h1" variant="h4">

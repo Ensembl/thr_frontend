@@ -15,24 +15,28 @@
  */
 
 import React from 'react';
-import Grid from "@material-ui/core/Grid";
 import ManagementDocsMenu from "./ManagementDocsMenu";
 import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import Alert from "@material-ui/lab/Alert";
 import MainBreadcrumb from "../../MainBreadcrumb";
 import ReactJson from 'react-json-view'
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Toolbar from "@material-ui/core/Toolbar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
-        marginTop: '30px'
+        marginTop: '-30px',
+        display: 'flex',
     },
     item: {
         listStyleType: 'none',
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
     },
 }));
 
@@ -41,14 +45,13 @@ const ModellingDocs = () => {
 
     return (
         <>
-            <MainBreadcrumb item="Track Hub Management"/>
             <div className={classes.root}>
-                <br/>
-                <Grid container spacing={4}>
-                    <Grid item xs={3}>
-                        <ManagementDocsMenu/>
-                    </Grid>
-                    <Grid item xs={9}>
+                <CssBaseline/>
+                <ManagementDocsMenu/>
+                <main className={classes.content}>
+                                <MainBreadcrumb item="Track Hub Management"/>
+                    <br/>
+
                         <Typography component="h1" variant="h4">
                             Managing Track Hubs with the Registry - An Overview
                         </Typography>
@@ -106,9 +109,7 @@ const ModellingDocs = () => {
                             name={false}
                             displayDataTypes={true}
                         />
-
-                    </Grid>
-                </Grid>
+                </main>
             </div>
         </>
     );
