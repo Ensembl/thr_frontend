@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -38,10 +38,10 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(3),
     },
     nestedLvl1: {
-        paddingLeft: theme.spacing.unit * 5,
+        paddingLeft: theme.spacing(5),
     },
     nestedLvl2: {
-        paddingLeft: theme.spacing.unit * 10,
+        paddingLeft: theme.spacing(10),
     },
     item: {
         listStyleType: 'none',
@@ -55,6 +55,26 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ApisDocsMenu() {
     const classes = useStyles();
+
+    useEffect(() => {
+        // get the last part of the url
+        // e.g. docs/management/overview => overview
+        const lastUrlPart = window.location.pathname.split("/").pop();
+        console.log(lastUrlPart)
+
+        if (lastUrlPart === "apis") {
+            setTrhApisOpen(true);
+        }
+        else if (lastUrlPart === "info") {
+            setInfoApisOpen(true);
+        }
+        else if (lastUrlPart === "registration") {
+            setRegistrationApiOpen(true);
+        }
+        else if (lastUrlPart === "search") {
+            setSearchApiOpen(true);
+        }
+    }, []);
 
     const [trhApisOpen, setTrhApisOpen] = React.useState(false);
     const [infoApisOpen, setInfoApisOpen] = React.useState(false);

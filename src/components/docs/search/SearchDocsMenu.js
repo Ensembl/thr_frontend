@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {Link} from "react-router-dom";
 import {HashLink} from "react-router-hash-link";
@@ -50,10 +50,10 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(3),
     },
     nestedLvl1: {
-        paddingLeft: theme.spacing.unit * 5,
+        paddingLeft: theme.spacing(5),
     },
     nestedLvl2: {
-        paddingLeft: theme.spacing.unit * 10,
+        paddingLeft: theme.spacing(10),
     },
     item: {
         listStyleType: 'none',
@@ -67,6 +67,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchDocsMenu() {
     const classes = useStyles();
+
+
+    useEffect(() => {
+        // get the last part of the url
+        // e.g. docs/management/overview => overview
+        const lastUrlPart = window.location.pathname.split("/").pop();
+        console.log(lastUrlPart)
+
+        if (lastUrlPart === "results") {
+            setSearchResPageOpen(true);
+        }
+    }, []);
 
     const [searchResPageOpen, setSearchResPageOpen] = React.useState(false);
 
