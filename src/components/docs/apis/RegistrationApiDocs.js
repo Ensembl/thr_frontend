@@ -59,6 +59,10 @@ const ThrApisDocs = () => {
                         Registration API
                     </Typography>
 
+                    <br/>
+                    <Typography id="authentication" component="h4" variant="h5">
+                        Authentication
+                    </Typography>
                     <p>
                         The Registry requires requests to the Registration API to be authenticated. The Registration API
                         implements Basic HTTP Authentication, as defined by RFC 2617, which enables a client to
@@ -67,7 +71,9 @@ const ThrApisDocs = () => {
                         and use that token in the authentication header of all subsequent requests.
                     </p>
 
-                    <h3 id="workflow">A Simplified RESTful workflow</h3>
+                    <Typography id="workflow" component="h4" variant="h5">
+                        A Simplified RESTful workflow
+                    </Typography>
                     <p>
                         API clients and the Registry communicates over HTTPS, exchanging JSON representations of API
                         objects.
@@ -82,42 +88,49 @@ const ThrApisDocs = () => {
                         href="/register" target="_blank">registration</a>.
                     </p>
 
-                    <h4 id="login"><a href="/docs/api/registration/workflow/login">Logging in</a>
-                    </h4>
+                    <Typography id="login" component="h4" variant="h6">
+                        <a href="/docs/api/registration/workflow/login">Logging in</a>
+                    </Typography>
                     <p>
                         All requests to the service must be authenticated. The first step in any Registration API
                         RESTful workflow is to obtain an authentication token.
                     </p>
 
-                    <h4 id=""><a href="/docs/api/registration/workflow/thregister">Registering track
-                        hubs</a></h4>
+                    <Typography id="" component="h4" variant="h6">
+                        <a href="/docs/api/registration/workflow/thregister">Registering track hubs</a>
+                    </Typography>
                     <p>
                         You've just signed up and you've got some remote public track hubs that you want to register
                         with and make available for search on the Track Hub Registry.
                     </p>
 
-                    <h4 id=""><a href="/docs/api/registration/workflow/thlist">Retrieve the list of
-                        registered track hubs</a></h4>
+                    <Typography id="" component="h4" variant="h6">
+                        <a href="/docs/api/registration/workflow/thlist">Retrieve the list of registered track hubs</a>
+                    </Typography>
                     <p>
                         You've submitted some of your public track hubs to the Registry. You want to know which ones by
                         retrieving the list of registered track hubs from the Registry.
                     </p>
 
-                    <h4 id=""><a href="/docs/api/registration/workflow/thupdate">Update registered
-                        track hubs</a></h4>
+                    <Typography id="" component="h4" variant="h6">
+                        <a href="/docs/api/registration/workflow/thupdate">Update registered track hubs</a>
+                    </Typography>
                     <p>
                         You've updated the structure or content of one of your remote public hubs registered with us.
                         You obviously want the changes to appear on the Registry as well.
                     </p>
 
-                    <h4 id=""><a href="/docs/api/registration/workflow/thdelete">Delete registered
-                        track hubs</a></h4>
+                    <Typography id="" component="h4" variant="h6">
+                        <a href="/docs/api/registration/workflow/thdelete">Delete registered track hubs</a>
+                    </Typography>
                     <p>
                         One of your remote public hubs does not exist any more. Or you simply don't want to make it
                         available for search in the Track Hub Registry.
                     </p>
 
-                    <h4 id="logout"><a href="/docs/api/registration/workflow/logout">Log out</a></h4>
+                    <Typography id="logout" component="h4" variant="h6">
+                        <a href="/docs/api/registration/workflow/logout">Log out</a>
+                    </Typography>
                     <p>
                         This terminates the client session and ends any possible workflow of interaction between the
                         client and the Registration API.

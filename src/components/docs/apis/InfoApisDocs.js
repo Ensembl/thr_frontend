@@ -66,8 +66,10 @@ const InfoApisDocs = () => {
                     <Typography component="h1" variant="h4">
                         Info API
                     </Typography>
-
-                    <h3 id="version">GET /api/info/version</h3>
+                    <br/>
+                    <Typography id="version" component="h4" variant="h5">
+                        GET /api/info/version
+                    </Typography>
                     <p>
                         Returns the current version of all the Registry APIs.
                     </p>
@@ -147,7 +149,10 @@ const InfoApisDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="ping">GET /api/info/ping</h3>
+                    <br/>
+                    <Typography id="ping" component="h4" variant="h5">
+                        GET /api/info/ping
+                    </Typography>
                     <p>
                         Checks if the service is alive.
                     </p>
@@ -233,7 +238,10 @@ const InfoApisDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="species">GET /api/info/species</h3>
+                    <br/>
+                    <Typography id="species" component="h4" variant="h5">
+                        GET /api/info/species
+                    </Typography>
                     <p>
                         Returns the set of species the track hubs registered in the Registry contain data for.
                     </p>
@@ -311,7 +319,10 @@ const InfoApisDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="assemblies">GET /api/info/assemblies</h3>
+                    <br/>
+                    <Typography id="assemblies" component="h4" variant="h5">
+                        GET /api/info/assemblies
+                    </Typography>
                     <p>
                         Returns the set of assemblies the track hubs registered in the Registry contain data for.
                         The returned assemblies are grouped by their corresponding species.
@@ -354,12 +365,64 @@ const InfoApisDocs = () => {
                     <pre className={classes.codeBlock}>
                         {
                             `HTTP/1.0 200 OK
-{"Brassica rapa": [ {"synonyms": [ "brarap1" ], "name":"Brapa_1.0", "accession":"GCA_000309985.1"} ],
-    "Homo sapiens": [ {"synonyms": [ "hg19" ], "name":"GRCh37", "accession":"GCA_000001405.1"}, {"synonyms": [ "hg38" ], "name":"GRCh38", "accession":"GCA_000001405.15"} ],
-    "Arabidopsis thaliana": [ {"synonyms": [ "aratha1" ], "name":"TAIR10", "accession":"GCA_000001735.1"} ],
-    "Danio rerio": [ {"synonyms": [ "danrer10" ], "name":"GRCz10", "accession":"GCA_000002035.3"}, {"synonyms": [ "danrer7" ], "name":"Zv9", "accession":"GCA_000002035.2"} ],
-    "Ricinus communis": [ {"synonyms": [ "riccom1" ], "name":"JCVI_RCG_1.1", "accession":"GCA_000151685.2"} ],
-    "Mus musculus": [ {"synonyms": [ "mm10" ], "name":"GRCm38", "accession":"GCA_000001635.2"}, {"synonyms": [ "mm9" ], "name":"MGSCv37", "accession":"GCA_000001635.1"} ]
+{
+    "Brassica rapa": [
+        {
+            "synonyms": ["brarap1"],
+            "name": "Brapa_1.0",
+            "accession": "GCA_000309985.1"
+        }
+    ],
+    "Homo sapiens": [
+        {
+            "synonyms": ["hg19"],
+            "name": "GRCh37",
+            "accession": "GCA_000001405.1"
+        },
+        {
+            "synonyms": ["hg38"],
+            "name": "GRCh38",
+            "accession": "GCA_000001405.15"
+        }
+    ],
+    "Arabidopsis thaliana": [
+        {
+            "synonyms": ["aratha1"],
+            "name": "TAIR10",
+            "accession": "GCA_000001735.1"
+        }
+    ],
+    "Danio rerio": [
+        {
+            "synonyms": ["danrer10"],
+            "name": "GRCz10",
+            "accession": "GCA_000002035.3"
+        },
+        {
+            "synonyms": ["danrer7"],
+            "name": "Zv9",
+            "accession": "GCA_000002035.2"
+        }
+    ],
+    "Ricinus communis": [
+        {
+            "synonyms": ["riccom1"],
+            "name": "JCVI_RCG_1.1",
+            "accession": "GCA_000151685.2"
+        }
+    ],
+    "Mus musculus": [
+        {
+            "synonyms": ["mm10"],
+            "name": "GRCm38",
+            "accession": "GCA_000001635.2"
+        },
+        {
+            "synonyms": ["mm9"],
+            "name": "MGSCv37",
+            "accession": "GCA_000001635.1"
+        }
+    ]
 }`
                         }
                     </pre>
@@ -397,7 +460,10 @@ const InfoApisDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="hubassemblies">GET /api/info/hubs_per_assembly/:assembly</h3>
+                    <br/>
+                    <Typography id="hubassemblies" component="h4" variant="h5">
+                        GET /api/info/hubs_per_assembly/:assembly
+                    </Typography>
                     <p>
                         Returns the number of hubs for a given assembly, specified either by INSDC name or
                         accession.
@@ -480,7 +546,10 @@ const InfoApisDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="tracksassemblies">GET /api/info/tracks_per_assembly/:assembly</h3>
+                    <br/>
+                    <Typography id="tracksassemblies" component="h4" variant="h5">
+                        GET /api/info/tracks_per_assembly/:assembly
+                    </Typography>
                     <p>
                         Returns the number of tracks for a given assembly, specified by INSDC name or accession.
                     </p>
@@ -564,7 +633,10 @@ const InfoApisDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="trackhubs">GET /api/info/trackhubs</h3>
+                    <br/>
+                    <Typography id="trackhubs" component="h4" variant="h5">
+                        GET /api/info/trackhubs
+                    </Typography>
                     <p>
                         Return the list of registered track data hubs.
                     </p>

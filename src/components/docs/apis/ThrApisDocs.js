@@ -25,7 +25,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
 import ApisDocsMenu from "./ApisDocsMenu";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -115,7 +114,9 @@ const ThrApisDocs = () => {
                         </ul>
                     </p>
 
-                    <h3 id="request">API Requests</h3>
+                    <Typography id="request" component="h4" variant="h5">
+                        API Requests
+                    </Typography>
                     <p>
                         Requests are typically categorised in terms of the type of requested operation: create,
                         retrieve, update, and delete. This sequence of verbs is often abbreviated with the acronym
@@ -157,7 +158,9 @@ const ThrApisDocs = () => {
 
                     </p>
 
-                    <h4 id="auth">Authentication/Authorisation</h4>
+                    <Typography id="auth" component="h4" variant="h6">
+                        Authentication/Authorisation
+                    </Typography>
                     <p>
                         HTTP communications between an API client and the server are secured with SSL. The
                         Registration API implements Basic HTTP Authentication, as defined by RFC 2617, to allow
@@ -165,7 +168,9 @@ const ThrApisDocs = () => {
                         individual authorised HTTP requests by including an auth-token header in the request.
                     </p>
 
-                    <h4 id="requestheaders">Request Headers</h4>
+                    <Typography id="requestheaders" component="h4" variant="h6">
+                        Request Headers
+                    </Typography>
                     <p>
                         The following HTTP headers can be included in API requests:
                         <br/><br/>
@@ -213,7 +218,9 @@ const ThrApisDocs = () => {
                         </TableContainer>
                     </p>
 
-                    <h4 id="requestbodies">Request Bodies</h4>
+                    <Typography id="requestbodies" component="h4" variant="h6">
+                        Request Bodies
+                    </Typography>
                     <p>
                         Some API endpoints allow or require requests to include a body. All request bodies must be
                         formatted as JSON documents. In these cases, the request must then start with the
@@ -222,14 +229,18 @@ const ThrApisDocs = () => {
                         with a JSON schema that defines valid trackDb documents within the registry.
                     </p>
 
-                    <h3 id="response">API Responses</h3>
+                    <Typography id="response" component="h4" variant="h5">
+                        API Responses
+                    </Typography>
                     <p>
                         All responses include an HTTP status code and, unless the status code is 204 (No Content),
                         a <em>Content-Type</em> header. Response content depends on the request. Some responses
                         include a document body, some include only a URL, and some are empty.
                     </p>
 
-                    <h4>HTTP Response Codes</h4>
+                    <Typography component="h4" variant="h6">
+                        HTTP Response Codes
+                    </Typography>
                     <p>
                         An API client expects a subset of HTTP status codes in a response.
 

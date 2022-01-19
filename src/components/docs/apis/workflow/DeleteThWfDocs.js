@@ -260,7 +260,10 @@ logout(user, auth_token)`,
                         A Simplified RESTful workflow
                     </Typography>
 
-                    <h2 id="thdelete">Deleting Registered Track Hubs</h2>
+                    <br/>
+                    <Typography id="thdelete" component="h4" variant="h5">
+                        Deleting Registered Track Hubs
+                    </Typography>
                     <p>
                         Suppose one of your registered remote public hubs does not exist or it's not public any more, or
                         you simply don't want to make it available for search in the Track Hub Registry. You can delete
@@ -270,7 +273,9 @@ logout(user, auth_token)`,
                         the hub.txt file).
                     </p>
 
-                    <h4>Prerequisites</h4>
+                    <Typography component="h4" variant="h5">
+                        Prerequisites
+                    </Typography>
                     <p>
                         Verify that:
                         <ul>
@@ -284,7 +289,9 @@ logout(user, auth_token)`,
                         </ul>
                     </p>
 
-                    <h4>Procedure</h4>
+                    <Typography component="h4" variant="h5">
+                        Procedure
+                    </Typography>
                     <p>
                         <ol>
                             <li>Make a request to the <a
@@ -299,7 +306,9 @@ logout(user, auth_token)`,
                         </ol>
                     </p>
 
-                    <h4>Example: track hub deletion request and response</h4>
+                    <Typography component="h4" variant="h5">
+                        Example: track hub deletion request and response
+                    </Typography>
                     <p>
                         In this example, we follow the pattern of the previous steps where we have registered and
                         updated the <a target="_blank" href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt">CSHL
@@ -326,7 +335,9 @@ logout(user, auth_token)`,
                         </pre>
                     </p>
 
-                    <h4 id="errors">What can possibly go wrong</h4>
+                    <Typography id="errors" component="h4" variant="h5">
+                        What can possibly go wrong
+                    </Typography>
                     <p>
                         Remember: <u>always check the response code</u> since it indicates whether the request
                         succeeded, or how it failed.
@@ -347,6 +358,7 @@ logout(user, auth_token)`,
                         </ul>
                     </p>
 
+                    {/* NOTE: This part was commented on the Perl code, I kept it just in case if we need to add it in the future */}
 
                     {/*<p>*/}
                     {/*  Suppose one of your remote public hubs does not exist or it's not public any more, or you simply don't want to make it available for search in the Track Hub Registry. Since a track hub in not directly stored in the Registry, to remove it you have to delete its corresponding records, i.e. <u>all</u> the trackDb entities stored in the Registry which are associated to the hub. For this, you need their URIs which you can get by making a request to the <a href="">GET /api/trackhub</a> endpoint and examining the <mark>trackdbs</mark> array of the object representing the track hub under consideration, as explained in <a href="/docs/api/registration/workflow/thlist">Retrieve the list of registered track hubs</a>.*/}
@@ -444,7 +456,10 @@ logout(user, auth_token)`,
                     {/*  </ul>*/}
                     {/*</p>*/}
 
-                    <h4>Example Clients</h4>
+                    <Typography component="h4" variant="h5">
+                        Example Clients
+                    </Typography>
+                    <br/>
 
                     <ExampleClientsTabs exampleClientsCode={exampleClientsCode}/>
 

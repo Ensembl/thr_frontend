@@ -61,13 +61,16 @@ const SearchApiDocs = () => {
                 <CssBaseline/>
                 <ApisDocsMenu/>
                 <main className={classes.content}>
-                    <MainBreadcrumb item="Registration"/>
+                    <MainBreadcrumb item="Search"/>
                     <br/>
                     <Typography id="top" component="h1" variant="h4">
                         Search API
                     </Typography>
 
-                    <h2 id="search">POST /api/search</h2>
+                    <br/>
+                    <Typography id="search" component="h1" variant="h5">
+                        POST /api/search
+                    </Typography>
                     <p>
                         Search track hubs using a query specified in the message body. Read the <a
                         href="/docs/search">Search docs</a> for information on how to perform a
@@ -285,7 +288,10 @@ const SearchApiDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="trackdb">GET /api/search/trackdb/:id</h3>
+                    <br/>
+                    <Typography id="trackdb" component="h1" variant="h5">
+                        GET /api/search/trackdb/:id
+                    </Typography>
                     <p>
                         Retrieve the document in the Registry representing the trackDb with the given ID.
                     </p>

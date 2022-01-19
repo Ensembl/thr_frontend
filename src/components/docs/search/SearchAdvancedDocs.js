@@ -71,7 +71,9 @@ const SearchAdvancedDocs = () => {
                         proximity searches and grouping.
                     </p>
 
-                    <h4 id="Field queries">Field-specific queries</h4>
+                    <Typography id="Field queries" component="h4" variant="h5">
+                        Field-specific queries
+                    </Typography>
                     <p>
                         Searches can be confined to specific fields, i.e. those visible in the individual hub pages.
                         The indexed fields are defined by the TrackHub specification, but some useful examples
@@ -84,7 +86,10 @@ const SearchAdvancedDocs = () => {
                         {/*<Box component="span" sx={{ display: 'block' }}>species.scientific_name:(Zea mays)</Box>*/}
                         Then use Logical Operators below to add additional search terms as and when you need them.
                     </p>
-                    <h4 id="wildcards">Wildcards</h4>
+
+                    <Typography id="wildcards" component="h4" variant="h5">
+                        Wildcards
+                    </Typography>
                     <p>
                         Sometimes it may be useful to match records based on a query pattern. Wildcard searches can
                         be run on individual terms, using ? to replace a single character, and * to replace zero or
@@ -94,7 +99,9 @@ const SearchAdvancedDocs = () => {
                         of memory and perform very badly.
                     </p>
 
-                    <h4 id="regex">Regular Expressions</h4>
+                    <Typography id="regex" component="h4" variant="h5">
+                        Regular Expressions
+                    </Typography>
                     <p>
                         Regular expression patterns can be embedded in the query string by wrapping them in
                         forward-slashes ("/"):
@@ -103,7 +110,9 @@ const SearchAdvancedDocs = () => {
                            target="_blank">Supported regex syntax</a> (Elasticsearch website).
                     </p>
 
-                    <h4 id="logical">Logical Operators</h4>
+                    <Typography id="logical" component="h4" variant="h5">
+                        Logical Operators
+                    </Typography>
                     <p>
                         By default, all terms are optional, as long as one term matches. A search for <em>foo bar
                         baz</em> will find any document that contains one or more
@@ -129,13 +138,17 @@ const SearchAdvancedDocs = () => {
                         to the right of the operator, AND and OR can affect the terms to the left and right.
                     </p>
 
-                    <h4 id="grouping">Grouping</h4>
+                    <Typography id="grouping" component="h4" variant="h5">
+                        Grouping
+                    </Typography>
                     <p>
                         Multiple terms or clauses can be grouped together with parentheses, to form sub-queries:
                         <pre className={classes.codeBlock}>(rnaseq OR srna) AND homo</pre>
                     </p>
 
-                    <h4 id="fuzzy">Fuzzy Operator</h4>
+                    <Typography id="fuzzygrouping" component="h4" variant="h5">
+                        Fuzzy Operator
+                    </Typography>
                     <p>
                         We can search for terms that are similar to, but not exactly like, our search terms, using
                         the fuzzy operator:
@@ -150,7 +163,9 @@ const SearchAdvancedDocs = () => {
                         <pre className={classes.codeBlock}>grhc38~1</pre>
                     </p>
 
-                    <h4 id="proximity">Proximity Searches</h4>
+                    <Typography id="proximity" component="h4" variant="h5">
+                        Proximity Searches
+                    </Typography>
                     <p>
                         While a phrase query (eg john smith) expects all of the terms in exactly the same order, a
                         proximity query allows the specified words to be further apart or in a different order. In

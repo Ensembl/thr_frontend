@@ -20,7 +20,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import MainBreadcrumb from "../../../MainBreadcrumb";
 import ApisDocsMenu from "../ApisDocsMenu";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
 import ExampleClientsTabs from "./ExampleClientsTabs";
 
 const useStyles = makeStyles((theme) => ({
@@ -160,13 +159,19 @@ curl -X GET "https://www.trackhubregistry.org/api/login" \\
                         A Simplified RESTful workflow
                     </Typography>
 
-                    <h2 id="login">Logging in</h2>
+                    <br/>
+                    <Typography id="login" component="h4" variant="h5">
+                        Logging in
+                    </Typography>
                     <p>
                         All requests to the service require access tokens, so the first step in any RESTful workflow is
                         to obtain an authentication token. You can acquire an access token by programatically logging
                         in.
                     </p>
-                    <h4>Procedure</h4>
+
+                    <Typography component="h4" variant="h6">
+                        Procedure
+                    </Typography>
                     <p>
                         <ol>
                             <li>Make a GET request to the <a
@@ -183,7 +188,9 @@ curl -X GET "https://www.trackhubregistry.org/api/login" \\
                         </ol>
                     </p>
 
-                    <h4>Example: Login request and response</h4>
+                    <Typography component="h4" variant="h6">
+                        Example: Login request and response
+                    </Typography>
                     <p>
                         A request to create a login session must supply the user's credentials in the following form:
                         <pre className={classes.codeBlock}>user:password</pre>
@@ -239,7 +246,10 @@ Content-type: application/json; charset=utf-8
                         </ul>
                     </p>
 
-                    <h4>Example Clients</h4>
+                    <Typography component="h4" variant="h6">
+                        Example Clients
+                    </Typography>
+                    <br/>
 
                     <ExampleClientsTabs exampleClientsCode={exampleClientsCode}/>
 

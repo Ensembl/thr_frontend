@@ -278,7 +278,10 @@ logout(user, auth_token)`,
                         A Simplified RESTful workflow
                     </Typography>
 
-                    <h2 id="login">Registering Track Hubs</h2>
+                    <br/>
+                    <Typography id="login" component="h4" variant="h5">
+                        Registering Track Hubs
+                    </Typography>
                     <p>
                         Suppose you've just <a href="/user/register">signed up</a> with the Track Hub
                         Registry. You've also got some remote public track hubs that you want to register with and make
@@ -292,7 +295,9 @@ logout(user, auth_token)`,
                         support the registration of multiple data hubs at a time.
                     </p>
 
-                    <h4>Prerequisites</h4>
+                    <Typography component="h4" variant="h6">
+                        Prerequisites
+                    </Typography>
                     <p>
                         Verify that:
                         <ul>
@@ -307,7 +312,9 @@ logout(user, auth_token)`,
                         </ul>
                     </p>
 
-                    <h4>Procedure</h4>
+                    <Typography component="h4" variant="h6">
+                        Procedure
+                    </Typography>
                     <p>
                         <ol>
                             <li>Make a POST request to the <a
@@ -324,7 +331,9 @@ logout(user, auth_token)`,
                         </ol>
                     </p>
 
-                    <h4>Example: registration request and response</h4>
+                    <Typography component="h4" variant="h6">
+                        Example: registration request and response
+                    </Typography>
                     <p>
                         In this example, we are going to register the <a target="_blank"
                                                                          href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt">CSHL
@@ -484,7 +493,9 @@ logout(user, auth_token)`,
                         be seen, all three assemblies refer to the same hub.
                     </p>
 
-                    <h4 id="errors">What can possibly go wrong</h4>
+                    <Typography id="errors" component="h4" variant="h6">
+                        What can possibly go wrong
+                    </Typography>
                     <p>
                         Remember: <u>always check the response code</u> since it indicates whether the request
                         succeeded, or how it failed.
@@ -522,8 +533,10 @@ logout(user, auth_token)`,
                         </ul>
                     </p>
 
-                    <h4 id="example_clients">Example Clients</h4>
-
+                    <Typography id="example_clients" component="h4" variant="h6">
+                        Example Clients
+                    </Typography>
+                    <br/>
                     <ExampleClientsTabs exampleClientsCode={exampleClientsCode}/>
 
                 </main>

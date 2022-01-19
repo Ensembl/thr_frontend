@@ -67,14 +67,19 @@ const RefApiDocs = () => {
                         A Simplified RESTful workflow
                     </Typography>
 
-                    <h2 id="reg_ref_api">Registration API</h2>
+                    <br/>
+                    <Typography id="reg_ref_api" component="h4" variant="h5">
+                        Registration API
+                    </Typography>
                     <p>
                         In all the following examples, it is assumed the client has successfully logged in as
                         user <em>exampleuser</em> and password <em>examplepassword</em> and therefore obtained a valid
                         access token. This token is used in all the following endpoint examples except /api/login.
                     </p>
 
-                    <h3 id="login">GET /api/login</h3>
+                    <Typography id="login" component="h4" variant="h6">
+                        GET /api/login
+                    </Typography>
                     <p>
                         Authenticate the client and obtain an access token in order to make subsequent requests to the
                         Registration API.
@@ -165,7 +170,10 @@ const RefApiDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="get_trackhub">GET /api/trackhub</h3>
+                    <br/>
+                    <Typography id="get_trackhub" component="h4" variant="h6">
+                        GET /api/trackhub
+                    </Typography>
                     <p>
                         Returns the set of registered track data hubs for the given user.
                     </p>
@@ -308,7 +316,10 @@ const RefApiDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="post_trackhub">POST /api/trackhub</h3>
+                    <br/>
+                    <Typography id="post_trackhub" component="h4" variant="h6">
+                        POST /api/trackhub
+                    </Typography>
                     <p>
                         Register/Update a remote public track hub with the Registry. The message body specifies the
                         track hub remote URL (can be either the directory or hub.txt file URL), a map from assembly
@@ -552,7 +563,10 @@ const RefApiDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="get_trackhub_id">GET /api/trackhub/:id</h3>
+                    <br/>
+                    <Typography id="get_trackhub_id" component="h4" variant="h6">
+                        GET /api/trackhub/:id
+                    </Typography>
                     <p>
                         Return a JSON representation of a track hub with the given name in the Registry.
                     </p>
@@ -671,7 +685,10 @@ const RefApiDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="delete_trackhub_id">DELETE /api/trackhub/:id</h3>
+                    <br/>
+                    <Typography id="delete_trackhub_id" component="h4" variant="h6">
+                        DELETE /api/trackhub/:id
+                    </Typography>
                     <p>
                         Delete trackDBs assigned to a given track hub.
                     </p>
@@ -788,7 +805,10 @@ const RefApiDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="get_trackdb">GET /api/trackdb/:id</h3>
+                    <br/>
+                    <Typography id="get_trackdb" component="h4" variant="h6">
+                        GET /api/trackdb/:id
+                    </Typography>
                     <p>
                         Return JSON representation of a trackDb with the given ID in the Registry.
                     </p>
@@ -934,7 +954,11 @@ const RefApiDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="delete_trackdb">DELETE /api/trackdb/:id</h3>
+                    <br/>
+                    <Typography id="delete_trackdb" component="h4" variant="h6">
+                        DELETE /api/trackdb/:id
+                    </Typography>
+
                     <p>
                         Delete the trackDb with the given ID from the Registry.
                     </p>
@@ -1064,7 +1088,10 @@ const RefApiDocs = () => {
                         </Table>
                     </TableContainer>
 
-                    <h3 id="logout">GET /api/logout</h3>
+                    <br/>
+                    <Typography id="logout" component="h4" variant="h6">
+                        GET /api/logout
+                    </Typography>
                     <p>
                         Logout and invalidate the current access token.
                     </p>

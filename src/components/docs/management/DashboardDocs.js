@@ -65,7 +65,9 @@ const DashboardDocs = () => {
                         contains a reminder of the possibility of using the REST API.
                     </p>
 
-                    <h3 id="status">Viewing and Editing Track Hubs</h3>
+                    <Typography id="status" component="h4" variant="h5">
+                        Viewing and Editing Track Hubs
+                    </Typography>
 
                     <p>
                         When you login into the registry using the web interface, the default panel which is shown
@@ -114,7 +116,9 @@ const DashboardDocs = () => {
                         databases belonging to the same hub</u>.
                     </p>
 
-                    <h3 id="profile">Updating Your Profile</h3>
+                    <Typography id="profile" component="h4" variant="h5">
+                        Updating Your Profile
+                    </Typography>
 
                     <p>
                         Click on the "Profile" tab label to access a page where you can view/update the details of
@@ -129,7 +133,9 @@ const DashboardDocs = () => {
                         authenticate with the website and the REST API.
                     </p>
 
-                    <h3 id="monitoring">Automatic Track Hub Monitoring</h3>
+                    <Typography id="monitoring" component="h4" variant="h5">
+                        Automatic Track Hub Monitoring
+                    </Typography>
 
                     <p>
                         You may have noticed a section "Track Hub monitoring configuration" when you signed up in

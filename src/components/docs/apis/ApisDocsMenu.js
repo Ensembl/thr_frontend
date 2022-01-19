@@ -62,16 +62,18 @@ export default function ApisDocsMenu() {
         const lastUrlPart = window.location.pathname.split("/").pop();
         console.log(lastUrlPart)
 
+        // keep the appropriate element expanded based on the URL
         if (lastUrlPart === "apis") {
             setTrhApisOpen(true);
-        }
-        else if (lastUrlPart === "info") {
+        } else if (lastUrlPart === "info") {
             setInfoApisOpen(true);
-        }
-        else if (lastUrlPart === "registration") {
+        } else if (lastUrlPart === "registration" || lastUrlPart === "login" ||
+            lastUrlPart === "thregister" || lastUrlPart === "thlist" ||
+            lastUrlPart === "thupdate" || lastUrlPart === "thdelete" ||
+            lastUrlPart === "logout" || lastUrlPart === "reference"
+        ) {
             setRegistrationApiOpen(true);
-        }
-        else if (lastUrlPart === "search") {
+        } else if (lastUrlPart === "search") {
             setSearchApiOpen(true);
         }
     }, []);

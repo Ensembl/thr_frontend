@@ -263,7 +263,10 @@ logout(user, auth_token)`,
                         A Simplified RESTful workflow
                     </Typography>
 
-                    <h3 id="thlist">Retrieve the list of registered track hubs</h3>
+                    <br/>
+                    <Typography id="thlist" component="h4" variant="h5">
+                        Retrieve the list of registered track hubs
+                    </Typography>
                     <p>
                         Suppose you've already submitted some of your public track hubs. At some point, you want to know
                         which ones by retrieving the list of registered track hubs from the Registry, perhaps because
@@ -276,7 +279,9 @@ logout(user, auth_token)`,
                         hubs together with the URIs of their corresponding trackDb entities stored in the Registry.
                     </p>
 
-                    <h4>Prerequisites</h4>
+                    <Typography component="h4" variant="h6">
+                        Prerequisites
+                    </Typography>
                     <p>
                         Verify that:
                         <ul>
@@ -287,7 +292,9 @@ logout(user, auth_token)`,
                         </ul>
                     </p>
 
-                    <h4>Procedure</h4>
+                    <Typography component="h4" variant="h6">
+                        Procedure
+                    </Typography>
                     <p>
                         <ol>
                             <li>Make a GET request to the <a
@@ -304,7 +311,9 @@ logout(user, auth_token)`,
                         </ol>
                     </p>
 
-                    <h4>Example: retrieve request and response</h4>
+                    <Typography component="h4" variant="h6">
+                        Example: retrieve request and response
+                    </Typography>
                     <p>
                         We start from the previous <a
                         href="/docs/api/registration/workflow/thregister">example</a>, where
@@ -390,7 +399,9 @@ logout(user, auth_token)`,
                         href="/docs/api/registration/reference#get_trackdb">/api/trackdb/:id</a> endpoint.
                     </p>
 
-                    <h4 id="errors">What can possibly go wrong</h4>
+                    <Typography id="errors" component="h4" variant="h6">
+                        What can possibly go wrong
+                    </Typography>
                     <p>
                         Remember: <u>always check the response code</u> since it indicates whether the request
                         succeeded, or how it failed.
@@ -408,7 +419,10 @@ logout(user, auth_token)`,
                         </ul>
                     </p>
 
-                    <h4>Example Clients</h4>
+                    <Typography component="h4" variant="h6">
+                        Example Clients
+                    </Typography>
+                    <br/>
 
                     <ExampleClientsTabs exampleClientsCode={exampleClientsCode}/>
 

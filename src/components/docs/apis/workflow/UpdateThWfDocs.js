@@ -62,7 +62,10 @@ const UpdateThWfDocs = () => {
                         A Simplified RESTful workflow
                     </Typography>
 
-                    <h2 id="thupdate">Updating Track Hubs</h2>
+                    <br/>
+                    <Typography id="thupdate" component="h4" variant="h5">
+                        Updating Track Hubs
+                    </Typography>
                     <p>
                         Suppose you've updated the structure or content of one of your remote public hubs registered
                         with us. You obviously want the changes to appear on the Registry as well.
@@ -77,7 +80,9 @@ const UpdateThWfDocs = () => {
                         entities and replace them with the most up-to-date versions obtained by parsing the hub again.
                     </p>
 
-                    <h4>Prerequisites</h4>
+                    <Typography component="h4" variant="h6">
+                        Prerequisites
+                    </Typography>
                     <p>
                         Verify that:
                         <ul>
@@ -88,7 +93,9 @@ const UpdateThWfDocs = () => {
                         </ul>
                     </p>
 
-                    <h4>Procedure</h4>
+                    <Typography component="h4" variant="h6">
+                        Procedure
+                    </Typography>
                     <ol>
                         <li>Make a POST request to the <a
                             href="/docs/api/registration/reference#post_trackhub">/api/trackhub</a> endpoint
@@ -103,7 +110,9 @@ const UpdateThWfDocs = () => {
                         </li>
                     </ol>
 
-                    <h4>Example: track hub update</h4>
+                    <Typography component="h4" variant="h6">
+                        Example: track hub update
+                    </Typography>
                     <p>
                         This example updates the registration of the <a target="_blank"
                                                                         href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt">CSHL
@@ -127,7 +136,9 @@ const UpdateThWfDocs = () => {
                         don't report here.
                     </p>
 
-                    <h4 id="errors">What can possibly go wrong</h4>
+                    <Typography id="errors" component="h4" variant="h6">
+                        What can possibly go wrong
+                    </Typography>
                     <p>
                         Remember: <u>always check the response code</u> since it indicates whether the request
                         succeeded, or how it failed.
@@ -166,7 +177,9 @@ const UpdateThWfDocs = () => {
                         </ul>
                     </p>
 
-                    <h4>Example clients</h4>
+                    <Typography component="h4" variant="h6">
+                        Example clients
+                    </Typography>
 
                     <p>
                         As already explained, the procedure is equivalent to the registration of a track hub for the

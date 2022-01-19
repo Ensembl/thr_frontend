@@ -190,22 +190,31 @@ puts 'Logged out'`,
                         A Simplified RESTful workflow
                     </Typography>
 
-                    <h2 id="logout">Logg out</h2>
+                    <br/>
+                    <Typography id="logout" component="h4" variant="h5">
+                        Log out
+                    </Typography>
                     <p>
                         When you want to terminate the client session, log out to delete the current access token.
                     </p>
 
-                    <h4>Prerequisites</h4>
+                    <Typography component="h4" variant="h6">
+                        Prerequisites
+                    </Typography>
                     <p>Verify that you are logged in and have a valid access token.</p>
 
-                    <h4>Procedure</h4>
+                    <Typography component="h4" variant="h6">
+                        Procedure
+                    </Typography>
                     <p>Make a request to the <a
                         href="/docs/api/registration/reference#logout">/api/logout</a> endpoint by
                         specifying your username (resp. access token) with
                         the <em>User</em> (resp. <em>Auth-Token</em>) header.
                     </p>
 
-                    <h4>Example: logging out</h4>
+                    <Typography component="h4" variant="h6">
+                        Example: logging out
+                    </Typography>
                     <p>
                         This example deletes the current access token which logs the user out.<br/>
                         Request:
@@ -227,7 +236,10 @@ puts 'Logged out'`,
                         </pre>
                     </p>
 
-                    <h4>Example Clients</h4>
+                    <Typography component="h4" variant="h6">
+                        Example Clients
+                    </Typography>
+                    <br/>
 
                     <ExampleClientsTabs exampleClientsCode={exampleClientsCode}/>
 

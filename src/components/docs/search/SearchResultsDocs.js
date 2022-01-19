@@ -80,7 +80,9 @@ const SearchResultsDocs = () => {
                         name).
                     </p>
 
-                    <h4 id="filter">Filtering Results</h4>
+                    <Typography id="filter" component="h4" variant="h5">
+                        Filtering Results
+                    </Typography>
                     <p>
                         On the left hand side of the results page various filter options (i.e. facets) are shown,
                         grouped according to four different types in their corresponding panels of the side bar:
@@ -118,7 +120,9 @@ const SearchResultsDocs = () => {
                         tracks of the matching track hubs.
                     </p>
 
-                    <h4 id="status">Data Tracks Status</h4>
+                    <Typography id="status" component="h4" variant="h5">
+                        Data Tracks Status
+                    </Typography>
                     <p>
                         For each search result summary, the status, as known by the Registry, is displayed. Status
                         is one of the following:
@@ -156,7 +160,9 @@ const SearchResultsDocs = () => {
                         the faulty tracks.
                     </p>
 
-                    <h4 id="load">Loading Track Hubs into Genome Browsers</h4>
+                    <Typography id="load" component="h4" variant="h5">
+                        Loading Track Hubs into Genome Browsers
+                    </Typography>
                     <p>
                         A button on the right hand side of each search result allows the user to view the track hub
                         data directly into an available genome browser.
@@ -170,7 +176,9 @@ const SearchResultsDocs = () => {
                         browser and the track hub.
                     </p>
 
-                    <h4 id="view">Viewing more information</h4>
+                    <Typography id="view" component="h4" variant="h5">
+                        Viewing more information
+                    </Typography>
                     <p>
                         Click on the "Info" button on the right hand side of each search result to view more
                         detailed information about the corresponding track hub and its supported genome assembly.

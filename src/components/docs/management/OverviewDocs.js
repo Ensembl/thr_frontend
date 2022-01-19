@@ -21,7 +21,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import MainBreadcrumb from "../../MainBreadcrumb";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -61,7 +60,9 @@ const OverviewDocs = () => {
                         intend to explore interesting data hubs.
                     </Alert>
 
-                    <h3 id="registration">Client Registration</h3>
+                    <Typography id="registration" component="h4" variant="h5">
+                        Client Registration
+                    </Typography>
                     <p>
                         You must have an account with the registry before submitting and managing any data. To
                         create an account, go to the <a href="/register" target="_blank">registration
@@ -83,7 +84,9 @@ const OverviewDocs = () => {
                         href="/docs/management/dashboard">dashboard</a>.
                     </p>
 
-                    <h3 id="management">Track Hub Management</h3>
+                    <Typography id="management" component="h4" variant="h5">
+                        Track Hub Management
+                    </Typography>
                     <p>
                         Once you <a href="/register" target="_blank">Sign Up</a>, you can
                         start using the <a href="'/docs/api/registration">Registration API</a>,
@@ -114,7 +117,9 @@ const OverviewDocs = () => {
                         the registry.
                     </p>
 
-                    <h3 id="submission">The Submission Process</h3>
+                    <Typography id="submission" component="h4" variant="h5">
+                        The Submission Process
+                    </Typography>
                     <p>
                         The figure below highlights the main steps involved when submitting a track data hub to the
                         Registry.
