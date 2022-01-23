@@ -40,6 +40,7 @@ import MainView from "./components/trackhub_view/MainView";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
 import UserDashboard from "./components/dashboard/UserDashboard";
 import NotFound from "./components/NotFound";
+import CookiesBanner from "./components/CookiesBanner";
 
 // The main colours and fonts used in the application
 const theme = createMuiTheme({
@@ -107,6 +108,7 @@ function App(props) {
 
                 </Layout>
             </div>
+            <CookiesBanner/>
         </ThemeProvider>
     );
 }
