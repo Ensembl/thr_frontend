@@ -11,7 +11,6 @@ Running the frontend for the first time:
 ```
 git clone https://github.com/Ensembl/thr_frontend.git
 cd thr_frontend
-npm install -g create-react-app # You may need 'sudo'
 npm install
 npm start
 ```
