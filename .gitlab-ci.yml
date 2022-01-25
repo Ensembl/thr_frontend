@@ -8,6 +8,10 @@ before_script:
 
 stages:
   - test
+  - build
+
+
+## Test
 
 lint:
   stage: test
@@ -18,3 +22,13 @@ test:
   stage: test
   script:
     - npm test
+
+## Build
+
+build:
+  stage: build
+  needs: ["test"]
+  script:
+    # fix: "Browserslist: caniuse-lite is outdated"
+    - npx browserslist@latest --update-db
+    - npm run build
