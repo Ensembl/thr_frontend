@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-import React, {useState, useEffect} from 'react';
-import {Link, useLocation} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import {makeStyles} from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Alert from '@material-ui/lab/Alert';
 
-import {userActions} from '../../_actions';
+import React, {useState, useEffect} from 'react';
+import queryString from 'query-string';
+
+import {makeStyles} from '@material-ui/core/styles';
+import {Avatar, Button, Container, CssBaseline, TextField, Typography} from '@material-ui/core';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import {useDispatch, useSelector} from "react-redux";
+import {useLocation} from "react-router-dom";
+import {userActions} from "../../_actions";
+import Alert from "@material-ui/lab/Alert";
+import {AlertTitle} from "@material-ui/lab";
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -48,30 +46,47 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
-    signup: {
-        textAlign: "right"
+    success: {
+        color: theme.palette.success.main,
     },
+    spacingDown: {
+        marginBottom: '10px'
+    }
 }));
 
-function Login() {
+/**
+ * The reset password displays a form for resetting an account password when it receives
+ * a valid password reset token in the url querystring parameters.
+ * The token is validated when the component mounts by calling userActions.validateResetToken(token)
+ * from inside a useEffect() react hook function, the empty dependency array passed to the react hook
+ * makes it run only once when the component mounts.
+ */
+function ResetPassword() {
     const classes = useStyles();
 
-    const [inputs, setInputs] = useState({
-        username: '',
-        password: ''
-    });
-    const [submitted, setSubmitted] = useState(false);
-    const {username, password} = inputs;
-    const loggingIn = useSelector(state => state.authentication.loggingIn);
     const dispatch = useDispatch();
     const location = useLocation();
+
+    // get the uidb64 and token from URL
+    const {uidb64, token} = queryString.parse(location.search);
+
+    const [inputs, setInputs] = useState({
+        new_password: '',
+        new_password_confirm: '',
+        uidb64: uidb64,
+        token: token
+    });
+    const [submitted, setSubmitted] = useState(false);
+    const {new_password, new_password_confirm} = inputs;
 
     const alert = useSelector(state => state.alert);
     let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
 
-    // reset login status
     useEffect(() => {
-        dispatch(userActions.logout());
+        // get the uidb64 and token from URL
+        const {uidb64, token} = queryString.parse(location.search);
+
+        dispatch(userActions.validateResetToken(uidb64, token));
     }, []);
 
     function handleChange(e) {
@@ -83,10 +98,8 @@ function Login() {
         e.preventDefault();
 
         setSubmitted(true);
-        if (username && password) {
-            // get return url from location state or default to home page
-            const {from} = location.state || {from: {pathname: "/"}};
-            dispatch(userActions.login(username, password, from));
+        if (new_password && new_password_confirm && new_password == new_password_confirm) {
+            dispatch(userActions.resetPassword(new_password, new_password_confirm, uidb64, token))
         }
     }
 
@@ -98,23 +111,25 @@ function Login() {
                 <Alert severity={alert.type}>{alertMessageObject.success}</Alert>
                 }
                 {alertMessageObject && alertMessageObject.error &&
-                    <Alert severity={alert.type} >{alertMessageObject.error}</Alert>
+                <Alert severity={alert.type}>{alertMessageObject.error}</Alert>
                 }
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon/>
+                    <VpnKeyIcon/>
                 </Avatar>
-                <Typography component="h1" variant="h5">
-                    Login
+                <Typography component="h1" variant="h5" className={classes.spacingDown}>
+                    Reset Password
                 </Typography>
                 {alertMessageObject && alertMessageObject.non_field_errors &&
-                <div>
-                    <br/>
-                    <Alert severity={alert.type}>{alertMessageObject.non_field_errors[0]}</Alert>
-                    <Alert severity="info" className={classes.submit}>
-                        You can <Link to='/forgot_password' variant="body2"> reset your password </Link>
-                        If you already have an account on the previous Track Hub Registry
-                    </Alert>
-                </div>
+                <Alert severity={alert.type}>
+                    <AlertTitle>Error</AlertTitle>
+                    <ul>
+                        {
+                            alertMessageObject.non_field_errors.map(err =>
+                                <li>{err}</li>
+                            )
+                        }
+                    </ul>
+                </Alert>
                 }
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <TextField
@@ -122,30 +137,30 @@ function Login() {
                         margin="normal"
                         required
                         fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
-                        autoComplete="username"
-                        autoFocus
+                        name="new_password"
+                        label="New Password"
+                        type="password"
+                        id="new_password"
                         onChange={handleChange}
                     />
-                    {submitted && !username &&
-                    <Alert severity="error">Username is required</Alert>
+                    {alertMessageObject.new_password &&
+                    <Alert severity={alert.type}>{alertMessageObject.new_password[0]}</Alert>
                     }
                     <TextField
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
-                        name="password"
-                        label="Password"
+                        name="new_password_confirm"
+                        label="New Password (Confirmation)"
                         type="password"
-                        id="password"
-                        autoComplete="current-password"
+                        id="new_password_confirm"
                         onChange={handleChange}
+                        error={new_password !== new_password_confirm}
+                        helperText={new_password !== new_password_confirm ? "Passwords don't match" : null}
                     />
-                    {submitted && !password &&
-                    <Alert severity="error">Password is required</Alert>
+                    {alertMessageObject.new_password_confirm &&
+                    <Alert severity={alert.type}>{alertMessageObject.new_password_confirm[0]}</Alert>
                     }
                     <Button
                         type="submit"
@@ -154,25 +169,13 @@ function Login() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Login
+                        Reset Password
                     </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link to='/forgot_password' variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <div className={classes.signup}>
-                                No account yet? <Link to='/register'>Register</Link>
-                            </div>
-                        </Grid>
-                    </Grid>
-
                 </form>
             </div>
         </Container>
     );
 }
 
-export default Login;
+
+export default ResetPassword;

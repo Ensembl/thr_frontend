@@ -14,11 +14,17 @@
  * limitations under the License.
  */
 
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from 'react';
+import ReactDOM from 'react-dom'
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+import Chart from './Chart';
+
+
+describe('Chart tests', () => {
+    it('should render without crashing', () => {
+        const div = document.createElement('div');
+        ReactDOM.render(<Chart/>, div);
+        ReactDOM.unmountComponentAtNode(div)
+    });
+})
+
