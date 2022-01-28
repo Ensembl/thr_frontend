@@ -161,7 +161,7 @@ function PasswordUpdate() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Update
+                        Update Password
                     </Button>
                 </form>
             </div>

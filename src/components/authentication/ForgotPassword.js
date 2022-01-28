@@ -15,7 +15,6 @@
  */
 
 import React, {useState, useEffect} from 'react';
-import {Link, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -29,6 +28,7 @@ import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
 
 import {userActions} from '../../_actions';
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -47,46 +47,32 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
-    },
-    signup: {
-        textAlign: "right"
+        float: "right"
     },
 }));
 
-function Login() {
+function ForgotPassword() {
     const classes = useStyles();
 
-    const [inputs, setInputs] = useState({
-        username: '',
-        password: ''
-    });
+    const [email, setEmail] = useState({email: ''});
     const [submitted, setSubmitted] = useState(false);
-    const {username, password} = inputs;
-    const loggingIn = useSelector(state => state.authentication.loggingIn);
+
     const dispatch = useDispatch();
-    const location = useLocation();
 
     const alert = useSelector(state => state.alert);
     let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
 
-    // reset login status
-    useEffect(() => {
-        dispatch(userActions.logout());
-    }, []);
-
     function handleChange(e) {
-        const {name, value} = e.target;
-        setInputs(inputs => ({...inputs, [name]: value}));
+        const email = e.target.value;
+        setEmail({email: email});
     }
 
     function handleSubmit(e) {
         e.preventDefault();
 
         setSubmitted(true);
-        if (username && password) {
-            // get return url from location state or default to home page
-            const {from} = location.state || {from: {pathname: "/"}};
-            dispatch(userActions.login(username, password, from));
+        if (email) {
+            dispatch(userActions.forgotPassword(email))
         }
     }
 
@@ -97,21 +83,17 @@ function Login() {
                 {alertMessageObject && alertMessageObject.success &&
                 <Alert severity={alert.type}>{alertMessageObject.success}</Alert>
                 }
+                {alertMessageObject && alertMessageObject.error &&
+                <Alert severity={alert.type}>{alertMessageObject.error}</Alert>
+                }
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Login
+                    Forgot/Reset Password
                 </Typography>
                 {alertMessageObject && alertMessageObject.non_field_errors &&
-                <div>
-                    <br/>
-                    <Alert severity={alert.type}>{alertMessageObject.non_field_errors[0]}</Alert>
-                    <Alert severity="info" className={classes.submit}>
-                        You can <Link to='/forgot_password' variant="body2"> reset your password </Link>
-                        If you already have an account on the previous Track Hub Registry
-                    </Alert>
-                </div>
+                <Alert severity={alert.type}>{alertMessageObject.non_field_errors[0]}</Alert>
                 }
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <TextField
@@ -119,57 +101,32 @@ function Login() {
                         margin="normal"
                         required
                         fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
-                        autoComplete="username"
+                        id="email"
+                        label="Email"
+                        name="email"
+                        autoComplete="email"
                         autoFocus
                         onChange={handleChange}
                     />
-                    {submitted && !username &&
-                    <Alert severity="error">Username is required</Alert>
+                    <FormHelperText>Please enter the email you used to create your account</FormHelperText>
+                    {submitted && !email &&
+                    <Alert severity="error">Email is required</Alert>
                     }
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        onChange={handleChange}
-                    />
-                    {submitted && !password &&
-                    <Alert severity="error">Password is required</Alert>
+                    {alertMessageObject.email &&
+                    <Alert severity={alert.type}>{alertMessageObject.email[0]}</Alert>
                     }
                     <Button
                         type="submit"
-                        fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
                     >
-                        Login
+                        Send
                     </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link to='/forgot_password' variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <div className={classes.signup}>
-                                No account yet? <Link to='/register'>Register</Link>
-                            </div>
-                        </Grid>
-                    </Grid>
-
                 </form>
             </div>
         </Container>
     );
 }
 
-export default Login;
+export default ForgotPassword;
