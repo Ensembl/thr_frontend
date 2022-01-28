@@ -97,6 +97,9 @@ function Login() {
                 {alertMessageObject && alertMessageObject.success &&
                 <Alert severity={alert.type}>{alertMessageObject.success}</Alert>
                 }
+                {alertMessageObject && alertMessageObject.error &&
+                    <Alert severity={alert.type} >{alertMessageObject.error}</Alert>
+                }
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon/>
                 </Avatar>

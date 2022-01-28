@@ -37,6 +37,7 @@ import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import ForgotPassword from "./components/authentication/ForgotPassword";
 import ResetPassword from "./components/authentication/ResetPassword";
+import VerifyEmail from "./components/authentication/VerifyEmail";
 import SearchResult from "./components/trackhub_search/SearchResult";
 import MainView from "./components/trackhub_view/MainView";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
@@ -96,6 +97,7 @@ function App(props) {
                             <Route exact path="/login" component={Login}/>
                             <Route exact path="/search" component={SearchResult}/>
                             <Route exact path="/register" component={Register}/>
+                            <Route exact path="/email_verification" component={VerifyEmail}/>
                             <Route exact path="/forgot_password" component={ForgotPassword}/>
                             <Route exact path="/reset_password" component={ResetPassword}/>
                             {/*

@@ -5,6 +5,7 @@ export const userService = {
     logout,
     register,
     changePassword,
+    verifyEmail,
     forgotPassword,
     validateResetToken,
     resetPassword
@@ -78,6 +79,17 @@ function changePassword(old_password, new_password1, new_password2) {
         .then(user => {
             return user;
         });
+}
+
+
+function verifyEmail(token) {
+    const requestOptions = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'}
+    };
+
+    // send token in params url
+    return fetch(`${settings.API_SERVER}/api/email_verification?token=${token}`, requestOptions).then(handleResponse);
 }
 
 function forgotPassword(email) {

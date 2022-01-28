@@ -10,7 +10,8 @@ export const userActions = {
     changePassword,
     forgotPassword,
     validateResetToken,
-    resetPassword
+    resetPassword,
+    verifyEmail
 };
 
 // TODO: Refactor me please?!
@@ -22,8 +23,17 @@ function login(username, password, from) {
         userService.login(username, password)
             .then(
                 user => {
-                    dispatch(success(user));
-                    history.push(from);
+                    // allow the user to log in if the account is activated
+                    if(user.is_account_activated) {
+                        dispatch(success(user));
+                        history.push(from);
+                    }
+                    // otherwise ask the user to activate it
+                    else {
+                        dispatch(failure());
+                        history.push('/login');
+                        dispatch(alertActions.error('{"error": "Account is not activated!"}'));
+                    }
                 },
                 error => {
                     dispatch(failure(error));
@@ -59,7 +69,7 @@ function register(user) {
                 user => {
                     dispatch(success());
                     history.push('/login');
-                    dispatch(alertActions.success('{"success": "Registration successful"}'));
+                    dispatch(alertActions.success('{"success": "Account created successfully! Please click the activation link we sent to your email to activate your account"}'));
                 }
                 ,
                 error => {
@@ -113,6 +123,39 @@ function changePassword(old_password, new_password1, new_password2) {
     }
 }
 
+
+function verifyEmail(token) {
+    return dispatch => {
+        dispatch(request(token));
+
+        userService.verifyEmail(token)
+            .then(
+                token => {
+                    dispatch(success());
+                    history.push('/login');
+                    dispatch(alertActions.success('{"success": "Account activated! Please login to your account"}'));
+                }
+                ,
+                error => {
+                    dispatch(failure(error));
+                    history.push('/login');
+                    dispatch(alertActions.error(error));
+                }
+            )
+    };
+
+    function request(user) {
+        return {type: userConstants.VERIFY_EMAIL_REQUEST, user}
+    }
+
+    function success(user) {
+        return {type: userConstants.VERIFY_EMAIL_SUCCESS, user}
+    }
+
+    function failure(error) {
+        return {type: userConstants.VERIFY_EMAIL_FAILURE, error}
+    }
+}
 function forgotPassword(email) {
     return dispatch => {
         dispatch(request({email}));
