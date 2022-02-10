@@ -9,6 +9,10 @@ import MainBreadcrumbs from "./components/MainBreadcrumb";
 const useStyles = makeStyles({
     root: {
         marginTop: '70px'
+    },
+    wt: {
+        position: "relative",
+        top: "-20px"
     }
 });
 
@@ -75,7 +79,7 @@ function About() {
                         Laboratory.
                     </p>
                     <img src={require("./static/img/bbsrc_logo.png").default}/>
-                    <img src={require("./static/img/wt_logo.png").default}/>
+                    <img src={require("./static/img/wt_logo.png").default} className={classes.wt}/>
                     <img src={require("./static/img/EMBL_logo.png").default}/>
                 </div>
             </div>
