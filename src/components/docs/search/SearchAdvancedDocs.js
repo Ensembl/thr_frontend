@@ -82,8 +82,9 @@ const SearchAdvancedDocs = () => {
                         These are specified in the query string followed by a colon. If the search term in that
                         field is comprised of more than one word, they must be grouped together with brackets,
                         e.g.
-                        <pre className={classes.codeBlock}>species.scientific_name:(Zea mays)</pre>
-                        {/*<Box component="span" sx={{ display: 'block' }}>species.scientific_name:(Zea mays)</Box>*/}
+                    </p>
+                    <pre className={classes.codeBlock}>species.scientific_name:(Zea mays)</pre>
+                    <p>
                         Then use Logical Operators below to add additional search terms as and when you need them.
                     </p>
 
@@ -94,7 +95,9 @@ const SearchAdvancedDocs = () => {
                         Sometimes it may be useful to match records based on a query pattern. Wildcard searches can
                         be run on individual terms, using ? to replace a single character, and * to replace zero or
                         more characters:
-                        <pre className={classes.codeBlock}>GRCh3? rna*</pre>
+                    </p>
+                    <pre className={classes.codeBlock}>GRCh3? rna*</pre>
+                    <p>
                         Be aware that wildcard queries, especially those with many terms, can use an enormous amount
                         of memory and perform very badly.
                     </p>
@@ -105,7 +108,9 @@ const SearchAdvancedDocs = () => {
                     <p>
                         Regular expression patterns can be embedded in the query string by wrapping them in
                         forward-slashes ("/"):
-                        <pre className={classes.codeBlock}>species.scientific_name:/dan?io (re[ri]o)/</pre>
+                    </p>
+                    <pre className={classes.codeBlock}>species.scientific_name:/dan?io (re[ri]o)/</pre>
+                    <p>
                         <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html#regexp-syntax"
                            target="_blank">Supported regex syntax</a> (Elasticsearch website).
                     </p>
@@ -124,14 +129,17 @@ const SearchAdvancedDocs = () => {
                         Other boolean operators can be used in the query string itself to provide more control. The
                         preferred operators are + (this term must be present) and - (this term must not be present).
                         All other terms are optional. For example, this query:
-                        <pre className={classes.codeBlock}>homo sapiens +rnaseq -srna</pre>
-                        States that:
-                        <ul>
-                            <li>rnaseq must be present</li>
-                            <li>srna must not be present</li>
-                            <li>homo and sapiens are optional — their presence increases the relevance</li>
-                        </ul>
                     </p>
+                    <pre className={classes.codeBlock}>homo sapiens +rnaseq -srna</pre>
+                    <p>
+                        States that:
+                    </p>
+                    <ul>
+                        <li>rnaseq must be present</li>
+                        <li>srna must not be present</li>
+                        <li>homo and sapiens are optional — their presence increases the relevance</li>
+                    </ul>
+
                     <p>
                         When mixing operators, tt is important to take their precedence into account: NOT takes
                         precedence over AND, which takes precedence over OR. While the + and - only affect the term
@@ -143,8 +151,8 @@ const SearchAdvancedDocs = () => {
                     </Typography>
                     <p>
                         Multiple terms or clauses can be grouped together with parentheses, to form sub-queries:
-                        <pre className={classes.codeBlock}>(rnaseq OR srna) AND homo</pre>
                     </p>
+                    <pre className={classes.codeBlock}>(rnaseq OR srna) AND homo</pre>
 
                     <Typography id="fuzzygrouping" component="h4" variant="h5">
                         Fuzzy Operator
@@ -152,7 +160,9 @@ const SearchAdvancedDocs = () => {
                     <p>
                         We can search for terms that are similar to, but not exactly like, our search terms, using
                         the fuzzy operator:
-                        <pre className={classes.codeBlock}>hoom~ rnseq~ srmas~</pre>
+                    </p>
+                    <pre className={classes.codeBlock}>hoom~ rnseq~ srmas~</pre>
+                    <p>
                         This uses the Damerau-Levenshtein distance to find all terms with a maximum of two changes,
                         where a change is the insertion, deletion or substitution of a single character, or
                         transposition of two adjacent characters.
@@ -160,8 +170,8 @@ const SearchAdvancedDocs = () => {
                     <p>
                         The default edit distance is 2, but an edit distance of 1 should be sufficient to catch 80%
                         of all human misspellings. It can be specified as:
-                        <pre className={classes.codeBlock}>grhc38~1</pre>
                     </p>
+                    <pre className={classes.codeBlock}>grhc38~1</pre>
 
                     <Typography id="proximity" component="h4" variant="h5">
                         Proximity Searches
@@ -171,7 +181,9 @@ const SearchAdvancedDocs = () => {
                         proximity query allows the specified words to be further apart or in a different order. In
                         the same way that fuzzy queries can specify a maximum edit distance for characters in a
                         word, a proximity search allows us to specify a maximum edit distance of words in a phrase:
-                        <pre className={classes.codeBlock}>"sapiens rnaseq"~5</pre>
+                    </p>
+                    <pre className={classes.codeBlock}>"sapiens rnaseq"~5</pre>
+                    <p>
                         The closer the text in a field is to the original order specified in the query string, the
                         more relevant that document is considered to be. When compared to the above example query,
                         the phrase "quick fox" would be considered more relevant than "quick brown fox".

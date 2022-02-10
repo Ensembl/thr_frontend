@@ -100,13 +100,13 @@ const AssemblySupportDocs = () => {
                     <p>
                         If your genome is in UCSC you should use the UCSC accession in
                         your <strong>genomes.txt</strong> file as shown below:
-
-                        <pre className={classes.codeBlock}>
+                    </p>
+                    <pre className={classes.codeBlock}>
                                 <strong>genome</strong> hg19
                                 <br/>
                                 <strong>trackDb</strong> hg19/trackDb.txt
                             </pre>
-
+                    <p>
                         The Track Hub Registry will normalise this into a suitable GCA accession. For genomes with
                         multiple patch releases i.e. <a
                         href="http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human#GRCh37"
@@ -135,22 +135,21 @@ const AssemblySupportDocs = () => {
                         href="https://www.ebi.ac.uk/ena/data/view/GCA_000001735.1"
                         target="_blank">GCA_000001735.1</a>. Your <strong>genomes.txt</strong> file should be
                         structured as shown below:
-
-                        <pre className={classes.codeBlock}>
+                    </p>
+                    <pre className={classes.codeBlock}>
                                 <strong>genome</strong> TAIR10
                                 <br/>
                                 <strong>trackDb</strong> TAIR10/trackDb.txt
                             </pre>
-                    </p>
 
                     <p>
                         When submitting the hub to the Track Hub Registry you must tell the registry the mapping
                         between TAIR10 and GCA_000001735.1 like so:
-
-                        <pre className={classes.codeBlock}>
+                    </p>
+                    <pre className={classes.codeBlock}>
                                 {example}
                             </pre>
-
+                    <p>
                         More details are available from the <a
                         href="/docs/api/registration/reference#post_trackhub_msg_format">submissions
                         API reference</a>.

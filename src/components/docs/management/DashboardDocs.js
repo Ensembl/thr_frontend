@@ -84,18 +84,19 @@ const DashboardDocs = () => {
                         assembly the database refers to; <em>Created/Updated</em> are the dates at which the hub was
                         submitted to/updated in the Registry; <em>Status</em> shows a label about the status of the
                         track database as know to the Registry, which can be:
-                        <ul>
-                            <li>"Unknown": the Registry has not yet checked the status of the hub and the tracks in
-                                the database;
-                            </li>
-                            <li>"All is well": hub and all track data files as available;</li>
-                            <li>"Remote data unavailable": some or all of the remote track data is unavailable.</li>
-                        </ul>
-                        The last two come with the date at which the check was performed. The last column presents
-                        buttons for doing some actions depending on the status of the track database. When status
-                        reports "Remote data unavailable", you can click on the spyglass icon to access information
-                        about the reasons, like in the following:
                     </p>
+                    <ul>
+                        <li>"Unknown": the Registry has not yet checked the status of the hub and the tracks in
+                            the database;
+                        </li>
+                        <li>"All is well": hub and all track data files as available;</li>
+                        <li>"Remote data unavailable": some or all of the remote track data is unavailable.</li>
+                    </ul>
+                    The last two come with the date at which the check was performed. The last column presents
+                    buttons for doing some actions depending on the status of the track database. When status
+                    reports "Remote data unavailable", you can click on the spyglass icon to access information
+                    about the reasons, like in the following:
+
 
                     <img src={require("../../../static/img/dashboard_status.png").default}/>
 
@@ -147,14 +148,16 @@ const DashboardDocs = () => {
                     </p>
                     <p>
                         You can control two parameters related to these periodic inspections:
-                        <ul>
-                            <li><em>Check interval</em>: tells the Registry the frequency with which to perfom the
-                                check. If set to <em>Automatic</em> the decision is left to the Registry;
-                            </li>
-                            <li><em>Receive continuos alerts</em>: if the checkbox is not ticked, you receive an
-                                alert message about some faulty tracks only once.
-                            </li>
-                        </ul>
+                    </p>
+                    <ul>
+                        <li><em>Check interval</em>: tells the Registry the frequency with which to perfom the
+                            check. If set to <em>Automatic</em> the decision is left to the Registry;
+                        </li>
+                        <li><em>Receive continuos alerts</em>: if the checkbox is not ticked, you receive an
+                            alert message about some faulty tracks only once.
+                        </li>
+                    </ul>
+                    <p>
                         As stated before, the Registry sends an alert message to the profile's email address at the
                         end of each inspection in case something wrong is found with the track data files of your
                         submitted data hubs, and unless you've ticked the checkbox above.

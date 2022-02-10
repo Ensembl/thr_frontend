@@ -96,6 +96,7 @@ const OverviewDocs = () => {
 
                     <p>
                         Using this API, you can:
+                    </p>
                         <ul>
                             <li><a href="/docs/api/registration/workflow/thregister">Register
                                 track data hubs</a> with the registry;
@@ -108,7 +109,6 @@ const OverviewDocs = () => {
                                 given track hub in the registry
                             </li>
                         </ul>
-                    </p>
 
                     <p>
                         Alternatively, you can use the <a

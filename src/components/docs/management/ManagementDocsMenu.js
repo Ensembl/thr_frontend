@@ -34,7 +34,7 @@ const drawerWidth = 350;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
+        display: 'flex',
     },
     drawer: {
         width: drawerWidth,
@@ -58,8 +58,6 @@ const useStyles = makeStyles((theme) => ({
     },
     item: {
         listStyleType: 'none',
-        // marginBottom: '-10px',
-        // marginTop: '-10px',
         textDecoration: 'inherit',
         color: 'inherit',
         marginRight: 'auto'
@@ -73,7 +71,6 @@ export default function ManagementDocsMenu() {
         // get the last part of the url
         // e.g. docs/management/overview => overview
         const lastUrlPart = window.location.pathname.split("/").pop();
-        console.log(lastUrlPart)
 
         if (lastUrlPart === "overview") {
             setOverviewOpen(true);
