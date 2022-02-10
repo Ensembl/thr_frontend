@@ -14,11 +14,29 @@
  * limitations under the License.
  */
 
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React, { useEffect } from 'react';
+import queryString from 'query-string';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+import {userActions} from "../../_actions";
+import {useDispatch} from "react-redux";
+
+export default function VerifyEmail({ history }) {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        // get token from the url
+        const { token } = queryString.parse(window.location.search);
+
+        // remove token from url to prevent http referer leakage
+        history.replace(window.location.pathname);
+
+        dispatch(userActions.verifyEmail(token));
+    }, []);
+
+    return (
+        <div>
+            <h3>Verifying Email...</h3>
+        </div>
+    )
+}

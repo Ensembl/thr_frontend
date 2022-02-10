@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import NestedGrid from "./NestedGrid";
 import SearchForm from "./SearchForm";
@@ -70,7 +70,7 @@ function Home() {
 
                     <p className={classes.description}>
                         The goal of the Track Hub Registry is to allow third parties to advertise <a
-                        href="http://genome.ucsc.edu/goldenPath/help/hgTrackHubHelp.html#Intro" target="_blank">track
+                        href="http://genome.ucsc.edu/goldenPath/help/hgTrackHubHelp.html#Intro" target="_blank" rel="noreferrer">track
                         hubs</a>, and to make it easier for researchers around the world to discover and use track
                         hubs
                         containing different types of genomic research data.

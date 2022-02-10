@@ -15,18 +15,29 @@
  */
 
 import React, {useEffect} from 'react';
+// TODO: restructure the code and move router to another .js file
+// eslint-disable-next-line
 import Urls from './Urls';
 import Layout from './components/Layout';
 
-import {Router, Route, Switch, Redirect, BrowserRouter} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import {Router, Route, Switch, Redirect} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 import {history} from './_helpers';
 import {alertActions} from './_actions';
 import {PrivateRoute} from './_components';
 
+import './static/css/style.css';
+
+import {ThemeProvider} from '@material-ui/styles';
+// Fix findDOMNode is deprecated in StrictMode: https://stackoverflow.com/q/61220424/4488332
+// import {unstable_createMuiStrictModeTheme as createMuiTheme} from '@material-ui/core/styles';
+import {createMuiTheme} from '@material-ui/core/styles';
 import Home from "./components/home/Home";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
+import ForgotPassword from "./components/authentication/ForgotPassword";
+import ResetPassword from "./components/authentication/ResetPassword";
+import VerifyEmail from "./components/authentication/VerifyEmail";
 import SearchResult from "./components/trackhub_search/SearchResult";
 import MainView from "./components/trackhub_view/MainView";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
@@ -40,6 +51,7 @@ import {ThemeProvider} from '@material-ui/styles';
 // Fix findDOMNode is deprecated in StrictMode: https://stackoverflow.com/q/61220424/4488332
 // import {unstable_createMuiStrictModeTheme as createMuiTheme} from '@material-ui/core/styles';
 import {createMuiTheme} from '@material-ui/core/styles';
+import CookiesBanner from "./components/CookiesBanner";
 
 // The main colours and fonts used in the application
 const theme = createMuiTheme({
@@ -93,6 +105,9 @@ function App(props) {
                             <Route exact path="/login" component={Login}/>
                             <Route exact path="/search" component={SearchResult}/>
                             <Route exact path="/register" component={Register}/>
+                            <Route exact path="/email_verification" component={VerifyEmail}/>
+                            <Route exact path="/forgot_password" component={ForgotPassword}/>
+                            <Route exact path="/reset_password" component={ResetPassword}/>
                             {/*
                                 more details here: https://stackoverflow.com/a/53694210/4488332
                                 and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/
@@ -108,6 +123,7 @@ function App(props) {
 
                 </Layout>
             </div>
+            <CookiesBanner/>
         </ThemeProvider>
     );
 }

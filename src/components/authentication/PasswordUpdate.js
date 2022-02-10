@@ -15,8 +15,6 @@
  */
 
 import React, {useState} from 'react';
-import axios from 'axios';
-import * as settings from '../../settings';
 
 import {makeStyles} from '@material-ui/core/styles';
 import {Avatar, Button, Container, CssBaseline, TextField, Typography} from '@material-ui/core';
@@ -62,9 +60,11 @@ function PasswordUpdate() {
         new_password1: '',
         new_password2: ''
     });
+    // eslint-disable-next-line
     const [submitted, setSubmitted] = useState(false);
     const {old_password, new_password1, new_password2} = inputs;
     const dispatch = useDispatch();
+    // eslint-disable-next-line
     const location = useLocation();
 
     const alert = useSelector(state => state.alert);
@@ -79,7 +79,7 @@ function PasswordUpdate() {
         e.preventDefault();
 
         setSubmitted(true);
-        if (old_password && new_password1 && new_password2 && new_password1 == new_password2) {
+        if (old_password && new_password1 && new_password2 && new_password1 === new_password2) {
             dispatch(userActions.changePassword(old_password, new_password1, new_password2));
         }
     }
@@ -161,7 +161,7 @@ function PasswordUpdate() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Update
+                        Update Password
                     </Button>
                 </form>
             </div>
