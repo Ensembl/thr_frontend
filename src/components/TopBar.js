@@ -16,24 +16,30 @@
 
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {AppBar, Toolbar, Typography, Button, IconButton} from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/Home';
+import {AppBar, Toolbar, Typography, Button} from '@material-ui/core';
 import SearchForm from "./home/SearchForm";
 import {useSelector} from "react-redux";
+import DocsDropdownMenu from "./docs/DocsDropdownMenu";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1,
+    },
     menuButton: {
         marginRight: theme.spacing(2),
     },
     title: {
-        flexGrow: 1,
         fontWeight: 800,
         fontStyle: "italic",
         textDecoration: "none !important",
+        marginRight: "20px",
     },
+    interSpace: {
+        flexGrow: 1,
+    }
 }));
 
 export default function TopBar(props) {
@@ -45,15 +51,17 @@ export default function TopBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>
                         <a href="/">The Track Hub Registry</a>
                     </Typography>
+                    <Button color="inherit" href="/register">Submit data</Button>
+                    <DocsDropdownMenu/>
+                    <Button color="inherit" href="/about">About</Button>
+                    <Button color="inherit" href="/help">Help</Button>
+                    <span className={classes.interSpace}/>
                     <SearchForm/>
-                    <IconButton aria-label="home page" color="inherit" href="/">
-                        <HomeIcon/>
-                    </IconButton>
                     {isLoggedIn ? null : <Button color="inherit" href="/register">Register</Button>}
                     {isLoggedIn ? null : <Button color="inherit" href="/login">Login</Button>}
                     {isLoggedIn ? <Button color="inherit" href="/user">Dashboard</Button> : null}
@@ -63,6 +71,8 @@ export default function TopBar(props) {
                         <Button color="inherit" href="/login">Logout</Button> : null}
                 </Toolbar>
             </AppBar>
+            <br/>
+            <Toolbar/>
         </div>
     );
 }

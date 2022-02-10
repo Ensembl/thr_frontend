@@ -26,12 +26,6 @@ import {history} from './_helpers';
 import {alertActions} from './_actions';
 import {PrivateRoute} from './_components';
 
-import './static/css/style.css';
-
-import {ThemeProvider} from '@material-ui/styles';
-// Fix findDOMNode is deprecated in StrictMode: https://stackoverflow.com/q/61220424/4488332
-// import {unstable_createMuiStrictModeTheme as createMuiTheme} from '@material-ui/core/styles';
-import {createMuiTheme} from '@material-ui/core/styles';
 import Home from "./components/home/Home";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
@@ -43,6 +37,26 @@ import MainView from "./components/trackhub_view/MainView";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
 import UserDashboard from "./components/dashboard/UserDashboard";
 import NotFound from "./components/NotFound";
+import About from "./About";
+import Help from "./Help";
+import SearchBasicDocs from "./components/docs/search/SearchBasicDocs";
+import SearchResultsDocs from "./components/docs/search/SearchResultsDocs";
+import SearchAdvancedDocs from "./components/docs/search/SearchAdvancedDocs";
+import OverviewDocs from "./components/docs/management/OverviewDocs";
+import AssemblySupportDocs from "./components/docs/management/AssemblySupportDocs";
+import ModellingDocs from "./components/docs/management/ModellingDocs";
+import DashboardDocs from "./components/docs/management/DashboardDocs";
+import ThrApisDocs from "./components/docs/apis/ThrApisDocs";
+import InfoApisDocs from "./components/docs/apis/InfoApisDocs";
+import RegistrationApiDocs from "./components/docs/apis/RegistrationApiDocs";
+import LoginWfDocs from "./components/docs/apis/workflow/LoginWfDocs";
+import RegisteringThWfDocs from "./components/docs/apis/workflow/RegisteringThWfDocs";
+import RetrieveThWfDocs from "./components/docs/apis/workflow/RetrieveThWfDocs";
+import UpdateThWfDocs from "./components/docs/apis/workflow/UpdateThWfDocs";
+import DeleteThWfDocs from "./components/docs/apis/workflow/DeleteThWfDocs";
+import LogoutWfDocs from "./components/docs/apis/workflow/LogoutWfDocs";
+import RefApiDocs from "./components/docs/apis/RefApiDocs";
+import SearchApiDocs from "./components/docs/apis/SearchApiDocs";
 import BiodallianceView from "./components/trackhub_view/BiodallianceView";
 
 import './static/css/style.css';
@@ -102,6 +116,26 @@ function App(props) {
                     <Router history={history}>
                         <Switch>
                             <Route exact path="/" component={Home}/>
+                            <Route exact path="/docs/search" component={SearchBasicDocs}/>
+                            <Route exact path="/docs/search/results" component={SearchResultsDocs}/>
+                            <Route exact path="/docs/search/advanced" component={SearchAdvancedDocs}/>
+                            <Route exact path="/docs/management/overview" component={OverviewDocs}/>
+                            <Route exact path="/docs/management/assembly_support" component={AssemblySupportDocs}/>
+                            <Route exact path="/docs/management/modelling" component={ModellingDocs}/>
+                            <Route exact path="/docs/management/dashboard" component={DashboardDocs}/>
+                            <Route exact path="/docs/api/info" component={InfoApisDocs}/>
+                            <Route exact path="/docs/apis" component={ThrApisDocs}/>
+                            <Route exact path="/docs/api/registration" component={RegistrationApiDocs}/>
+                            <Route exact path="/docs/api/registration/workflow/login" component={LoginWfDocs}/>
+                            <Route exact path="/docs/api/registration/workflow/thregister" component={RegisteringThWfDocs}/>
+                            <Route exact path="/docs/api/registration/workflow/thlist" component={RetrieveThWfDocs}/>
+                            <Route exact path="/docs/api/registration/workflow/thupdate" component={UpdateThWfDocs}/>
+                            <Route exact path="/docs/api/registration/workflow/thdelete" component={DeleteThWfDocs}/>
+                            <Route exact path="/docs/api/registration/workflow/logout" component={LogoutWfDocs}/>
+                            <Route exact path="/docs/api/registration/reference" component={RefApiDocs}/>
+                            <Route exact path="/docs/api/search" component={SearchApiDocs}/>
+                            <Route exact path="/about" component={About}/>
+                            <Route exact path="/help" component={Help}/>
                             <Route exact path="/login" component={Login}/>
                             <Route exact path="/search" component={SearchResult}/>
                             <Route exact path="/register" component={Register}/>

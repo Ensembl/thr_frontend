@@ -1,0 +1,207 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "title": "TrackHub Schema v.1.0",
+
+  "description" : "The schema which describes valid TrackHub track database JSON documents.",
+
+  "type": "object",
+
+  "properties": {
+
+    "public": {
+      "type": "boolean",
+
+      "description": "Whether the trackDb is to made available for search or not"
+    },
+
+    "type": {
+      "type": "string",
+
+      "description": "The trackdb generic main data type.",
+
+      "enum": [ "genomics", "epigenomics", "transcriptomics", "proteomics" ]
+    },
+
+    "hub": {
+      "type": "object",
+
+      "description": "Information about the hub the track database belongs to",
+
+      "properties": {
+        "name": { "type": "string" },
+        "shortLabel": { "type": "string" },
+        "longLabel": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "assembly": { "type": "number" }
+      },
+
+      "additionalProperties": true,
+
+      "required": [ "name", "shortLabel", "longLabel" ]
+    },
+
+    "description": { "type": "string" },
+
+    "version": {
+      "type": "string",
+
+      "description": "The version of the JSON track database document.",
+
+      "enum": [ "v1.0" ]
+    },
+
+    "source": {
+      "type": "object",
+
+      "description": "Describes the original trackDb file, in case the JSON has been created from it.",
+
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "checksum": { "type": "string" }
+      },
+
+      "required": [ "url" ]
+
+    },
+
+    "species": {
+      "type": "object",
+
+      "title": "The organism/species of this collection of tracks.",
+
+      "properties": {
+        "tax_id": {
+          "oneOf": [
+            { "type": "integer", "minimum": 0, "exclusiveMinimum": true },
+            { "type": "string", "pattern": "^[1-9][0-9]+?$" }
+          ]
+        },
+        "scientific_name": { "type": "string" },
+        "common_name": { "type": "string" }
+      },
+
+      "additionalProperties": false,
+
+      "required": [ "tax_id", "scientific_name" ]
+    },
+
+    "assembly": {
+      "type": "object",
+
+      "title": "Assembly",
+
+      "description": "Information which identifies the assembly referred to by this set of tracks.",
+
+      "properties": {
+        "accession": {
+          "type": "string",
+
+          "title": "NCBI Assembly accession ID",
+
+          "description": "The NCBI assembly identifier (accession and version)",
+
+          "pattern": "^G(CA|CF)_[0-9]+.[0-9]+$|^NA$"
+        },
+
+        "name": { "type": "string" },
+
+        "long_name": { "type": "string" },
+
+        "synonyms": { "type": "string" }
+      },
+
+      "additionalProperties": false,
+
+      "required": [ "accession", "name" ]
+    },
+
+    "data": {
+      "type": "array",
+
+      "title": "Track metadata",
+
+      "description": "Contains metadata for a collection of tracks defined in the TrackHub. Each track metadata has an id attribute which is used as a property key to fetch the corresponding configuration in the configuration object.",
+
+      "items": { "$ref": "#/definitions/track_metadata" },
+
+      "minItems": 1,
+
+      "uniqueItems": true
+    },
+
+    "configuration": {
+      "type": "object",
+
+      "title": "Track configuration",
+
+      "description": "Contains display and configuration properties for the tracks in the data hub.",
+
+      "patternProperties": {
+        "^[a-zA-z][a-zA-Z0-9_-]+$": { "$ref": "#/definitions/track_configuration" }
+      },
+
+      "additionalProperties": true
+    }
+  },
+
+  "additionalProperties": true,
+
+  "required": [ "version", "hub", "species", "assembly", "configuration" ],
+
+  "definitions": {
+
+    "track_metadata": {
+      "type": "object",
+
+      "title": "Track metadata definition.",
+
+      "patternProperties": {
+        "^[a-zA-z][a-zA-Z0-9_-]+$": { "type": "string" }
+      },
+
+      "additionalProperties": true
+    },
+
+    "track_configuration": {
+
+      "title": "Track display and configuration properties.",
+
+      "type": "object",
+
+      "description": "Contains display and configuration properties for all track types.",
+
+      "properties": {
+        "members": {
+          "type": "object",
+
+          "patternProperties": {
+             "^[a-zA-z][a-zA-Z0-9_-]*?$": { "$ref": "#/definitions/track_configuration" }
+           }
+        }
+      },
+
+      "additionalProperties": true,
+
+      "patternProperties": {
+        "^[a-zA-z][a-zA-Z0-9_-]*?$": {
+          "oneOf": [
+             { "type": "string" },
+             { "type": "number" },
+             { "type": "array",
+               "items": {
+                 "oneOf": [
+                   { "type": "string" },
+                   { "type": "number" }
+                 ]
+               }
+             },
+             { "type": "object" }
+           ]
+        }
+      },
+
+      "additionalProperties": true
+    }
+  }
+}
