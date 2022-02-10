@@ -90,7 +90,7 @@ function useScript(src) {
 export default function BiodallianceView({location}) {
 
     const status = useScript(
-        "http://www.biodalliance.org/release-0.13/dalliance-compiled.js"
+        "//www.biodalliance.org/release-0.13/dalliance-compiled.js"
     );
 
     const urlParams = location.search
@@ -152,12 +152,12 @@ export default function BiodallianceView({location}) {
         coordSystem.ucscName = 'hg38'
 
         // geneSource.name = 'GENCODEv21'
-        genomeSource.twoBitURI = 'https://www.biodalliance.org/datasets/hg38.2bit'
+        genomeSource.twoBitURI = '//www.biodalliance.org/datasets/hg38.2bit'
 
         geneSource.desc = 'Gene structures from GENCODE 21'
-        geneSource.bwgURI = 'https://www.biodalliance.org/datasets/GRCh38/gencode.v21.annotation.bb'
+        geneSource.bwgURI = '//www.biodalliance.org/datasets/GRCh38/gencode.v21.annotation.bb'
         geneSource.stylesheet_uri = '//www.biodalliance.org/datasets/gencode.bb'
-        geneSource.trixURI = 'https://www.biodalliance.org/datasets/GRCh38/gencode.v21.annotation.ix'
+        geneSource.trixURI = '//www.biodalliance.org/datasets/GRCh38/gencode.v21.annotation.ix'
 
     } else if (assembly === 'mm10') {
         chr = 19
