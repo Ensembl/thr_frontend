@@ -26,15 +26,12 @@ import {history} from './_helpers';
 import {alertActions} from './_actions';
 import {PrivateRoute} from './_components';
 
-import './static/css/style.css';
-
-import {ThemeProvider} from '@material-ui/styles';
-// Fix findDOMNode is deprecated in StrictMode: https://stackoverflow.com/q/61220424/4488332
-// import {unstable_createMuiStrictModeTheme as createMuiTheme} from '@material-ui/core/styles';
-import {createMuiTheme} from '@material-ui/core/styles';
 import Home from "./components/home/Home";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
+import ForgotPassword from "./components/authentication/ForgotPassword";
+import ResetPassword from "./components/authentication/ResetPassword";
+import VerifyEmail from "./components/authentication/VerifyEmail";
 import SearchResult from "./components/trackhub_search/SearchResult";
 import MainView from "./components/trackhub_view/MainView";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
@@ -60,6 +57,15 @@ import DeleteThWfDocs from "./components/docs/apis/workflow/DeleteThWfDocs";
 import LogoutWfDocs from "./components/docs/apis/workflow/LogoutWfDocs";
 import RefApiDocs from "./components/docs/apis/RefApiDocs";
 import SearchApiDocs from "./components/docs/apis/SearchApiDocs";
+import BiodallianceView from "./components/trackhub_view/BiodallianceView";
+
+import './static/css/style.css';
+
+import {ThemeProvider} from '@material-ui/styles';
+// Fix findDOMNode is deprecated in StrictMode: https://stackoverflow.com/q/61220424/4488332
+// import {unstable_createMuiStrictModeTheme as createMuiTheme} from '@material-ui/core/styles';
+import {createMuiTheme} from '@material-ui/core/styles';
+import CookiesBanner from "./components/CookiesBanner";
 
 // The main colours and fonts used in the application
 const theme = createMuiTheme({
@@ -106,7 +112,7 @@ function App(props) {
         <ThemeProvider theme={theme}>
             <div className="App">
                 <Layout {...props}>
-
+                    {/* TODO: move the routing to a separate file*/}
                     <Router history={history}>
                         <Switch>
                             <Route exact path="/" component={Home}/>
@@ -133,11 +139,15 @@ function App(props) {
                             <Route exact path="/login" component={Login}/>
                             <Route exact path="/search" component={SearchResult}/>
                             <Route exact path="/register" component={Register}/>
+                            <Route exact path="/email_verification" component={VerifyEmail}/>
+                            <Route exact path="/forgot_password" component={ForgotPassword}/>
+                            <Route exact path="/reset_password" component={ResetPassword}/>
                             {/*
                                 more details here: https://stackoverflow.com/a/53694210/4488332
                                 and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/
                             */}
                             <Route path="/trackhub_view/:id" component={MainView}/>
+                            <Route path="/biodalliance/view" component={BiodallianceView}></Route>
                             <PrivateRoute exact path="/update_password" component={PasswordUpdate}/>
                             <PrivateRoute exact path="/user" component={UserDashboard}/>
                             <Route path="/404" component={NotFound}/>
@@ -147,6 +157,7 @@ function App(props) {
 
                 </Layout>
             </div>
+            <CookiesBanner/>
         </ThemeProvider>
     );
 }
