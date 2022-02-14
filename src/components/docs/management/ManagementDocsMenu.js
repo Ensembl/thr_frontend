@@ -28,7 +28,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import {ExpandLess, ExpandMore} from "@material-ui/icons";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
-import {userActions} from "../../../_actions";
+import {userActions} from "../../../redux/actions";
 
 const drawerWidth = 350;
 

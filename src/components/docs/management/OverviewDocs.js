@@ -19,7 +19,7 @@ import ManagementDocsMenu from "./ManagementDocsMenu";
 import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
-import MainBreadcrumb from "../../MainBreadcrumb";
+import MainBreadcrumb from "../../generic/MainBreadcrumb";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 const useStyles = makeStyles((theme) => ({

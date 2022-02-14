@@ -19,7 +19,7 @@ import SearchDocsMenu from "./SearchDocsMenu";
 import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import MainBreadcrumb from "../../MainBreadcrumb";
+import MainBreadcrumb from "../../generic/MainBreadcrumb";
 
 const useStyles = makeStyles((theme) => ({
     root: {

@@ -17,7 +17,7 @@
 import React, { useEffect } from 'react';
 import queryString from 'query-string';
 
-import {userActions} from "../../_actions";
+import {userActions} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 
 export default function VerifyEmail({ history }) {

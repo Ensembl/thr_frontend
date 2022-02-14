@@ -1,4 +1,4 @@
-import * as settings from "../settings";
+import * as settings from "../../settings";
 
 export const userService = {
     login,

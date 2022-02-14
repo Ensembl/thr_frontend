@@ -17,7 +17,7 @@
 import React from 'react';
 import {TableCell, TableHead, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import MainBreadcrumb from "../../MainBreadcrumb";
+import MainBreadcrumb from "../../generic/MainBreadcrumb";
 import TableContainer from "@material-ui/core/TableContainer";
 import Paper from "@material-ui/core/Paper";
 import TableBody from "@material-ui/core/TableBody";

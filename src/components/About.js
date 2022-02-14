@@ -3,8 +3,8 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
 import {Divider} from "@material-ui/core";
-import MainBreadcrumb from "./components/MainBreadcrumb";
-import MainBreadcrumbs from "./components/MainBreadcrumb";
+import MainBreadcrumb from "./generic/MainBreadcrumb";
+import MainBreadcrumbs from "./generic/MainBreadcrumb";
 
 const useStyles = makeStyles({
     root: {
@@ -78,9 +78,9 @@ function About() {
                         BB/L024225/1), the Wellcome Trust (WT095908 and WT098051) and the European Molecular Biology
                         Laboratory.
                     </p>
-                    <img src={require("./static/img/bbsrc_logo.png").default}/>
-                    <img src={require("./static/img/wt_logo.png").default} className={classes.wt}/>
-                    <img src={require("./static/img/EMBL_logo.png").default}/>
+                    <img src={require("../static/img/bbsrc_logo.png").default}/>
+                    <img src={require("../static/img/wt_logo.png").default} className={classes.wt}/>
+                    <img src={require("../static/img/EMBL_logo.png").default}/>
                 </div>
             </div>
         </Container>

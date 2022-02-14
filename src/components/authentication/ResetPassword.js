@@ -23,7 +23,7 @@ import {Avatar, Button, Container, CssBaseline, TextField, Typography} from '@ma
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
-import {userActions} from "../../_actions";
+import {userActions} from "../../redux/actions";
 import Alert from "@material-ui/lab/Alert";
 import {AlertTitle} from "@material-ui/lab";
 

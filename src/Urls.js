@@ -15,63 +15,145 @@
  */
 
 import React from "react";
-import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
+import {BrowserRouter, Route, Switch, Redirect, Router} from "react-router-dom";
 import Login from "./components/authentication/Login";
 import Home from "./components/home/Home";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";
-// import Register from "./components/authentication/Register";
 import UserDashboard from "./components/dashboard/UserDashboard";
 import SearchResult from "./components/trackhub_search/SearchResult";
 import MainView from "./components/trackhub_view/MainView";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/generic/NotFound";
+import {history} from "./redux/helpers";
+import SearchBasicDocs from "./components/docs/search/SearchBasicDocs";
+import SearchResultsDocs from "./components/docs/search/SearchResultsDocs";
+import SearchAdvancedDocs from "./components/docs/search/SearchAdvancedDocs";
+import OverviewDocs from "./components/docs/management/OverviewDocs";
+import AssemblySupportDocs from "./components/docs/management/AssemblySupportDocs";
+import ModellingDocs from "./components/docs/management/ModellingDocs";
+import DashboardDocs from "./components/docs/management/DashboardDocs";
+import InfoApisDocs from "./components/docs/apis/InfoApisDocs";
+import ThrApisDocs from "./components/docs/apis/ThrApisDocs";
+import RegistrationApiDocs from "./components/docs/apis/RegistrationApiDocs";
+import LoginWfDocs from "./components/docs/apis/workflow/LoginWfDocs";
+import RegisteringThWfDocs from "./components/docs/apis/workflow/RegisteringThWfDocs";
+import RetrieveThWfDocs from "./components/docs/apis/workflow/RetrieveThWfDocs";
+import UpdateThWfDocs from "./components/docs/apis/workflow/UpdateThWfDocs";
+import DeleteThWfDocs from "./components/docs/apis/workflow/DeleteThWfDocs";
+import LogoutWfDocs from "./components/docs/apis/workflow/LogoutWfDocs";
+import RefApiDocs from "./components/docs/apis/RefApiDocs";
+import SearchApiDocs from "./components/docs/apis/SearchApiDocs";
+import About from "./components/About";
+import Help from "./components/Help";
+import Register from "./components/authentication/Register";
+import VerifyEmail from "./components/authentication/VerifyEmail";
+import ForgotPassword from "./components/authentication/ForgotPassword";
+import ResetPassword from "./components/authentication/ResetPassword";
+import BiodallianceView from "./components/trackhub_view/BiodallianceView";
 
 
 // A wrapper for <Route> that redirects to the login screen if you're not yet authenticated.
-function PrivateRoute({isAuthenticated, children, ...rest}) {
+// function PrivateRoute({isAuthenticated, children, ...rest}) {
+//     return (
+//         <Route
+//             {...rest}
+//             render={({location}) =>
+//                 isAuthenticated ? (
+//                     children
+//                 ) : (
+//                     <Redirect
+//                         to={{
+//                             pathname: "/login/",
+//                             state: {from: location}
+//                         }}
+//                     />
+//                 )
+//             }
+//         />
+//     );
+// }
+function PrivateRoute({ component: Component, roles, ...rest }) {
     return (
-        <Route
-            {...rest}
-            render={({location}) =>
-                isAuthenticated ? (
-                    children
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/login/",
-                            state: {from: location}
-                        }}
-                    />
-                )
+        <Route {...rest} render={props => {
+            if (!localStorage.getItem('user')) {
+                // not logged in so redirect to login page with the return url
+                return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
             }
-        />
+
+            // logged in so return component
+            return <Component {...props} />
+        }} />
     );
 }
 
-function Urls(props) {
+
+function Urls() {
     return (
-        <div>
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path="/"> <Home {...props} /></Route>
-                    <Route exact path="/login/"> <Login {...props} /></Route>
-                    <Route exact path="/search" component={SearchResult}></Route>
-                    {/*<Route exact path="/register/"> <Register {...props} /></Route>*/}
-                    {/*
-                    more details here: https://stackoverflow.com/a/53694210/4488332
-                    and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/
-                    */}
-                    <Route path="/trackhub_view/:id" component={MainView}></Route>
-                    <PrivateRoute exact path="/update_password/" isAuthenticated={props.isAuthenticated}>
-                        <PasswordUpdate {...props}/>
-                    </PrivateRoute>
-                    <PrivateRoute exact path="/user/" isAuthenticated={props.isAuthenticated}>
-                        <UserDashboard {...props}/>
-                    </PrivateRoute>
-                    <Route path="/404" component={NotFound}/>
-                    <Redirect to="/404"/>
-                </Switch>
-            </BrowserRouter>
-        </div>
+        // <div>
+        //     <BrowserRouter>
+        //         <Switch>
+        //             <Route exact path="/"> <Home {...props} /></Route>
+        //             <Route exact path="/login/"> <Login {...props} /></Route>
+        //             <Route exact path="/search" component={SearchResult}></Route>
+        //             {/*<Route exact path="/register/"> <Register {...props} /></Route>*/}
+        //             {/*
+        //             more details here: https://stackoverflow.com/a/53694210/4488332
+        //             and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/
+        //             */}
+        //             <Route path="/trackhub_view/:id" component={MainView}></Route>
+        //             <PrivateRoute exact path="/update_password/" isAuthenticated={props.isAuthenticated}>
+        //                 <PasswordUpdate {...props}/>
+        //             </PrivateRoute>
+        //             <PrivateRoute exact path="/user/" isAuthenticated={props.isAuthenticated}>
+        //                 <UserDashboard {...props}/>
+        //             </PrivateRoute>
+        //             <Route path="/404" component={NotFound}/>
+        //             <Redirect to="/404"/>
+        //         </Switch>
+        //     </BrowserRouter>
+        // </div>
+        <Router history={history}>
+            <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/about" component={About}/>
+                <Route exact path="/help" component={Help}/>
+                {/************ Documentation ************/}
+                <Route exact path="/docs/search" component={SearchBasicDocs}/>
+                <Route exact path="/docs/search/results" component={SearchResultsDocs}/>
+                <Route exact path="/docs/search/advanced" component={SearchAdvancedDocs}/>
+                <Route exact path="/docs/management/overview" component={OverviewDocs}/>
+                <Route exact path="/docs/management/assembly_support" component={AssemblySupportDocs}/>
+                <Route exact path="/docs/management/modelling" component={ModellingDocs}/>
+                <Route exact path="/docs/management/dashboard" component={DashboardDocs}/>
+                <Route exact path="/docs/api/info" component={InfoApisDocs}/>
+                <Route exact path="/docs/apis" component={ThrApisDocs}/>
+                <Route exact path="/docs/api/registration" component={RegistrationApiDocs}/>
+                <Route exact path="/docs/api/registration/workflow/login" component={LoginWfDocs}/>
+                <Route exact path="/docs/api/registration/workflow/thregister" component={RegisteringThWfDocs}/>
+                <Route exact path="/docs/api/registration/workflow/thlist" component={RetrieveThWfDocs}/>
+                <Route exact path="/docs/api/registration/workflow/thupdate" component={UpdateThWfDocs}/>
+                <Route exact path="/docs/api/registration/workflow/thdelete" component={DeleteThWfDocs}/>
+                <Route exact path="/docs/api/registration/workflow/logout" component={LogoutWfDocs}/>
+                <Route exact path="/docs/api/registration/reference" component={RefApiDocs}/>
+                <Route exact path="/docs/api/search" component={SearchApiDocs}/>
+                {/************ User & Dashboard ************/}
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/register" component={Register}/>
+                <Route exact path="/email_verification" component={VerifyEmail}/>
+                <Route exact path="/forgot_password" component={ForgotPassword}/>
+                <Route exact path="/reset_password" component={ResetPassword}/>
+                <PrivateRoute exact path="/update_password" component={PasswordUpdate}/>
+                <PrivateRoute exact path="/user" component={UserDashboard}/>
+                {/************ Search & View Track hubs ************/}
+                <Route exact path="/search" component={SearchResult}/>
+                {/* more details here: https://stackoverflow.com/a/53694210/4488332
+                    and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/ */}
+                <Route path="/trackhub_view/:id" component={MainView}/>
+                <Route path="/biodalliance/view" component={BiodallianceView}></Route>
+                {/************ Not Found ************/}
+                <Route path="/404" component={NotFound}/>
+                <Redirect from="*" to="/404"/>
+            </Switch>
+        </Router>
     )
 };
 

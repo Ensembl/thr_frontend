@@ -16,8 +16,8 @@
 
 import React, {useEffect, useState} from 'react';
 import TrackHubPanels from "./TrackHubPanels";
-import WithDataLoading from "../WithDataLoading";
-import MainBreadcrumb from "../MainBreadcrumb";
+import WithDataLoading from "../generic/WithDataLoading";
+import MainBreadcrumb from "../generic/MainBreadcrumb";
 import * as settings from "../../settings";
 import axios from "axios";
 import Tags from "./Tags";

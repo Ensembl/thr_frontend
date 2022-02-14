@@ -23,7 +23,7 @@ import {Container} from "@material-ui/core";
 import 'typeface-open-sans';
 
 import { Provider } from 'react-redux';
-import { store } from './_helpers';
+import { store } from './redux/helpers';
 
 ReactDOM.render(
   <React.StrictMode>
