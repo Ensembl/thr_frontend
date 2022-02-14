@@ -15,12 +15,11 @@
  */
 
 import React from 'react';
-import {Paper, Typography} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import MainBreadcrumb from "../../../generic/MainBreadcrumb";
 import ApisDocsMenu from "../ApisDocsMenu";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
 import ExampleClientsTabs from "./ExampleClientsTabs";
 
 const useStyles = makeStyles((theme) => ({
@@ -385,7 +384,7 @@ logout(user, auth_token)`,
                             }
                         </pre>
                         In our example, the client had previously registered one single hub, the <a target="_blank"
-                                                                                                    href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt">CSHL
+                                                                                                    href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt" rel="noreferrer">CSHL
                         Biology of Genomes meeting 2013 demonstration assembly hub</a>, so the response body is an array
                         with one component representing this hub. The track hub object has some string attributes
                         derived from parsing the remote hub URL specified in the url attribute.

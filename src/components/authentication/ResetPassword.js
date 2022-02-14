@@ -98,7 +98,7 @@ function ResetPassword() {
         e.preventDefault();
 
         setSubmitted(true);
-        if (new_password && new_password_confirm && new_password == new_password_confirm) {
+        if (new_password && new_password_confirm && new_password === new_password_confirm) {
             dispatch(userActions.resetPassword(new_password, new_password_confirm, uidb64, token))
         }
     }

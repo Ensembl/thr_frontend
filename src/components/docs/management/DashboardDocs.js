@@ -15,14 +15,11 @@
  */
 
 import React from 'react';
-import Grid from "@material-ui/core/Grid";
 import ManagementDocsMenu from "./ManagementDocsMenu";
 import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import Alert from "@material-ui/lab/Alert";
 import MainBreadcrumb from "../../generic/MainBreadcrumb";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -75,7 +72,7 @@ const DashboardDocs = () => {
                         submitted to the Track Hub registry. An imaginary example is shown below:
                     </p>
 
-                    <img src={require("../../../static/img/dashboard_collection.png").default}/>
+                    <img src={require("../../../static/img/dashboard_collection.png").default} alt=""/>
 
                     <p>
                         Each line refers to track database settings for a given assembly in a given hub submitted to
@@ -98,7 +95,7 @@ const DashboardDocs = () => {
                     about the reasons, like in the following:
 
 
-                    <img src={require("../../../static/img/dashboard_status.png").default}/>
+                    <img src={require("../../../static/img/dashboard_status.png").default} alt=""/>
 
                     <p>
                         The report will show a summary of the track database, with the hub name, species and
@@ -126,7 +123,7 @@ const DashboardDocs = () => {
                         your account profile.
                     </p>
 
-                    <img src={require("../../../static/img/dashboard_profile.png").default}/>
+                    <img src={require("../../../static/img/dashboard_profile.png").default} alt=""/>
 
                     <p>
                         You cannot change your username, but you can edit your first/last name and affiliation

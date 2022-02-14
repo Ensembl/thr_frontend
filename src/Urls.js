@@ -15,7 +15,7 @@
  */
 
 import React from "react";
-import {BrowserRouter, Route, Switch, Redirect, Router} from "react-router-dom";
+import {Route, Switch, Redirect, Router} from "react-router-dom";
 import Login from "./components/authentication/Login";
 import Home from "./components/home/Home";
 import PasswordUpdate from "./components/authentication/PasswordUpdate";

@@ -20,7 +20,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import MainBreadcrumb from "../../generic/MainBreadcrumb";
 import ApisDocsMenu from "./ApisDocsMenu";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
@@ -530,10 +529,10 @@ const RefApiDocs = () => {
                                             <li>one of the hub trackDb configurations cannot be translated to <a
                                                 href="/docs/management/modelling">valid JSON</a></li>
                                             <li>one of the hub genome subdirectory names are not <a target="_blank"
-                                                                                                    href="https://genome.ucsc.edu/FAQ/FAQreleases.html#release1">valid
+                                                                                                    href="https://genome.ucsc.edu/FAQ/FAQreleases.html#release1" rel="noreferrer">valid
                                                 UCSC DB names</a>, or cannot be translated to an existing NCBI assembly
                                                 identifier (e.g. assembly accession + version, e.g. <a target="_blank"
-                                                                                                       href="http://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13/">GCA_000001405.1</a>)
+                                                                                                       href="http://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13/" rel="noreferrer">GCA_000001405.1</a>)
                                             </li>
                                         </ul>
                                         See <a href="/docs/api/registration/workflow/thregister#errors">What

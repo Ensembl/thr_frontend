@@ -15,11 +15,9 @@
  */
 
 import React from 'react';
-import Grid from "@material-ui/core/Grid";
 import SearchDocsMenu from "./SearchDocsMenu";
 import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 const useStyles = makeStyles((theme) => ({
@@ -112,7 +110,7 @@ const SearchAdvancedDocs = () => {
                     <pre className={classes.codeBlock}>species.scientific_name:/dan?io (re[ri]o)/</pre>
                     <p>
                         <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-regexp-query.html#regexp-syntax"
-                           target="_blank">Supported regex syntax</a> (Elasticsearch website).
+                           target="_blank" rel="noreferrer">Supported regex syntax</a> (Elasticsearch website).
                     </p>
 
                     <Typography id="logical" component="h4" variant="h5">

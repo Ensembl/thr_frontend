@@ -15,14 +15,11 @@
  */
 
 import React from 'react';
-import Grid from "@material-ui/core/Grid";
 import ManagementDocsMenu from "./ManagementDocsMenu";
 import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import Alert from "@material-ui/lab/Alert";
 import MainBreadcrumb from "../../generic/MainBreadcrumb";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -75,11 +72,11 @@ const AssemblySupportDocs = () => {
                         In order to correctly categorise TrackHubs into the Track Hub Registry it is essential to
                         tag hubs against the right assembly version during the submission process. The Track Hub
                         Registry attempts to normalise any given assembly name into a suitable <a
-                        href="https://www.ebi.ac.uk/ena/browse/genome-assembly-database" target="_blank">Genome
+                        href="https://www.ebi.ac.uk/ena/browse/genome-assembly-database" target="_blank" rel="noreferrer">Genome
                         Collection Accession (GCA)</a> during submission e.g. the UCSC assembly
                         name <strong>hg19</strong> is automatically converted into <a
                         href='http://www.ebi.ac.uk/ena/data/view/GCA_000001405.1'
-                        target="_blank">GCA_000001405.1</a>. All hubs registered with the Track Hub Registry should
+                        target="_blank" rel="noreferrer">GCA_000001405.1</a>. All hubs registered with the Track Hub Registry should
                         have a GCA available in the Genome Assembly Database to map to and is a current requirement
                         of submitting to the registry. All modern assemblies should conform to this requirement.
                     </p>
@@ -110,11 +107,11 @@ const AssemblySupportDocs = () => {
                         The Track Hub Registry will normalise this into a suitable GCA accession. For genomes with
                         multiple patch releases i.e. <a
                         href="http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human#GRCh37"
-                        target="_blank">GRCh37/hg19</a>, <a
+                        target="_blank" rel="noreferrer">GRCh37/hg19</a>, <a
                         href="http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human#GRCh38"
-                        target="_blank">GRCh38/hg38</a> and <a
+                        target="_blank" rel="noreferrer">GRCh38/hg38</a> and <a
                         href="http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/mouse#GRCm38"
-                        target="_blank">GRCm38/mm10</a> we normalise to the original GCA used for that assembly
+                        target="_blank" rel="noreferrer">GRCm38/mm10</a> we normalise to the original GCA used for that assembly
                         version.
                     </p>
 
@@ -124,7 +121,7 @@ const AssemblySupportDocs = () => {
                     <p>
                         If you genome is not in UCSC we recommend you use the assembly name as present in the GCA
                         record. You can find this either by querying the <a
-                        href="http://www.ncbi.nlm.nih.gov/genome/browse/" target="_blank">NCBI Genome list</a> for
+                        href="http://www.ncbi.nlm.nih.gov/genome/browse/" target="_blank" rel="noreferrer">NCBI Genome list</a> for
                         your species of interest and clicking on
                         the <strong>Organism/Name</strong> or <strong>Assemblies</strong> links.
                     </p>
@@ -133,7 +130,7 @@ const AssemblySupportDocs = () => {
                         For example <em>Arabidopsis thaliana</em> is a genome not available in UCSC. Searching at
                         NCBI will lead you to the active assembly name <strong>TAIR10</strong> and the accession <a
                         href="https://www.ebi.ac.uk/ena/data/view/GCA_000001735.1"
-                        target="_blank">GCA_000001735.1</a>. Your <strong>genomes.txt</strong> file should be
+                        target="_blank" rel="noreferrer">GCA_000001735.1</a>. Your <strong>genomes.txt</strong> file should be
                         structured as shown below:
                     </p>
                     <pre className={classes.codeBlock}>

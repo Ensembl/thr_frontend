@@ -15,12 +15,11 @@
  */
 
 import React from 'react';
-import {Paper, Typography} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import MainBreadcrumb from "../../../generic/MainBreadcrumb";
 import ApisDocsMenu from "../ApisDocsMenu";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -115,7 +114,7 @@ const UpdateThWfDocs = () => {
                     </Typography>
                     <p>
                         This example updates the registration of the <a target="_blank"
-                                                                        href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt">CSHL
+                                                                        href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt" rel="noreferrer">CSHL
                         Biology of Genomes meeting 2013 demonstration assembly hub</a>. This time we don't specify a
                         data type, hence it will default to "genomics":
                     </p>
@@ -154,12 +153,12 @@ const UpdateThWfDocs = () => {
                                 response code 400. The response body message contains the error
                             </li>
                             <li>your hub genome subdirectory names must be <a target="_blank"
-                                                                              href="https://genome.ucsc.edu/FAQ/FAQreleases.html#release1">valid
+                                                                              href="https://genome.ucsc.edu/FAQ/FAQreleases.html#release1" rel="noreferrer">valid
                                 UCSC DB names</a> (assembly synonyms, e.g. hg38) or you must provide a map from these
                                 names to
                                 their corresponding INSDC accessions (i.e. assembly accession + version, e.g. <a
                                     target="_blank"
-                                    href="http://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13">GCA_000001405.1</a>).
+                                    href="http://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13" rel="noreferrer">GCA_000001405.1</a>).
                                 If neither of the two conditions are met, the server returns HTTP response code 400 with
                                 the message "Unable to find a valid INSDC accession for genome assembly [..]"
                             </li>
