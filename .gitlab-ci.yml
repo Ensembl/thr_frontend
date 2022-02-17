@@ -6,7 +6,7 @@ before_script:
   # upgrade npm
   - npm install -g npm@7.11.1
   # install npx globally to fix "npx: command not found" error
-  - npm install -g npx
+  - npm install -g npx --force
   - npm -v
   - npm install
 
