@@ -2,7 +2,7 @@ stages:
   - test
   - build
 
-# CAREFUL! global before_script are not executed when job has its own before_script
+# KEEP IN MIND! global before_script is not executed when job has its own before_script
 before_script:
   # upgrade npm
   - npm install -g npm@7.11.1
@@ -20,11 +20,13 @@ variables:
 
 lint-test:
   stage: test
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:14.17.3
   script:
     - npm run lint
 
 unit-test:
   stage: test
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:14.17.3
   script:
     - npm test
 
@@ -33,6 +35,7 @@ unit-test:
 app-build:
   stage: build
   needs: ["unit-test"]
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:14.17.3
   script:
     # fix: "Browserslist: caniuse-lite is outdated"
     - npx browserslist@latest --update-db
@@ -46,7 +49,9 @@ docker-build:
     - name: docker:19.03.12-dind
   variables:
     IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-  script:
+  # By using before_script here we override the global one as we don't need npm ;)
+  before_script:
     - echo $CI_REGISTRY_TOKEN | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+  script:
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
