@@ -1,4 +1,6 @@
-image: node:14.17.3
+# GitLab Dependency Proxy to get rid of Docker hub pull limit issue
+# https://docs.gitlab.com/ee/user/packages/dependency_proxy/#authenticate-within-cicd
+image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:14.17.3
 
 before_script:
   # upgrade npm
