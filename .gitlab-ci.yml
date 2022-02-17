@@ -53,5 +53,11 @@ docker-build:
   before_script:
     - echo $CI_REGISTRY_TOKEN | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
   script:
+    # this two lines fix "cgroups: cgroup mountpoint does not exist: unknown"
+    # job: https://gitlab.ebi.ac.uk/ensembl-apps/thr_frontend/-/jobs/741260
+    # got them from: https://github.com/docker/for-linux/issues/219
+    - sudo mkdir /sys/fs/cgroup/systemd
+    - sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
+    # build and push
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
