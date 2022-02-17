@@ -30,7 +30,17 @@ test:
 build:
   stage: build
   needs: ["test"]
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:19.03.12
+  services:
+    - name: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:19.03.12-dind
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     # fix: "Browserslist: caniuse-lite is outdated"
     - npx browserslist@latest --update-db
     - npm run build
+    # push to gitlab
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
