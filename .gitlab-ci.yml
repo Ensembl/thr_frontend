@@ -12,6 +12,12 @@ stages:
   - test
   - build
 
+variables:
+  # This fixes "error during connect: Post http://docker:2375/v1.40/auth: dial tcp: lookup docker on 192.168.65.5:53: no such host"
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2
+  # See https://github.com/docker-library/docker/pull/166
+  DOCKER_TLS_CERTDIR: ""
 
 ## Test
 
