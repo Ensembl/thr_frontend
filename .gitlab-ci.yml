@@ -1,16 +1,12 @@
-# GitLab Dependency Proxy to get rid of Docker hub pull limit issue
-# https://docs.gitlab.com/ee/user/packages/dependency_proxy/#authenticate-within-cicd
-image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:14.17.3
+stages:
+  - test
+  - build
 
 before_script:
   # upgrade npm
   - npm install -g npm@7.11.1
   - npm -v
   - npm install
-
-stages:
-  - test
-  - build
 
 variables:
   # This fixes "error during connect: Post http://docker:2375/v1.40/auth: dial tcp: lookup docker on 192.168.65.5:53: no such host"
@@ -21,19 +17,27 @@ variables:
 
 ## Test
 
-lint:
+lint-test:
   stage: test
   script:
     - npm run lint
 
-test:
+unit-test:
   stage: test
   script:
     - npm test
 
 ## Build
 
-build:
+app-build:
+  stage: build
+    needs: ["test"]
+    script:
+      # fix: "Browserslist: caniuse-lite is outdated"
+      - npx browserslist@latest --update-db
+      - npm run build
+
+docker-build:
   stage: build
   needs: ["test"]
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:19.03.12
@@ -43,9 +47,5 @@ build:
     IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   script:
     - echo $CI_REGISTRY_TOKEN | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-    # fix: "Browserslist: caniuse-lite is outdated"
-    - npx browserslist@latest --update-db
-    - npm run build
-    # push to gitlab
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
