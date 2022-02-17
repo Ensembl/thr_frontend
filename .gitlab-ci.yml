@@ -2,6 +2,7 @@ stages:
   - test
   - build
 
+# CAREFUL! global before_script are not executed when job has its own before_script
 before_script:
   # upgrade npm
   - npm install -g npm@7.11.1
@@ -31,7 +32,7 @@ unit-test:
 
 app-build:
   stage: build
-  needs: ["test"]
+  needs: ["unit-test"]
   script:
     # fix: "Browserslist: caniuse-lite is outdated"
     - npx browserslist@latest --update-db
@@ -39,7 +40,7 @@ app-build:
 
 docker-build:
   stage: build
-  needs: ["test"]
+  needs: ["unit-test"]
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:19.03.12
   services:
     - name: docker:19.03.12-dind
