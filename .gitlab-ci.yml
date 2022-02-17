@@ -5,8 +5,6 @@ image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:14.17.3
 before_script:
   # upgrade npm
   - npm install -g npm@7.11.1
-  # install npx globally to fix "npx: command not found" error
-  - npm install -g npx --force
   - npm -v
   - npm install
 
@@ -43,9 +41,8 @@ build:
     - name: docker:19.03.12-dind
   variables:
     IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-  before_script:
-    - echo $CI_REGISTRY_TOKEN | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
   script:
+    - echo $CI_REGISTRY_TOKEN | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
     # fix: "Browserslist: caniuse-lite is outdated"
     - npx browserslist@latest --update-db
     - npm run build
