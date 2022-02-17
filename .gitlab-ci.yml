@@ -31,11 +31,11 @@ unit-test:
 
 app-build:
   stage: build
-    needs: ["test"]
-    script:
-      # fix: "Browserslist: caniuse-lite is outdated"
-      - npx browserslist@latest --update-db
-      - npm run build
+  needs: ["test"]
+  script:
+    # fix: "Browserslist: caniuse-lite is outdated"
+    - npx browserslist@latest --update-db
+    - npm run build
 
 docker-build:
   stage: build
