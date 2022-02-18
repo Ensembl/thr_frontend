@@ -43,7 +43,7 @@ variables:
 
 docker-build:
   stage: build
-  needs: ["unit-test"]
+#  needs: ["unit-test"]
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:19.03.12
   services:
     - name: docker:dind
