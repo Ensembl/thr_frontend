@@ -46,7 +46,7 @@ docker-build:
   needs: ["unit-test"]
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:19.03.12
   services:
-    - name: docker:19.03.12-dind
+    - name: docker:dind
   variables:
     IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   # By using before_script here we override the global one as we don't need npm ;)
@@ -56,8 +56,8 @@ docker-build:
     # this two lines fix "cgroups: cgroup mountpoint does not exist: unknown"
     # job: https://gitlab.ebi.ac.uk/ensembl-apps/thr_frontend/-/jobs/741260
     # got them from: https://github.com/docker/for-linux/issues/219
-    - mkdir /sys/fs/cgroup/systemd
-    - mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
+#    - sudo mkdir /sys/fs/cgroup/systemd
+#    - sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
     # build and push
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
