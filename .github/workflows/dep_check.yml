@@ -30,7 +30,7 @@ jobs:
       - name: Set up Node.js 14.17.3
         uses: actions/setup-node@v1
         with:
-          python-version: 14.17.3
+          node-version: 14.17.3
 
       # Install dependencies and make sure there are no compatibilities issues
       - name: Install dependencies
