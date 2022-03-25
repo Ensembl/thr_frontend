@@ -18,7 +18,7 @@ import React from 'react';
 import ManagementDocsMenu from "./ManagementDocsMenu";
 import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import MainBreadcrumb from "../../MainBreadcrumb";
+import MainBreadcrumb from "../../generic/MainBreadcrumb";
 import ReactJson from 'react-json-view'
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -86,14 +86,14 @@ const ModellingDocs = () => {
                         <u>The Registry stores assembly track database settings in a JSON document</u>, with
                         metadata attributes and a simple tree-based structure facilitating parsing with <a
                         target="_blank"
-                        href="http://genome.ucsc.edu/goldenPath/help/trackDb/trackDbHub.html#groupingTracks">complex
+                        href="http://genome.ucsc.edu/goldenPath/help/trackDb/trackDbHub.html#groupingTracks" rel="noreferrer">complex
                         track organisations</a>. Some of the document attributes identify the hub the trackDb
                         belongs to, so that a track data hub is implicitly represented by the set of trackDb
                         documents referring to it.
                     </p>
                     <p>
                         The following section presents an interactive diagram of the trackDb <a target="_blank"
-                                                                                                href="http://json-schema.org">JSON
+                                                                                                href="http://json-schema.org" rel="noreferrer">JSON
                         schema</a> against which all trackDbs submitted to Registry are validated (read about the <a
                         href="/docs/management/overview#submission">submission process</a> to
                         know more). To access the original schema document, click <a

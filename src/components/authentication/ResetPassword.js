@@ -23,7 +23,7 @@ import {Avatar, Button, Container, CssBaseline, TextField, Typography} from '@ma
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
-import {userActions} from "../../_actions";
+import {userActions} from "../../redux/actions";
 import Alert from "@material-ui/lab/Alert";
 import {AlertTitle} from "@material-ui/lab";
 
@@ -98,7 +98,7 @@ function ResetPassword() {
         e.preventDefault();
 
         setSubmitted(true);
-        if (new_password && new_password_confirm && new_password == new_password_confirm) {
+        if (new_password && new_password_confirm && new_password === new_password_confirm) {
             dispatch(userActions.resetPassword(new_password, new_password_confirm, uidb64, token))
         }
     }

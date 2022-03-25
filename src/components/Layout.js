@@ -15,8 +15,8 @@
  */
 
 import React from 'react';
-import TopBar from "./TopBar"
-import Footer from "./Footer"
+import TopBar from "./generic/TopBar"
+import Footer from "./generic/Footer"
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from "@material-ui/core/Box";
 

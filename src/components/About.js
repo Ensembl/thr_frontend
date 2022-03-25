@@ -3,8 +3,7 @@ import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
 import {Divider} from "@material-ui/core";
-import MainBreadcrumb from "./components/MainBreadcrumb";
-import MainBreadcrumbs from "./components/MainBreadcrumb";
+import MainBreadcrumbs from "./generic/MainBreadcrumb";
 
 const useStyles = makeStyles({
     root: {
@@ -47,14 +46,14 @@ function About() {
                         of genome annotations on genome browsers.</p>
 
                     <p>The track hub specification is provided <a
-                        href="http://genome.ucsc.edu/goldenPath/help/hgTrackHubHelp.html#Setup" target="_blank">here</a>.
+                        href="http://genome.ucsc.edu/goldenPath/help/hgTrackHubHelp.html#Setup" target="_blank" rel="noreferrer">here</a>.
                     </p>
 
                     <p>Both UCSC and Ensembl have developed initial support for this technology, but there are still
                         limitations for many users, and Ensembl's support has remained incomplete so far. Integration of
                         track hubs into the Ensembl and UCSC genome browsers involved the copy-paste of a known URL.
                         Discovery is based on word of mouth or the provision of <a
-                            href="http://genome.ucsc.edu/cgi-bin/hgHubConnect" target="_blank">manually curated portal
+                            href="http://genome.ucsc.edu/cgi-bin/hgHubConnect" target="_blank" rel="noreferrer">manually curated portal
                             pages</a> hosted by the genome browsers. We believe this system is unmaintainable, as the
                         current growth in data volume in bioinformatics applies not only to the size and density of
                         datasets, but also to their number. The number of public track hubs is increasing, largely
@@ -73,14 +72,14 @@ function About() {
                     <h3>Funding</h3>
                     <p>
                         The Track Hub Registry is supported by funding from the BBSRC (<a target="_blank"
-                                                                                          href="http://gtr.rcuk.ac.uk/project/EE7F1556-743E-4209-905D-84FAF566E3E7"><strong>ProteoGenomics:
+                                                                                          href="http://gtr.rcuk.ac.uk/project/EE7F1556-743E-4209-905D-84FAF566E3E7" rel="noreferrer"><strong>ProteoGenomics:
                         Dynamic Linkage of Genomes and Proteomes through Ensembl and ProteomeXchange</strong></a>;
                         BB/L024225/1), the Wellcome Trust (WT095908 and WT098051) and the European Molecular Biology
                         Laboratory.
                     </p>
-                    <img src={require("./static/img/bbsrc_logo.png").default}/>
-                    <img src={require("./static/img/wt_logo.png").default} className={classes.wt}/>
-                    <img src={require("./static/img/EMBL_logo.png").default}/>
+                    <img src={require("../static/img/bbsrc_logo.png").default} alt=""/>
+                    <img src={require("../static/img/wt_logo.png").default} className={classes.wt} alt=""/>
+                    <img src={require("../static/img/EMBL_logo.png").default} alt=""/>
                 </div>
             </div>
         </Container>

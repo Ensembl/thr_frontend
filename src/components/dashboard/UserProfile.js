@@ -30,7 +30,7 @@ import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import * as settings from "../../settings";
 import axios from "axios";
-import Alerts from "../Alerts";
+import Alerts from "../generic/Alerts";
 
 const useStyles = makeStyles((theme) => ({
     paper: {

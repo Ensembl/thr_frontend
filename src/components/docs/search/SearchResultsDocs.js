@@ -15,7 +15,6 @@
  */
 
 import React from 'react';
-import Grid from "@material-ui/core/Grid";
 import SearchDocsMenu from "./SearchDocsMenu";
 import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
@@ -69,7 +68,7 @@ const SearchResultsDocs = () => {
                         the current page number and providing links to jump to other pages.
                     </p>
                     <p>
-                        <img src={require("../../../static/img/search_results.png").default}/>
+                        <img src={require("../../../static/img/search_results.png").default} alt=""/>
                     </p>
 
                     <p>
@@ -92,7 +91,7 @@ const SearchResultsDocs = () => {
                         The top panel of the side bar, titled "Current Filters", presents a list of currently
                         selected filters.
                     </p>
-                    <p><img src={require("../../../static/img/current_filters.png").default}/></p>
+                    <p><img src={require("../../../static/img/current_filters.png").default} alt=""/></p>
                     <p>
                         By default, when the user initiates a new search with no filters, the panel shows only the
                         query as a filter. By clicking on one of the filters marked with a cross, the Registry will
@@ -106,7 +105,7 @@ const SearchResultsDocs = () => {
                         For instance, the Species filter presents a list of species matching the query where each
                         species is reported with the numbers of results (i.e. data tracks) referring to it.
                     </p>
-                    <p><img src={require("../../../static/img/species_facet.png").default}/></p>
+                    <p><img src={require("../../../static/img/species_facet.png").default} alt=""/></p>
                     <p>
                         Clicking on one of the listed facet values will filter the results by the chosen species and
                         will change the current filter panel to display the selection. All other filters work
@@ -141,7 +140,7 @@ const SearchResultsDocs = () => {
                         in this case, a yellow border and will show a yellow label with the text "Unknown status",
                         as shown in the figure below.
                     </p>
-                    <p><img src={require("../../../static/img/unknow_status_result.png").default}/></p>
+                    <p><img src={require("../../../static/img/unknow_status_result.png").default} alt=""/></p>
                     <p>
                         It is still possible to load the tracks into a genome browser for display (though it iss not
                         guaranteed it will work) and show more detailed information.
@@ -152,7 +151,7 @@ const SearchResultsDocs = () => {
                         this case, a red border and will show a label of the same color with the text "Remote Data
                         Unavailable", as it is shown in the figure below.
                     </p>
-                    <p><img src={require("../../../static/img/unavailable_status_result.png").default}/></p>
+                    <p><img src={require("../../../static/img/unavailable_status_result.png").default} alt=""/></p>
                     <p>
                         In this case, the upload option is not available and it is not possible to view tracks in a
                         genome browser. It is still possible to view more detailed information about the hub, see
@@ -168,7 +167,7 @@ const SearchResultsDocs = () => {
                         data directly into an available genome browser.
                     </p>
                     <p>
-                        <img src={require("../../../static/img/load_result.png").default}/>
+                        <img src={require("../../../static/img/load_result.png").default} alt=""/>
                     </p>
                     <p>
                         Clicking on it will display a dropdown with the available choices, e.g. "Ensembl" or "UCSC".
@@ -184,7 +183,7 @@ const SearchResultsDocs = () => {
                         detailed information about the corresponding track hub and its supported genome assembly.
                     </p>
                     <p>
-                        <img src={require("../../../static/img/view_more_info.png").default}/>
+                        <img src={require("../../../static/img/view_more_info.png").default} alt=""/>
                     </p>
                     <p>
                         You'll be presented three panels, as shown in the image above.
@@ -195,7 +194,7 @@ const SearchResultsDocs = () => {
                         the tracks (can be one of "genomics", "epigenomics", "transcriptomics", "proteomics"), the
                         file types of the track data (e.g. bigWig, bigBED, VCF, BAM). The panel also contains a
                         button allowing direct access to the remote genome assembly <a
-                        href="http://genome.ucsc.edu/goldenPath/help/trackDb/trackDbHub.html" target="_blank">trackDB
+                        href="http://genome.ucsc.edu/goldenPath/help/trackDb/trackDbHub.html" target="_blank" rel="noreferrer">trackDB
                         configuration file</a>.
                     </p>
                     <p>
@@ -215,7 +214,7 @@ const SearchResultsDocs = () => {
                         below:
                     </p>
                     <p>
-                        <img src={require("../../../static/img/error_log.png").default}/>
+                        <img src={require("../../../static/img/error_log.png").default} alt=""/>
                     </p>
                     <p>
                         For each unavailable track, name and remote URL will be shown, together with a description

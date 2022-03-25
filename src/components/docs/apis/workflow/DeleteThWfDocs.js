@@ -15,12 +15,11 @@
  */
 
 import React from 'react';
-import {Paper, Typography} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import MainBreadcrumb from "../../../MainBreadcrumb";
+import MainBreadcrumb from "../../../generic/MainBreadcrumb";
 import ApisDocsMenu from "../ApisDocsMenu";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
 import ExampleClientsTabs from "./ExampleClientsTabs";
 
 const useStyles = makeStyles((theme) => ({
@@ -311,7 +310,7 @@ logout(user, auth_token)`,
                     </Typography>
                     <p>
                         In this example, we follow the pattern of the previous steps where we have registered and
-                        updated the <a target="_blank" href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt">CSHL
+                        updated the <a target="_blank" href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt" rel="noreferrer">CSHL
                         Biology of Genomes meeting 2013 demonstration assembly hub</a>. We now want to delete its
                         records in the Registry, corresponding to three trackDbs associated to the an equivalent number
                         of plant assemblies.

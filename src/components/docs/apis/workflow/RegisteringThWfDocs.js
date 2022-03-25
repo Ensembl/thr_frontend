@@ -15,12 +15,11 @@
  */
 
 import React from 'react';
-import {Paper, Typography} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import MainBreadcrumb from "../../../MainBreadcrumb";
+import MainBreadcrumb from "../../../generic/MainBreadcrumb";
 import ApisDocsMenu from "../ApisDocsMenu";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
 import ExampleClientsTabs from "./ExampleClientsTabs";
 
 const useStyles = makeStyles((theme) => ({
@@ -306,7 +305,7 @@ logout(user, auth_token)`,
                                 as such, obtained a valid authentication token;
                             </li>
                             <li>The remote data hub is publicly accessible and is compliant with <a target="_blank"
-                                                                                                    href="http://genome-euro.ucsc.edu/goldenPath/help/hgTrackHubHelp.html#Setup">UCSC
+                                                                                                    href="http://genome-euro.ucsc.edu/goldenPath/help/hgTrackHubHelp.html#Setup" rel="noreferrer">UCSC
                                 Track Hubs specification</a>.
                             </li>
                         </ul>
@@ -336,7 +335,7 @@ logout(user, auth_token)`,
                     </Typography>
                     <p>
                         In this example, we are going to register the <a target="_blank"
-                                                                         href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt">CSHL
+                                                                         href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt" rel="noreferrer">CSHL
                         Biology of Genomes meeting 2013 demonstration assembly hub</a>. For this, we are obviously
                         assuming we are those who have published this data and are in control of it. The Registry does
                         not make any effort to check this kind of information: you are responsible for your own actions
@@ -391,7 +390,7 @@ logout(user, auth_token)`,
 
                         Some things happen in the background once you've made the request. Most notably, the server runs
                         the <a target="_blank"
-                               href="https://genome.ucsc.edu/goldenPath/help/hgTrackHubHelp.html#Debug">hubCheck</a> from
+                               href="https://genome.ucsc.edu/goldenPath/help/hgTrackHubHelp.html#Debug" rel="noreferrer">hubCheck</a> from
                         UCSC to check that the files in the hub are correctly formatted. The Registry will ignore error
                         messages related to the use of deprecated features. For any other error, the request will be
                         deemed unsuccessful and the response body will report the hubCheck output report.
@@ -511,11 +510,11 @@ logout(user, auth_token)`,
                                 response code 400. The response body message contains the error
                             </li>
                             <li>your hub genome subdirectory names must be <a target="_blank"
-                                                                              href="https://genome.ucsc.edu/FAQ/FAQreleases.html#release1">valid
+                                                                              href="https://genome.ucsc.edu/FAQ/FAQreleases.html#release1" rel="noreferrer">valid
                                 UCSC DB names</a> (assembly synonyms, e.g. hg38) or you must provide a map from these
                                 names to their corresponding INSDC accessions (i.e. assembly accession + version,
                                 e.g. <a target="_blank"
-                                        href="http://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13">GCA_000001405.1</a>).
+                                        href="http://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13" rel="noreferrer">GCA_000001405.1</a>).
                                 If neither of the two conditions are met, the server returns HTTP response code 400 with
                                 the message "Unable to find a valid INSDC accession for genome assembly [..]"
                             </li>
