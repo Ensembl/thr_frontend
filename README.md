@@ -1,5 +1,7 @@
 ## Track Hub Registry (frontend)
 
+[![Dependency Compatibility Check](https://github.com/Ensembl/thr_frontend/actions/workflows/dep_check.yml/badge.svg)](https://github.com/Ensembl/thr_frontend/actions/workflows/dep_check.yml)
+
 ### Prerequisites
 
 * [node 16+](https://nodejs.org/en/download/)
