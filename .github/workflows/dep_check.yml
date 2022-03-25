@@ -34,6 +34,6 @@ jobs:
 
       # Install dependencies and make sure there are no compatibilities issues
       - name: Install dependencies
-          run: npm install
+        run: npm install
 
       # npm test will be added later
