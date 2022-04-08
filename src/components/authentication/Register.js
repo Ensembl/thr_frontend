@@ -83,10 +83,10 @@ export default function Register() {
 
     const [submitted, setSubmitted] = useState(false);
     // eslint-disable-next-line
-    const registering = useSelector(state => state.registration.registering);
+    const registering = useSelector(state => state.registrationReducer.registering);
     const dispatch = useDispatch();
 
-    const alert = useSelector(state => state.alert);
+    const alert = useSelector(state => state.alertReducer);
 
     let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
 

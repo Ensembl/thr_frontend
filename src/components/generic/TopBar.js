@@ -46,8 +46,8 @@ export default function TopBar(props) {
     const classes = useStyles();
 
     // IDEA: we can store other infos in user object
-    // const user = useSelector(state => state.authentication.user);
-    const isLoggedIn = useSelector(state => state.authentication.loggedIn);
+    // const user = useSelector(state => state.authenticationReducer.user);
+    const isLoggedIn = useSelector(state => state.authenticationReducer.loggedIn);
 
     return (
         <div className={classes.root}>

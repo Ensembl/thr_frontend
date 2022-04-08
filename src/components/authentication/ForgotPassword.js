@@ -58,7 +58,7 @@ function ForgotPassword() {
 
     const dispatch = useDispatch();
 
-    const alert = useSelector(state => state.alert);
+    const alert = useSelector(state => state.alertReducer);
     let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
 
     function handleChange(e) {

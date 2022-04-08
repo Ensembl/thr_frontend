@@ -79,7 +79,7 @@ function ResetPassword() {
     const [submitted, setSubmitted] = useState(false);
     const {new_password, new_password_confirm} = inputs;
 
-    const alert = useSelector(state => state.alert);
+    const alert = useSelector(state => state.alertReducer);
     let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
 
     useEffect(() => {

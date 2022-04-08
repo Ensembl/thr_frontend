@@ -62,11 +62,11 @@ function Login() {
     });
     const [submitted, setSubmitted] = useState(false);
     const {username, password} = inputs;
-    const loggingIn = useSelector(state => state.authentication.loggingIn);
+    const loggingIn = useSelector(state => state.authenticationReducer.loggingIn);
     const dispatch = useDispatch();
     const location = useLocation();
 
-    const alert = useSelector(state => state.alert);
+    const alert = useSelector(state => state.alertReducer);
     let alertMessageObject = Object.keys(alert).length > 0 ? JSON.parse(alert.message) : {}
 
     // reset login status
