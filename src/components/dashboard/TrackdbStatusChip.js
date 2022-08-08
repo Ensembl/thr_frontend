@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
         '& > *': {
             margin: theme.spacing(0.5),
         },
+        "& .MuiChip-root": {
+            borderRadius: 1
+        }
     },
     status_error: {
         backgroundColor: theme.palette.error.main,

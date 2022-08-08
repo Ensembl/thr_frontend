@@ -52,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
         lineHeight: "2em"
     },
     chipContent: {
-        marginLeft: "8px"
+        marginLeft: "8px",
+        borderRadius: "10px",
     },
     trackStatus: {
         float: "right",
@@ -101,10 +102,11 @@ export default function TrackHubPanels({trackDbInfo}) {
                                         label={trackDbInfo.status.tracks.with_data.total}
                                         className={classes.chipContent}
                                         color={"primary"}
+                                        size="small"
                                     />
                                 </div>
                                 <div>Data Type:
-                                    <Chip label={trackDbInfo.type} className={classes.chipContent}/>
+                                    <Chip label={trackDbInfo.type} className={classes.chipContent} size="small"/>
                                 </div>
                                 <div>File type(s):
                                     <ul>
@@ -114,7 +116,8 @@ export default function TrackHubPanels({trackDbInfo}) {
                                                     <li key={fileType}>
                                                         {fileType}: <Chip label={fileTypeCount}
                                                                           className={classes.chipContent}
-                                                                          color={"primary"}/>
+                                                                          color={"primary"}
+                                                                          size="small"/>
                                                     </li>
                                             )
                                         }
@@ -196,6 +199,7 @@ export default function TrackHubPanels({trackDbInfo}) {
                                             className={classes.chipContent}
                                             color="primary"
                                             component="a"
+                                            size="small"
                                             href={`http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${trackDbInfo.species.taxon_id}`}
                                             target="_blank"
                                             rel="noreferrer"

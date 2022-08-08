@@ -22,10 +22,13 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
+        marginBottom: "15px",
         '& > *': {
             margin: theme.spacing(0.5),
         },
-        marginBottom: "15px"
+        "& .MuiChip-root": {
+            borderRadius: 1
+        }
     },
     tag_info: {
         backgroundColor: theme.palette.info.main,

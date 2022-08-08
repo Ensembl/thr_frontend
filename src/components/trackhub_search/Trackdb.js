@@ -20,15 +20,18 @@ import {makeStyles} from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import TrackdbStatusChip from "../dashboard/TrackdbStatusChip";
+import Box from "@material-ui/core/Box";
+import {useTheme} from "@material-ui/core";
+import InnerHTML from "dangerously-set-html-content";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
-    paper: {
+    boxDesign: {
         padding: theme.spacing(1),
-        borderRadius: 10,
-        borderColor: "#F00",
+        borderRadius: "5px",
+        background: "white"
     },
     paperContent: {
         margin: "20px",
@@ -70,18 +73,33 @@ const useStyles = makeStyles((theme) => ({
 const Trackdb = ({trackdb}) => {
     const classes = useStyles();
 
+    // We can access the theme variables inside your functional React components using the useTheme hook
+    const theme = useTheme();
+    let currentTrackdbStatus = trackdb.status.message
+    let BoxBorderColor;
+
+    // Change border color based on the trackdb status
+    if (currentTrackdbStatus === "" || currentTrackdbStatus === undefined) {
+        BoxBorderColor = theme.palette.default.main
+    } else if (currentTrackdbStatus === 'All is Well') {
+        BoxBorderColor = theme.palette.success.main
+    } else if (currentTrackdbStatus === "Remote Data Unavailable") {
+        BoxBorderColor = theme.palette.error.main
+    }
+
     return (
         <>
-            <Paper className={classes.paper} elevation={2}>
+            <Box className={classes.boxDesign} border={1} borderColor={BoxBorderColor}>
                 <div className={classes.paperContent}>
                     <h3 className={classes.PanelTitle}>
                         <Link to={`/trackhub_view/${trackdb.trackdb_id}`} target={'_blank'} rel="noreferrer">
-                            {trackdb.hub.short_label}
+                            <InnerHTML html={trackdb.hub.short_label}/>
                         </Link>
                     </h3>
                     <div className={classes.PanelContent}>
                         <div>
-                            {trackdb.hub.long_label}
+                            {/* Fix HTML tags not being rendered properly*/}
+                            <InnerHTML html={trackdb.hub.long_label}/>
                         </div>
                         <br/>
                         <div>
@@ -92,7 +110,7 @@ const Trackdb = ({trackdb}) => {
                         <div className={classes.stautsInfo}>
                             {
                                 trackdb.status ?
-                                    <TrackdbStatusChip trackdbStatus={trackdb.status.message} ></TrackdbStatusChip>
+                                    <TrackdbStatusChip trackdbStatus={currentTrackdbStatus} ></TrackdbStatusChip>
                                     :
                                     <TrackdbStatusChip trackdbStatus="" ></TrackdbStatusChip>
                             }
@@ -109,7 +127,7 @@ const Trackdb = ({trackdb}) => {
                         </div>
                     </div>
                 </div>
-            </Paper>
+            </Box>
             <br/>
         </>
     );

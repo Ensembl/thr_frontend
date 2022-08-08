@@ -24,6 +24,8 @@ import SearchPagination from "./SearchPagination";
 import {Alert} from "@material-ui/lab";
 import {Link} from "react-router-dom";
 import {ArrowBack, ArrowBackIos} from "@material-ui/icons";
+import MainBreadcrumbs from "../generic/MainBreadcrumb";
+import {Typography} from "@material-ui/core";
 
 const SearchResult = ({location}) => {
 
@@ -44,6 +46,11 @@ const SearchResult = ({location}) => {
     const [facets, setFacets] = useState([]);
     const [totalEntries, setTotalEntries] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
+
+    // scroll to the top of the page when clicking on a page number at the bottom
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [currentFilters.page])
 
     useEffect(() => {
         axios.post(`${settings.API_SERVER}/api/search/?page=${currentFilters.page}`, currentFilters, {
@@ -75,6 +82,8 @@ const SearchResult = ({location}) => {
         <>
             <div>
                 <br/>
+                <MainBreadcrumbs item="Search"></MainBreadcrumbs>
+                <br/>
                 {
                     loading && !errorMessage ? (
                         <span>loading...</span>
@@ -82,7 +91,7 @@ const SearchResult = ({location}) => {
                         <h2>{errorMessage}</h2>
                     ) : !totalEntries ? (
                         <>
-                            <Alert severity="error" >
+                            <Alert severity="error">
                                 No results! Try with another query. <br/><br/>
                                 <Link to='/'> <ArrowBack fontSize="inherit"/> Go back to the home page</Link>
                             </Alert>
@@ -90,12 +99,15 @@ const SearchResult = ({location}) => {
                     ) : (
                         <Grid container spacing={3}>
                             <Grid item xs={3}>
-                                <h1>Filters</h1>
                                 <Facets params={params} facetsFilters={facets}></Facets>
                             </Grid>
                             <Grid item xs={9}>
-                                <h1>Search results</h1>
-                                <h4>{totalEntries} Result(s)</h4>
+                                <Typography variant="h4">Search results</Typography>
+                                <Typography variant="h6" style={{display: 'flex'}}>
+                                    Page {currentFilters.page} of {Math.floor(totalEntries / 5) + 1}
+                                </Typography>
+                                <Typography variant="h6" style={{textAlign: 'right'}}>{totalEntries} Result(s)</Typography>
+                                <br/>
                                 {
                                     trackdbs.map((trackdb, index) => (
                                         <Trackdb key={trackdb.trackdb_id} trackdb={trackdb}/>
