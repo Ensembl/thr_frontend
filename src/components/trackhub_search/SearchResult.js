@@ -21,6 +21,9 @@ import * as settings from "../../settings";
 import Grid from "@material-ui/core/Grid";
 import Facets from "./Facets";
 import SearchPagination from "./SearchPagination";
+import {Alert} from "@material-ui/lab";
+import {Link} from "react-router-dom";
+import {ArrowBack, ArrowBackIos} from "@material-ui/icons";
 
 const SearchResult = ({location}) => {
 
@@ -78,7 +81,12 @@ const SearchResult = ({location}) => {
                     ) : errorMessage ? (
                         <h2>{errorMessage}</h2>
                     ) : !totalEntries ? (
-                        <h1>No results! Try with another query.</h1>
+                        <>
+                            <Alert severity="error" >
+                                No results! Try with another query. <br/><br/>
+                                <Link to='/'> <ArrowBack fontSize="inherit"/> Go back to the home page</Link>
+                            </Alert>
+                        </>
                     ) : (
                         <Grid container spacing={3}>
                             <Grid item xs={3}>
