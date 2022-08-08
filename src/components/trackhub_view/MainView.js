@@ -21,49 +21,61 @@ import MainBreadcrumb from "../generic/MainBreadcrumb";
 import * as settings from "../../settings";
 import axios from "axios";
 import Tags from "./Tags";
+import {Alert} from "@material-ui/lab";
+import {Link} from "react-router-dom";
+import {ArrowBack} from "@material-ui/icons";
 
 
 function MainView(props) {
     const trackdb_id = parseInt(props.match.params.id)
 
     const [trackDbInfo, setTrackDbInfo] = useState()
+    const [httpStatusCode, setHttpStatusCode] = React.useState();
 
     useEffect(() => {
         const apiUrlGeneralInfo = `${settings.API_SERVER}/api/trackdb/${trackdb_id}`;
         const header = {'Content-Type': 'application/json'}
         axios.get(apiUrlGeneralInfo, {headers: header})
             .then(response => {
-                // console.log('trackdb info --> ', response.data);
+                setHttpStatusCode(response.status)
                 setTrackDbInfo(response.data);
             })
             .catch(err => {
-                console.log(err)
+                setHttpStatusCode(err.response.status)
             });
     }, [trackdb_id])
 
-    if (trackDbInfo === undefined) {
-        // TODO: Manage the non existent trackdb id
+    if (httpStatusCode === 404) {
+        return <Alert severity="error" >
+            This trackdb doesn't exist! <br/><br/>
+            <Link to='/'> <ArrowBack fontSize="inherit"/> Go back to the home page</Link>
+        </Alert>
+    }
+    if (httpStatusCode === 500) {
+        return <Alert severity="error" >
+            Internal server error! <br/><br/>
+            <Link to='/'> <ArrowBack fontSize="inherit"/> Go back to the home page</Link>
+        </Alert>
+    }
+    else if (httpStatusCode === 200 && trackDbInfo !== undefined) {
+        return (
+            <div>
+                <MainBreadcrumb item={trackDbInfo.hub.name + ' - ' + trackDbInfo.assembly.accession}/><br/>
+                <Tags
+                    hubName={trackDbInfo.hub.name}
+                    speciesScientificName={trackDbInfo.species.scientific_name}
+                    assemblyAccession={trackDbInfo.assembly.accession}
+                />
+                <TrackHubPanels trackDbInfo={trackDbInfo}/>
+            </div>
+        );
+    }
+    else {
         return <>
             Loading...
             <WithDataLoading></WithDataLoading>
-            {/*<br/>*/}
-            {/*<Alert severity="error" >*/}
-            {/*    This trackdb doesn't exist! Please Make sure that you entered the right ID*/}
-            {/*</Alert>*/}
         </>;
     }
-
-    return (
-        <div>
-            <MainBreadcrumb item={trackDbInfo.hub.name + ' - ' + trackDbInfo.assembly.accession}/><br/>
-            <Tags
-                hubName={trackDbInfo.hub.name}
-                speciesScientificName={trackDbInfo.species.scientific_name}
-                assemblyAccession={trackDbInfo.assembly.accession}
-            />
-            <TrackHubPanels trackDbInfo={trackDbInfo}/>
-        </div>
-    );
 }
 
 export default MainView
