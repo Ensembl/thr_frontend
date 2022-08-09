@@ -23,9 +23,10 @@ import Facets from "./Facets";
 import SearchPagination from "./SearchPagination";
 import {Alert} from "@material-ui/lab";
 import {Link} from "react-router-dom";
-import {ArrowBack, ArrowBackIos} from "@material-ui/icons";
+import {ArrowBack} from "@material-ui/icons";
 import MainBreadcrumbs from "../generic/MainBreadcrumb";
 import {Typography} from "@material-ui/core";
+import SearchResultSkeleton from "./SearchResultSkeleton";
 
 const SearchResult = ({location}) => {
 
@@ -86,7 +87,7 @@ const SearchResult = ({location}) => {
                 <br/>
                 {
                     loading && !errorMessage ? (
-                        <span>loading...</span>
+                        <SearchResultSkeleton />
                     ) : errorMessage ? (
                         <h2>{errorMessage}</h2>
                     ) : !totalEntries ? (

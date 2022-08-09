@@ -16,7 +16,6 @@
 
 import React, {useEffect, useState} from 'react';
 import TrackHubPanels from "./TrackHubPanels";
-import WithDataLoading from "../generic/WithDataLoading";
 import MainBreadcrumb from "../generic/MainBreadcrumb";
 import * as settings from "../../settings";
 import axios from "axios";
@@ -24,6 +23,7 @@ import Tags from "./Tags";
 import {Alert} from "@material-ui/lab";
 import {Link} from "react-router-dom";
 import {ArrowBack} from "@material-ui/icons";
+import MainViewSkeleton from "./MainViewSkeleton";
 
 
 function MainView(props) {
@@ -72,8 +72,7 @@ function MainView(props) {
     }
     else {
         return <>
-            Loading...
-            <WithDataLoading></WithDataLoading>
+            <MainViewSkeleton />
         </>;
     }
 }
