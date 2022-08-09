@@ -15,13 +15,12 @@
  */
 
 import React from "react";
-import Paper from '@material-ui/core/Paper';
 import {makeStyles} from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 import TrackdbStatusChip from "../dashboard/TrackdbStatusChip";
 import Box from "@material-ui/core/Box";
-import {useTheme} from "@material-ui/core";
+import {Typography, useTheme} from "@material-ui/core";
 import InnerHTML from "dangerously-set-html-content";
 
 const useStyles = makeStyles((theme) => ({
@@ -91,11 +90,11 @@ const Trackdb = ({trackdb}) => {
         <>
             <Box className={classes.boxDesign} border={1} borderColor={BoxBorderColor}>
                 <div className={classes.paperContent}>
-                    <h3 className={classes.PanelTitle}>
+                    <Typography component="h3" variant="h6" className={classes.PanelTitle}>
                         <Link to={`/trackhub_view/${trackdb.trackdb_id}`} target={'_blank'} rel="noreferrer">
                             <InnerHTML html={trackdb.hub.short_label}/>
                         </Link>
-                    </h3>
+                    </Typography>
                     <div className={classes.PanelContent}>
                         <div>
                             {/* Fix HTML tags not being rendered properly*/}

@@ -32,6 +32,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import Moment from 'react-moment'
 import Button from "@material-ui/core/Button";
 import GenomeBrowsersLinks from "./GenomeBrowsersLinks";
+import Typography from "@material-ui/core/Typography";
+import ListItem from "@material-ui/core/ListItem";
+import List from "@material-ui/core/List";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -87,9 +90,9 @@ export default function TrackHubPanels({trackDbInfo}) {
                 <Grid item xs={6}>
                     <Paper className={classes.paper} elevation={2}>
                         <div className={classes.paperContent}>
-                            <h3 className={classes.PanelTitle}>
+                            <Typography component="h3" variant="h6" className={classes.PanelTitle}>
                                 General Info
-                            </h3>
+                            </Typography>
                             <Divider className={classes.divider}/>
                             <div className={classes.PanelContent}>
                                 <div className={classes.trackStatus}>
@@ -109,19 +112,19 @@ export default function TrackHubPanels({trackDbInfo}) {
                                     <Chip label={trackDbInfo.type} className={classes.chipContent} size="small"/>
                                 </div>
                                 <div>File type(s):
-                                    <ul>
+                                    <List>
                                         {
                                             Object.entries(trackDbInfo.file_type).map(
                                                 ([fileType, fileTypeCount]) =>
-                                                    <li key={fileType}>
+                                                    <ListItem key={fileType}>
                                                         {fileType}: <Chip label={fileTypeCount}
                                                                           className={classes.chipContent}
                                                                           color={"primary"}
                                                                           size="small"/>
-                                                    </li>
+                                                    </ListItem>
                                             )
                                         }
-                                    </ul>
+                                    </List>
                                 </div>
                                 <div className={classes.browserView}>
                                     <GenomeBrowsersLinks
@@ -151,9 +154,9 @@ export default function TrackHubPanels({trackDbInfo}) {
                     <Grid item xs={12}>
                         <Paper className={classes.paper}>
                             <div className={classes.paperContent}>
-                                <h3 className={classes.PanelTitle}>
+                                <Typography component="h3" variant="h6" className={classes.PanelTitle}>
                                     Hub
-                                </h3>
+                                </Typography>
                                 <Divider className={classes.divider}/>
                                 <div className={classes.PanelContent}>
                                     <div><strong>Name:</strong> {trackDbInfo.hub.name}</div>
@@ -184,9 +187,9 @@ export default function TrackHubPanels({trackDbInfo}) {
                     <Grid item xs={12}>
                         <Paper className={classes.paper}>
                             <div className={classes.paperContent}>
-                                <h3 className={classes.title}>
+                                <Typography component="h3" variant="h6" className={classes.PanelTitle}>
                                     Species
-                                </h3>
+                                </Typography>
                                 <Divider className={classes.divider}/>
                                 <div className={classes.PanelContent}>
                                     <div>
@@ -210,12 +213,12 @@ export default function TrackHubPanels({trackDbInfo}) {
                                     <div><strong>Common name:</strong> {trackDbInfo.species.common_name}</div>
 
                                     <Divider className={classes.shortDivider}/>
-
-                                    <h3 className={classes.title}>
+                                    <br/>
+                                    <Typography component="h3" variant="h6" className={classes.PanelTitle}>
                                         Assembly Information
-                                    </h3>
+                                    </Typography>
                                     <TableContainer component={Paper}>
-                                        <Table className={classes.table} aria-label="simple table">
+                                        <Table aria-label="simple table">
                                             <TableHead>
                                                 <TableRow>
                                                     <TableCell>Accession</TableCell>
@@ -249,9 +252,9 @@ export default function TrackHubPanels({trackDbInfo}) {
                         <Grid item xs={12}>
                             <Paper className={classes.paper}>
                                 <div className={classes.paperContent}>
-                                    <h3 className={classes.PanelTitle}>
+                                    <Typography component="h3" variant="h6" className={classes.PanelTitle}>
                                         Error Log
-                                    </h3>
+                                    </Typography>
                                     <Divider className={classes.divider}/>
                                     <div className={classes.PanelContent}>
                                         <div>
