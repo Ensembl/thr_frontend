@@ -80,7 +80,7 @@ export default function UserTrackhubs(props) {
                                             <Chips trackdbStatus={trackdb.status.message}></Chips>
                                         </TableCell>
                                         <TableCell align="center">
-                                            <Link to={`/trackhub_view/${trackdb.trackdb_id}`} target="_blank" rel="noreferrer">
+                                            <Link to={`/search/trackhub_view/${trackdb.trackdb_id}`} target="_blank" rel="noreferrer">
                                                 <VisibilityIcon color="primary"/>
                                             </Link>
                                         </TableCell>

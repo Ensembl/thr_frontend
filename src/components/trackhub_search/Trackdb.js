@@ -91,7 +91,7 @@ const Trackdb = ({trackdb}) => {
             <Box className={classes.boxDesign} border={1} borderColor={BoxBorderColor}>
                 <div className={classes.paperContent}>
                     <Typography component="h3" variant="h6" className={classes.PanelTitle}>
-                        <Link to={`/trackhub_view/${trackdb.trackdb_id}`} target={'_blank'} rel="noreferrer">
+                        <Link to={`/search/trackhub_view/${trackdb.trackdb_id}`} target={'_blank'} rel="noreferrer">
                             <InnerHTML html={trackdb.hub.short_label}/>
                         </Link>
                     </Typography>
@@ -117,7 +117,7 @@ const Trackdb = ({trackdb}) => {
                                 className={classes.chipContent}
                                 size="small"
                                 variant="outlined"
-                                href={`/trackhub_view/${trackdb.trackdb_id}`}
+                                href={`/search/trackhub_view/${trackdb.trackdb_id}`}
                                 target="_blank"
                                 rel="noreferrer"
                                 color="default"
