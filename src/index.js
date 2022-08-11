@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
 import reportWebVitals from './reportWebVitals';
@@ -25,15 +25,19 @@ import 'typeface-open-sans';
 import { Provider } from 'react-redux';
 import { store } from './redux/helpers';
 
-ReactDOM.render(
-  <React.StrictMode>
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
+  // TODO: Fix this
+  // Strict Mode has gotten stricter in React 18, it breaks the filters and some part of the UI
+  // https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#updates-to-strict-mode
+  // <React.StrictMode>
     <Provider store={store}>
         <Container maxWidth="xl">
             <App />
         </Container>
     </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
