@@ -19,7 +19,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import PublishIcon from '@mui/icons-material/Publish';
 import {Equalizer, Search} from "@mui/icons-material";
-import Chart from "./Chart";
+import Counter from "./Counter";
 import {Button, Stack, Typography} from "@mui/material";
 
 const styles = {
@@ -107,11 +107,7 @@ export default function NestedGrid() {
                             </Typography>
                         </Stack>
                         <br/>
-                        <Typography component="p" variant="p">
-                            A brief summary of the data content.
-                        </Typography>
-                        <br/>
-                        <Chart/>
+                        <Counter/>
                     </Paper>
                 </Grid>
             </>
