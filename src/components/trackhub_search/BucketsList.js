@@ -15,12 +15,12 @@
  */
 
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Chip from "@material-ui/core/Chip";
+import makeStyles from '@mui/styles/makeStyles';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import ListItemText from '@mui/material/ListItemText';
+import Chip from "@mui/material/Chip";
 import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({

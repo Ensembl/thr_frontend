@@ -1,17 +1,17 @@
 import React, {useEffect} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import {Collapse, ListSubheader} from "@material-ui/core";
+import makeStyles from '@mui/styles/makeStyles';
+import Drawer from '@mui/material/Drawer';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import {Collapse, ListSubheader} from "@mui/material";
 import {Link} from "react-router-dom";
 import {HashLink} from "react-router-hash-link";
-import HttpIcon from '@material-ui/icons/Http';
-import {ExpandLess, ExpandMore} from "@material-ui/icons";
+import HttpIcon from '@mui/icons-material/Http';
+import {ExpandLess, ExpandMore} from "@mui/icons-material";
 
 const drawerWidth = 350;
 

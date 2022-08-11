@@ -15,26 +15,26 @@
  */
 
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from "@material-ui/core/Grid";
-import Chip from "@material-ui/core/Chip";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import TableContainer from "@material-ui/core/TableContainer";
-import Divider from "@material-ui/core/Divider";
+import makeStyles from '@mui/styles/makeStyles';
+import Paper from '@mui/material/Paper';
+import Grid from "@mui/material/Grid";
+import Chip from "@mui/material/Chip";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import TableContainer from "@mui/material/TableContainer";
+import Divider from "@mui/material/Divider";
 import parse from 'html-react-parser';
 import TrackdbStatusChip from "../dashboard/TrackdbStatusChip";
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from '@mui/icons-material/Close';
 import Moment from 'react-moment'
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import GenomeBrowsersLinks from "./GenomeBrowsersLinks";
-import Typography from "@material-ui/core/Typography";
-import ListItem from "@material-ui/core/ListItem";
-import List from "@material-ui/core/List";
+import Typography from "@mui/material/Typography";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -140,9 +140,7 @@ export default function TrackHubPanels({trackDbInfo}) {
                                         variant="outlined"
                                         href={trackDbInfo.source.url}
                                         target="_blank"
-                                        rel="noreferrer"
-                                        color="default"
-                                    >View
+                                        rel="noreferrer">View
                                     </Button>
                                 </div>
                             </div>
@@ -172,9 +170,7 @@ export default function TrackHubPanels({trackDbInfo}) {
                                             variant="outlined"
                                             href={trackDbInfo.hub.url}
                                             target="_blank"
-                                            rel="noreferrer"
-                                            color="default"
-                                        >View
+                                            rel="noreferrer">View
                                         </Button>
                                     </div>
                                 </div>

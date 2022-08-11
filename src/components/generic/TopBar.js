@@ -15,8 +15,8 @@
  */
 
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import {AppBar, Toolbar, Typography, Button} from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
+import {AppBar, Toolbar, Typography, Button} from '@mui/material';
 import SearchForm from "../home/SearchForm";
 import {useSelector} from "react-redux";
 import DocsDropdownMenu from "../docs/DocsDropdownMenu";

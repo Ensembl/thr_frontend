@@ -15,19 +15,19 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import TextField from '@material-ui/core/TextField';
-import {makeStyles} from '@material-ui/core/styles';
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Avatar from "@material-ui/core/Avatar";
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import Checkbox from "@material-ui/core/Checkbox";
+import TextField from '@mui/material/TextField';
+import makeStyles from '@mui/styles/makeStyles';
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import Avatar from "@mui/material/Avatar";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Checkbox from "@mui/material/Checkbox";
 
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import NativeSelect from '@mui/material/NativeSelect';
 import * as settings from "../../settings";
 import axios from "axios";
 import Alerts from "../generic/Alerts";

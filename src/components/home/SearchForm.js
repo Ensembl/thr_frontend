@@ -15,11 +15,11 @@
  */
 
 import React, {useState} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import makeStyles from '@mui/styles/makeStyles';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -59,24 +59,26 @@ const SearchForm = () => {
         }
     }
 
-    return (
-        <>
-            <Paper component="form" className={classes.root}>
-                <InputBase
-                    className={classes.input}
-                    placeholder="Search by keywords: hg19, epigenomics, mouse ..."
-                    inputProps={{'aria-label': 'Search by keywords: hg19, epigenomics, mouse ...'}}
-                    value={searchValue}
-                    onChange={handleSearchInputChanges}
-                    name={'q'}
-                />
-                <IconButton type="submit" onClick={handleSearch} className={classes.iconButton} aria-label="search">
-                    <SearchIcon/>
-                </IconButton>
-            </Paper>
-        </>
-
-    );
+    return <>
+        <Paper component="form" className={classes.root}>
+            <InputBase
+                className={classes.input}
+                placeholder="Search by keywords: hg19, epigenomics, mouse ..."
+                inputProps={{'aria-label': 'Search by keywords: hg19, epigenomics, mouse ...'}}
+                value={searchValue}
+                onChange={handleSearchInputChanges}
+                name={'q'}
+            />
+            <IconButton
+                type="submit"
+                onClick={handleSearch}
+                className={classes.iconButton}
+                aria-label="search"
+                size="large">
+                <SearchIcon/>
+            </IconButton>
+        </Paper>
+    </>;
 }
 
 export default SearchForm;

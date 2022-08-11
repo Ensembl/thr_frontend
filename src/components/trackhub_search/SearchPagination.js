@@ -15,9 +15,9 @@
  */
 
 import React, {useEffect} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import {useHistory} from 'react-router-dom';
-import Pagination from '@material-ui/lab/Pagination';
+import Pagination from '@mui/material/Pagination';
 
 const useStyles = makeStyles((theme) => ({
     root: {

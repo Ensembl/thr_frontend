@@ -15,7 +15,7 @@
  */
 
 import React, {useState} from "react";
-import {Button, Divider, Menu, MenuItem} from "@material-ui/core";
+import {Button, Divider, Menu, MenuItem} from "@mui/material";
 
 import NestedMenuItem from "material-ui-nested-menu-item";
 

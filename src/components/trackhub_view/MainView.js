@@ -20,9 +20,9 @@ import MainBreadcrumb from "../generic/MainBreadcrumb";
 import * as settings from "../../settings";
 import axios from "axios";
 import Tags from "./Tags";
-import {Alert} from "@material-ui/lab";
+import { Alert } from '@mui/material';
 import {Link} from "react-router-dom";
-import {ArrowBack} from "@material-ui/icons";
+import {ArrowBack} from "@mui/icons-material";
 import MainViewSkeleton from "./MainViewSkeleton";
 
 

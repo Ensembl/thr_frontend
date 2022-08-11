@@ -15,12 +15,13 @@
  */
 
 import React from 'react';
-import {makeStyles, withStyles} from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import makeStyles from '@mui/styles/makeStyles';
+import withStyles from '@mui/styles/withStyles';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const StyledMenu = withStyles({
     paper: {

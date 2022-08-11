@@ -15,11 +15,11 @@
  */
 
 import React from 'react'
-import CssBaseline from '@material-ui/core/CssBaseline';
+import CssBaseline from '@mui/material/CssBaseline';
 import NestedGrid from "./NestedGrid";
 import SearchForm from "./SearchForm";
-import Divider from "@material-ui/core/Divider";
-import {makeStyles} from "@material-ui/core/styles";
+import Divider from "@mui/material/Divider";
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
     main: {

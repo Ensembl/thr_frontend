@@ -16,14 +16,14 @@
 
 import React, {useState} from 'react';
 
-import {makeStyles} from '@material-ui/core/styles';
-import {Avatar, Button, Container, CssBaseline, TextField, Typography} from '@material-ui/core';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import makeStyles from '@mui/styles/makeStyles';
+import {Avatar, Button, Container, CssBaseline, TextField, Typography} from '@mui/material';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
 import {userActions} from "../../redux/actions";
-import Alert from "@material-ui/lab/Alert";
-import {AlertTitle} from "@material-ui/lab";
+import Alert from '@mui/material/Alert';
+import { AlertTitle } from '@mui/material';
 
 
 const useStyles = makeStyles((theme) => ({

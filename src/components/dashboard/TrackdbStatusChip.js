@@ -15,11 +15,11 @@
  */
 
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import makeStyles from '@mui/styles/makeStyles';
+import Chip from '@mui/material/Chip';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 const useStyles = makeStyles((theme) => ({
     root: {

@@ -16,9 +16,9 @@
 
 import React from 'react';
 import SearchDocsMenu from "./SearchDocsMenu";
-import {Typography} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import {Typography} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import CssBaseline from "@mui/material/CssBaseline";
 import MainBreadcrumb from "../../generic/MainBreadcrumb";
 
 const useStyles = makeStyles((theme) => ({

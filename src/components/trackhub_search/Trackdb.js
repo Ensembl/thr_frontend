@@ -15,12 +15,12 @@
  */
 
 import React from "react";
-import {makeStyles} from '@material-ui/core/styles';
-import Button from "@material-ui/core/Button";
+import makeStyles from '@mui/styles/makeStyles';
+import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
 import TrackdbStatusChip from "../dashboard/TrackdbStatusChip";
-import Box from "@material-ui/core/Box";
-import {Typography, useTheme} from "@material-ui/core";
+import Box from "@mui/material/Box";
+import {Typography, useTheme} from "@mui/material";
 import InnerHTML from "dangerously-set-html-content";
 
 const useStyles = makeStyles((theme) => ({
@@ -86,50 +86,46 @@ const Trackdb = ({trackdb}) => {
         BoxBorderColor = theme.palette.error.main
     }
 
-    return (
-        <>
-            <Box className={classes.boxDesign} border={1} borderColor={BoxBorderColor}>
-                <div className={classes.paperContent}>
-                    <Typography component="h3" variant="h6" className={classes.PanelTitle}>
-                        <Link to={`/search/trackhub_view/${trackdb.trackdb_id}`} target={'_blank'} rel="noreferrer">
-                            <InnerHTML html={trackdb.hub.short_label}/>
-                        </Link>
-                    </Typography>
-                    <div className={classes.PanelContent}>
-                        <div>
-                            {/* Fix HTML tags not being rendered properly*/}
-                            <InnerHTML html={trackdb.hub.long_label}/>
-                        </div>
+    return <>
+        <Box className={classes.boxDesign} border={1} borderColor={BoxBorderColor}>
+            <div className={classes.paperContent}>
+                <Typography component="h3" variant="h6" className={classes.PanelTitle}>
+                    <Link to={`/search/trackhub_view/${trackdb.trackdb_id}`} target={'_blank'} rel="noreferrer">
+                        <InnerHTML html={trackdb.hub.short_label}/>
+                    </Link>
+                </Typography>
+                <div className={classes.PanelContent}>
+                    <div>
+                        {/* Fix HTML tags not being rendered properly*/}
+                        <InnerHTML html={trackdb.hub.long_label}/>
+                    </div>
+                    <br/>
+                    <div>
+                        <strong>Species:</strong> {trackdb.species.taxon_id} - {trackdb.species.scientific_name}
                         <br/>
-                        <div>
-                            <strong>Species:</strong> {trackdb.species.taxon_id} - {trackdb.species.scientific_name}
-                            <br/>
-                            <strong>Assembly:</strong> {trackdb.assembly.accession} - {trackdb.assembly.name}
-                        </div>
-                        <div className={classes.stautsInfo}>
-                            {
-                                trackdb.status ?
-                                    <TrackdbStatusChip trackdbStatus={currentTrackdbStatus} ></TrackdbStatusChip>
-                                    :
-                                    <TrackdbStatusChip trackdbStatus="" ></TrackdbStatusChip>
-                            }
-                            <Button
-                                className={classes.chipContent}
-                                size="small"
-                                variant="outlined"
-                                href={`/search/trackhub_view/${trackdb.trackdb_id}`}
-                                target="_blank"
-                                rel="noreferrer"
-                                color="default"
-                            >View Info
-                            </Button>
-                        </div>
+                        <strong>Assembly:</strong> {trackdb.assembly.accession} - {trackdb.assembly.name}
+                    </div>
+                    <div className={classes.stautsInfo}>
+                        {
+                            trackdb.status ?
+                                <TrackdbStatusChip trackdbStatus={currentTrackdbStatus} ></TrackdbStatusChip>
+                                :
+                                <TrackdbStatusChip trackdbStatus="" ></TrackdbStatusChip>
+                        }
+                        <Button
+                            className={classes.chipContent}
+                            size="small"
+                            variant="outlined"
+                            href={`/search/trackhub_view/${trackdb.trackdb_id}`}
+                            target="_blank"
+                            rel="noreferrer">View Info
+                        </Button>
                     </div>
                 </div>
-            </Box>
-            <br/>
-        </>
-    );
+            </div>
+        </Box>
+        <br/>
+    </>;
 };
 
 

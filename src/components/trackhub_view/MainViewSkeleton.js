@@ -15,18 +15,18 @@
  */
 
 import React from 'react';
-import {Skeleton} from "@material-ui/lab";
-import {makeStyles} from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
-import TableContainer from "@material-ui/core/TableContainer";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import {Typography} from "@material-ui/core";
+import { Skeleton } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
+import TableContainer from "@mui/material/TableContainer";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import {Typography} from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
     root: {

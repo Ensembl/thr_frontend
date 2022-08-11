@@ -15,11 +15,11 @@
  */
 
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DeleteIcon from "@material-ui/icons/Delete";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
+import DeleteIcon from "@mui/icons-material/Delete";
 import * as settings from "../../settings";
 import axios from "axios";
 
@@ -71,7 +71,7 @@ export default function DeleteTrackdbAlert({trackdbId}) {
                     <Button onClick={handleYes} style={{ color: 'red' }}>
                         Yes
                     </Button>
-                    <Button onClick={handleClose} color="default" autoFocus>
+                    <Button onClick={handleClose} autoFocus>
                         Cancel
                     </Button>
                 </DialogActions>

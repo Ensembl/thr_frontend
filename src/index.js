@@ -19,7 +19,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 
 import reportWebVitals from './reportWebVitals';
-import {Container} from "@material-ui/core";
+import {Container} from "@mui/material";
 import 'typeface-open-sans';
 
 import { Provider } from 'react-redux';
