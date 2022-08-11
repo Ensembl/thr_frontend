@@ -15,65 +15,64 @@
  */
 
 import React from 'react';
-import makeStyles from '@mui/styles/makeStyles';
-import {AppBar, Toolbar, Typography, Button} from '@mui/material';
+import {AppBar, Toolbar, Typography, Button, Container} from '@mui/material';
 import SearchForm from "../home/SearchForm";
 import {useSelector} from "react-redux";
 import DocsDropdownMenu from "../docs/DocsDropdownMenu";
+import Box from "@mui/material/Box";
+import SandwichMenu from "./SandwichMenu";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        fontWeight: 800,
-        fontStyle: "italic",
-        textDecoration: "none !important",
-        marginRight: "20px",
-    },
-    interSpace: {
-        flexGrow: 1,
-    }
-}));
 
-export default function TopBar(props) {
-    const classes = useStyles();
-
+export default function TopBar() {
     // IDEA: we can store other infos in user object
     // const user = useSelector(state => state.authenticationReducer.user);
     const isLoggedIn = useSelector(state => state.authenticationReducer.loggedIn);
 
     return (
-        <div className={classes.root}>
-            <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
-                        <a href="/">The Track Hub Registry</a>
-                    </Typography>
-                    {
-                        isLoggedIn ?
-                            <Button color="inherit" href="/docs/management/overview">Submit data</Button> :
-                            <Button color="inherit" href="/register">Submit data</Button>
-                    }
-                    <DocsDropdownMenu/>
-                    <Button color="inherit" href="/about">About</Button>
-                    <Button color="inherit" href="/help">Help</Button>
-                    <span className={classes.interSpace}/>
-                    <SearchForm/>
-                    {isLoggedIn ? null : <Button color="inherit" href="/register">Register</Button>}
-                    {isLoggedIn ? null : <Button color="inherit" href="/login">Login</Button>}
-                    {isLoggedIn ? <Button color="inherit" href="/user">Dashboard</Button> : null}
-                    {isLoggedIn ?
-                        <Button color="inherit" href="/update_password">Update Password</Button> : null}
-                    {isLoggedIn ?
-                        <Button color="inherit" href="/login">Logout</Button> : null}
-                </Toolbar>
+        <div>
+            <AppBar position="fixed" sx={{zIndex: 1300, flexGrow: 1}}>
+                <Container maxWidth="xl">
+                    <Toolbar disableGutters>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="a"
+                            href="/"
+                            sx={{
+                                fontWeight: 800,
+                                fontStyle: "italic",
+                                textDecoration: "none !important",
+                                marginRight: "20px",
+                                color: "inherit",
+                                display: {xs: 'none', md: 'flex'},
+                            }}
+                        >
+                            The Track Hub Registry
+                        </Typography>
+
+                        <SandwichMenu/>
+
+                        <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
+                            {
+                                isLoggedIn ?
+                                    <Button color="inherit" href="/docs/management/overview">Submit data</Button> :
+                                    <Button color="inherit" href="/register">Submit data</Button>
+                            }
+                            <DocsDropdownMenu/>
+                            <Button color="inherit" href="/about">About</Button>
+                            <Button color="inherit" href="/help">Help</Button>
+                            <Typography sx={{flexGrow: 1}}/>
+                            <SearchForm/>
+                            {isLoggedIn ? null : <Button color="inherit" href="/register">Register</Button>}
+                            {isLoggedIn ? null : <Button color="inherit" href="/login">Login</Button>}
+                            {isLoggedIn ? <Button color="inherit" href="/user">Dashboard</Button> : null}
+                            {isLoggedIn ?
+                                <Button color="inherit" href="/update_password">Update Password</Button> : null}
+                            {isLoggedIn ?
+                                <Button color="inherit" href="/">Logout</Button> : null}
+                        </Box>
+                    </Toolbar>
+                </Container>
             </AppBar>
             <br/>
             <Toolbar/>

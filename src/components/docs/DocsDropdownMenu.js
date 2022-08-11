@@ -29,7 +29,7 @@ export const DocsDropdownMenu = () => {
     const handleClose = () => setAnchorEl(null);
 
     return (
-        <div>
+        <>
             <Button color="inherit" onClick={handleClick} endIcon={<ArrowDropDownIcon />}>
                 Documentation
             </Button>
@@ -59,7 +59,7 @@ export const DocsDropdownMenu = () => {
                 <MenuItem component="a" href="/docs/apis">Registry APIs</MenuItem>
                 <MenuItem component="a" href="/docs/management/modelling">TrackDB JSON specification</MenuItem>
             </Menu>
-        </div>
+        </>
     );
 };
 
