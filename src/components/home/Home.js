@@ -19,69 +19,66 @@ import CssBaseline from '@mui/material/CssBaseline';
 import NestedGrid from "./NestedGrid";
 import SearchForm from "./SearchForm";
 import Divider from "@mui/material/Divider";
-import makeStyles from '@mui/styles/makeStyles';
+import Grid from "@mui/material/Grid";
+import {Typography} from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
-    main: {
-        padding: '50px',
-        paddingTop: '5px',
-        alignItems: 'center',
-        width: '90%',
-        marginTop: '30px',
-        margin: 'auto',
-        textAlign: "center",
-        backgroundColor: "white"
-    },
-    title: {
-        fontWeight: 300,
-        lineHeight: '75px',
-        fontSize: '68px'
-    },
-    subtitle: {
-        fontWeight: 300,
-        lineHeight: '29px',
-        fontSize: '26px'
-    },
-    description: {
-        fontWeight: 300,
-        lineHeight: '26px',
-        fontSize: '18px'
-    },
-    divider: {
-        height: 1,
-        margin: 'auto',
-        width: 200,
-    },
-}));
 
 function Home() {
-    const classes = useStyles();
 
     return (
-        <React.Fragment>
+        <>
             <CssBaseline/>
-            <div>
-                <div className={classes.main}>
-                    <h1 className={classes.title}>The Track Hub Registry</h1>
-                    <h3 className={classes.subtitle}>A global centralised collection of publicly accessible track
-                        hubs</h3>
+            <Grid
+                container
+                direction="column"
+                sx={{
+                    padding: '50px',
+                    width: '90%',
+                    margin: 'auto',
+                    textAlign: "center",
+                }}
+            >
 
-                    <Divider className={classes.divider} orientation="horizontal"/>
+                <Typography
+                    variant="h1"
+                    sx={{
+                        fontWeight: 300,
+                        lineHeight: '75px',
+                        fontSize: '68px'
+                    }}
+                >
+                    The Track Hub Registry
+                </Typography>
+                <Typography
+                    variant="h4"
+                    sx={{
+                        fontWeight: 300,
+                        margin: 4
+                    }}
+                >
+                    A global centralised collection of publicly accessible track hubs
+                </Typography>
 
-                    <p className={classes.description}>
-                        The goal of the Track Hub Registry is to allow third parties to advertise <a
-                        href="http://genome.ucsc.edu/goldenPath/help/hgTrackHubHelp.html#Intro" target="_blank" rel="noreferrer">track
-                        hubs</a>, and to make it easier for researchers around the world to discover and use track
-                        hubs
-                        containing different types of genomic research data.
-                    </p>
-                    <SearchForm/>
-                </div>
-                <br/>
-                <br/>
-                <NestedGrid/>
-            </div>
-        </React.Fragment>
+                <Divider
+                    orientation="horizontal"
+                    sx={{
+                        height: 1,
+                        margin: 'auto',
+                        width: 200,
+                    }}
+                />
+
+                <Typography variant="h6" sx={{margin: 4}}>
+                    The goal of the Track Hub Registry is to allow third parties to advertise <a
+                    href="http://genome.ucsc.edu/goldenPath/help/hgTrackHubHelp.html#Intro" target="_blank"
+                    rel="noreferrer">track hubs</a>, and to make it easier for researchers around the world to
+                    discover and use track hubs containing different types of genomic research data.
+                </Typography>
+                <SearchForm/>
+            </Grid>
+            <br/><br/>
+            <NestedGrid/>
+        </>
     )
 }
 

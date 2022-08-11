@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {BarChart, Bar, XAxis, YAxis} from 'recharts';
+import {BarChart, Bar, XAxis, YAxis, ResponsiveContainer} from 'recharts';
 import React, {useEffect} from "react";
 import * as settings from "../../settings";
 import axios from "axios";
@@ -46,11 +46,13 @@ export default function Chart() {
     }, [])
 
     return (
-        <BarChart width={350} height={200} data={summaryData}>
+        <ResponsiveContainer height={200}>
+            <BarChart width={350} height={200} data={summaryData}>
             <XAxis dataKey="name"/>
             <YAxis/>
             <Bar dataKey="count" barSize={30} fill="#8884d8"
                  label={renderCustomBarLabel}/>
         </BarChart>
+        </ResponsiveContainer>
     )
 }

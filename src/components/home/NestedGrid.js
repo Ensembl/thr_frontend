@@ -15,116 +15,112 @@
  */
 
 import React from 'react';
-import makeStyles from '@mui/styles/makeStyles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import PublishIcon from '@mui/icons-material/Publish';
 import {Equalizer, Search} from "@mui/icons-material";
 import Chart from "./Chart";
-import {Button} from "@mui/material";
+import {Button, Stack, Typography} from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
+const styles = {
     paper: {
-        padding: theme.spacing(1),
-    },
-    paperContent: {
-        margin: "15px",
-        fontWeight: 300,
-    },
-    title: {
-        fontWeight: 300,
-        lineHeight: "35px",
-        fontSize: "32px",
+        padding: 2
     },
     quote: {
-        lineHeight: "26px",
         fontSize: "19px",
         fontStyle: "italic",
     },
-    text: {
-        fontWeight: 300,
-        lineHeight: "26px",
-        fontSize: "14px",
-    },
-    largeIcon: {
-        fontSize: 40,
-        margin: -8,
-        paddingRight: 5,
-    },
-}));
+};
 
 export default function NestedGrid() {
-    const classes = useStyles();
 
     function FormRow() {
         return (
-            <React.Fragment>
+            <>
                 <Grid item xs={4}>
-                    <Paper className={classes.paper} elevation={3}>
-                        <div className={classes.paperContent}>
-                            <h1 className={classes.title}>
-                                <PublishIcon className={classes.largeIcon}/> Submit Data
-                            </h1>
-                            <p className={classes.quote}>
-                                I want maximum visibility for my track hubs.
-                            </p>
-                            <p className={classes.text}>
-                                External track hub providers can register and submit their track databases to the
-                                registry. <a href="/register">Registration</a> is web-based and done
-                                on this site; submission happens programatically via our RESTful API. Once submitted and
-                                successfully validated, the track dbs become available for search by other users
-                                worldwide,
-                                allowing for automatic and rapid integration into a genome browser.
-                            </p>
-                            <Button variant="contained" color="primary" href="/docs/management/overview">How To Submit</Button>
-                        </div>
+                    <Paper sx={styles.paper} elevation={3}>
+                        <Stack direction="row" alignItems="center" gap={1}>
+                            <PublishIcon/>
+                            <Typography component="h5" variant="h5">
+                                Submit Data
+                            </Typography>
+                        </Stack>
+
+                        <br/>
+                        <Typography component="p" variant="p" sx={styles.quote}>
+                            I want maximum visibility for my track hubs.
+                        </Typography>
+                        <br/>
+                        <Typography component="p" variant="p">
+                            External track hub providers can register and submit their track databases to the
+                            registry. <a href="/register">Registration</a> is web-based and done
+                            on this site; submission happens programatically via our RESTful API. Once submitted and
+                            successfully validated, the track dbs become available for search by other users
+                            worldwide,
+                            allowing for automatic and rapid integration into a genome browser.
+                        </Typography>
+                        <br/>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            href="/docs/management/overview"
+                        >
+                            How To Submit
+                        </Button>
                     </Paper>
                 </Grid>
                 <Grid item xs={4}>
-                    <Paper className={classes.paper} elevation={3}>
-                        <div className={classes.paperContent}>
-                            <h1 className={classes.title}>
-                                <Search className={classes.largeIcon}/> Access Data
-                            </h1>
-                            <p className={classes.quote}>
-                                How do I find omics tracks for an assembly of my favourite organism?
-                            </p>
-                            <p className={classes.text}>
-                                Track hubs can be searched based on metadata information. Free text <a
-                                href="/docs/search">search</a> is provided from the search box in the
-                                header of all track hub Registry web pages and in the middle of this page. Advanced
-                                search
-                                options are available for more specific and customised searches.
-                            </p>
-                            <Button variant="contained" color="primary" href="/docs/search/advanced">Help On Advanced Search</Button>
-                        </div>
+                    <Paper sx={styles.paper} elevation={3}>
+                        <Stack direction="row" alignItems="center" gap={1}>
+                            <Search/>
+                            <Typography component="h5" variant="h5">
+                                Access Data
+                            </Typography>
+                        </Stack>
+                        <br/>
+                        <Typography component="p" variant="p" sx={styles.quote}>
+                            How do I find omics tracks for an assembly of my favourite organism?
+                        </Typography>
+                        <br/>
+                        <Typography component="p" variant="p">
+                            Track hubs can be searched based on metadata information. Free text <a
+                            href="/docs/search">search</a> is provided from the search box in the
+                            header of all track hub Registry web pages and in the middle of this page. Advanced
+                            search options are available for more specific and customised searches.
+                        </Typography>
+                        <br/>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            href="/docs/search/advanced"
+                        >
+                            Help On Advanced Search
+                        </Button>
                     </Paper>
                 </Grid>
                 <Grid item xs={4}>
-                    <Paper className={classes.paper} elevation={3}>
-                        <div className={classes.paperContent}>
-                            <h1 className={classes.title}>
-                                <Equalizer className={classes.largeIcon} y={10}/> Stats
-                            </h1>
-                            <p className={classes.text}>A brief summary of the data content, hover over the column for
-                                exact
-                                numbers.</p>
-                            <Chart></Chart>
-                        </div>
+                    <Paper sx={styles.paper} elevation={3}>
+                        <Stack direction="row" alignItems="center" gap={1}>
+                            <Equalizer y={10}/>
+                            <Typography variant="h5">
+                                Stats
+                            </Typography>
+                        </Stack>
+                        <br/>
+                        <Typography component="p" variant="p">
+                            A brief summary of the data content.
+                        </Typography>
+                        <br/>
+                        <Chart/>
                     </Paper>
                 </Grid>
-            </React.Fragment>
+            </>
         );
     }
 
     return (
-        <div className={classes.root}>
-            <Grid container item xs={12} spacing={3}>
-                <FormRow/>
-            </Grid>
-        </div>
+        <Grid container item xs={12} spacing={{xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}}>
+            <FormRow/>
+        </Grid>
     );
 }
