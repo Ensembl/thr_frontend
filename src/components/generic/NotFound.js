@@ -15,12 +15,18 @@
  */
 
 import React from 'react';
+import {Link} from "react-router-dom";
+import {ArrowBack} from "@material-ui/icons";
+import {Alert} from "@material-ui/lab";
 
 
 function NotFound() {
     return (
-      <h1>Page not found!</h1>
+        <Alert severity="error">
+            Page not found! <br/><br/>
+            <Link to='/'> <ArrowBack fontSize="inherit"/> Go back to the home page</Link>
+        </Alert>
     );
-  }
+}
 
 export default NotFound

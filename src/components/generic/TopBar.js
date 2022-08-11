@@ -56,7 +56,11 @@ export default function TopBar(props) {
                     <Typography variant="h6" className={classes.title}>
                         <a href="/">The Track Hub Registry</a>
                     </Typography>
-                    <Button color="inherit" href="/register">Submit data</Button>
+                    {
+                        isLoggedIn ?
+                            <Button color="inherit" href="/docs/management/overview">Submit data</Button> :
+                            <Button color="inherit" href="/register">Submit data</Button>
+                    }
                     <DocsDropdownMenu/>
                     <Button color="inherit" href="/about">About</Button>
                     <Button color="inherit" href="/help">Help</Button>

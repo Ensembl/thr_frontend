@@ -49,6 +49,13 @@ function logout() {
                 // remove user from local storage to log user out
                 localStorage.removeItem('user');
                 return user;
+            })
+            .catch(err => {
+                // some times the token may be invalid
+                // in that case, just remove it for now
+                // TODO: find a way to log the user out once the token expires
+                localStorage.removeItem('user');
+                return user;
             });
     }
 }

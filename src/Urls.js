@@ -103,7 +103,7 @@ function Urls() {
                 <Route exact path="/search" component={SearchResult}/>
                 {/* more details here: https://stackoverflow.com/a/53694210/4488332
                     and here: https://blog.pshrmn.com/simple-react-router-v4-tutorial/ */}
-                <Route path="/trackhub_view/:id" component={MainView}/>
+                <Route path="/search/trackhub_view/:id" component={MainView}/>
                 <Route path="/biodalliance/view" component={BiodallianceView}></Route>
                 {/************ Not Found ************/}
                 <Route path="/404" component={NotFound}/>
