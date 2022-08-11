@@ -17,49 +17,37 @@
 import React, {useState} from "react";
 import {Button, Divider, Menu, MenuItem} from "@mui/material";
 
-import NestedMenuItem from "material-ui-nested-menu-item";
+import {NestedMenuItem} from "mui-nested-menu"
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 export const DocsDropdownMenu = () => {
-    const [menuPosition, setMenuPosition] = useState(null);
 
-    const handleClick = (e) => {
-        if (menuPosition) {
-            return;
-        }
-        e.preventDefault();
-        setMenuPosition({
-            top: e.pageY,
-            left: e.pageX
-        });
-    };
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
 
-    const handleItemClick = (e) => {
-        setMenuPosition(null);
-    };
+    const handleClick = e => { setAnchorEl(e.currentTarget) };
+    const handleClose = () => setAnchorEl(null);
 
     return (
-        <div onClick={handleClick}>
-            <Button color="inherit" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+        <div>
+            <Button color="inherit" onClick={handleClick} endIcon={<ArrowDropDownIcon />}>
                 Documentation
             </Button>
             <Menu
-                open={!!menuPosition}
-                onClose={() => setMenuPosition(null)}
-                anchorReference="anchorPosition"
-                anchorPosition={menuPosition}
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
             >
                 <NestedMenuItem
                     label="Searching Track Hubs"
-                    parentMenuOpen={!!menuPosition}
-                    onClick={handleItemClick}
+                    parentMenuOpen={open}
                 >
                     <MenuItem component="a" href="/docs/search">Basic Search</MenuItem>
                     <MenuItem component="a" href="/docs/search/advanced">Advanced Search</MenuItem>
                 </NestedMenuItem>
                 <NestedMenuItem
                     label="Registering/Managing Track Hubs"
-                    parentMenuOpen={!!menuPosition}
-                    onClick={handleItemClick}
+                    parentMenuOpen={open}
                 >
                     <MenuItem component="a" href="/docs/management/overview">Overview</MenuItem>
                     <MenuItem component="a" href="/docs/management/assembly_support">Supported Genome Assemblies</MenuItem>

@@ -56,13 +56,13 @@ export default function TrackdbStatusChip({trackdbStatus}) {
     } else if (trackdbStatus === 'All is Well') {
         status = <Chip
             className={classes.status_success}
-            icon={<CheckCircleOutlineIcon className={classes.status_success}/>}
+            icon={<CheckCircleOutlineIcon style={{color: 'white'}}/>}
             label="All is Well"
         />
     } else if (trackdbStatus === "Remote Data Unavailable") {
         status = <Chip
             className={classes.status_error}
-            icon={<HighlightOffIcon className={classes.status_error}/>}
+            icon={<HighlightOffIcon style={{color: 'white'}}/>}
             label="Remote Data Unavailable"
         />
     }
