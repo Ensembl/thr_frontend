@@ -15,7 +15,6 @@
  */
 
 import React from 'react';
-import makeStyles from '@mui/styles/makeStyles';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
@@ -23,17 +22,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Chip from "@mui/material/Chip";
 import {useHistory} from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
-    },
-}));
-
 export default function BucketsList({params, facetFilterInfo, filterName}) {
-    const classes = useStyles();
-
     const history = useHistory()
 
     const handleFilterLinks = (filterValue) => {
@@ -46,7 +35,7 @@ export default function BucketsList({params, facetFilterInfo, filterName}) {
     };
 
     return (
-        <List className={classes.root}>
+        <List>
             {
                 facetFilterInfo &&
                 facetFilterInfo.buckets.map((facetFilterName) => {

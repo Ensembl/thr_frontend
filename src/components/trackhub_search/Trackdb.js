@@ -15,62 +15,35 @@
  */
 
 import React from "react";
-import makeStyles from '@mui/styles/makeStyles';
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
 import TrackdbStatusChip from "../dashboard/TrackdbStatusChip";
 import Box from "@mui/material/Box";
 import {Typography, useTheme} from "@mui/material";
 import InnerHTML from "dangerously-set-html-content";
+import Grid from "@mui/material/Grid";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
+const styles = {
     boxDesign: {
-        padding: theme.spacing(1),
         borderRadius: "5px",
-        background: "white"
     },
     paperContent: {
         margin: "20px",
-        fontWeight: 400,
-    },
-    PanelTitle: {
-        // fontWeight: 500,
-        marginBottom: "10px"
     },
     PanelContent: {
         lineHeight: "2em"
     },
     chipContent: {
-        marginLeft: "8px"
-    },
-    trackStatus: {
-        float: "right",
-        fontSize: "12px",
-        borderRadius: "0px"
-    },
-    divider: {
-        marginBottom: "15px"
-    },
-    shortDivider: {
-        margin: 'auto',
-        marginTop: '15px',
-        width: 200,
-    },
-    largeIcon: {
-        marginBottom: "-7px"
+        marginLeft: 1,
     },
     stautsInfo: {
         float: "right",
         display: "flex",
-        marginTop: "-50px"
+        marginTop: -5
     }
-}));
+};
 
 const Trackdb = ({trackdb}) => {
-    const classes = useStyles();
 
     // We can access the theme variables inside your functional React components using the useTheme hook
     const theme = useTheme();
@@ -87,42 +60,42 @@ const Trackdb = ({trackdb}) => {
     }
 
     return <>
-        <Box className={classes.boxDesign} border={1} borderColor={BoxBorderColor}>
-            <div className={classes.paperContent}>
-                <Typography component="h3" variant="h6" className={classes.PanelTitle}>
+        <Box sx={styles.boxDesign} border={1} borderColor={BoxBorderColor}>
+            <Box sx={styles.paperContent}>
+                <Typography component="h3" variant="h6">
                     <Link to={`/search/trackhub_view/${trackdb.trackdb_id}`} target={'_blank'} rel="noreferrer">
                         <InnerHTML html={trackdb.hub.short_label}/>
                     </Link>
                 </Typography>
-                <div className={classes.PanelContent}>
-                    <div>
-                        {/* Fix HTML tags not being rendered properly*/}
-                        <InnerHTML html={trackdb.hub.long_label}/>
-                    </div>
+                <Box sx={styles.PanelContent}>
+                    {/* Fix HTML tags not being rendered properly*/}
+                    <InnerHTML html={trackdb.hub.long_label}/>
                     <br/>
-                    <div>
-                        <strong>Species:</strong> {trackdb.species.taxon_id} - {trackdb.species.scientific_name}
-                        <br/>
-                        <strong>Assembly:</strong> {trackdb.assembly.accession} - {trackdb.assembly.name}
-                    </div>
-                    <div className={classes.stautsInfo}>
-                        {
-                            trackdb.status ?
-                                <TrackdbStatusChip trackdbStatus={currentTrackdbStatus} ></TrackdbStatusChip>
-                                :
-                                <TrackdbStatusChip trackdbStatus="" ></TrackdbStatusChip>
-                        }
-                        <Button
-                            className={classes.chipContent}
-                            size="small"
-                            variant="outlined"
-                            href={`/search/trackhub_view/${trackdb.trackdb_id}`}
-                            target="_blank"
-                            rel="noreferrer">View Info
-                        </Button>
-                    </div>
-                </div>
-            </div>
+                </Box>
+                <Grid xs={6} sm={6} md={12}>
+                    <strong>Species:</strong> {trackdb.species.taxon_id} - {trackdb.species.scientific_name}
+                    <br/>
+                    <strong>Assembly:</strong> {trackdb.assembly.accession} - {trackdb.assembly.name}
+                </Grid>
+
+                <Grid sx={styles.stautsInfo} xs={6} sm={6} md={12}>
+                    {
+                        trackdb.status ?
+                            <TrackdbStatusChip trackdbStatus={currentTrackdbStatus}></TrackdbStatusChip>
+                            :
+                            <TrackdbStatusChip trackdbStatus=""></TrackdbStatusChip>
+                    }
+                    <Button
+                        sx={styles.chipContent}
+                        noWrap
+                        size="small"
+                        variant="outlined"
+                        href={`/search/trackhub_view/${trackdb.trackdb_id}`}
+                        target="_blank"
+                        rel="noreferrer">View Info
+                    </Button>
+                </Grid>
+            </Box>
         </Box>
         <br/>
     </>;

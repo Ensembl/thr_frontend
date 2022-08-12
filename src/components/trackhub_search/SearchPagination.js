@@ -15,18 +15,12 @@
  */
 
 import React, {useEffect} from 'react';
-import makeStyles from '@mui/styles/makeStyles';
 import {useHistory} from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
+import {Box} from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        margin: "auto",
-    },
-}));
 
 export default function SearchPagination({params, totalEntries}) {
-    const classes = useStyles();
 
     const [page, setPage] = React.useState(1);
 
@@ -50,7 +44,7 @@ export default function SearchPagination({params, totalEntries}) {
     }, [pageValue])
 
     return (
-        <div className={classes.root}>
+        <Box sx={{margin: 'auto'}}>
             <Pagination
                 className="my-3"
                 count={count}
@@ -60,6 +54,6 @@ export default function SearchPagination({params, totalEntries}) {
                 color="primary"
                 onChange={handlePageChange}
             />
-        </div>
+        </Box>
     );
 }

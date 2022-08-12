@@ -15,7 +15,6 @@
  */
 
 import React from 'react';
-import makeStyles from '@mui/styles/makeStyles';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -24,65 +23,59 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CurrentFiltersChips from "./CurrentFiltersChips";
 import BucketsList from "./BucketsList";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-    },
+
+const styles = {
     heading: {
-        fontSize: theme.typography.pxToRem(17),
-        fontWeight: theme.typography.fontWeightRegular,
         color: 'white'
     },
     summary: {
-        backgroundColor: theme.palette.primary.main
+        backgroundColor: 'primary.main',
     },
     item: {
-        listStyleType: 'none',
+        margin: 1,
     },
     chipContent: {
         marginLeft: '8px'
     },
-}));
+};
+
 
 export default function Facets({params, facetsFilters}) {
-    const classes = useStyles();
 
     const filtersNames = ['q', 'species', 'assembly', 'hub', 'type']
 
     return (
-        <div className={classes.root}>
+        <>
             <Accordion defaultExpanded>
                 <AccordionSummary
-                    className={classes.summary}
+                    sx={styles.summary}
                     expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}
                     aria-controls="current-filters-content"
                     id="current-filters-header"
                 >
-                    <Typography className={classes.heading}>Current Filters</Typography>
+                    <Typography sx={styles.heading}>Current Filters</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <ul>
-                        {
-                            filtersNames.map((filterName, index) => (
-                                <li key={index} className={classes.item}>
-                                    {
-                                        params.get(filterName) &&
-                                        <CurrentFiltersChips params={params} filter={filterName}/>
-                                    }
-                                </li>
-                            ))
-                        }
-                    </ul>
+                    {
+                        filtersNames.map((filterName, index) => (
+                            <Typography sx={styles.item}>
+                                {
+                                    params.get(filterName) &&
+                                    <CurrentFiltersChips params={params} filter={filterName}/>
+                                }
+                            </Typography>
+                        ))
+                    }
                 </AccordionDetails>
             </Accordion>
             <Accordion>
                 <AccordionSummary
-                    className={classes.summary}
+                    sx={styles.summary}
                     expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}
                     aria-controls="species-content"
                     id="species-header"
                 >
-                    <Typography className={classes.heading}>Species</Typography>
+                    <Typography sx={styles.heading}>Species</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <BucketsList
@@ -94,12 +87,12 @@ export default function Facets({params, facetsFilters}) {
             </Accordion>
             <Accordion>
                 <AccordionSummary
-                    className={classes.summary}
+                    sx={styles.summary}
                     expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}
                     aria-controls="assembly-content"
                     id="assembly-header"
                 >
-                    <Typography className={classes.heading}>Assembly</Typography>
+                    <Typography sx={styles.heading}>Assembly</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <BucketsList
@@ -111,12 +104,12 @@ export default function Facets({params, facetsFilters}) {
             </Accordion>
             <Accordion>
                 <AccordionSummary
-                    className={classes.summary}
+                    sx={styles.summary}
                     expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}
                     aria-controls="hub-content"
                     id="hub-header"
                 >
-                    <Typography className={classes.heading}>Hub</Typography>
+                    <Typography sx={styles.heading}>Hub</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <BucketsList
@@ -128,12 +121,12 @@ export default function Facets({params, facetsFilters}) {
             </Accordion>
             <Accordion>
                 <AccordionSummary
-                    className={classes.summary}
+                    sx={styles.summary}
                     expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}
                     aria-controls="data-type-content"
                     id="data-type-header"
                 >
-                    <Typography className={classes.heading}>Data Type</Typography>
+                    <Typography sx={styles.heading}>Data Type</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <BucketsList
@@ -143,6 +136,6 @@ export default function Facets({params, facetsFilters}) {
                     />
                 </AccordionDetails>
             </Accordion>
-        </div>
+        </>
     );
 }

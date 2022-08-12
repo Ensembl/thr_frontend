@@ -15,115 +15,110 @@
  */
 
 import Grid from "@mui/material/Grid";
-import { Alert, Skeleton } from '@mui/material';
+import {Skeleton, Typography} from '@mui/material';
 import React from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import makeStyles from '@mui/styles/makeStyles';
 import Box from "@mui/material/Box";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-    },
+const styles = {
     summary: {
-        backgroundColor: theme.palette.primary.main
+        backgroundColor: 'primary.main',
     },
     item: {
-        listStyleType: 'none',
-    },
-    boxDesign: {
-        padding: theme.spacing(1),
-        borderRadius: "5px",
-        background: "white"
+        margin: 1,
     },
     paperContent: {
         margin: "20px",
-        fontWeight: 400,
-    }
-}));
+    },
+};
 
 const SearchResultSkeleton = () => {
-    const classes = useStyles();
 
     return (
         <>
-            <div>
-                <br/>
-                {/*Facets*/}
-                <Grid container spacing={3}>
-                    <Grid item xs={3}>
-                        <div className={classes.root}>
-                            <Accordion defaultExpanded>
-                                <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}>
-                                    <Skeleton variant="text" width={130} height={30}/>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <ul>
-                                        <li className={classes.item}>
-                                            <Skeleton variant="text" width={80} height={30}/>
-                                        </li>
-                                    </ul>
-                                </AccordionDetails>
-                            </Accordion>
-                            <Accordion>
-                                 <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}>
-                                    <Skeleton variant="text" width={100} height={30}/>
-                                </AccordionSummary>
-                            </Accordion>
-                            <Accordion>
-                                 <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}>
-                                    <Skeleton variant="text" width={120} height={30}/>
-                                </AccordionSummary>
-                            </Accordion>
-                            <Accordion>
-                                 <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}>
-                                    <Skeleton variant="text" width={60} height={30}/>
-                                </AccordionSummary>
-                            </Accordion>
-                            <Accordion>
-                                 <AccordionSummary className={classes.summary} expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}>
-                                    <Skeleton variant="text" width={140} height={30}/>
-                                </AccordionSummary>
-                            </Accordion>
-                        </div>
-                    </Grid>
-                    <Grid item xs={9}>
-                        {/*Search results*/}
-                        <Skeleton variant="text" width={200} height={40}/>
-                        <Skeleton variant="text" width={150} height={40}/>
-                        <Skeleton variant="text" width={150} height={40} style={{float: 'right'}}/>
-                        <br/><br/><br/>
-                        {/*SearchPagination*/}
-                        {
-                            // Repeat Box 5 times
-                            [...Array(5)].map((elementInArray, index) => (
-                                <div>
-                                    <Box className={classes.boxDesign} key={index}>
-                                        <div className={classes.paperContent}>
-                                            <Skeleton variant="text" width={140} height={40}/>
-                                            <div>
-                                                <Skeleton variant="text" height={30}/>
-                                                <Skeleton variant="text" width={300} height={25}/>
-                                                <br/>
-                                                <Skeleton variant="rectangular" width={200} height={35}
-                                                          style={{float: 'right'}}/>
-                                                <Skeleton variant="text" width={200} height={25}/>
-                                                <Skeleton variant="text" width={260} height={25}/>
-                                            </div>
-                                        </div>
-                                    </Box>
-                                    <br/>
-                                </div>)
-                            )
-                        }
-                    </Grid>
-                    {/*SearchPagination*/}
-                    <Skeleton variant="rectangular" width={400} height={30} style={{ margin: "auto" }}/>
+            {/*Facets*/}
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={4} md={3}>
+                    <Accordion defaultExpanded>
+                        <AccordionSummary
+                            sx={styles.summary}
+                            expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}
+                        >
+                            <Skeleton variant="text" width={130} height={30}/>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography sx={styles.item}>
+                                <Skeleton variant="text" width={80} height={30}/>
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                            sx={styles.summary}
+                            expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}
+                        >
+                            <Skeleton variant="text" width={100} height={30}/>
+                        </AccordionSummary>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                            sx={styles.summary}
+                            expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}
+                        >
+                            <Skeleton variant="text" width={120} height={30}/>
+                        </AccordionSummary>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                            sx={styles.summary}
+                            expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}
+                        >
+                            <Skeleton variant="text" width={60} height={30}/>
+                        </AccordionSummary>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                            sx={styles.summary}
+                            expandIcon={<ExpandMoreIcon style={{color: 'white'}}/>}
+                        >
+                            <Skeleton variant="text" width={140} height={30}/>
+                        </AccordionSummary>
+                    </Accordion>
                 </Grid>
-            </div>
+                <Grid item xs={12} sm={8} md={9}>
+                    {/*Search results*/}
+                    <Skeleton variant="text" width={200} height={40}/>
+                    <Skeleton variant="text" width={150} height={40}/>
+                    <Skeleton variant="text" width={150} height={40} style={{float: 'right'}}/>
+                    <br/><br/><br/>
+                    {/*SearchPagination*/}
+                    {
+                        // Repeat Box 5 times
+                        [...Array(5)].map((elementInArray, index) => (
+                            <div>
+                                <Box sx={styles.paperContent} key={index}>
+                                    <Skeleton variant="text" width={140} height={40}/>
+                                    <div>
+                                        <Skeleton variant="text" height={30}/>
+                                        <Skeleton variant="text" width={300} height={25}/>
+                                        <br/>
+                                        <Skeleton variant="rectangular" width={200} height={35}
+                                                  style={{float: 'right'}}/>
+                                        <Skeleton variant="text" width={200} height={25}/>
+                                        <Skeleton variant="text" width={260} height={25}/>
+                                    </div>
+                                </Box>
+                                <br/>
+                            </div>)
+                        )
+                    }
+                </Grid>
+                {/*SearchPagination*/}
+                <Skeleton variant="rectangular" width={400} height={30} style={{margin: "auto"}}/>
+            </Grid>
         </>
     );
 };
