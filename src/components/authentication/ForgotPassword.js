@@ -16,7 +16,6 @@
 
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import makeStyles from '@mui/styles/makeStyles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
@@ -28,30 +27,31 @@ import Alert from '@mui/material/Alert';
 
 import {userActions} from '../../redux/actions';
 import FormHelperText from "@mui/material/FormHelperText";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
+const styles = {
+    boxStyle: {
+        marginTop: 8,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+        margin: 1,
+        backgroundColor: 'secondary.main',
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
+        marginTop: 1,
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        marginTop: 3,
+        marginBottom: 2,
         float: "right"
     },
-}));
+};
 
 function ForgotPassword() {
-    const classes = useStyles();
 
     const [email, setEmail] = useState({email: ''});
     const [submitted, setSubmitted] = useState(false);
@@ -78,14 +78,14 @@ function ForgotPassword() {
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
-            <div className={classes.paper}>
+            <Box sx={styles.boxStyle}>
                 {alertMessageObject && alertMessageObject.success &&
                 <Alert severity={alert.type}>{alertMessageObject.success}</Alert>
                 }
                 {alertMessageObject && alertMessageObject.error &&
                 <Alert severity={alert.type}>{alertMessageObject.error}</Alert>
                 }
-                <Avatar className={classes.avatar}>
+                <Avatar sx={styles.avatar}>
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
@@ -94,7 +94,7 @@ function ForgotPassword() {
                 {alertMessageObject && alertMessageObject.non_field_errors &&
                 <Alert severity={alert.type}>{alertMessageObject.non_field_errors[0]}</Alert>
                 }
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={styles.form}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -118,12 +118,12 @@ function ForgotPassword() {
                         type="submit"
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
+                        sx={styles.submit}
                     >
                         Send
                     </Button>
-                </form>
-            </div>
+                </Box>
+            </Box>
         </Container>
     );
 }

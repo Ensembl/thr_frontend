@@ -23,7 +23,6 @@ import Checkbox from '@mui/material/Checkbox';
 import {Link} from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import makeStyles from '@mui/styles/makeStyles';
 import Container from '@mui/material/Container';
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
@@ -35,36 +34,35 @@ import {useDispatch, useSelector} from 'react-redux';
 import {userActions} from '../../redux/actions';
 import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(3),
+
+const styles = {
+    boxStyle: {
+        marginTop: 3,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
     },
     avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+        margin: 1,
+        backgroundColor: 'secondary.main',
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(3),
+        marginTop: 3,
         maxWidth: '800px'
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        marginTop: 3,
+        marginBottom: 2,
     },
     signin: {
         textAlign: "center"
     },
-    down: {
-        marginTop: '20px'
-    }
-}));
+};
 
 export default function Register() {
-    const classes = useStyles();
 
     const [user, setUser] = useState({
         username: '',
@@ -118,22 +116,21 @@ export default function Register() {
 
     return (
         <Container component="main" maxWidth="lg">
-            {/*<Alerts messageType={'info'} message={registrationMessageInfo}></Alerts>*/}
             <CssBaseline/>
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
+            <Box sx={styles.boxStyle}>
+                <Avatar sx={styles.avatar}>
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Register as Track Hub Provider
                 </Typography>
-                <Alert severity="info" className={classes.submit}>
+                <Alert severity="info" sx={styles.submit}>
                     {registrationMessageInfo}
                 </Alert>
-                <div className={classes.signin}>
+                <div sx={styles.signin}>
                     Already Have an Account? <Link to='/login'>Login</Link>
                 </div>
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={styles.form}>
                     <h2>Authentication & Contact</h2>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
@@ -289,7 +286,7 @@ export default function Register() {
 
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
-                            <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                            <FormControl fullWidth variant="outlined">
                                 <InputLabel id="check-interval-label">Check Interval</InputLabel>
                                 <NativeSelect
                                     id="check_interval"
@@ -324,12 +321,12 @@ export default function Register() {
                         type="submit"
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
+                        sx={styles.submit}
                     >
                         Register
                     </Button>
-                </form>
-            </div>
+                </Box>
+            </Box>
         </Container>
     );
 }

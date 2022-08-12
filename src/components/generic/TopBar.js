@@ -69,7 +69,7 @@ export default function TopBar() {
                             {isLoggedIn ?
                                 <Button color="inherit" href="/update_password">Update Password</Button> : null}
                             {isLoggedIn ?
-                                <Button color="inherit" href="/">Logout</Button> : null}
+                                <Button color="inherit" href="/login">Logout</Button> : null}
                         </Box>
                     </Toolbar>
                 </Container>

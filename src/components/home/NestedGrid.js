@@ -107,6 +107,10 @@ export default function NestedGrid() {
                             </Typography>
                         </Stack>
                         <br/>
+                        <Typography component="p" variant="p">
+                            A brief summary of the data content.
+                        </Typography>
+                        <br/>
                         <Counter/>
                     </Paper>
                 </Grid>

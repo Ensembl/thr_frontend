@@ -53,9 +53,6 @@ export default function Counter() {
                 <strong><CountUp end={summaryData.hubs}/></strong> Hubs <br/>
                 <strong><CountUp end={summaryData.species}/></strong> Species <br/>
                 <strong><CountUp end={summaryData.assemblies}/></strong> Assemblies <br/>
-                <strong>X</strong> Trackdbs <br/>
-                <strong>X</strong> Tracks <br/>
-                <strong>X</strong> Registered Users <br/>
             </Typography>
         </>
     )
