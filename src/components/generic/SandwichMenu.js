@@ -1,121 +1,295 @@
-/**
- * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-import React from 'react';
-import { Typography, Divider } from '@mui/material';
-import SearchForm from "../home/SearchForm";
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import MailIcon from '@mui/icons-material/Mail';
+import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import {useSelector} from "react-redux";
-import DocsDropdownMenu from "../docs/DocsDropdownMenu";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import UploadIcon from '@mui/icons-material/Upload';
+import ArticleIcon from '@mui/icons-material/Article';
+import InfoIcon from '@mui/icons-material/Info';
+import HelpIcon from '@mui/icons-material/Help';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import LoginIcon from '@mui/icons-material/Login';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import LogoutIcon from '@mui/icons-material/Logout';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import SearchIcon from '@mui/icons-material/Search';
+import ImportContactsIcon from '@mui/icons-material/ImportContacts';
+import HttpIcon from '@mui/icons-material/Http';
+import DataObjectIcon from '@mui/icons-material/DataObject';
+import {Collapse} from "@mui/material";
+import {ExpandLess, ExpandMore} from "@mui/icons-material";
 
+const drawerWidth = 320;
 
-export default function SandwichMenu() {
+function SandwichMenu(props) {
+    const {window} = props;
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
     };
 
     // IDEA: we can store other infos in user object
     // const user = useSelector(state => state.authenticationReducer.user);
     const isLoggedIn = useSelector(state => state.authenticationReducer.loggedIn);
 
+    // For Documentation (nested list)
+    const [openDocs, setOpenDocs] = React.useState(false);
+    const handleDocsClick = () => {
+        setOpenDocs(!openDocs);
+    };
+
+    const [openSearch, setOpenSearch] = React.useState(false);
+    const handleSearchClick = () => {
+        setOpenSearch(!openSearch);
+    };
+
+    const [openManagment, setOpenManagment] = React.useState(false);
+    const handleManagmentClick = () => {
+        setOpenManagment(!openManagment);
+    };
+
+    const container = window !== undefined ? () => window().document.body : undefined;
+
     return (
         <>
             <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
+                <CssBaseline/>
                 <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleOpenNavMenu}
                     color="inherit"
+                    size="large"
+                    aria-label="open drawer"
+                    edge="start"
+                    onClick={handleDrawerToggle}
                 >
                     <MenuIcon/>
                 </IconButton>
-                <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorElNav}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
+                <Drawer
+                    container={container}
+                    variant="temporary"
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                    ModalProps={{
+                        keepMounted: true, // Better open performance on mobile.
                     }}
-                    keepMounted
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'left',
-                    }}
-                    open={Boolean(anchorElNav)}
-                    onClose={handleCloseNavMenu}
                     sx={{
                         display: {xs: 'block', md: 'none'},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                     }}
                 >
-                    <MenuItem key={"submit_data"} onClick={handleCloseNavMenu}>
-                        {
-                            isLoggedIn ?
-                                <Typography color="inherit" component="a" href="/docs/management/overview">Submit
-                                    data</Typography> :
-                                <Typography color="inherit" component="a" href="/register">Submit
-                                    data</Typography>
-                        }
-                    </MenuItem>
-                    <MenuItem key={"doc_menu"}>
-                        <DocsDropdownMenu/>
-                    </MenuItem>
-                    <MenuItem key={"about"} onClick={handleCloseNavMenu}>
-                        <Typography color="inherit" component="a" href="/about">About</Typography>
-                    </MenuItem>
-                    <MenuItem key={"help"} onClick={handleCloseNavMenu}>
-                        <Typography color="inherit" component="a" href="/help">Help</Typography>
-                    </MenuItem>
-                    <Divider/>
-                    <MenuItem key={"search_form"}>
-                        <SearchForm/>
-                    </MenuItem>
-                    <Divider/>
-                    {isLoggedIn ? null :
-                        <MenuItem key={"register"} onClick={handleCloseNavMenu}>
-                            <Typography color="inherit" component="a"
-                                        href="/register">Register</Typography>
-                        </MenuItem>}
-                    {isLoggedIn ? null :
-                        <MenuItem key={"login"} onClick={handleCloseNavMenu}>
-
-                            <Typography color="inherit" component="a" href="/login">Login</Typography>
-                        </MenuItem>}
-                    {isLoggedIn ?
-                        <MenuItem key={"update_password"} onClick={handleCloseNavMenu}>
-                            <Typography color="inherit" component="a" href="/update_password">Update
-                                Password</Typography>
-                        </MenuItem> : null}
-                    {isLoggedIn ?
-                        <MenuItem key={"logout"} onClick={handleCloseNavMenu}>
-                            <Typography color="inherit" component="a" href="/">Logout</Typography>
-                        </MenuItem> : null}
-                </Menu>
+                    <div>
+                        <Toolbar/>
+                        <List>
+                            {
+                                isLoggedIn ?
+                                    <ListItem button component="a" href="/docs/management/overview" disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <UploadIcon/>
+                                            </ListItemIcon>
+                                            <ListItemText primary="Submit data"/>
+                                        </ListItemButton>
+                                    </ListItem>
+                                    :
+                                    <ListItem button component="a" href="/register" disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <UploadIcon/>
+                                            </ListItemIcon>
+                                            <ListItemText primary="Submit data"/>
+                                        </ListItemButton>
+                                    </ListItem>
+                            }
+                            <ListItemButton onClick={handleDocsClick}>
+                                <ListItemIcon>
+                                    <ArticleIcon/>
+                                </ListItemIcon>
+                                <ListItemText primary="Documentation"/>
+                                {openDocs ? <ExpandLess/> : <ExpandMore/>}
+                            </ListItemButton>
+                            <Collapse in={openDocs} timeout="auto" unmountOnExit>
+                                <List component="div" disablePadding>
+                                    <ListItemButton sx={{pl: 4}} onClick={handleSearchClick}>
+                                        <ListItemIcon>
+                                            <SearchIcon/>
+                                        </ListItemIcon>
+                                        <ListItemText primary="Searching Track Hubs"/>
+                                        {openSearch ? <ExpandLess/> : <ExpandMore/>}
+                                    </ListItemButton>
+                                    <Collapse in={openSearch} timeout="auto" unmountOnExit>
+                                        <List component="div" disablePadding>
+                                            <ListItem button component="a" href="/docs/search"  sx={{pl: 8}}>
+                                                <ListItemIcon>
+                                                    <SearchIcon/>
+                                                </ListItemIcon>
+                                                <ListItemText primary="Basic Search"/>
+                                            </ListItem>
+                                        </List>
+                                        <List component="div" disablePadding>
+                                            <ListItem button component="a" href="/docs/search/advanced"  sx={{pl: 8}}>
+                                                <ListItemIcon>
+                                                    <SearchIcon/>
+                                                </ListItemIcon>
+                                                <ListItemText primary="Advanced Search"/>
+                                            </ListItem>
+                                        </List>
+                                    </Collapse>
+                                    <ListItemButton sx={{pl: 4}} onClick={handleManagmentClick}>
+                                        <ListItemIcon>
+                                            <ImportContactsIcon/>
+                                        </ListItemIcon>
+                                        <ListItemText primary="Registering/Managing Track Hubs"/>
+                                        {openManagment ? <ExpandLess/> : <ExpandMore/>}
+                                    </ListItemButton>
+                                    <Collapse in={openManagment} timeout="auto" unmountOnExit>
+                                        <List component="div" disablePadding>
+                                            <ListItem button component="a" href="/docs/management/overview"  sx={{pl: 8}}>
+                                                <ListItemIcon>
+                                                    <ImportContactsIcon/>
+                                                </ListItemIcon>
+                                                <ListItemText primary="Overview"/>
+                                            </ListItem>
+                                        </List>
+                                        <List component="div" disablePadding>
+                                            <ListItem button component="a" href="/docs/management/assembly_support"  sx={{pl: 8}}>
+                                                <ListItemIcon>
+                                                    <ImportContactsIcon/>
+                                                </ListItemIcon>
+                                                <ListItemText primary="Supported Genome Assemblies"/>
+                                            </ListItem>
+                                        </List>
+                                        <List component="div" disablePadding>
+                                            <ListItem button component="a" href="/docs/management/modelling"  sx={{pl: 8}}>
+                                                <ListItemIcon>
+                                                    <ImportContactsIcon/>
+                                                </ListItemIcon>
+                                                <ListItemText primary="Modelling Track Hubs"/>
+                                            </ListItem>
+                                        </List>
+                                        <List component="div" disablePadding>
+                                            <ListItem button component="a" href="/docs/management/dashboard"  sx={{pl: 8}}>
+                                                <ListItemIcon>
+                                                    <ImportContactsIcon/>
+                                                </ListItemIcon>
+                                                <ListItemText primary="Dashboard"/>
+                                            </ListItem>
+                                        </List>
+                                    </Collapse>
+                                    <ListItemButton sx={{pl: 4}}>
+                                        <ListItemIcon>
+                                            <HttpIcon/>
+                                        </ListItemIcon>
+                                        <ListItemText primary="Registry APIs"/>
+                                    </ListItemButton>
+                                    <ListItemButton sx={{pl: 4}}>
+                                        <ListItemIcon>
+                                            <DataObjectIcon/>
+                                        </ListItemIcon>
+                                        <ListItemText primary="TrackDB JSON specification"/>
+                                    </ListItemButton>
+                                </List>
+                            </Collapse>
+                            <ListItem button component="a" href="/about" disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <InfoIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText primary="About"/>
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem button component="a" href="/help" disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <HelpIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText primary="Help"/>
+                                </ListItemButton>
+                            </ListItem>
+                        </List>
+                        <Divider/>
+                        <List>
+                            {
+                                isLoggedIn ?
+                                    null
+                                    :
+                                    <ListItem button component="a" href="/register" disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <HowToRegIcon/>
+                                            </ListItemIcon>
+                                            <ListItemText primary="Register"/>
+                                        </ListItemButton>
+                                    </ListItem>
+                            }
+                            {
+                                isLoggedIn ?
+                                    null
+                                    :
+                                    <ListItem button component="a" href="/login" disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <LoginIcon/>
+                                            </ListItemIcon>
+                                            <ListItemText primary="Login"/>
+                                        </ListItemButton>
+                                    </ListItem>
+                            }
+                            {
+                                isLoggedIn ?
+                                    <ListItem button component="a" href="/user" disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <DashboardIcon/>
+                                            </ListItemIcon>
+                                            <ListItemText primary="Dashboard"/>
+                                        </ListItemButton>
+                                    </ListItem>
+                                    :
+                                    null
+                            }
+                            {
+                                isLoggedIn ?
+                                    <ListItem button component="a" href="/update_password" disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <VpnKeyIcon/>
+                                            </ListItemIcon>
+                                            <ListItemText primary="Update Password"/>
+                                        </ListItemButton>
+                                    </ListItem>
+                                    :
+                                    null
+                            }
+                            {
+                                isLoggedIn ?
+                                    <ListItem button component="a" href="/login" disablePadding>
+                                        <ListItemButton>
+                                            <ListItemIcon>
+                                                <LogoutIcon/>
+                                            </ListItemIcon>
+                                            <ListItemText primary="Logout"/>
+                                        </ListItemButton>
+                                    </ListItem>
+                                    :
+                                    null
+                            }
+                        </List>
+                    </div>
+                </Drawer>
             </Box>
 
             <Typography
@@ -135,5 +309,16 @@ export default function SandwichMenu() {
                 The Track Hub Registry
             </Typography>
         </>
+
     );
 }
+
+SandwichMenu.propTypes = {
+    /**
+     * Injected by the documentation to work in an iframe.
+     * You won't need it on your project.
+     */
+    window: PropTypes.func,
+};
+
+export default SandwichMenu;
