@@ -186,18 +186,18 @@ function SandwichMenu(props) {
                                             </ListItem>
                                         </List>
                                     </Collapse>
-                                    <ListItemButton sx={{pl: 4}}>
+                                    <ListItem button component="a" href="/docs/apis" sx={{pl: 4}}>
                                         <ListItemIcon>
                                             <HttpIcon/>
                                         </ListItemIcon>
                                         <ListItemText primary="Registry APIs"/>
-                                    </ListItemButton>
-                                    <ListItemButton sx={{pl: 4}}>
+                                    </ListItem>
+                                    <ListItem button component="a" href="/docs/management/modelling" sx={{pl: 4}}>
                                         <ListItemIcon>
                                             <DataObjectIcon/>
                                         </ListItemIcon>
                                         <ListItemText primary="TrackDB JSON specification"/>
-                                    </ListItemButton>
+                                    </ListItem>
                                 </List>
                             </Collapse>
                             <ListItem button component="a" href="/about" disablePadding>
