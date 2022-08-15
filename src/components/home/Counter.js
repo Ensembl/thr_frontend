@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import {BarChart, Bar, XAxis, YAxis, ResponsiveContainer} from 'recharts';
 import React, {useEffect} from "react";
 import * as settings from "../../settings";
 import axios from "axios";

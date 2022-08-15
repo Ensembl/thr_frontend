@@ -72,13 +72,13 @@ const Trackdb = ({trackdb}) => {
                     <InnerHTML html={trackdb.hub.long_label}/>
                     <br/>
                 </Box>
-                <Grid xs={6} sm={6} md={12}>
+                <Grid item xs={6} sm={6} md={12}>
                     <strong>Species:</strong> {trackdb.species.taxon_id} - {trackdb.species.scientific_name}
                     <br/>
                     <strong>Assembly:</strong> {trackdb.assembly.accession} - {trackdb.assembly.name}
                 </Grid>
 
-                <Grid sx={styles.stautsInfo} xs={6} sm={6} md={12}>
+                <Grid item sx={styles.stautsInfo} xs={6} sm={6} md={12}>
                     {
                         trackdb.status ?
                             <TrackdbStatusChip trackdbStatus={currentTrackdbStatus}></TrackdbStatusChip>
@@ -87,7 +87,6 @@ const Trackdb = ({trackdb}) => {
                     }
                     <Button
                         sx={styles.chipContent}
-                        noWrap
                         size="small"
                         variant="outlined"
                         href={`/search/trackhub_view/${trackdb.trackdb_id}`}

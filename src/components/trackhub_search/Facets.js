@@ -58,7 +58,7 @@ export default function Facets({params, facetsFilters}) {
                 <AccordionDetails>
                     {
                         filtersNames.map((filterName, index) => (
-                            <Typography sx={styles.item}>
+                            <Typography key={index} sx={styles.item}>
                                 {
                                     params.get(filterName) &&
                                     <CurrentFiltersChips params={params} filter={filterName}/>

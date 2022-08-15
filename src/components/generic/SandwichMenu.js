@@ -120,7 +120,6 @@ export default function SandwichMenu() {
 
             <Typography
                 variant="h6"
-                noWrap
                 component="a"
                 href="/"
                 sx={{

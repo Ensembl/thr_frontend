@@ -35,7 +35,6 @@ export default function TopBar() {
                     <Toolbar disableGutters>
                         <Typography
                             variant="h6"
-                            noWrap
                             component="a"
                             href="/"
                             sx={{

@@ -98,10 +98,9 @@ const SearchResultSkeleton = () => {
                     {
                         // Repeat Box 5 times
                         [...Array(5)].map((elementInArray, index) => (
-                            <div>
+                            <Box key={index}>
                                 <Box sx={styles.paperContent} key={index}>
                                     <Skeleton variant="text" width={140} height={40}/>
-                                    <div>
                                         <Skeleton variant="text" height={30}/>
                                         <Skeleton variant="text" width={300} height={25}/>
                                         <br/>
@@ -109,10 +108,9 @@ const SearchResultSkeleton = () => {
                                                   style={{float: 'right'}}/>
                                         <Skeleton variant="text" width={200} height={25}/>
                                         <Skeleton variant="text" width={260} height={25}/>
-                                    </div>
                                 </Box>
                                 <br/>
-                            </div>)
+                            </Box>)
                         )
                     }
                 </Grid>
