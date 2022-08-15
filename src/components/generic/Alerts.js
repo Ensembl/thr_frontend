@@ -15,29 +15,29 @@
  */
 
 import React from 'react';
-import makeStyles from '@mui/styles/makeStyles';
 import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Collapse from '@mui/material/Collapse';
+import {Box} from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
+const styles = {
     root: {
         width: '100%',
         '& > * + *': {
-            marginTop: theme.spacing(2),
+            marginTop: 2,
         },
-        marginTop: theme.spacing(3),
-        marginBottom: theme.spacing(3),
+        marginTop: 3,
+        marginBottom: 3,
     },
-}));
+};
 
 export default function Alerts({messageType, message}) {
-    const classes = useStyles();
+
     const [open, setOpen] = React.useState(true);
 
     return (
-        <div className={classes.root}>
+        <Box sx={styles.root}>
             {/*<Alert severity="info">This is an info alert — check it out!</Alert>*/}
             <Collapse in={open}>
                 <Alert
@@ -58,6 +58,6 @@ export default function Alerts({messageType, message}) {
                     {message}
                 </Alert>
             </Collapse>
-        </div>
+        </Box>
     );
 }

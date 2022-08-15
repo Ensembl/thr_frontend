@@ -1,24 +1,15 @@
 import React from 'react';
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import makeStyles from '@mui/styles/makeStyles';
 import MainBreadcrumbs from "./generic/MainBreadcrumb";
-import {Divider} from "@mui/material";
-
-const useStyles = makeStyles({
-    root: {
-        marginTop: '70px'
-    }
-});
+import {Box, Divider} from "@mui/material";
 
 function Help() {
-    const classes = useStyles();
-
     return (
         <Container component="main" maxWidth="lg">
             <MainBreadcrumbs item="Help"></MainBreadcrumbs>
 
-            <div className={classes.root}>
+            <Box sx={{ marginTop: 5 }}>
                 <Typography component="h1" variant="h5">
                     Getting Help and Contacts
                 </Typography>
@@ -33,7 +24,7 @@ function Help() {
                         problem you might have about using the Trackhub Registry service.
                     </p>
                 </div>
-            </div>
+            </Box>
         </Container>
     );
 }
