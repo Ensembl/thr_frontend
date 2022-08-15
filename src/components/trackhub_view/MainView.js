@@ -59,7 +59,7 @@ function MainView(props) {
     }
     else if (httpStatusCode === 200 && trackDbInfo !== undefined) {
         return (
-            <div>
+            <>
                 <MainBreadcrumb item={trackDbInfo.hub.name + ' - ' + trackDbInfo.assembly.accession}/><br/>
                 <Tags
                     hubName={trackDbInfo.hub.name}
@@ -67,13 +67,11 @@ function MainView(props) {
                     assemblyAccession={trackDbInfo.assembly.accession}
                 />
                 <TrackHubPanels trackDbInfo={trackDbInfo}/>
-            </div>
+            </>
         );
     }
     else {
-        return <>
-            <MainViewSkeleton />
-        </>;
+        return <MainViewSkeleton/>;
     }
 }
 

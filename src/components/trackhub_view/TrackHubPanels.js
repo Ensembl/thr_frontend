@@ -15,7 +15,6 @@
  */
 
 import React from 'react';
-import makeStyles from '@mui/styles/makeStyles';
 import Paper from '@mui/material/Paper';
 import Grid from "@mui/material/Grid";
 import Chip from "@mui/material/Chip";
@@ -35,40 +34,33 @@ import GenomeBrowsersLinks from "./GenomeBrowsersLinks";
 import Typography from "@mui/material/Typography";
 import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
+import {Box} from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
+
+const styles = {
     paper: {
-        padding: theme.spacing(1),
+        padding: 1,
     },
     paperContent: {
         margin: "20px",
-        fontWeight: 400,
-    },
-    PanelTitle: {
-        // fontWeight: 500,
-        marginBottom: "10px"
     },
     PanelContent: {
         lineHeight: "2em"
     },
     chipContent: {
-        marginLeft: "8px",
+        marginLeft: 1,
         borderRadius: "10px",
     },
     trackStatus: {
         float: "right",
         fontSize: "12px",
-        borderRadius: "0px"
     },
     browserView: {
         float: "right",
         marginTop: "-70px"
     },
     divider: {
-        marginBottom: "15px"
+        marginBottom: 2,
     },
     shortDivider: {
         margin: 'auto',
@@ -78,38 +70,37 @@ const useStyles = makeStyles((theme) => ({
     largeIcon: {
         marginBottom: "-7px"
     },
-}));
+};
 
 export default function TrackHubPanels({trackDbInfo}) {
-    const classes = useStyles();
 
     return (
         <React.Fragment>
             <Grid container spacing={3}>
                 {/***** General Info Panel ******/}
-                <Grid item xs={6}>
-                    <Paper className={classes.paper} elevation={2}>
-                        <div className={classes.paperContent}>
-                            <Typography component="h3" variant="h6" className={classes.PanelTitle}>
+                <Grid item xs={12} sm={12} md={6}>
+                    <Paper sx={styles.paper} elevation={2}>
+                        <Box sx={styles.paperContent}>
+                            <Typography component="h3" variant="h6">
                                 General Info
                             </Typography>
-                            <Divider className={classes.divider}/>
-                            <div className={classes.PanelContent}>
-                                <div className={classes.trackStatus}>
+                            <Divider sx={styles.divider}/>
+                            <Box sx={styles.PanelContent}>
+                                <Box sx={styles.trackStatus}>
                                     <TrackdbStatusChip trackdbStatus={trackDbInfo.status.message}/>
                                     <Moment unix>{trackDbInfo.status.last_update}</Moment>
-                                </div>
+                                </Box>
                                 <div>
                                     Remote data tracks:
                                     <Chip
                                         label={trackDbInfo.status.tracks.with_data.total}
-                                        className={classes.chipContent}
+                                        sx={styles.chipContent}
                                         color={"primary"}
                                         size="small"
                                     />
                                 </div>
                                 <div>Data Type:
-                                    <Chip label={trackDbInfo.type} className={classes.chipContent} size="small"/>
+                                    <Chip label={trackDbInfo.type} sx={styles.chipContent} size="small"/>
                                 </div>
                                 <div>File type(s):
                                     <List>
@@ -118,7 +109,7 @@ export default function TrackHubPanels({trackDbInfo}) {
                                                 ([fileType, fileTypeCount]) =>
                                                     <ListItem key={fileType}>
                                                         {fileType}: <Chip label={fileTypeCount}
-                                                                          className={classes.chipContent}
+                                                                          sx={styles.chipContent}
                                                                           color={"primary"}
                                                                           size="small"/>
                                                     </ListItem>
@@ -126,16 +117,16 @@ export default function TrackHubPanels({trackDbInfo}) {
                                         }
                                     </List>
                                 </div>
-                                <div className={classes.browserView}>
+                                <Box sx={styles.browserView}>
                                     <GenomeBrowsersLinks
                                         trackdbBrowserLinks={trackDbInfo.browser_links}
                                         assemblyAccession={trackDbInfo.assembly.accession}
                                         hubUrl={trackDbInfo.hub.url}
                                     />
-                                </div>
+                                </Box>
                                 <div>Source URL:
                                     <Button
-                                        className={classes.chipContent}
+                                        sx={styles.chipContent}
                                         size="small"
                                         variant="outlined"
                                         href={trackDbInfo.source.url}
@@ -143,29 +134,29 @@ export default function TrackHubPanels({trackDbInfo}) {
                                         rel="noreferrer">View
                                     </Button>
                                 </div>
-                            </div>
-                        </div>
+                            </Box>
+                        </Box>
                     </Paper>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={12} md={6}>
                     {/***** Hub Panel ******/}
                     <Grid item xs={12}>
-                        <Paper className={classes.paper}>
-                            <div className={classes.paperContent}>
-                                <Typography component="h3" variant="h6" className={classes.PanelTitle}>
+                        <Paper sx={styles.paper}>
+                            <Box sx={styles.paperContent}>
+                                <Typography component="h3" variant="h6">
                                     Hub
                                 </Typography>
-                                <Divider className={classes.divider}/>
-                                <div className={classes.PanelContent}>
+                                <Divider sx={styles.divider}/>
+                                <Box sx={styles.PanelContent}>
                                     <div><strong>Name:</strong> {trackDbInfo.hub.name}</div>
                                     <div><strong>Short Label:</strong> {trackDbInfo.hub.short_label}</div>
                                     <div><strong>Long Label:</strong> {parse(`${trackDbInfo.hub.long_label}`)}</div>
                                     <div><strong>Assembly Hub:</strong>
-                                        {trackDbInfo.hub.assembly || <CloseIcon className={classes.largeIcon}/>}
+                                        {trackDbInfo.hub.assembly || <CloseIcon sx={styles.largeIcon}/>}
                                     </div>
                                     <div><strong>Public URL:</strong>
                                         <Button
-                                            className={classes.chipContent}
+                                            sx={styles.chipContent}
                                             size="small"
                                             variant="outlined"
                                             href={trackDbInfo.hub.url}
@@ -173,21 +164,20 @@ export default function TrackHubPanels({trackDbInfo}) {
                                             rel="noreferrer">View
                                         </Button>
                                     </div>
-                                </div>
-
-                            </div>
+                                </Box>
+                            </Box>
                         </Paper>
                     </Grid>
                     <br/>
                     {/***** Species Panel ******/}
                     <Grid item xs={12}>
-                        <Paper className={classes.paper}>
-                            <div className={classes.paperContent}>
-                                <Typography component="h3" variant="h6" className={classes.PanelTitle}>
+                        <Paper sx={styles.paper}>
+                            <Box sx={styles.paperContent}>
+                                <Typography component="h3" variant="h6">
                                     Species
                                 </Typography>
-                                <Divider className={classes.divider}/>
-                                <div className={classes.PanelContent}>
+                                <Divider sx={styles.divider}/>
+                                <Box sx={styles.PanelContent}>
                                     <div>
                                         <strong>
                                             <a href={`http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${trackDbInfo.species.taxon_id}`}
@@ -195,7 +185,7 @@ export default function TrackHubPanels({trackDbInfo}) {
                                         </strong>
                                         <Chip
                                             label={trackDbInfo.species.taxon_id}
-                                            className={classes.chipContent}
+                                            sx={styles.chipContent}
                                             color="primary"
                                             component="a"
                                             size="small"
@@ -208,9 +198,9 @@ export default function TrackHubPanels({trackDbInfo}) {
                                     <div><strong>Scientific name:</strong> {trackDbInfo.species.scientific_name}</div>
                                     <div><strong>Common name:</strong> {trackDbInfo.species.common_name}</div>
 
-                                    <Divider className={classes.shortDivider}/>
+                                    <Divider sx={styles.shortDivider}/>
                                     <br/>
-                                    <Typography component="h3" variant="h6" className={classes.PanelTitle}>
+                                    <Typography component="h3" variant="h6">
                                         Assembly Information
                                     </Typography>
                                     <TableContainer component={Paper}>
@@ -230,14 +220,14 @@ export default function TrackHubPanels({trackDbInfo}) {
                                                             {trackDbInfo.assembly.accession}</a>
                                                     </TableCell>
                                                     <TableCell>{trackDbInfo.assembly.name}</TableCell>
-                                                    <TableCell>{trackDbInfo.assembly.mong_name}</TableCell>
+                                                    <TableCell>{trackDbInfo.assembly.common_name}</TableCell>
                                                     <TableCell>{trackDbInfo.assembly.ucsc_synonym}</TableCell>
                                                 </TableRow>
                                             </TableBody>
                                         </Table>
                                     </TableContainer>
-                                </div>
-                            </div>
+                                </Box>
+                            </Box>
 
                         </Paper>
                     </Grid>
@@ -246,13 +236,13 @@ export default function TrackHubPanels({trackDbInfo}) {
                 {
                     trackDbInfo.status.tracks.with_data.total_ko > 0 ?
                         <Grid item xs={12}>
-                            <Paper className={classes.paper}>
-                                <div className={classes.paperContent}>
-                                    <Typography component="h3" variant="h6" className={classes.PanelTitle}>
+                            <Paper sx={styles.paper}>
+                                <Box sx={styles.paperContent}>
+                                    <Typography component="h3" variant="h6">
                                         Error Log
                                     </Typography>
-                                    <Divider className={classes.divider}/>
-                                    <div className={classes.PanelContent}>
+                                    <Divider sx={styles.divider}/>
+                                    <Box sx={styles.PanelContent}>
                                         <div>
                                             <strong>
                                                 {trackDbInfo.status.tracks.with_data.total_ko} / {trackDbInfo.status.tracks.total}
@@ -263,7 +253,7 @@ export default function TrackHubPanels({trackDbInfo}) {
                                             }
                                         </div>
                                         <TableContainer component={Paper}>
-                                            <Table className={classes.table} aria-label="simple table">
+                                            <Table sx={styles.table} aria-label="simple table">
                                                 <TableHead>
                                                     <TableRow>
                                                         <TableCell>#</TableCell>
@@ -289,8 +279,8 @@ export default function TrackHubPanels({trackDbInfo}) {
                                                 </TableBody>
                                             </Table>
                                         </TableContainer>
-                                    </div>
-                                </div>
+                                    </Box>
+                                </Box>
                             </Paper>
                         </Grid>
                         : null
