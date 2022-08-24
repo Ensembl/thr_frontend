@@ -47,7 +47,11 @@ const Trackdb = ({trackdb}) => {
 
     // We can access the theme variables inside your functional React components using the useTheme hook
     const theme = useTheme();
-    let currentTrackdbStatus = trackdb.status.message
+
+    let currentTrackdbStatus = undefined;
+    if(trackdb.status) {
+        currentTrackdbStatus = trackdb.status.message
+    }
     let BoxBorderColor;
 
     // Change border color based on the trackdb status
