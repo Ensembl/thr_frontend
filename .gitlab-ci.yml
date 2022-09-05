@@ -32,7 +32,7 @@ unit-test:
   stage: test
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:14.17.3
   script:
-    - npm test
+    - npm test --passWithNoTests
 
 ## Build
 
