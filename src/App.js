@@ -24,14 +24,15 @@ import {alertActions} from './redux/actions';
 
 import './static/css/style.css';
 
-import {ThemeProvider} from '@material-ui/styles';
-// Fix findDOMNode is deprecated in StrictMode: https://stackoverflow.com/q/61220424/4488332
-// import {unstable_createMuiStrictModeTheme as createMuiTheme} from '@material-ui/core/styles';
-import {createMuiTheme} from '@material-ui/core/styles';
+// import { ThemeProvider, StyledEngineProvider } from '@mui/styles';
+// Had to manually edit this one to fix:
+// Attempted import error: 'StyledEngineProvider' is not exported from '@mui/styles
+import { ThemeProvider, StyledEngineProvider } from '@mui/material';
+import { createTheme, adaptV4Theme } from '@mui/material/styles';
 import CookiesBanner from "./components/generic/CookiesBanner";
 
 // The main colours and fonts used in the application
-const theme = createMuiTheme({
+const theme = createTheme(adaptV4Theme({
     palette: {
         default: {
             main: '#e7e7e7',
@@ -61,7 +62,7 @@ const theme = createMuiTheme({
             textTransform: 'none'
         }
     },
-});
+}));
 
 function App(props) {
 
@@ -75,14 +76,16 @@ function App(props) {
     }, []);
 
     return (
-        <ThemeProvider theme={theme}>
-            <div className="App">
-                <Layout {...props}>
-                    <Urls/>
-                </Layout>
-            </div>
-            <CookiesBanner/>
-        </ThemeProvider>
+        <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <div className="App">
+                    <Layout {...props}>
+                        <Urls/>
+                    </Layout>
+                </div>
+                <CookiesBanner/>
+            </ThemeProvider>
+        </StyledEngineProvider>
     );
 }
 

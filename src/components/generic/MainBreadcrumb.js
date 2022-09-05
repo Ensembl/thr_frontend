@@ -15,13 +15,12 @@
  */
 
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Link from '@material-ui/core/Link';
-import {makeStyles} from "@material-ui/core/styles";
+import Typography from '@mui/material/Typography';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
 
 
-const useStyles = makeStyles((theme) => ({
+const styles = {
     root: {
         margin: "10px",
         padding: "6px 12px",
@@ -30,15 +29,14 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#f5f5f5",
         fontSize: "14px",
     },
-}));
+};
 
 export default function MainBreadcrumb(props) {
-    const classes = useStyles();
 
     const { item } = props
 
     return (
-        <Breadcrumbs color="primary" aria-label="breadcrumb" className={classes.root}>
+        <Breadcrumbs color="primary" aria-label="breadcrumb" sx={styles.root}>
             <Link color="inherit" href="/">Home</Link>
             <Typography color="textPrimary">{ item }</Typography>
         </Breadcrumbs>

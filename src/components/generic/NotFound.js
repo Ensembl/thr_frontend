@@ -16,8 +16,8 @@
 
 import React from 'react';
 import {Link} from "react-router-dom";
-import {ArrowBack} from "@material-ui/icons";
-import {Alert} from "@material-ui/lab";
+import {ArrowBack} from "@mui/icons-material";
+import { Alert } from '@mui/material';
 
 
 function NotFound() {

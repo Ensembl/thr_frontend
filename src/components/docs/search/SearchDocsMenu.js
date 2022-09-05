@@ -15,19 +15,19 @@
  */
 
 import React, {useEffect} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import {Link} from "react-router-dom";
 import {HashLink} from "react-router-hash-link";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import {Collapse, ListSubheader} from "@material-ui/core";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import SearchIcon from '@material-ui/icons/Search';
-import ListItemText from "@material-ui/core/ListItemText";
-import {ExpandLess, ExpandMore} from "@material-ui/icons";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import {Collapse, ListSubheader} from "@mui/material";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import SearchIcon from '@mui/icons-material/Search';
+import ListItemText from "@mui/material/ListItemText";
+import {ExpandLess, ExpandMore} from "@mui/icons-material";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
 
 const drawerWidth = 300;
 

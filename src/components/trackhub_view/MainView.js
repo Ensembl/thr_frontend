@@ -20,9 +20,9 @@ import MainBreadcrumb from "../generic/MainBreadcrumb";
 import * as settings from "../../settings";
 import axios from "axios";
 import Tags from "./Tags";
-import {Alert} from "@material-ui/lab";
+import { Alert } from '@mui/material';
 import {Link} from "react-router-dom";
-import {ArrowBack} from "@material-ui/icons";
+import {ArrowBack} from "@mui/icons-material";
 import MainViewSkeleton from "./MainViewSkeleton";
 
 
@@ -59,7 +59,7 @@ function MainView(props) {
     }
     else if (httpStatusCode === 200 && trackDbInfo !== undefined) {
         return (
-            <div>
+            <>
                 <MainBreadcrumb item={trackDbInfo.hub.name + ' - ' + trackDbInfo.assembly.accession}/><br/>
                 <Tags
                     hubName={trackDbInfo.hub.name}
@@ -67,13 +67,11 @@ function MainView(props) {
                     assemblyAccession={trackDbInfo.assembly.accession}
                 />
                 <TrackHubPanels trackDbInfo={trackDbInfo}/>
-            </div>
+            </>
         );
     }
     else {
-        return <>
-            <MainViewSkeleton />
-        </>;
+        return <MainViewSkeleton/>;
     }
 }
 

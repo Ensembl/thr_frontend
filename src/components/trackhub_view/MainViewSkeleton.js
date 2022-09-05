@@ -15,78 +15,90 @@
  */
 
 import React from 'react';
-import {Skeleton} from "@material-ui/lab";
-import {makeStyles} from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
-import TableContainer from "@material-ui/core/TableContainer";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import {Typography} from "@material-ui/core";
+import { Skeleton } from '@mui/material';
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
+import TableContainer from "@mui/material/TableContainer";
+import Table from "@mui/material/Table";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import {Typography} from "@mui/material";
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
+const styles = {
+    tagsStyle: {
         display: 'flex',
         flexWrap: 'wrap',
         marginBottom: "15px",
         '& > *': {
-            margin: theme.spacing(0.5),
+            margin: 0.5,
         },
+        "& .MuiChip-root": {
+            borderRadius: 0
+        }
     },
     paper: {
-        padding: theme.spacing(1),
+        padding: 1,
     },
     paperContent: {
         margin: "20px",
-        fontWeight: 400,
-    },
-    PanelTitle: {
-        // fontWeight: 500,
-        marginBottom: "10px"
     },
     PanelContent: {
         lineHeight: "2em"
     },
+    chipContent: {
+        marginLeft: 1,
+        borderRadius: "10px",
+    },
+    trackStatus: {
+        float: "right",
+        fontSize: "12px",
+    },
+    browserView: {
+        float: "right",
+        marginTop: "-70px"
+    },
     divider: {
-        marginBottom: "15px"
+        marginBottom: 2,
     },
     shortDivider: {
         margin: 'auto',
         marginTop: '15px',
         width: 200,
     },
-}));
+    largeIcon: {
+        marginBottom: "-7px"
+    },
+};
 
 
 function MainViewSkeleton() {
-    const classes = useStyles();
 
     return (
-        <div>
+        <>
             {/*MainBreadcrumb*/}
             <Skeleton variant="rectangular" height={35}/>
             <br/><br/>
             {/*Tags*/}
-            <div className={classes.root}>
+            <Box sx={styles.tagsStyle}>
                 <Skeleton variant="rectangular" width={100} height={30}/>
                 <Skeleton variant="rectangular" width={150} height={30}/>
                 <Skeleton variant="rectangular" width={130} height={30}/>
-            </div>
+            </Box>
             {/*TrackHubPanels*/}
             <Grid container spacing={3}>
                 {/***** General Info Panel ******/}
-                <Grid item xs={6}>
-                    <Paper className={classes.paper} elevation={2}>
-                        <div className={classes.paperContent}>
-                            <Typography className={classes.PanelTitle}>
+                <Grid item xs={12} sm={12} md={6}>
+                    <Paper sx={styles.paper} elevation={2}>
+                        <Box sx={styles.paperContent}>
+                            <Typography sx={styles.PanelTitle}>
                                 <Skeleton variant="text" width={200} height={50}/>
                             </Typography>
-                            <Divider className={classes.divider}/>
-                            <div className={classes.PanelContent}>
+                            <Divider sx={styles.divider}/>
+                            <Box sx={styles.PanelContent}>
                                 {/*Status*/}
                                 <Skeleton variant="rectangular" width={150} height={30} style={{float: 'right'}}/>
                                 {/*Remote data tracks*/}
@@ -98,21 +110,21 @@ function MainViewSkeleton() {
                                 <Skeleton variant="text" width={150} height={40}/>
                                 {/*Source URL*/}
                                 <Skeleton variant="text" width={220} height={40}/>
-                            </div>
-                        </div>
+                            </Box>
+                        </Box>
                     </Paper>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={12} md={6}>
                     {/***** Hub Panel ******/}
                     <Grid item xs={12}>
-                        <Paper className={classes.paper}>
-                            <div className={classes.paperContent}>
-                                <h3 className={classes.PanelTitle}>
+                        <Paper sx={styles.paper}>
+                            <Box sx={styles.paperContent}>
+                                <h3 sx={styles.PanelTitle}>
                                     {/*Hub*/}
                                     <Skeleton variant="text" width={50} height={50}/>
                                 </h3>
-                                <Divider className={classes.divider}/>
-                                <div className={classes.PanelContent}>
+                                <Divider sx={styles.divider}/>
+                                <Box sx={styles.PanelContent}>
                                     {/*Name*/}
                                     <Skeleton variant="text" width={100} height={40}/>
                                     {/*Short Label*/}
@@ -123,21 +135,21 @@ function MainViewSkeleton() {
                                     <Skeleton variant="text" width={100} height={40}/>
                                     {/*Public URL*/}
                                     <Skeleton variant="text" width={150} height={40}/>
-                                </div>
-                            </div>
+                                </Box>
+                            </Box>
                         </Paper>
                     </Grid>
                     <br/>
                     {/***** Species Panel ******/}
                     <Grid item xs={12}>
-                        <Paper className={classes.paper}>
-                            <div className={classes.paperContent}>
-                                <h3 className={classes.title}>
+                        <Paper sx={styles.paper}>
+                            <Box sx={styles.paperContent}>
+                                <h3 sx={styles.title}>
                                     {/*Species*/}
                                     <Skeleton variant="text" width={100} height={50}/>
                                 </h3>
-                                <Divider className={classes.divider}/>
-                                <div className={classes.PanelContent}>
+                                <Divider sx={styles.divider}/>
+                                <Box sx={styles.PanelContent}>
                                     <div>
                                         {/*Taxonomy*/}
                                         <Skeleton variant="text" width={200} height={40}/>
@@ -151,7 +163,7 @@ function MainViewSkeleton() {
                                         <Skeleton variant="text" width={250} height={40}/>
                                     </div>
 
-                                    <Divider className={classes.shortDivider}/>
+                                    <Divider sx={styles.shortDivider}/>
 
                                     <Typography>
                                         {/*Assembly Information*/}
@@ -197,13 +209,13 @@ function MainViewSkeleton() {
                                             </TableBody>
                                         </Table>
                                     </TableContainer>
-                                </div>
-                            </div>
+                                </Box>
+                            </Box>
                         </Paper>
                     </Grid>
                 </Grid>
             </Grid>
-        </div>
+        </>
     );
 }
 

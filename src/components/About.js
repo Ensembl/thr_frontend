@@ -1,28 +1,16 @@
 import React from 'react';
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import {makeStyles} from "@material-ui/core/styles";
-import {Divider} from "@material-ui/core";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import {Box, Divider} from "@mui/material";
 import MainBreadcrumbs from "./generic/MainBreadcrumb";
 
-const useStyles = makeStyles({
-    root: {
-        marginTop: '70px'
-    },
-    wt: {
-        position: "relative",
-        top: "-20px"
-    }
-});
 
 function About() {
-    const classes = useStyles();
-
     return (
         <Container component="main" maxWidth="lg">
             <MainBreadcrumbs item="About"></MainBreadcrumbs>
 
-            <div className={classes.root}>
+            <Box sx={{ marginTop: 5 }}>
                 <Typography component="h1" variant="h5">
                     About the Track Hub Registry
                 </Typography>
@@ -78,10 +66,15 @@ function About() {
                         Laboratory.
                     </p>
                     <img src={require("../static/img/bbsrc_logo.png").default} alt=""/>
-                    <img src={require("../static/img/wt_logo.png").default} className={classes.wt} alt=""/>
+                    <Box
+                        component="img"
+                        src={require("../static/img/wt_logo.png").default}
+                        alt=""
+                        sx={{ position: "relative", top: "-20px" }}
+                    />
                     <img src={require("../static/img/EMBL_logo.png").default} alt=""/>
                 </div>
-            </div>
+            </Box>
         </Container>
     );
 }

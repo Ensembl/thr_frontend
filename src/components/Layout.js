@@ -17,8 +17,8 @@
 import React from 'react';
 import TopBar from "./generic/TopBar"
 import Footer from "./generic/Footer"
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Box from "@material-ui/core/Box";
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from "@mui/material/Box";
 
 
 function Layout(props) {

@@ -15,24 +15,12 @@
  */
 
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
+import Avatar from '@mui/material/Avatar';
+import Chip from '@mui/material/Chip';
 import {useHistory} from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        '& > *': {
-            margin: theme.spacing(0.5),
-        },
-    },
-}));
 
 export default function CurrentFiltersChips({params, filter}) {
-    const classes = useStyles();
-
     const history = useHistory()
 
     const handleDelete = filter => {
@@ -42,14 +30,12 @@ export default function CurrentFiltersChips({params, filter}) {
     };
 
     return (
-        <div className={classes.root}>
-            <Chip
-                avatar={<Avatar style={{ color: 'white' }}>{filter.charAt(0).toUpperCase()}</Avatar>}
-                label={params.get(filter)}
-                onDelete={() => handleDelete(filter)}
-                color="primary"
-                variant="outlined"
-            />
-        </div>
+        <Chip
+            avatar={<Avatar style={{color: 'white'}}>{filter.charAt(0).toUpperCase()}</Avatar>}
+            label={params.get(filter)}
+            onDelete={() => handleDelete(filter)}
+            color="primary"
+            variant="outlined"
+        />
     );
 }

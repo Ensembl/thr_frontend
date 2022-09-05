@@ -15,16 +15,16 @@
  */
 
 import React from 'react';
-import {TableCell, TableHead, Typography} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
+import {TableCell, TableHead, Typography} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import MainBreadcrumb from "../../generic/MainBreadcrumb";
 import ApisDocsMenu from "./ApisDocsMenu";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Paper from "@material-ui/core/Paper";
-import TableContainer from "@material-ui/core/TableContainer";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
+import CssBaseline from "@mui/material/CssBaseline";
+import Paper from "@mui/material/Paper";
+import TableContainer from "@mui/material/TableContainer";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableRow from "@mui/material/TableRow";
 
 const useStyles = makeStyles((theme) => ({
     root: {

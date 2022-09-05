@@ -16,11 +16,11 @@
 
 import React from 'react';
 import ManagementDocsMenu from "./ManagementDocsMenu";
-import {Typography} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
+import {Typography} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import MainBreadcrumb from "../../generic/MainBreadcrumb";
 import ReactJson from 'react-json-view'
-import CssBaseline from "@material-ui/core/CssBaseline";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const useStyles = makeStyles((theme) => ({
     root: {

@@ -1,35 +1,13 @@
-/**
- * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+import * as React from 'react';
+import {styled} from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-import React from 'react';
-import {makeStyles, withStyles} from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-
-const StyledMenu = withStyles({
-    paper: {
-        border: '1px solid #d3d4d5',
-    },
-})((props) => (
+const StyledMenu = styled((props) => (
     <Menu
         elevation={0}
-        getContentAnchorEl={null}
         anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'center',
@@ -40,28 +18,30 @@ const StyledMenu = withStyles({
         }}
         {...props}
     />
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-    root: {
-        '&:focus': {
-            backgroundColor: theme.palette.primary.main,
-            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                color: theme.palette.common.white,
-            },
+))(({theme}) => ({
+    '& .MuiPaper-root': {
+        borderRadius: 2,
+        minWidth: 220,
+        boxShadow:
+            'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
+        '& .MuiMenu-list': {
+            padding: '4px 0',
+        },
+        '& .MuiMenuItem-root': {
+            color: theme.palette.common.black,
         },
     },
-}))(MenuItem);
+}));
 
-const useStyles = makeStyles((theme) => ({
+const styles = {
     customLink: {
         color: "inherit",
         textDecoration: "none",
     },
-}));
+};
 
-export default function GenomeBrowsersLinks(props) {
-    const classes = useStyles();
+export default function
+    GenomeBrowsersLinks(props) {
 
     const {trackdbBrowserLinks, assemblyAccession, hubUrl} = props
 
@@ -78,6 +58,7 @@ export default function GenomeBrowsersLinks(props) {
     return (
         <div>
             <Button
+                id="customized-button"
                 aria-controls="customized-menu"
                 aria-haspopup="true"
                 variant="contained"
@@ -89,27 +70,30 @@ export default function GenomeBrowsersLinks(props) {
             </Button>
             <StyledMenu
                 id="customized-menu"
+                MenuListProps={{
+                    'aria-labelledby': 'customized-button',
+                }}
                 anchorEl={anchorEl}
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                { trackdbBrowserLinks &&
-                    Object.entries(trackdbBrowserLinks).map(
-                        ([genomeBrowserName, genomeBrowserLink]) =>
-                            <a href={genomeBrowserLink} target="_blank" rel="noreferrer" className={classes.customLink}>
-                                <StyledMenuItem key={genomeBrowserName}>
-                                    <ListItemText primary={genomeBrowserName.toUpperCase()}/>
-                                </StyledMenuItem>
-                            </a>
-                    )
+                {trackdbBrowserLinks &&
+                Object.entries(trackdbBrowserLinks).map(
+                    ([genomeBrowserName, genomeBrowserLink]) =>
+                        <a key={genomeBrowserName} href={genomeBrowserLink} target="_blank" rel="noreferrer" sx={styles.customLink}>
+                            <MenuItem>
+                                {genomeBrowserName.toUpperCase()}
+                            </MenuItem>
+                        </a>
+                )
                 }
 
                 <a href={`https://www.ncbi.nlm.nih.gov/genome/gdv/browser/genome/?acc=${assemblyAccession}&hub=${hubUrl}`}
-                   target="_blank" rel="noreferrer" className={classes.customLink}>
-                    <StyledMenuItem key='NCBI GDV'>
-                        <ListItemText primary='NCBI GDV'/>
-                    </StyledMenuItem>
+                   target="_blank" rel="noreferrer" sx={styles.customLink}>
+                    <MenuItem key='NCBI GDV'>
+                        NCBI GDV
+                    </MenuItem>
                 </a>
             </StyledMenu>
         </div>

@@ -18,14 +18,14 @@ import React, {useState, useEffect} from 'react';
 import Trackdb from './Trackdb';
 import axios from "axios";
 import * as settings from "../../settings";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import Facets from "./Facets";
 import SearchPagination from "./SearchPagination";
-import {Alert} from "@material-ui/lab";
+import {Alert} from '@mui/material';
 import {Link} from "react-router-dom";
-import {ArrowBack} from "@material-ui/icons";
+import {ArrowBack} from "@mui/icons-material";
 import MainBreadcrumbs from "../generic/MainBreadcrumb";
-import {Typography} from "@material-ui/core";
+import {Typography} from "@mui/material";
 import SearchResultSkeleton from "./SearchResultSkeleton";
 
 const SearchResult = ({location}) => {
@@ -81,45 +81,42 @@ const SearchResult = ({location}) => {
 
     return (
         <>
-            <div>
-                <br/>
-                <MainBreadcrumbs item="Search"></MainBreadcrumbs>
-                <br/>
-                {
-                    loading && !errorMessage ? (
-                        <SearchResultSkeleton />
-                    ) : errorMessage ? (
-                        <h2>{errorMessage}</h2>
-                    ) : !totalEntries ? (
-                        <>
-                            <Alert severity="error">
-                                No results! Try with another query. <br/><br/>
-                                <Link to='/'> <ArrowBack fontSize="inherit"/> Go back to the home page</Link>
-                            </Alert>
-                        </>
-                    ) : (
-                        <Grid container spacing={3}>
-                            <Grid item xs={3}>
-                                <Facets params={params} facetsFilters={facets}></Facets>
-                            </Grid>
-                            <Grid item xs={9}>
-                                <Typography variant="h4">Search results</Typography>
-                                <Typography variant="h6" style={{display: 'flex'}}>
-                                    Page {currentFilters.page} of {Math.floor(totalEntries / 5) + 1}
-                                </Typography>
-                                <Typography variant="h6" style={{textAlign: 'right'}}>{totalEntries} Result(s)</Typography>
-                                <br/>
-                                {
-                                    trackdbs.map((trackdb, index) => (
-                                        <Trackdb key={trackdb.trackdb_id} trackdb={trackdb}/>
-                                    ))
-                                }
-                            </Grid>
-                            <SearchPagination params={params} totalEntries={totalEntries}/>
+            <MainBreadcrumbs item="Search"></MainBreadcrumbs>
+            <br/>
+            {
+                loading && !errorMessage ? (
+                    <SearchResultSkeleton/>
+                ) : errorMessage ? (
+                    <h2>{errorMessage}</h2>
+                ) : !totalEntries ? (
+                    <>
+                        <Alert severity="error">
+                            No results! Try with another query. <br/><br/>
+                            <Link to='/'> <ArrowBack fontSize="inherit"/> Go back to the home page</Link>
+                        </Alert>
+                    </>
+                ) : (
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} sm={4} md={3}>
+                            <Facets params={params} facetsFilters={facets}></Facets>
                         </Grid>
-                    )
-                }
-            </div>
+                        <Grid item xs={12} sm={8} md={9}>
+                            <Typography variant="h4">Search results</Typography>
+                            <Typography variant="h6" style={{display: 'flex'}}>
+                                Page {currentFilters.page} of {Math.floor(totalEntries / 5) + 1}
+                            </Typography>
+                            <Typography variant="h6" style={{textAlign: 'right'}}>{totalEntries} Result(s)</Typography>
+                            <br/>
+                            {
+                                trackdbs.map((trackdb, index) => (
+                                    <Trackdb key={trackdb.trackdb_id} trackdb={trackdb}/>
+                                ))
+                            }
+                        </Grid>
+                        <SearchPagination params={params} totalEntries={totalEntries}/>
+                    </Grid>
+                )
+            }
         </>
     );
 };

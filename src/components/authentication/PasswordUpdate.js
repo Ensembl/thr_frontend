@@ -16,44 +16,44 @@
 
 import React, {useState} from 'react';
 
-import {makeStyles} from '@material-ui/core/styles';
-import {Avatar, Button, Container, CssBaseline, TextField, Typography} from '@material-ui/core';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import {Avatar, Button, Container, CssBaseline, TextField, Typography} from '@mui/material';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
 import {userActions} from "../../redux/actions";
-import Alert from "@material-ui/lab/Alert";
-import {AlertTitle} from "@material-ui/lab";
+import Alert from '@mui/material/Alert';
+import { AlertTitle } from '@mui/material';
+import Box from "@mui/material/Box";
 
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
+const styles = {
+    boxStyle: {
+        marginTop: 8,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+        margin: 1,
+        backgroundColor: 'secondary.main',
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
+        marginTop: 1,
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        marginTop: 3,
+        marginBottom: 2,
     },
     success: {
-        color: theme.palette.success.main,
+        color: 'success.main',
     },
     spacingDown: {
         marginBottom: '10px'
     }
-}));
+};
 
 function PasswordUpdate() {
-    const classes = useStyles();
 
     const [inputs, setInputs] = useState({
         old_password: '',
@@ -87,14 +87,14 @@ function PasswordUpdate() {
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
-            <div className={classes.paper}>
+            <Box sx={styles.boxStyle}>
                 {alertMessageObject && alertMessageObject.success &&
                 <Alert severity={alert.type}>{alertMessageObject.success}</Alert>
                 }
-                <Avatar className={classes.avatar}>
+                <Avatar sx={styles.avatar}>
                     <VpnKeyIcon/>
                 </Avatar>
-                <Typography component="h1" variant="h5" className={classes.spacingDown}>
+                <Typography component="h1" variant="h5" sx={styles.spacingDown}>
                     Update Password
                 </Typography>
                 {alertMessageObject && alertMessageObject.non_field_errors &&
@@ -109,7 +109,7 @@ function PasswordUpdate() {
                     </ul>
                 </Alert>
                 }
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={styles.form}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -159,12 +159,12 @@ function PasswordUpdate() {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
+                        sx={styles.submit}
                     >
                         Update Password
                     </Button>
-                </form>
-            </div>
+                </Box>
+            </Box>
         </Container>
     );
 }

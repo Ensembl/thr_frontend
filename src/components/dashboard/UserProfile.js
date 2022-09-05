@@ -15,24 +15,25 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import TextField from '@material-ui/core/TextField';
-import {makeStyles} from '@material-ui/core/styles';
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Avatar from "@material-ui/core/Avatar";
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import Checkbox from "@material-ui/core/Checkbox";
+import TextField from '@mui/material/TextField';
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import Avatar from "@mui/material/Avatar";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Checkbox from "@mui/material/Checkbox";
 
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import NativeSelect from '@mui/material/NativeSelect';
 import * as settings from "../../settings";
 import axios from "axios";
 import Alerts from "../generic/Alerts";
+import {Box} from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
+
+const styles = {
     paper: {
         display: 'flex',
         flexDirection: 'column',
@@ -40,25 +41,24 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '30px'
     },
     avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.primary.dark,
+        margin: 1,
+        backgroundColor: 'primary.dark',
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
+        marginTop: 1,
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        marginTop: 3,
     },
     formControl: {
-        marginTop: theme.spacing(2),
+        marginTop: 2,
         minWidth: 200,
     },
-}));
+};
 
 
 const UserProfile = () => {
-    const classes = useStyles();
 
     const user = JSON.parse(localStorage.getItem('user'));
     const header = {'Content-Type': 'application/json', 'Authorization': `Token ${user.token}`}
@@ -110,14 +110,14 @@ const UserProfile = () => {
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
-            <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
+            <Box sx={styles.paper}>
+                <Avatar sx={styles.avatar}>
                     <AccountCircleIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Profile
                 </Typography>
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                <form sx={styles.form} noValidate onSubmit={handleSubmit}>
                     <TextField
                         disabled
                         id="username"
@@ -163,7 +163,7 @@ const UserProfile = () => {
                         margin="normal"
                         required
                     />
-                    <FormControl className={classes.formControl}>
+                    <FormControl sx={styles.formControl}>
                         <InputLabel id="check-interval-label">Check Interval</InputLabel>
                         <NativeSelect
                             // labelId="check-interval-label"
@@ -190,7 +190,7 @@ const UserProfile = () => {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
+                        sx={styles.submit}
                     >
                         Update
                     </Button>
@@ -206,7 +206,7 @@ const UserProfile = () => {
                         message={message.success}
                     ></Alerts>
                 }
-            </div>
+            </Box>
         </Container>
     );
 };

@@ -24,6 +24,21 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
+    <!--<%= process.env.REACT_APP_ENV %>-->
+    <% if (process.env.REACT_APP_ENV === 'production') { %>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-MWYRTVK1Q2"></script>
+      <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+              dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-MWYRTVK1Q2');
+      </script>
+    <% } %>
+
     <title>Track Hub Registry</title>
   </head>
   <body>

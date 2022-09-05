@@ -15,49 +15,48 @@
  */
 
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
+import Chip from '@mui/material/Chip';
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles((theme) => ({
+const styles = {
     root: {
         display: 'flex',
         flexWrap: 'wrap',
         marginBottom: "15px",
         '& > *': {
-            margin: theme.spacing(0.5),
+            margin: 0.5,
         },
         "& .MuiChip-root": {
-            borderRadius: 1
+            borderRadius: 0
         }
     },
     tag_info: {
-        backgroundColor: theme.palette.info.main,
+        backgroundColor: 'info.main',
         color: "white"
     },
     tag_success: {
-        backgroundColor: theme.palette.success.main,
+        backgroundColor: 'success.main',
         color: "white"
     },
-}));
+};
 
 export default function Tags(props) {
-    const classes = useStyles();
     const {hubName, speciesScientificName, assemblyAccession} = props
 
     return (
-        <div className={classes.root}>
+        <Box sx={styles.root}>
             <Chip
                 label={hubName}
                 color="primary"
             />
             <Chip
-                className={classes.tag_success}
+                sx={styles.tag_success}
                 label={speciesScientificName}
             />
             <Chip
-                className={classes.tag_info}
+                sx={styles.tag_info}
                 label={assemblyAccession}
             />
-        </div>
+        </Box>
     );
 }

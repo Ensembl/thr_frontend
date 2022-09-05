@@ -18,41 +18,42 @@
 import React, {useState, useEffect} from 'react';
 import queryString from 'query-string';
 
-import {makeStyles} from '@material-ui/core/styles';
-import {Avatar, Button, Container, CssBaseline, TextField, Typography} from '@material-ui/core';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import {Avatar, Button, Container, CssBaseline, TextField, Typography} from '@mui/material';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
 import {userActions} from "../../redux/actions";
-import Alert from "@material-ui/lab/Alert";
-import {AlertTitle} from "@material-ui/lab";
+import Alert from '@mui/material/Alert';
+import { AlertTitle } from '@mui/material';
+import Box from "@mui/material/Box";
 
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
+const styles = {
+    boxStyle: {
+        marginTop: 8,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+        margin: 1,
+        backgroundColor: 'secondary.main',
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
+        marginTop: 1,
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        marginTop: 3,
+        marginBottom: 2,
     },
     success: {
-        color: theme.palette.success.main,
+        color: 'success.main',
     },
     spacingDown: {
         marginBottom: '10px'
     }
-}));
+};
 
 /**
  * The reset password displays a form for resetting an account password when it receives
@@ -62,7 +63,6 @@ const useStyles = makeStyles((theme) => ({
  * makes it run only once when the component mounts.
  */
 function ResetPassword() {
-    const classes = useStyles();
 
     const dispatch = useDispatch();
     const location = useLocation();
@@ -106,17 +106,17 @@ function ResetPassword() {
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
-            <div className={classes.paper}>
+            <Box sx={styles.boxStyle}>
                 {alertMessageObject && alertMessageObject.success &&
                 <Alert severity={alert.type}>{alertMessageObject.success}</Alert>
                 }
                 {alertMessageObject && alertMessageObject.error &&
                 <Alert severity={alert.type}>{alertMessageObject.error}</Alert>
                 }
-                <Avatar className={classes.avatar}>
+                <Avatar sx={styles.avatar}>
                     <VpnKeyIcon/>
                 </Avatar>
-                <Typography component="h1" variant="h5" className={classes.spacingDown}>
+                <Typography component="h1" variant="h5" sx={styles.spacingDown}>
                     Reset Password
                 </Typography>
                 {alertMessageObject && alertMessageObject.non_field_errors &&
@@ -131,7 +131,7 @@ function ResetPassword() {
                     </ul>
                 </Alert>
                 }
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={styles.form}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -167,12 +167,12 @@ function ResetPassword() {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
+                        sx={styles.submit}
                     >
                         Reset Password
                     </Button>
-                </form>
-            </div>
+                </Box>
+            </Box>
         </Container>
     );
 }

@@ -15,34 +15,31 @@
  */
 
 import React, {useState} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 import {useHistory} from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+
+const styles = {
     root: {
         padding: '2px 4px',
         display: 'flex',
         alignItems: 'center',
-        // width: '70%',
         marginRight: '20px',
     },
     input: {
-        marginLeft: theme.spacing(1),
+        marginLeft: 1,
         flex: 1,
     },
     iconButton: {
-        padding: 10,
+        padding: 1,
     },
-}));
+};
 
 
 const SearchForm = () => {
-    const classes = useStyles();
-
     const [searchValue, setSearchValue] = useState("");
 
     const handleSearchInputChanges = (e) => {
@@ -59,24 +56,26 @@ const SearchForm = () => {
         }
     }
 
-    return (
-        <>
-            <Paper component="form" className={classes.root}>
-                <InputBase
-                    className={classes.input}
-                    placeholder="Search by keywords: hg19, epigenomics, mouse ..."
-                    inputProps={{'aria-label': 'Search by keywords: hg19, epigenomics, mouse ...'}}
-                    value={searchValue}
-                    onChange={handleSearchInputChanges}
-                    name={'q'}
-                />
-                <IconButton type="submit" onClick={handleSearch} className={classes.iconButton} aria-label="search">
-                    <SearchIcon/>
-                </IconButton>
-            </Paper>
-        </>
-
-    );
+    return <>
+        <Paper component="form" sx={styles.root}>
+            <InputBase
+                sx={styles.input}
+                placeholder="Search by keywords: hg19, epigenomics, mouse ..."
+                inputProps={{'aria-label': 'Search by keywords: hg19, epigenomics, mouse ...'}}
+                value={searchValue}
+                onChange={handleSearchInputChanges}
+                name={'q'}
+            />
+            <IconButton
+                type="submit"
+                onClick={handleSearch}
+                sx={styles.iconButton}
+                aria-label="search"
+                size="large">
+                <SearchIcon/>
+            </IconButton>
+        </Paper>
+    </>;
 }
 
 export default SearchForm;

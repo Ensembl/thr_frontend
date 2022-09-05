@@ -14,31 +14,32 @@
  * limitations under the License.
  */
 
-import {BarChart, Bar, XAxis, YAxis} from 'recharts';
 import React, {useEffect} from "react";
 import * as settings from "../../settings";
 import axios from "axios";
+import {Typography} from "@mui/material";
+import CountUp from "react-countup";
 
 
 const renderCustomBarLabel = ({payload, x, y, width, height, value}) => {
     return <text x={x + width / 2} y={y} fill="#666" textAnchor="middle" dy={-6}>{`${value}`}</text>;
 };
 
-export default function Chart() {
+export default function Counter() {
 
     const header = {'Content-Type': 'application/json'}
-    const [summaryData, setSummaryData] = React.useState([])
+    const [summaryData, setSummaryData] = React.useState({})
 
     // Get the summary stats
     useEffect(() => {
         const apiUrlSummary = `${settings.API_SERVER}/api/stats/summary`;
         axios.get(apiUrlSummary, {headers: header})
             .then(response => {
-                setSummaryData([
-                    {name: 'Hubs', count: response.data[1][1]},
-                    {name: 'Species', count: response.data[2][1]},
-                    {name: 'Assemblies', count: response.data[3][1]}
-                ])
+                setSummaryData({
+                    hubs: response.data[1][1],
+                    species: response.data[2][1],
+                    assemblies: response.data[3][1]
+                })
             })
             .catch(err => {
                 console.log(err)
@@ -46,11 +47,12 @@ export default function Chart() {
     }, [])
 
     return (
-        <BarChart width={350} height={200} data={summaryData}>
-            <XAxis dataKey="name"/>
-            <YAxis/>
-            <Bar dataKey="count" barSize={30} fill="#8884d8"
-                 label={renderCustomBarLabel}/>
-        </BarChart>
+        <>
+            <Typography variant="h5" sx={{lineHeight: 2, textAlign: 'center'}}>
+                <strong><CountUp end={summaryData.hubs}/></strong> Hubs <br/>
+                <strong><CountUp end={summaryData.species}/></strong> Species <br/>
+                <strong><CountUp end={summaryData.assemblies}/></strong> Assemblies <br/>
+            </Typography>
+        </>
     )
 }

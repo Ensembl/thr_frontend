@@ -17,44 +17,46 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {makeStyles} from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Alert from '@material-ui/lab/Alert';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
 
 import {userActions} from '../../redux/actions';
+import Box from "@mui/material/Box";
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
+
+const styles = {
+    boxStyle: {
+        marginTop: 8,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+        margin: 1,
+        backgroundColor: 'secondary.main',
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
+        marginTop: 1,
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        marginTop: 3,
+        marginBottom: 2,
     },
     signup: {
         textAlign: "right"
     },
-}));
+};
+
 
 function Login() {
-    const classes = useStyles();
 
     const [inputs, setInputs] = useState({
         username: '',
@@ -93,30 +95,30 @@ function Login() {
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
-            <div className={classes.paper}>
+            <Box sx={styles.boxStyle}>
                 {alertMessageObject && alertMessageObject.success &&
                 <Alert severity={alert.type}>{alertMessageObject.success}</Alert>
                 }
                 {alertMessageObject && alertMessageObject.error &&
-                    <Alert severity={alert.type} >{alertMessageObject.error}</Alert>
+                <Alert severity={alert.type}>{alertMessageObject.error}</Alert>
                 }
-                <Avatar className={classes.avatar}>
+                <Avatar sx={styles.avatar}>
                     <LockOutlinedIcon/>
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h5" sx={{mb: 1}}>
                     Login
                 </Typography>
                 {alertMessageObject && alertMessageObject.non_field_errors &&
                 <div>
                     <br/>
                     <Alert severity={alert.type}>{alertMessageObject.non_field_errors[0]}</Alert>
-                    <Alert severity="info" className={classes.submit}>
+                    <Alert severity="info" sx={styles.submit}>
                         You can <Link to='/forgot_password' variant="body2"> reset your password </Link>
                         If you already have an account on the previous Track Hub Registry
                     </Alert>
                 </div>
                 }
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={styles.form}>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -152,7 +154,7 @@ function Login() {
                         fullWidth
                         variant="contained"
                         color="primary"
-                        className={classes.submit}
+                        sx={styles.submit}
                     >
                         Login
                     </Button>
@@ -163,14 +165,13 @@ function Login() {
                             </Link>
                         </Grid>
                         <Grid item>
-                            <div className={classes.signup}>
+                            <div sx={styles.signup}>
                                 No account yet? <Link to='/register'>Register</Link>
                             </div>
                         </Grid>
                     </Grid>
-
-                </form>
-            </div>
+                </Box>
+            </Box>
         </Container>
     );
 }

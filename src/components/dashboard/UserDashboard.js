@@ -16,12 +16,12 @@
 
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {makeStyles} from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
+import makeStyles from '@mui/styles/makeStyles';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
 import MainBreadcrumbs from "../generic/MainBreadcrumb";
-import Paper from "@material-ui/core/Paper";
+import Paper from "@mui/material/Paper";
 import UserProfile from "./UserProfile";
 import UserTrackhubs from "./UserTrackhubs";
 import SubmitHub from "./SubmitHub";
