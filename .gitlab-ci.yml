@@ -28,17 +28,17 @@ lint-test:
   script:
     - npm run lint
 
-unit-test:
+.unit-test:
   stage: test
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:14.17.3
   script:
-    - npm test --passWithNoTests
+    - npm test
 
 ## Build
 
 app-build:
   stage: build
-  needs: ["unit-test"]
+  # needs: ["unit-test"]
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:14.17.3
   script:
     # fix: "Browserslist: caniuse-lite is outdated"
@@ -47,7 +47,7 @@ app-build:
 
 docker-build:
   stage: build
-  needs: ["unit-test"]
+  # needs: ["unit-test"]
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:19.03.12
   services:
     - name: docker:dind
