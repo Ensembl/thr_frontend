@@ -36,14 +36,14 @@ lint-test:
 
 ## Build
 
-app-build:
+app-build-staging:
   stage: build
   # needs: ["unit-test"]
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:14.17.3
   script:
     # fix: "Browserslist: caniuse-lite is outdated"
-    - npx browserslist@latest --update-db
-    - npm run build
+    - npx browserslist@latest --update-db]
+    - npm run build:staging
 
 docker-build:
   stage: build
