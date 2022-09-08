@@ -44,7 +44,7 @@ ENV REACT_APP_API_SERVER=${API_SERVER}
 # this would create a build folder to be served later by the npm 'serve' server
 # you could read more about this here: https://create-react-app.dev/docs/deployment/
 RUN REACT_APP_API_SERVER=${API_SERVER} \
-  npm run build
+  npm run build:staging
 
 
 # Final stage:
