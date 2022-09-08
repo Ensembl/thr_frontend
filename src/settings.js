@@ -16,7 +16,12 @@
 
 let API_SERVER_VAL = '';
 
-switch (process.env.REACT_APP_ENV) {
+// NODE_ENV is set automatically based on the script used
+//   start -> development
+//   test -> test
+//   build -> production
+// https://tacomanator.medium.com/environments-with-create-react-app-7b645312c09d
+switch (process.env.NODE_ENV) {
     case 'development':
         API_SERVER_VAL = 'http://localhost:8000';
         break;
