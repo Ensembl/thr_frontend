@@ -14,22 +14,77 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-
+import {Box, Container, Grid, Stack} from "@mui/material";
+import * as settings from "../../settings";
+import axios from "axios";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 function Footer() {
+
+    const [pingStatus, setPingStatus] = useState()
+    const [apiVersion, setApiVersion] = useState()
+
+    useEffect(() => {
+        const pingStatusUrl = `${settings.API_SERVER}/api/info/ping`;
+        const header = {'Content-Type': 'application/json'}
+        axios.get(pingStatusUrl, {headers: header})
+            .then(response => {
+                setPingStatus(response.data.ping)
+            })
+            .catch(err => {
+                setPingStatus(0)
+            });
+
+        const apiVersionUrl = `${settings.API_SERVER}/api/info/version`;
+        axios.get(apiVersionUrl, {headers: header})
+            .then(response => {
+                setApiVersion(response.data.version)
+            })
+            .catch(err => {
+                setApiVersion("Unknown")
+            });
+    }, [])
+
     return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="http://www.ebi.ac.uk/">
-          EMBL-EBI
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
+        <>
+            <Container maxWidth="xl">
+                <Box sx={{flexGrow: 1, display: "flex"}}>
+                    <Stack direction="row" alignItems="center" gap={0.5} sx={{flexGrow: 1}}>
+                        <Typography variant="body2"><i>Status:</i></Typography>
+                        {
+                            pingStatus ?
+                                <CheckCircleIcon color="success" fontSize="inherit"/>
+                                :
+                                <CancelIcon color="error" fontSize="inherit"/>
+                        }
+                    </Stack>
+                    <Typography variant="body2">
+                        <i>
+                            API v<strong>{apiVersion}</strong>
+                            ,
+                            UI v<strong>{process.env.REACT_APP_VERSION}</strong>
+                        </i>
+                    </Typography>
+                </Box>
+                <br/>
+                <Box>
+                    <Typography variant="body2" color="textSecondary" align="center">
+                        {'Copyright © '}
+                        <Link color="inherit" href="http://www.ebi.ac.uk/">
+                            EMBL-EBI
+                        </Link>{' '}
+                        {new Date().getFullYear()}
+                        {'.'}
+                    </Typography>
+                </Box>
+            </Container>
+        </>
+
     );
-  }
+}
 
 export default Footer
