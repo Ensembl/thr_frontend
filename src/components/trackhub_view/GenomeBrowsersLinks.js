@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 const StyledMenu = styled((props) => (
     <Menu
@@ -79,11 +80,12 @@ export default function
                 onClose={handleClose}
             >
                 {trackdbBrowserLinks &&
-                Object.entries(trackdbBrowserLinks).map(
+                // sort to list ENSEMBL first
+                Object.entries(trackdbBrowserLinks).sort().map(
                     ([genomeBrowserName, genomeBrowserLink]) =>
                         <a key={genomeBrowserName} href={genomeBrowserLink} target="_blank" rel="noreferrer" sx={styles.customLink}>
                             <MenuItem>
-                                {genomeBrowserName.toUpperCase()}
+                                {genomeBrowserName.toUpperCase()} <OpenInNewIcon fontSize="inherit" sx={{margin: 0.5}}/>
                             </MenuItem>
                         </a>
                 )
@@ -92,7 +94,7 @@ export default function
                 <a href={`https://www.ncbi.nlm.nih.gov/genome/gdv/browser/genome/?acc=${assemblyAccession}&hub=${hubUrl}`}
                    target="_blank" rel="noreferrer" sx={styles.customLink}>
                     <MenuItem key='NCBI GDV'>
-                        NCBI GDV
+                        NCBI GDV <OpenInNewIcon fontSize="inherit" sx={{margin: 0.5}}/>
                     </MenuItem>
                 </a>
             </StyledMenu>

@@ -35,6 +35,7 @@ import Typography from "@mui/material/Typography";
 import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
 import {Box} from "@mui/material";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 
 const styles = {
@@ -131,7 +132,10 @@ export default function TrackHubPanels({trackDbInfo}) {
                                         variant="outlined"
                                         href={trackDbInfo.source.url}
                                         target="_blank"
-                                        rel="noreferrer">View
+                                        rel="noreferrer"
+                                        endIcon={<OpenInNewIcon/>}
+                                    >
+                                        View
                                     </Button>
                                 </div>
                             </Box>
@@ -161,7 +165,10 @@ export default function TrackHubPanels({trackDbInfo}) {
                                             variant="outlined"
                                             href={trackDbInfo.hub.url}
                                             target="_blank"
-                                            rel="noreferrer">View
+                                            rel="noreferrer"
+                                            endIcon={<OpenInNewIcon/>}
+                                        >
+                                            View
                                         </Button>
                                     </div>
                                 </Box>
@@ -181,7 +188,7 @@ export default function TrackHubPanels({trackDbInfo}) {
                                     <div>
                                         <strong>
                                             <a href={`http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${trackDbInfo.species.taxon_id}`}
-                                               target="_blank" rel="noreferrer">Taxonomy</a>
+                                               target="_blank" rel="noreferrer">Taxonomy <OpenInNewIcon fontSize="inherit"/></a>
                                         </strong>
                                         <Chip
                                             label={trackDbInfo.species.taxon_id}
@@ -216,8 +223,8 @@ export default function TrackHubPanels({trackDbInfo}) {
                                             <TableBody>
                                                 <TableRow key={trackDbInfo.assembly}>
                                                     <TableCell>
-                                                        <a href={`http://www.ebi.ac.uk/ena/data/view/${trackDbInfo.assembly.accession}`}>
-                                                            {trackDbInfo.assembly.accession}</a>
+                                                        <a href={`http://www.ebi.ac.uk/ena/data/view/${trackDbInfo.assembly.accession}`}
+                                                        target="_blank" rel="noreferrer">{trackDbInfo.assembly.accession} <OpenInNewIcon fontSize="inherit"/></a>
                                                     </TableCell>
                                                     <TableCell>{trackDbInfo.assembly.name}</TableCell>
                                                     <TableCell>{trackDbInfo.assembly.common_name}</TableCell>
