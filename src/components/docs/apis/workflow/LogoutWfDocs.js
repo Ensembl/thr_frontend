@@ -58,66 +58,58 @@ use warnings;
 
 use JSON;
 use HTTP::Request::Common;
-use LWP::UserAgent;
+use LWP::UserAgent; # install LWP::Protocol::https as well
 
+my $auth_token = 'exampletoken';
 my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
-my $server = 'https://www.trackhubregistry.org';
-my ($user, $pass, $auth_token) = ('exampleuser', 'examplepass');
 
-$auth_token = login($server, $user, $pass);
+my $request = POST('https://www.trackhubregistry.org/api/logout', 
+  'Content-type' => 'multipart/form-data', 
+  'Authorization' => "Token $auth_token"
+);
 
-my $request = GET("$server/api/logout");
-$request->headers->header(user       => $user);
-$request->headers->header(auth_token => $auth_token);`,
+my $response = $ua->request($request);
+my $response_message;
+if ($response->is_success) {
+  print "Logged out successfully!\\n" if $response;
+} else {
+  die sprintf "Couldn't logout, reason: %s [%d] ", $response->content, $response->code;
+}`,
         },
         {
             tabTitle: `Python2`,
             tabContent: `import requests, sys
 
-server = 'https://www.trackhubregistry.org'
-user = 'exampleuser'
-password = 'examplepass'
+auth_token = 'exampletoken'
 
-def login(server, user, password):
-    r = requests.get(server+'/api/login', auth=(user, password), verify=False)
-    if not r.ok:
-        print "Couldn't login, reason: %s [%d]" % (r.text, r.status_code)
-        sys.exit
+headers = {
+    'Authorization': 'Token ' + auth_token,
+    'content-type': 'multipart/form-data',
+}
 
-    auth_token = r.json()[u'auth_token']
-    print 'Logged in [%s]' % auth_token
-    return auth_token
-
-auth_token = login(server, user, password)
-r = requests.get(server+'/api/logout', headers={ 'user': user, 'auth_token': auth_token })
+r = requests.post('https://www.trackhubregistry.org/api/logout', headers=headers)
 if not r.ok:
     print "Couldn't logout, reason: %s [%d]" % (r.text, r.status_code)
-    sys.exit
+    sys.exit()
+    
 print 'Logged out'`,
         },
         {
             tabTitle: `Python3`,
             tabContent: `import requests, sys
 
-server = 'https://www.trackhubregistry.org'
-user = 'exampleuser'
-password = 'examplepass'
+auth_token = 'exampletoken'
 
-def login(server, user, password):
-    r = requests.get(server+'/api/login', auth=(user, password), verify=True)
-    if not r.ok:
-        print("Couldn't login, reason: %s [%d]" % (r.text, r.status_code))
-        sys.exit
+headers = {
+    'Authorization': 'Token ' + auth_token,
+    'content-type': 'multipart/form-data',
+}
 
-    auth_token = r.json()[u'auth_token']
-    print('Logged in [%s]' % auth_token)
-    return auth_token
-
-auth_token = login(server, user, password)
-r = requests.get(server+'/api/logout', headers={ 'user': user, 'auth_token': auth_token })
+r = requests.post('https://www.trackhubregistry.org/api/logout', headers=headers)
 if not r.ok:
     print("Couldn't logout, reason: %s [%d]" % (r.text, r.status_code))
-    sys.exit
+    sys.exit()
+
 print('Logged out')`,
         },
         {
@@ -128,36 +120,18 @@ require 'uri'
 require 'rubygems'
 require 'json'
 
-def login(user, pass)
-  request = Net::HTTP::Get.new('/api/login')
-  request.basic_auth(user, pass)
-  response = $http.request(request)
-  
-  if response.code != "200"
-    puts "Couldn't login, reason: #{response.body} [#{response.code}]"
-    exit
-  end
-
-  result = JSON.parse(response.body)
-  puts "Logged in [#{result["auth_token"]}]"
-  
-  return result["auth_token"]
-end
-
-server = 'https://www.trackhubregistry.org'
-user = 'exampleuser'
-pass = 'examplepass'
+server='https://www.trackhubregistry.org'
+path = '/api/logout'
+auth_token = 'exampletoken'
 
 url = URI.parse(server)
 $http = Net::HTTP.new(url.host, url.port)
 $http.use_ssl = true
 $http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-auth_token = login(user, pass)
-
-request = Net::HTTP::Get.new('/api/logout')
-request["User"] = user
-request["Auth-Token"] = auth_token
+request = Net::HTTP::Post.new(path)
+request["Authorization"] = "Token #{auth_token}"
+request["content-type"] = "multipart/form-data"
 response = $http.request(request)
  
 if response.code != "200"
@@ -170,9 +144,9 @@ puts 'Logged out'`,
         },
         {
             tabTitle: `Curl`,
-            tabContent: `curl -X DELETE "https://www.trackhubregistry.org/api/logout" \\
-     -H "User: exampleuser" \\
-     -H "Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi"`,
+            tabContent: `curl -X POST https://www.trackhubregistry.org/api/logout \\
+  --header 'content-type: multipart/form-data' \\
+  --header 'Authorization: Token exampletoken'`,
         },
     ]
 
@@ -219,9 +193,8 @@ puts 'Logged out'`,
                         Request:
                         <pre className={classes.codeBlock}>
                             {
-                                `      GET https://www.trackhubregistry.org/api/logout
-      User: exampleuser
-      Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
+                                `      POST https://www.trackhubregistry.org/api/logout
+      Authorization: Token 52d07632507e6c17f4dca1a2c6b76fb146078c2e`
                             }
                         </pre>
 
@@ -230,7 +203,9 @@ puts 'Logged out'`,
                             {
                                 `      200 OK
       ...
-      { "message": "Successfully logged out" }`
+      {
+         "success": "Successfully logged out."
+      }`
                             }
                         </pre>
                     </p>
