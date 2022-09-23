@@ -78,7 +78,7 @@ export default function UserDashboard() {
 
     // get token from localStorage and prepare the header
     const user = JSON.parse(localStorage.getItem('user'));
-    const header = {'Content-Type': 'application/json', 'Authorization': `Token ${user.token}`}
+    const header = {'Content-Type': 'application/json', 'Authorization': `Token ${user.auth_token}`}
 
     const [userHubs, setUserHubs] = React.useState([])
 

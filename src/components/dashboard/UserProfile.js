@@ -61,7 +61,7 @@ const styles = {
 const UserProfile = () => {
 
     const user = JSON.parse(localStorage.getItem('user'));
-    const header = {'Content-Type': 'application/json', 'Authorization': `Token ${user.token}`}
+    const header = {'Content-Type': 'application/json', 'Authorization': `Token ${user.auth_token}`}
     const apiUrlUserInfo = `${settings.API_SERVER}/api/user/`;
 
     const handleSubmit = (e) => {

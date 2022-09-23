@@ -32,12 +32,12 @@ function logout() {
     let user = JSON.parse(localStorage.getItem('user'));
 
     // log the user out only if he's already logged in
-    if (user && user.token) {
+    if (user && user.auth_token) {
         const requestOptions = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Token ${user.token}`
+                'Authorization': `Token ${user.auth_token}`
             },
             body: JSON.stringify({})
         };
@@ -76,7 +76,7 @@ function changePassword(old_password, new_password1, new_password2) {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Token ${user.token}`
+            'Authorization': `Token ${user.auth_token}`
         },
         body: JSON.stringify({old_password, new_password1, new_password2})
     };

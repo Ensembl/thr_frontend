@@ -39,7 +39,7 @@ export default function DeleteTrackdbAlert({trackdbId}) {
         axios.delete(apiUrlDeleteTrackdb, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Token ${user.token}`
+                    'Authorization': `Token ${user.auth_token}`
                 }
             }
         )
