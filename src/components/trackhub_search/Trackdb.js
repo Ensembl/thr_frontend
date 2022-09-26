@@ -22,6 +22,7 @@ import Box from "@mui/material/Box";
 import {Typography, useTheme} from "@mui/material";
 import InnerHTML from "dangerously-set-html-content";
 import Grid from "@mui/material/Grid";
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 const styles = {
     boxDesign: {
@@ -95,7 +96,10 @@ const Trackdb = ({trackdb}) => {
                         variant="outlined"
                         href={`/search/trackhub_view/${trackdb.trackdb_id}`}
                         target="_blank"
-                        rel="noreferrer">View Info
+                        rel="noreferrer"
+                        endIcon={<OpenInNewIcon/>}
+                    >
+                        View Info
                     </Button>
                 </Grid>
             </Box>

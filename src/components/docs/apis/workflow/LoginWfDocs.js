@@ -61,10 +61,9 @@ use HTTP::Request::Common;
 use LWP::UserAgent; # install LWP::Protocol::https as well
 
 my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
-my ($user, $pass) = ('exampleuser', 'examplepass');
+my $payload = ['username' => 'exampleuser', 'password' => 'examplepass'];
 
-my $request = GET('https://www.trackhubregistry.org/api/login');
-$request->headers->authorization_basic($user, $pass);
+my $request = POST('https://www.trackhubregistry.org/api/login', $payload);
 
 my $response = $ua->request($request);
 my $auth_token;
@@ -73,30 +72,37 @@ if ($response->is_success) {
   print "Logged in [", $auth_token, "]\\n" if $auth_token;
 } else {
   die sprintf "Couldn't login, reason: %s [%d] ", $response->content, $response->code;
-}`,
+}
+`,
         },
         {
             tabTitle: `Python2`,
             tabContent: `import requests, sys
 
-r = requests.get('https://www.trackhubregistry.org/api/login', auth=('exampleuser', 'examplepass'), verify=False)
-if not r.ok:
-    print "Couldn't login, reason: %s [%d]" % (r.text, r.status_code) 
+url = "https://www.trackhubregistry.org/api/login"
+payload = {"username": "your_username", "password": "your_password"}
+
+response = requests.post(url, data=payload)
+if not response.ok:
+    print "Couldn't login, reason: %s [%d]" % (response.text, response.status_code) 
     sys.exit()
 
-auth_token = r.json()[u'auth_token']
+auth_token = response.json()[u'auth_token']
 print 'Logged in [%s]' % auth_token`,
         },
         {
             tabTitle: `Python3`,
             tabContent: `import requests, sys
 
-r = requests.get('https://www.trackhubregistry.org/api/login', auth=('exampleuser', 'examplepass'), verify=True)
-if not r.ok:
-    print("Couldn't login, reason: %s [%d]" % (r.text, r.status_code))
+url = "https://www.trackhubregistry.org/api/login"
+payload = {"username": "your_username", "password": "your_password"}
+
+response = requests.post(url, data=payload)
+if not response.ok:
+    print("Couldn't login, reason: %s [%d]" % (response.text, response.status_code))
     sys.exit()
 
-auth_token = r.json()[u'auth_token']
+auth_token = response.json()[u'auth_token']
 print('Logged in [%s]' % auth_token)`,
         },
         {
@@ -112,8 +118,8 @@ http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-request = Net::HTTP::Get.new(path)
-request.basic_auth("exampleuser", "examplepass")
+request = Net::HTTP::Post.new(path)
+request.set_form_data('username' => 'exampleuser', 'password' => 'examplepass')
 response = http.request(request)
  
 if response.code != "200"
@@ -130,19 +136,16 @@ puts "Logged in [#{result["auth_token"]}]"`,
         },
         {
             tabTitle: `Curl`,
-            tabContent: `curl 'https://www.trackhubregistry.org/api/login' \\
-     -X GET -u 'exampleuser' \\
-     --header "Content-Type:application/json"
-      
-(Note: you will be prompted for password)      
+            tabContent: `curl -X POST https://www.trackhubregistry.org/api/login \\
+  --header 'Content-Type: multipart/form-data' \\
+  --form username=exampleuser \\
+  --form password=examplepass      
 
 Another method:
 
-echo "exampleuser:examplepassword"|base64
-ZXhhbXBsZXVzZXI6ZXhhbXBsZXBhc3N3b3JkCg==
-
-curl -X GET "https://www.trackhubregistry.org/api/login" \\
-     -H "Authorization:Basic ZXhhbXBsZXVzZXI6ZXhhbXBsZXBhc3N3b3JkCg==" `,
+curl -X POST https://www.trackhubregistry.org/api/login \\
+     -H "Content-Type: application/json"  \\
+     -d "{\\"username\\": \\"exampleuser\\", \\"password\\": \\"examplepass\\"}"`,
         },
     ]
 
@@ -212,7 +215,7 @@ curl -X GET "https://www.trackhubregistry.org/api/login" \\
                         Request:
                         <pre className={classes.codeBlock}>
                         {
-                            `GET https://www.trackhubregistry.org/api/login
+                            `POST https://www.trackhubregistry.org/api/login
 Authorization: Basic ZXhhbXBsZXVzZXI6ZXhhbXBsZXBhc3N3b3Jk`
                         }
                         </pre>
@@ -224,7 +227,9 @@ Authorization: Basic ZXhhbXBsZXVzZXI6ZXhhbXBsZXBhc3N3b3Jk`
 Content-type: application/json; charset=utf-8
 ...
 {
-   "auth_token":"6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi"
+  "auth_token": "52d07632507e6c17f4dca1a2c6b76fb146078c2e",
+  "email": "user@email.com",
+  "is_account_activated": true
 }`
                         }
                         </pre>
