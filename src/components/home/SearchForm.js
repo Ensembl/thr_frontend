@@ -19,6 +19,7 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import {useHistory} from "react-router-dom";
 
 
 const styles = {
@@ -45,13 +46,42 @@ const SearchForm = () => {
         setSearchValue(e.target.value);
     }
 
-    const handleSearch = () => {
-        // Something tricky is happening here, I fixed the bug using Javascript way
-        // however I'll need to get back to this later (PR#39)
-        if(searchValue){
-            return window.location.href = '/search?q='+searchValue;
-        } else {
-            return window.location.href = '/search';
+    const history = useHistory();
+
+    const handleOnClickSearch = (event) => {
+        if(history) {
+            // we are using main search bar in the home page
+            if(searchValue){
+                history.push(`/search?q=${searchValue}`);
+            } else {
+                history.push(`/search`);
+            }
+        }
+        else {
+            // we are using top bar search (see the comment in handleKeyPressSearch() below)
+            if (searchValue) {
+                event.preventDefault();
+                return window.location.href = `/search?q=` + searchValue;
+            }
+            else {
+                event.preventDefault();
+                return window.location.href = `/search`;
+            }
+        }
+    }
+
+    const handleKeyPressSearch = (event) => {
+        // Something tricky is happening here, I fixed the bug using pure Javascript
+        // however I'll need to get back to this later (PR#39, PR#40)
+        // 'useHistory()' cannot be used here because Topbar isn't in the Router
+        // https://cucumbersome.net/2021/01/17/react-router-history-is-not-defined/
+        if (event.key === 'Enter' && searchValue) {
+            event.preventDefault();
+            return window.location.href = `/search?q=` + searchValue;
+        }
+        else if (event.key === 'Enter') {
+            event.preventDefault();
+            return window.location.href = `/search`;
         }
     }
 
@@ -63,12 +93,13 @@ const SearchForm = () => {
                 inputProps={{'aria-label': 'Search by keywords: hg19, epigenomics, mouse ...'}}
                 value={searchValue}
                 onChange={handleSearchInputChanges}
-                name={'q'}
+                // onKeyPress is used by top bar search
+                onKeyPress={handleKeyPressSearch}
+                name='q'
             />
             <IconButton
                 type="submit"
-                onClick={handleSearch}
-                to="/search"
+                onClick={handleOnClickSearch}
                 sx={styles.iconButton}
                 aria-label="search"
                 size="large">
