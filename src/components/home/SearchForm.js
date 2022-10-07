@@ -61,11 +61,11 @@ const SearchForm = () => {
             // we are using top bar search (see the comment in handleKeyPressSearch() below)
             if (searchValue) {
                 event.preventDefault();
-                return window.location.href = '/search?q=' + searchValue;
+                return window.location.href = `/search?q=` + searchValue;
             }
             else {
                 event.preventDefault();
-                return window.location.href = '/search';
+                return window.location.href = `/search`;
             }
         }
     }
@@ -77,11 +77,11 @@ const SearchForm = () => {
         // https://cucumbersome.net/2021/01/17/react-router-history-is-not-defined/
         if (event.key === 'Enter' && searchValue) {
             event.preventDefault();
-            return window.location.href = '/search?q=' + searchValue;
+            return window.location.href = `/search?q=` + searchValue;
         }
         else if (event.key === 'Enter') {
             event.preventDefault();
-            return window.location.href = '/search';
+            return window.location.href = `/search`;
         }
     }
 
