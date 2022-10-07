@@ -39,7 +39,7 @@ const styles = {
 };
 
 
-const MainSearchForm = () => {
+const SearchForm = () => {
     const [searchValue, setSearchValue] = useState("");
 
     const handleSearchInputChanges = (e) => {
@@ -48,11 +48,40 @@ const MainSearchForm = () => {
 
     const history = useHistory();
 
-    const handleMainSearch = () => {
-        if(searchValue){
-            history.push(`/search?q=${searchValue}`);
-        } else {
-            history.push(`/search`);
+    const handleOnClickSearch = (event) => {
+        if(history) {
+            // we are using main search bar in the home page
+            if(searchValue){
+                history.push(`/search?q=${searchValue}`);
+            } else {
+                history.push(`/search`);
+            }
+        }
+        else {
+            // we are using top bar search (see the comment in handleKeyPressSearch() below)
+            if (searchValue) {
+                event.preventDefault();
+                return window.location.href = '/search?q=' + searchValue;
+            }
+            else {
+                event.preventDefault();
+                return window.location.href = '/search';
+            }
+        }
+    }
+
+    const handleKeyPressSearch = (event) => {
+        // Something tricky is happening here, I fixed the bug using pure Javascript
+        // however I'll need to get back to this later (PR#39, PR#40)
+        // 'useHistory()' cannot be used here because Topbar isn't in the Router
+        // https://cucumbersome.net/2021/01/17/react-router-history-is-not-defined/
+        if (event.key === 'Enter' && searchValue) {
+            event.preventDefault();
+            return window.location.href = '/search?q=' + searchValue;
+        }
+        else if (event.key === 'Enter') {
+            event.preventDefault();
+            return window.location.href = '/search';
         }
     }
 
@@ -64,11 +93,13 @@ const MainSearchForm = () => {
                 inputProps={{'aria-label': 'Search by keywords: hg19, epigenomics, mouse ...'}}
                 value={searchValue}
                 onChange={handleSearchInputChanges}
-                name={'q'}
+                // onKeyPress is used by top bar search
+                onKeyPress={handleKeyPressSearch}
+                name='q'
             />
             <IconButton
                 type="submit"
-                onClick={handleMainSearch}
+                onClick={handleOnClickSearch}
                 sx={styles.iconButton}
                 aria-label="search"
                 size="large">
@@ -78,4 +109,4 @@ const MainSearchForm = () => {
     </>;
 }
 
-export default MainSearchForm;
+export default SearchForm;
