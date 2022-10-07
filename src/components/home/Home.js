@@ -17,7 +17,7 @@
 import React from 'react'
 import CssBaseline from '@mui/material/CssBaseline';
 import NestedGrid from "./NestedGrid";
-import SearchForm from "./SearchForm";
+import MainSearchForm from "./MainSearchForm";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import {Typography} from "@mui/material";
@@ -74,7 +74,7 @@ function Home() {
                     rel="noreferrer">track hubs</a>, and to make it easier for researchers around the world to
                     discover and use track hubs containing different types of genomic research data.
                 </Typography>
-                <SearchForm/>
+                <MainSearchForm/>
             </Grid>
             <br/><br/>
             <NestedGrid/>

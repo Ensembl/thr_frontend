@@ -16,7 +16,7 @@
 
 import React from 'react';
 import {AppBar, Toolbar, Typography, Button, Container} from '@mui/material';
-import SearchForm from "../home/SearchForm";
+import TopbarSearchForm from "./TopbarSearchForm";
 import {useSelector} from "react-redux";
 import DocsDropdownMenu from "../docs/DocsDropdownMenu";
 import Box from "@mui/material/Box";
@@ -61,7 +61,7 @@ export default function TopBar() {
                             <Button color="inherit" href="/about">About</Button>
                             <Button color="inherit" href="/help">Help</Button>
                             <Typography sx={{flexGrow: 1}}/>
-                            <SearchForm/>
+                            <TopbarSearchForm/>
                             {isLoggedIn ? null : <Button color="inherit" href="/register">Register</Button>}
                             {isLoggedIn ? null : <Button color="inherit" href="/login">Login</Button>}
                             {isLoggedIn ? <Button color="inherit" href="/user">Dashboard</Button> : null}

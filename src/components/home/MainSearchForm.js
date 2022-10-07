@@ -19,6 +19,7 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import {useHistory} from "react-router-dom";
 
 
 const styles = {
@@ -38,20 +39,20 @@ const styles = {
 };
 
 
-const SearchForm = () => {
+const MainSearchForm = () => {
     const [searchValue, setSearchValue] = useState("");
 
     const handleSearchInputChanges = (e) => {
         setSearchValue(e.target.value);
     }
 
-    const handleSearch = () => {
-        // Something tricky is happening here, I fixed the bug using Javascript way
-        // however I'll need to get back to this later (PR#39)
+    const history = useHistory();
+
+    const handleMainSearch = () => {
         if(searchValue){
-            return window.location.href = '/search?q='+searchValue;
+            history.push(`/search?q=${searchValue}`);
         } else {
-            return window.location.href = '/search';
+            history.push(`/search`);
         }
     }
 
@@ -67,8 +68,7 @@ const SearchForm = () => {
             />
             <IconButton
                 type="submit"
-                onClick={handleSearch}
-                to="/search"
+                onClick={handleMainSearch}
                 sx={styles.iconButton}
                 aria-label="search"
                 size="large">
@@ -78,4 +78,4 @@ const SearchForm = () => {
     </>;
 }
 
-export default SearchForm;
+export default MainSearchForm;
