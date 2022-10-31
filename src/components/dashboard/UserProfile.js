@@ -62,7 +62,7 @@ const UserProfile = () => {
 
     const user = JSON.parse(localStorage.getItem('user'));
     const header = {'Content-Type': 'application/json', 'Authorization': `Token ${user.auth_token}`}
-    const apiUrlUserInfo = `${settings.API_SERVER}/api/user/`;
+    const apiUrlUserInfo = `${settings.API_SERVER}/api/user`;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -89,7 +89,7 @@ const UserProfile = () => {
     // Get the user profile info
     const [profileInfo, setProfileInfo] = useState({})
     useEffect(() => {
-        const apiUrlUserInfo = `${settings.API_SERVER}/api/user/`;
+        const apiUrlUserInfo = `${settings.API_SERVER}/api/user`;
         axios.get(apiUrlUserInfo, {headers: header})
             .then(response => {
                 // console.log(response.data);

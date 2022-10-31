@@ -84,7 +84,7 @@ export default function UserDashboard() {
 
     // Get the user track collections
     useEffect(() => {
-        const apiUrlUserHubs = `${settings.API_SERVER}/api/trackhub/`;
+        const apiUrlUserHubs = `${settings.API_SERVER}/api/trackhub`;
         axios.get(apiUrlUserHubs, {headers: header})
             .then(response => {
                 // console.log('UserHubs --> ', response.data)

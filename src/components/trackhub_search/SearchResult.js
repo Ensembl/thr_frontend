@@ -54,7 +54,7 @@ const SearchResult = ({location}) => {
     }, [currentFilters.page])
 
     useEffect(() => {
-        axios.post(`${settings.API_SERVER}/api/search/?page=${currentFilters.page}`, currentFilters, {
+        axios.post(`${settings.API_SERVER}/api/search?page=${currentFilters.page}`, currentFilters, {
                 headers: {
                     'Content-Type': 'application/json',
                 }
