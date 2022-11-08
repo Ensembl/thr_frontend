@@ -63,7 +63,7 @@ use LWP::UserAgent; # install LWP::Protocol::https as well
 my $auth_token = 'exampletoken';
 my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
 
-my $request = POST('https://www.trackhubregistry.org/api/logout', 
+my $request = POST('`+ window.location.origin +`/api/logout', 
   'Content-type' => 'multipart/form-data', 
   'Authorization' => "Token $auth_token"
 );
@@ -87,7 +87,7 @@ headers = {
     'content-type': 'multipart/form-data',
 }
 
-r = requests.post('https://www.trackhubregistry.org/api/logout', headers=headers)
+r = requests.post('`+ window.location.origin +`/api/logout', headers=headers)
 if not r.ok:
     print "Couldn't logout, reason: %s [%d]" % (r.text, r.status_code)
     sys.exit()
@@ -105,7 +105,7 @@ headers = {
     'content-type': 'multipart/form-data',
 }
 
-r = requests.post('https://www.trackhubregistry.org/api/logout', headers=headers)
+r = requests.post('`+ window.location.origin +`/api/logout', headers=headers)
 if not r.ok:
     print("Couldn't logout, reason: %s [%d]" % (r.text, r.status_code))
     sys.exit()
@@ -120,7 +120,7 @@ require 'uri'
 require 'rubygems'
 require 'json'
 
-server='https://www.trackhubregistry.org'
+server='`+ window.location.origin +`'
 path = '/api/logout'
 auth_token = 'exampletoken'
 
@@ -144,7 +144,7 @@ puts 'Logged out'`,
         },
         {
             tabTitle: `Curl`,
-            tabContent: `curl -X POST https://www.trackhubregistry.org/api/logout \\
+            tabContent: `curl -X POST `+ window.location.origin +`/api/logout \\
   --header 'content-type: multipart/form-data' \\
   --header 'Authorization: Token exampletoken'`,
         },
@@ -193,7 +193,7 @@ puts 'Logged out'`,
                         Request:
                         <pre className={classes.codeBlock}>
                             {
-                                `      POST https://www.trackhubregistry.org/api/logout
+                                `      POST `+ window.location.origin +`/api/logout
       Authorization: Token 52d07632507e6c17f4dca1a2c6b76fb146078c2e`
                             }
                         </pre>

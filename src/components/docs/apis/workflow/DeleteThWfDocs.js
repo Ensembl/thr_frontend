@@ -61,7 +61,7 @@ use HTTP::Request::Common;
 use LWP::UserAgent;
 
 my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
-my $server = 'https://www.trackhubregistry.org';
+my $server = '`+ window.location.origin +`';
 my ($user, $pass, $auth_token) = ('exampleuser', 'examplepass');
 
 $auth_token = login($server, $user, $pass);
@@ -115,7 +115,7 @@ sub logout {
             tabTitle: `Python2`,
             tabContent: `import requests, sys
 
-server = 'https://www.trackhubregistry.org'
+server = '`+ window.location.origin +`'
 user = 'exampleuser'
 password = 'examplepass'
 
@@ -149,7 +149,7 @@ logout(server, user, auth_token)`,
             tabTitle: `Python3`,
             tabContent: `import requests, sys
 
-server = 'https://www.trackhubregistry.org'
+server = '`+ window.location.origin +`'
 user = 'exampleuser'
 password = 'examplepass'
 
@@ -187,7 +187,7 @@ require 'uri'
 require 'rubygems'
 require 'json'
 
-server = 'https://www.trackhubregistry.org'
+server = '`+ window.location.origin +`'
 user = 'exampleuser'
 pass = 'examplepass'
 
@@ -240,7 +240,7 @@ logout(user, auth_token)`,
         },
         {
             tabTitle: `Curl`,
-            tabContent: `curl -X DELETE "https://www.trackhubregistry.org/api/trackhub/cshl2013" \\
+            tabContent: `curl -X DELETE "`+ window.location.origin +`/api/trackhub/cshl2013" \\
      -H "User: exampleuser" \\
      -H "Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi"`,
         },
@@ -313,13 +313,13 @@ logout(user, auth_token)`,
                         updated the <a target="_blank" href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt" rel="noreferrer">CSHL
                         Biology of Genomes meeting 2013 demonstration assembly hub</a>. We now want to delete its
                         records in the Registry, corresponding to three trackDbs associated to the an equivalent number
-                        of plant assemblies.
+                        of plant assemblies where <strong>1</strong> is the track hub ID.
                     </p>
 
                     <p>
                         <pre className={classes.codeBlock}>
                             {
-                                `      DELETE https://www.trackhubregistry.org/api/trackhub/cshl2013
+                                `      DELETE `+ window.location.origin +`/api/trackhub/1
       User: exampleuser
       Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                             }
@@ -329,7 +329,9 @@ logout(user, auth_token)`,
                         <pre className={classes.codeBlock}>
                             {
                                 `      HTTP/1.0 200 OK
-      { 'message': 'Deleted trackDBs from track hub cshl2013' }`
+      {
+          "success": "Hub 'cshl2013' is deleted successfully"
+      }`
                             }
                         </pre>
                     </p>
@@ -394,7 +396,7 @@ logout(user, auth_token)`,
                     {/*<p>*/}
                     {/*  Request 1 (delete Ricinus communis assembly data):*/}
                     {/*  <pre>*/}
-                    {/*    DELETE https://www.trackhubregistry.org/api/trackdb/KRBr5PS7RmapaFr7ofpTBA*/}
+                    {/*    DELETE `+ window.location.origin +`/api/trackdb/KRBr5PS7RmapaFr7ofpTBA*/}
                     {/*    User: exampleuser*/}
                     {/*    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi*/}
                     {/*  </pre>*/}
@@ -409,7 +411,7 @@ logout(user, auth_token)`,
                     {/*  </pre>*/}
                     {/*  Request 2 (delete Brassica rapa assembly data):*/}
                     {/*  <pre>*/}
-                    {/*    DELETE https://www.trackhubregistry.org/api/trackdb/FOEM87nETMOCOglmm0sSsg*/}
+                    {/*    DELETE `+ window.location.origin +`/api/trackdb/FOEM87nETMOCOglmm0sSsg*/}
                     {/*    User: exampleuser*/}
                     {/*    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi*/}
                     {/*  </pre>*/}
@@ -424,7 +426,7 @@ logout(user, auth_token)`,
                     {/*  </pre>*/}
                     {/*  Request 3 (delete Arabidopsis thaliana assembly data):*/}
                     {/*  <pre>*/}
-                    {/*    DELETE https://www.trackhubregistry.org/api/trackdb/hB8Npdm1ST2gBwkbQThkVg*/}
+                    {/*    DELETE `+ window.location.origin +`/api/trackdb/hB8Npdm1ST2gBwkbQThkVg*/}
                     {/*    User: exampleuser*/}
                     {/*    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi*/}
                     {/*  </pre>*/}

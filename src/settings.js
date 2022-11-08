@@ -21,6 +21,8 @@ let API_SERVER_VAL = '';
 //   test -> test
 //   build -> production
 // https://tacomanator.medium.com/environments-with-create-react-app-7b645312c09d
+// NB: You cannot override NODE_ENV manually!
+// https://create-react-app.dev/docs/adding-custom-environment-variables
 switch (process.env.NODE_ENV) {
     case 'development':
         API_SERVER_VAL = 'http://localhost:8000';

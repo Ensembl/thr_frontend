@@ -20,6 +20,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import MainBreadcrumb from "../../../generic/MainBreadcrumb";
 import ApisDocsMenu from "../ApisDocsMenu";
 import CssBaseline from "@mui/material/CssBaseline";
+import {Alert} from "@mui/lab";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -65,6 +66,14 @@ const UpdateThWfDocs = () => {
                     <Typography id="thupdate" component="h4" variant="h5">
                         Updating Track Hubs
                     </Typography>
+                    <br/>
+                    <Alert severity="warning">
+                        This feature is not implemented yet, if you want to update one of your hubs, please delete
+                        the old one using the <a href="/docs/management/dashboard">dashboard</a> or <a
+                        href="/docs/api/registration/workflow/thdelete">DELETE API</a> and <a
+                        href="/docs/api/registration/workflow/thregister">submit</a> the newer version
+                        again.
+                    </Alert>
                     <p>
                         Suppose you've updated the structure or content of one of your remote public hubs registered
                         with us. You obviously want the changes to appear on the Registry as well.
@@ -85,9 +94,9 @@ const UpdateThWfDocs = () => {
                     <p>
                         Verify that:
                         <ul>
-                            <li>your client has successfully <a
+                            <li>Your client has successfully <a
                                 href="/docs/api/registration/workflow/login">logged in</a> and have, as
-                                such, obtained a valid authentication token;
+                                such, obtained a valid authentication token.
                             </li>
                         </ul>
                     </p>
@@ -114,7 +123,8 @@ const UpdateThWfDocs = () => {
                     </Typography>
                     <p>
                         This example updates the registration of the <a target="_blank"
-                                                                        href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt" rel="noreferrer">CSHL
+                                                                        href="http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt"
+                                                                        rel="noreferrer">CSHL
                         Biology of Genomes meeting 2013 demonstration assembly hub</a>. This time we don't specify a
                         data type, hence it will default to "genomics":
                     </p>
@@ -122,7 +132,7 @@ const UpdateThWfDocs = () => {
                         Request:
                         <pre className={classes.codeBlock}>
                     {
-                        `      POST https://www.trackhubregistry.org/api/trackhub
+                        `      POST ` + window.location.origin + `/api/trackhub
       User: exampleuser
       Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi
       {
@@ -153,12 +163,14 @@ const UpdateThWfDocs = () => {
                                 response code 400. The response body message contains the error
                             </li>
                             <li>your hub genome subdirectory names must be <a target="_blank"
-                                                                              href="https://genome.ucsc.edu/FAQ/FAQreleases.html#release1" rel="noreferrer">valid
+                                                                              href="https://genome.ucsc.edu/FAQ/FAQreleases.html#release1"
+                                                                              rel="noreferrer">valid
                                 UCSC DB names</a> (assembly synonyms, e.g. hg38) or you must provide a map from these
                                 names to
                                 their corresponding INSDC accessions (i.e. assembly accession + version, e.g. <a
                                     target="_blank"
-                                    href="http://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13" rel="noreferrer">GCA_000001405.1</a>).
+                                    href="http://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13"
+                                    rel="noreferrer">GCA_000001405.1</a>).
                                 If neither of the two conditions are met, the server returns HTTP response code 400 with
                                 the message "Unable to find a valid INSDC accession for genome assembly [..]"
                             </li>
