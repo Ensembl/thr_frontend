@@ -61,7 +61,7 @@ use HTTP::Request::Common;
 use LWP::UserAgent;
 
 my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
-my $server = 'https://www.trackhubregistry.org';
+my $server = '`+ window.location.origin +`';
 my ($user, $pass, $auth_token) = ('exampleuser', 'examplepass');
 
 $auth_token = login($server, $user, $pass);
@@ -118,7 +118,7 @@ sub logout {
             tabTitle: `Python2`,
             tabContent: `import requests, sys
 
-server = 'https://www.trackhubregistry.org'
+server = '`+ window.location.origin +`'
 user = 'exampleuser'
 password = 'examplepass'
 
@@ -152,7 +152,7 @@ logout(server, user, auth_token)`,
             tabTitle: `Python3`,
             tabContent: `import requests, sys
 
-server = 'https://www.trackhubregistry.org'
+server = '`+ window.location.origin +`'
 user = 'exampleuser'
 password = 'examplepass'
 
@@ -190,7 +190,7 @@ require 'uri'
 require 'rubygems'
 require 'json'
 
-server = 'https://www.trackhubregistry.org'
+server = '`+ window.location.origin +`'
 user = 'exampleuser'
 pass = 'examplepass'
 
@@ -243,7 +243,7 @@ logout(user, auth_token)`,
         },
         {
             tabTitle: `Curl`,
-            tabContent: `curl -X GET "https://www.trackhubregistry.org/api/trackhub" \\
+            tabContent: `curl -X GET "`+ window.location.origin +`/api/trackhub" \\
      -H "User: exampleuser" \\
      -H "Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi"`,
         },
@@ -339,7 +339,7 @@ logout(user, auth_token)`,
                         Request:
                         <pre className={classes.codeBlock}>
                             {
-                                `      GET https://www.trackhubregistry.org/api/trackhub
+                                `      GET `+ window.location.origin +`/api/trackhub
       User: exampleuser
       Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                             }
@@ -366,17 +366,17 @@ logout(user, auth_token)`,
                             {
                               'species': '3988',
                               'assembly': 'GCA_000151685.2',
-                              'uri': 'https://www.trackhubregistry.org/api/trackdb/KRBr5PS7RmapaFr7ofpTBA'
+                              'uri': '`+ window.location.origin +`/api/trackdb/1'
                             },
                             {
                               'species': '3711',
                               'assembly': 'GCA_000309985.1',
-                              'uri': 'https://www.trackhubregistry.org/api/trackdb/FOEM87nETMOCOglmm0sSsg'
+                              'uri': '`+ window.location.origin +`/api/trackdb/2'
                             },
                             {
                               'species': '3702',
                               'assembly': 'GCA_000001735.1',
-                              'uri': 'https://www.trackhubregistry.org/api/trackdb/hB8Npdm1ST2gBwkbQThkVg'
+                              'uri': '`+ window.location.origin +`/api/trackdb/3'
                             }
                         ]
         }

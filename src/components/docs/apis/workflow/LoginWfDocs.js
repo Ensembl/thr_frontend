@@ -63,7 +63,7 @@ use LWP::UserAgent; # install LWP::Protocol::https as well
 my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
 my $payload = ['username' => 'exampleuser', 'password' => 'examplepass'];
 
-my $request = POST('https://www.trackhubregistry.org/api/login', $payload);
+my $request = POST('` + window.location.origin + `/api/login', $payload);
 
 my $response = $ua->request($request);
 my $auth_token;
@@ -79,7 +79,7 @@ if ($response->is_success) {
             tabTitle: `Python2`,
             tabContent: `import requests, sys
 
-url = "https://www.trackhubregistry.org/api/login"
+url = "` + window.location.origin + `/api/login"
 payload = {"username": "your_username", "password": "your_password"}
 
 response = requests.post(url, data=payload)
@@ -94,7 +94,7 @@ print 'Logged in [%s]' % auth_token`,
             tabTitle: `Python3`,
             tabContent: `import requests, sys
 
-url = "https://www.trackhubregistry.org/api/login"
+url = "` + window.location.origin + `/api/login"
 payload = {"username": "your_username", "password": "your_password"}
 
 response = requests.post(url, data=payload)
@@ -110,7 +110,7 @@ print('Logged in [%s]' % auth_token)`,
             tabContent: `require 'net/https'
 require 'uri'
  
-server='https://www/trackhubregistry.org'
+server='`+ window.location.origin +`'
 path = '/api/login'
  
 url = URI.parse(server)
@@ -136,14 +136,14 @@ puts "Logged in [#{result["auth_token"]}]"`,
         },
         {
             tabTitle: `Curl`,
-            tabContent: `curl -X POST https://www.trackhubregistry.org/api/login \\
+            tabContent: `curl -X POST ` + window.location.origin + `/api/login \\
   --header 'Content-Type: multipart/form-data' \\
   --form username=exampleuser \\
   --form password=examplepass      
 
 Another method:
 
-curl -X POST https://www.trackhubregistry.org/api/login \\
+curl -X POST ` + window.location.origin + `/api/login \\
      -H "Content-Type: application/json"  \\
      -d "{\\"username\\": \\"exampleuser\\", \\"password\\": \\"examplepass\\"}"`,
         },
@@ -215,7 +215,7 @@ curl -X POST https://www.trackhubregistry.org/api/login \\
                         Request:
                         <pre className={classes.codeBlock}>
                         {
-                            `POST https://www.trackhubregistry.org/api/login
+                            `POST ` + window.location.origin + `/api/login
 Authorization: Basic ZXhhbXBsZXVzZXI6ZXhhbXBsZXBhc3N3b3Jk`
                         }
                         </pre>

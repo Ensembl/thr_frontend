@@ -93,7 +93,7 @@ const DashboardDocs = () => {
                     buttons for doing some actions depending on the status of the track database. When status
                     reports "Remote data unavailable", you can click on the spyglass icon to access information
                     about the reasons, like in the following:
-
+                    <br/><br/>
 
                     <img src={require("../../../static/img/dashboard_status.png").default} alt=""/>
 

@@ -115,7 +115,7 @@ const RefApiDocs = () => {
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
                         {
-                            `    GET https://www.trackhubregistry.org/api/login
+                            `    GET `+ window.location.origin +`/api/login
     Authorization: Basic ZXhhbXBsZXVzZXI6ZXhhbXBsZXBhc3N3b3Jk`
                         }
                     </pre>
@@ -218,7 +218,7 @@ const RefApiDocs = () => {
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
                         {
-                            `    GET https://www.trackhubregistry.org/api/trackhub
+                            `    GET `+ window.location.origin +`/api/trackhub
     User: exampleuser
     Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                         }
@@ -236,17 +236,17 @@ const RefApiDocs = () => {
                             {
                               'species': '3988',
                               'assembly': 'GCA_000151685.2',
-                              'uri': 'https://www.trackhubregistry.org/api/trackdb/knB1GHPYSdmeypb-R8sxhA'
+                              'uri': '`+ window.location.origin +`/api/trackdb/1'
                             },
                             {
                               'species': '3711',
                               'assembly': 'GCA_000309985.1',
-                              'uri': 'https://www.trackhubregistry.org/api/trackdb/JFF3OqH1QJmIJSlLfICyQg'
+                              'uri': '`+ window.location.origin +`/api/trackdb/2'
                             },
                             {
                               'species': '3702',
                               'assembly': 'GCA_000001735.1',
-                              'uri': 'https://www.trackhubregistry.org/api/trackdb/We3M8-1RQnaUYpTspYQpCQ'
+                              'uri': '`+ window.location.origin +`/api/trackdb/3'
                             }
                           ],
         'shortLabel': 'Plants',
@@ -259,12 +259,12 @@ const RefApiDocs = () => {
                             {
                               'species': '9606',
                               'assembly': 'GCA_000001405.15',
-                              'uri': 'https://www.trackhubregistry.org/api/trackdb/rkaQgGf_TxW5xKElGkYQAA'
+                              'uri': '`+ window.location.origin +`/api/trackdb/4'
                             },
                             {
                               'species': '9606',
                               'assembly': 'GCA_000001405.1',
-                              'uri': 'https://www.trackhubregistry.org/api/trackdb/-IT64jDKRXiQN_Blhjy4Uw'
+                              'uri': '`+ window.location.origin +`/api/trackdb/5'
                             }
                           ],
         'shortLabel': 'Ensembl Regulatory Build',
@@ -455,7 +455,7 @@ const RefApiDocs = () => {
 
                     <pre className={classes.codeBlock}>
     {
-        `    POST https://www.trackhubregistry.org/api/trackhub
+        `    POST `+ window.location.origin +`/api/trackhub
     User: exampleuser
     Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi
     {
@@ -475,9 +475,9 @@ const RefApiDocs = () => {
         `    HTTP/1.0 201 OK
     Content-type: application/json
     Location: [ 
-        'https://www.trackhubregistry.org/api/trackdb/KRBr5PS7RmapaFr7ofpTBA, 
-        'https://www.trackhubregistry.org/api/trackdb/hB8Npdm1ST2gBwkbQThkVg', 
-        'https://www.trackhubregistry.org/api/trackdb/FOEM87nETMOCOglmm0sSsg' 
+        '`+ window.location.origin +`/api/trackdb/KRBr5PS7RmapaFr7ofpTBA, 
+        '`+ window.location.origin +`/api/trackdb/hB8Npdm1ST2gBwkbQThkVg', 
+        '`+ window.location.origin +`/api/trackdb/FOEM87nETMOCOglmm0sSsg' 
     ]
     ...
     [
@@ -615,7 +615,7 @@ const RefApiDocs = () => {
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
                         {
-                            `    GET https://www.trackhubregistry.org/api/trackhub/cshl2013
+                            `    GET `+ window.location.origin +`/api/trackhub/cshl2013
     User: exampleuser
     Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                         }
@@ -737,7 +737,7 @@ const RefApiDocs = () => {
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
                         {
-                            `    DELETE https://www.trackhubregistry.org/api/trackhub/cshl2013
+                            `    DELETE `+ window.location.origin +`/api/trackhub/cshl2013
     User: exampleuser
     Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                         }
@@ -857,7 +857,7 @@ const RefApiDocs = () => {
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
                         {
-                            `    GET https://www.trackhubregistry.org/api/trackdb/knB1GHPYSdmeypb-R8sxhA
+                            `    GET `+ window.location.origin +`/api/trackdb/knB1GHPYSdmeypb-R8sxhA
     User: exampleuser
     Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                         }
@@ -1017,7 +1017,7 @@ const RefApiDocs = () => {
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
                         {
-                            `    DELETE https://www.trackhubregistry.org/api/trackdb/knB1GHPYSdmeypb-R8sxhA
+                            `    DELETE `+ window.location.origin +`/api/trackdb/knB1GHPYSdmeypb-R8sxhA
     User: exampleuser
     Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                         }
@@ -1125,7 +1125,7 @@ const RefApiDocs = () => {
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
                         {
-                            `    GET https://www.trackhubregistry.org/api/logout
+                            `    GET `+ window.location.origin +`/api/logout
     User: exampleuser
     Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                         }

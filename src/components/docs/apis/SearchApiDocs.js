@@ -203,7 +203,7 @@ const SearchApiDocs = () => {
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
                         {
-                            `    POST https://www.trackhubregistry.org/api/search?page=1
+                            `    POST `+ window.location.origin +`/api/search?page=1
     {
       "query": "monocyte male",
       "assembly": "GRCh37"
@@ -342,7 +342,7 @@ const SearchApiDocs = () => {
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
     {
-        `GET https://www.trackhubregistry.org/api/search/trackdb/gOGRzcTSRd2l0LMQTufS4w`
+        `GET `+ window.location.origin +`/api/search/trackdb/1`
     }
   </pre>
 

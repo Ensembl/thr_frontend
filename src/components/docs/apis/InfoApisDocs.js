@@ -102,7 +102,7 @@ const InfoApisDocs = () => {
 
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
-                            GET https://www.trackhubregistry.org/api/info/version
+                            GET {window.location.origin}/api/info/version
                         </pre>
 
                     <h4>Example Response</h4>
@@ -110,7 +110,7 @@ const InfoApisDocs = () => {
                             {
                                 `HTTP/1.0 200 OK
 {
-   "version": "0.01"
+   "version": "0.8.1"
 }`
                             }
                         </pre>
@@ -185,7 +185,7 @@ const InfoApisDocs = () => {
 
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
-                            GET https://www.trackhubregistry.org/api/info/ping
+                            GET {window.location.origin}/api/info/ping
                         </pre>
 
                     <h4>Example Response</h4>
@@ -274,14 +274,30 @@ const InfoApisDocs = () => {
 
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
-                        GET https://www.trackhubregistry.org/api/info/species
+                        GET {window.location.origin}/api/info/species
                     </pre>
 
                     <h4>Example Response</h4>
                     <pre className={classes.codeBlock}>
                     {
                         `HTTP/1.0 200 OK
-["Homo sapiens","Danio rerio","Mus musculus","Arabidopsis thaliana","Brassica rapa","Drosophila simulans","Ricinus communis"]`
+[
+    "Homo sapiens",
+    "Phaeodactylum tricornutum CCAP 1055/1",
+    "Pythium arrhenomanes ATCC 12531",
+    "Colletotrichum graminicola M1.001",
+    "Colletotrichum higginsianum",
+    "Colletotrichum sublineola",
+    "Brassica rapa",
+    "Mus musculus",
+    "Chlamydomonas reinhardtii",
+    "Solanum tuberosum",
+    "Zea mays",
+    "Arabidopsis thaliana",
+    "Brachypodium distachyon",
+    "Triticum aestivum",
+    ...
+]`
                     }
                     </pre>
 
@@ -357,7 +373,7 @@ const InfoApisDocs = () => {
 
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
-                        GET https://www.trackhubregistry.org/api/info/assemblies
+                        GET {window.location.origin}/api/info/assemblies
                     </pre>
 
                     <h4>Example Response</h4>
@@ -365,63 +381,98 @@ const InfoApisDocs = () => {
                         {
                             `HTTP/1.0 200 OK
 {
-    "Brassica rapa": [
-        {
-            "synonyms": ["brarap1"],
-            "name": "Brapa_1.0",
-            "accession": "GCA_000309985.1"
-        }
-    ],
     "Homo sapiens": [
         {
-            "synonyms": ["hg19"],
-            "name": "GRCh37",
-            "accession": "GCA_000001405.1"
-        },
-        {
-            "synonyms": ["hg38"],
             "name": "GRCh38",
-            "accession": "GCA_000001405.15"
-        }
-    ],
-    "Arabidopsis thaliana": [
-        {
-            "synonyms": ["aratha1"],
-            "name": "TAIR10",
-            "accession": "GCA_000001735.1"
-        }
-    ],
-    "Danio rerio": [
-        {
-            "synonyms": ["danrer10"],
-            "name": "GRCz10",
-            "accession": "GCA_000002035.3"
+            "accession": "GCA_000001405.15",
+            "synonyms": [
+                "hg38"
+            ]
         },
         {
-            "synonyms": ["danrer7"],
-            "name": "Zv9",
-            "accession": "GCA_000002035.2"
-        }
-    ],
-    "Ricinus communis": [
-        {
-            "synonyms": ["riccom1"],
-            "name": "JCVI_RCG_1.1",
-            "accession": "GCA_000151685.2"
-        }
-    ],
-    "Mus musculus": [
-        {
-            "synonyms": ["mm10"],
-            "name": "GRCm38",
-            "accession": "GCA_000001635.2"
+            "name": "GRCh37",
+            "accession": "GCA_000001405.1",
+            "synonyms": [
+                "hg19"
+            ]
         },
         {
-            "synonyms": ["mm9"],
-            "name": "MGSCv37",
-            "accession": "GCA_000001635.1"
+            "name": "GRCh38.p13",
+            "accession": "GCA_000001405.28",
+            "synonyms": [
+                "hg38"
+            ]
+        },
+        {
+            "name": "GRCh38.p12",
+            "accession": "GCA_000001405.27",
+            "synonyms": [
+                "hg38"
+            ]
+        },
+        {
+            "name": "T2T-CHM13v2.0",
+            "accession": "GCA_009914755.4",
+            "synonyms": [
+                "GCA_009914755.4"
+            ]
+        }
+    ],
+    "Phaeodactylum tricornutum CCAP 1055/1": [
+        {
+            "name": "ASM15095v2",
+            "accession": "GCA_000150955.2",
+            "synonyms": [
+                "ASM15095v2"
+            ]
+        }
+    ],
+    "Pythium arrhenomanes ATCC 12531": [
+        {
+            "name": "par_scaffolds_v1",
+            "accession": "GCA_000387505.2",
+            "synonyms": [
+                "par_scaffolds_v1"
+            ]
+        }
+    ],
+    "Colletotrichum graminicola M1.001": [
+        {
+            "name": "C_graminicola_M1_001_V1",
+            "accession": "GCA_000149035.1",
+            "synonyms": [
+                "C_graminicola_M1_001_V1"
+            ]
+        }
+    ],
+    "Colletotrichum higginsianum": [
+        {
+            "name": "ASM31379v2",
+            "accession": "GCA_000313795.2",
+            "synonyms": [
+                "GCA_000313795.2"
+            ]
+        }
+    ],
+    "Colletotrichum sublineola": [
+        {
+            "name": "ASM69613v1",
+            "accession": "GCA_000696135.1",
+            "synonyms": [
+                "ASM69613v1"
+            ]
+        }
+    ],
+    "Brassica rapa": [
+        {
+            "name": "Brapa_1.0",
+            "accession": "GCA_000309985.1",
+            "synonyms": [
+                "braRap1"
+            ]
         }
     ]
+    ...
 }`
                         }
                     </pre>
@@ -497,18 +548,20 @@ const InfoApisDocs = () => {
 
                     <h4>Example Requests</h4>
                     <pre className={classes.codeBlock}>
-                        GET https://www.trackhubregistry.org/api/info/hubs_per_assembly/GRCz10
+                        GET {window.location.origin}/api/info/hubs_per_assembly/GRCz10
                     </pre>
 
                     <pre className={classes.codeBlock}>
-                        GET https://www.trackhubregistry.org/api/info/hubs_per_assembly/GCA_000002035.3
+                        GET {window.location.origin}/api/info/hubs_per_assembly/GCA_000002035.3
                     </pre>
 
                     <h4>Example Response</h4>
                     <pre className={classes.codeBlock}>
                         {
                             `HTTP/1.0 200 OK
-{"tot": 2}`
+{
+    "tot": 4
+}`
                         }
                     </pre>
 
@@ -583,18 +636,20 @@ const InfoApisDocs = () => {
                     <h4>Example Request</h4>
 
                     <pre className={classes.codeBlock}>
-                        GET https://www.trackhubregistry.org/api/info/tracks_per_assembly/GRCz10
+                        GET {window.location.origin}/api/info/tracks_per_assembly/GRCz10
                     </pre>
 
                     <pre className={classes.codeBlock}>
-                        GET https://www.trackhubregistry.org/api/info/tracks_per_assembly/GCA_000002035.3
+                        GET {window.location.origin}/api/info/tracks_per_assembly/GCA_000002035.3
                     </pre>
 
                     <h4>Example Response</h4>
                     <pre className={classes.codeBlock}>
                         {
                             `HTTP/1.0 200 OK
-{"tot": 11}`
+{
+    "tot": 19
+}`
                         }
 
                     </pre>
@@ -689,172 +744,100 @@ const InfoApisDocs = () => {
 
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
-                        GET https://www.trackhubregistry.org/api/info/trackhubs
+                        GET {window.location.origin}/api/info/trackhubs
                     </pre>
-
+{/*+ window.location.origin +*/}
                     <h4>Example Response</h4>
                     <pre className={classes.codeBlock}>
                         {
-                            `HTTP/1.0 200 OK
-[
-   {
-      "name":"cshl2013",
-      "url":"http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt",
-      "shortLabel":"Plants",
-      "longLabel":"CSHL Biology of Genomes meeting 2013 demonstration assembly hub",
-      "trackdbs":[
-         {
-            "species":"3711",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/fI163v_DQDyf7WSKw-8v_g",
-            "assembly":"GCA_000309985.1"
-         },
-         {
-            "species":"3988",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/9ztv_BxMRo6gAE6z8CNPOg",
-            "assembly":"GCA_000151685.2"
-         },
-         {
-            "species":"3702",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/gOGRzcTSRd2l0LMQTufS4w",
-            "assembly":"GCA_000001735.1"
-         }
-      ]
-   },
-   {
-      "name":"miRcodeHub",
-      "url":"http://www.mircode.org/ucscHub/hub.txt",
-      "shortLabel":"miRcode microRNA sites",
-      "longLabel":"Predicted microRNA target sites in GENCODE transcripts",
-      "trackdbs":[
-         {
-            "species":"9606",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/AR8hZ1QKR-exXMkJkxCAgg",
-            "assembly":"GCA_000001405.1"
-         }
-      ]
-   },
-   {
-      "name":"454paper",
-      "url":"http://web.stanford.edu/~htilgner/2012_454paper/data/hub.txt",
-      "shortLabel":"454 K562andHelaS3RNAseq",
-      "longLabel":"Whole-Cell 454 Hela and K562 RNAseq",
-      "trackdbs":[
-         {
-            "species":"9606",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/QDIwMj-0QR-rRjSUeS2UyQ",
-            "assembly":"GCA_000001405.1"
-         }
-      ]
-   },
-   {
-      "name":"track_hub",
-      "url":"http://ngs.sanger.ac.uk/production/grit/track_hub/hub.txt",
-      "shortLabel":"GRC Genome Issues under Review",
-      "longLabel":"Sanger Genome Reference Informatics Team: Genome issues and other features",
-      "trackdbs":[
-         {
-            "species":"7955",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/4_c-YWQASiayXpf11BZ5Aw",
-            "assembly":"GCA_000002035.2"
-         },
-         {
-            "species":"7955",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/dMmLmnVgQgWmAUcxKASgng",
-            "assembly":"GCA_000002035.3"
-         },
-         {
-            "species":"9606",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/-MXT_AKKTHi9IQvC3Y5tZQ",
-            "assembly":"GCA_000001405.1"
-         },
-         {
-            "species":"9606",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/8XUZuzoqQdSvcISZ5rirMA",
-            "assembly":"GCA_000001405.15"
-         },
-         {
-            "species":"10090",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/7I5tcGcCTE2BxgmtajXLYA",
-            "assembly":"GCA_000001635.1"
-         },
-         {
-            "species":"10090",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/tMOCJ3MBSv2k2b7paS6dkQ",
-            "assembly":"GCA_000001635.2"
-         }
-      ]
-   },
-   {
-      "name":"ThorntonLab",
-      "url":"http://devlaeminck.bio.uci.edu/RogersUCSC/hub.txt",
-      "shortLabel":"ThorntonHub",
-      "longLabel":"DrosophilaGenomeAssemblies",
-      "trackdbs":[
-         {
-            "species":"7240",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/gkQbds68R_-Qkj-HFa9BSg",
-            "assembly":"GCA_000754195.2"
-         }
-      ]
-   },
-   {
-      "name":"Blueprint_Hub_20150128",
-      "url":"ftp://ftp.ebi.ac.uk/pub/databases/blueprint/releases/current_release/homo_sapiens/hub",
-      "shortLabel":"Blueprint Hub",
-      "longLabel":"Blueprint Epigenomics Data Hub",
-      "trackdbs":[
-         {
-            "species":"9606",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/C7wK0Ov2Tf2-Ei8FaPRpvw",
-            "assembly":"GCA_000001405.1"
-         }
-      ]
-   },
-   {
-      "name":"EnsemblRegulatoryBuild",
-      "url":"http://ngs.sanger.ac.uk/production/ensembl/regulation/hub.txt",
-      "shortLabel":"Ensembl Regulatory Build",
-      "longLabel":"Evidence summaries and provisional results for the new Ensembl Regulatory Build",
-      "trackdbs":[
-         {
-            "species":"9606",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/HccITRN2QFSPN2RTlx2jWQ",
-            "assembly":"GCA_000001405.15"
-         },
-         {
-            "species":"9606",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/zEnMYwioQD2MNutpWECpyA",
-            "assembly":"GCA_000001405.1"
-         }
-      ]
-   },
-   {
-      "name":"NHGRI-1",
-      "url":"http://research.nhgri.nih.gov/manuscripts/Burgess/zebrafish/downloads/NHGRI-1/hub.txt",
-      "shortLabel":"ZebrafishGenomics",
-      "longLabel":"Burgess Lab Zebrafish Genomic Resources",
-      "trackdbs":[
-         {
-            "species":"7955",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/jViT9wCASoqpvIu1PUCwvw",
-            "assembly":"GCA_000002035.2"
-         }
-      ]
-   },
-   {
-      "name":"xPADHub",
-      "url":"http://johnlab.org/xpad/Hub/UCSC.txt",
-      "shortLabel":"Cancer genome polyA site & usage",
-      "longLabel":"An in-depth map of polyadenylation sites in cancer (matched-pair tissues and cell lines)",
-      "trackdbs":[
-         {
-            "species":"9606",
-            "uri":"https://www.trackhubregistry.org/api/search/trackdb/8a9goBD0RAWKJOsxH0wPXQ",
-            "assembly":"GCA_000001405.1"
-         }
-      ]
-   }
-]`
+                            `HTTP 200 OK
+{
+    "count": 8274,
+    "next": "` + window.location.origin + `/api/info/trackhubs?limit=5&offset=5",
+    "previous": null,
+    "results": [
+        {
+            "name": "Blueprint_Hub_20160816",
+            "shortLabel": "Blueprint Hub",
+            "longLabel": "Blueprint Epigenomics Data Hub",
+            "url": "http://ftp.ebi.ac.uk/pub/databases/blueprint/releases/current_release/homo_sapiens/hub/hub.txt",
+            "trackdbs": [
+                {
+                    "species": "9606",
+                    "uri": "` + window.location.origin + `/api/search/trackdb/1",
+                    "assembly": "GCA_000001405.15"
+                }
+            ]
+        },
+        {
+            "name": "SRP040703",
+            "shortLabel": "RNA-Seq alignment hub SRP040703",
+            "longLabel": "Next generation sequencing of Phaeodactylum tricornutum grown with and without nitrogen",
+            "url": "ftp://ftp.ensemblgenomes.org/pub/misc_data/track_hubs/protists//SRP040703/hub.txt",
+            "trackdbs": [
+                {
+                    "species": "556484",
+                    "uri": "` + window.location.origin + `/api/search/trackdb/2",
+                    "assembly": "GCA_000150955.2"
+                }
+            ]
+        },
+        {
+            "name": "SRP006964",
+            "shortLabel": "RNA-Seq alignment hub SRP006964",
+            "longLabel": "Pythium Comparative Transcriptome Analysis SRP006964",
+            "url": "ftp://ftp.ensemblgenomes.org/pub/misc_data/track_hubs/protists//SRP006964/hub.txt",
+            "trackdbs": [
+                {
+                    "species": "1223556",
+                    "uri": "` + window.location.origin + `/api/search/trackdb/3",
+                    "assembly": "GCA_000387505.2"
+                },
+                {
+                    "species": "1223557",
+                    "uri": "` + window.location.origin + `/api/search/trackdb/3010",
+                    "assembly": "GCA_000387425.2"
+                },
+                {
+                    "species": "1223558",
+                    "uri": "` + window.location.origin + `/api/search/trackdb/6157",
+                    "assembly": "GCA_000387465.2"
+                },
+                {
+                    "species": "1223560",
+                    "uri": "` + window.location.origin + `/api/search/trackdb/6482",
+                    "assembly": "GCA_000387545.2"
+                }
+            ]
+        },
+        {
+            "name": "SRP123414",
+            "shortLabel": "RNA-Seq alignment hub SRP123414",
+            "longLabel": "Colletotrichum graminicola CBS130836 Gene Expression Profiling on Sugar Beet Pulp - 32",
+            "url": "ftp://ftp.ensemblgenomes.org/pub/misc_data/track_hubs/fungi/SRP123414/hub.txt",
+            "trackdbs": [
+                {
+                    "species": "645133",
+                    "uri": "` + window.location.origin + `/api/search/trackdb/4",
+                    "assembly": "GCA_000149035.1"
+                }
+            ]
+        },
+        {
+            "name": "SRP123425",
+            "shortLabel": "RNA-Seq alignment hub SRP123425",
+            "longLabel": "Colletotrichum higginsianum IMI349063 Gene Expression Profiling on MP - 7 SRP123425",
+            "url": "ftp://ftp.ensemblgenomes.org/pub/misc_data/track_hubs/fungi/SRP123425/hub.txt",
+            "trackdbs": [
+                {
+                    "species": "80884",
+                    "uri": "` + window.location.origin + `/api/search/trackdb/5",
+                    "assembly": "GCA_000313795.2"
+                }
+            ]
+        }
+    ]
+}`
                         }
                     </pre>
 

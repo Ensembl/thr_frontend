@@ -21,6 +21,7 @@ import MainBreadcrumb from "../../../generic/MainBreadcrumb";
 import ApisDocsMenu from "../ApisDocsMenu";
 import CssBaseline from "@mui/material/CssBaseline";
 import ExampleClientsTabs from "./ExampleClientsTabs";
+import {Alert} from "@mui/lab";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -61,7 +62,7 @@ use HTTP::Request::Common;
 use LWP::UserAgent;
 
 my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
-my $server = 'https://www.trackhubregistry.org';
+my $server = '`+ window.location.origin +`';
 my $HUB_URL = 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt';
 my ($user, $pass, $auth_token) = ('exampleuser', 'examplepass');
 
@@ -122,7 +123,7 @@ sub logout {
             tabTitle: `Python2`,
             tabContent: `import requests, sys
 
-server = 'https://www.trackhubregistry.org'
+server = '`+ window.location.origin +`'
 hub_url = 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt'
 user = 'exampleuser'
 password = 'examplepass'
@@ -159,7 +160,7 @@ logout(server, user, auth_token)`,
             tabTitle: `Python3`,
             tabContent: `import requests, sys
 
-server = 'https://www.trackhubregistry.org'
+server = '`+ window.location.origin +`'
 hub_url = 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt'
 user = 'exampleuser'
 password = 'examplepass'
@@ -200,7 +201,7 @@ require 'uri'
 require 'rubygems'
 require 'json'
 
-server = 'https://www.trackhubregistry.org'
+server = '`+ window.location.origin +`'
 hub_url = 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt'
 user = 'exampleuser'
 pass = 'examplepass'
@@ -255,7 +256,7 @@ logout(user, auth_token)`,
         },
         {
             tabTitle: `Curl`,
-            tabContent: `curl 'https://www.trackhubregistry.org/api/trackhub' \\
+            tabContent: `curl '`+ window.location.origin +`/api/trackhub' \\
     -H 'User: exampleuser' \\
     -H 'Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi'\\
     -X POST -d '{ "url": "http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt", \\
@@ -370,7 +371,7 @@ logout(user, auth_token)`,
                         Request:
                         <pre className={classes.codeBlock}>
                             {
-                                `      POST https://www.trackhubregistry.org/api/trackhub
+                                `      POST `+ window.location.origin +`/api/trackhub
       User: exampleuser
       Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi
       {
@@ -417,14 +418,26 @@ logout(user, auth_token)`,
                     </p>
                     <p>
                         Response:
+                        <Alert severity="warning">
+                            This section needs to be updated, as for now, the response is:
+                            <pre className={classes.codeBlock}>
+                            {
+                                `      201 Created
+      Content-type: application/json; charset=utf-8
+      {
+	    "success": "The hub is submitted successfully"                                                         
+      }`
+                            }
+                        </pre>
+                        </Alert>
                         <pre className={classes.codeBlock}>
                             {
                                 `      201 Created
       Content-type: application/json; charset=utf-8
       Location: [ 
-            'https://www.trackhubregistry.org/api/trackdb/KRBr5PS7RmapaFr7ofpTBA, 
-            'https://www.trackhubregistry.org/api/trackdb/hB8Npdm1ST2gBwkbQThkVg', 
-            'https://www.trackhubregistry.org/api/trackdb/FOEM87nETMOCOglmm0sSsg' 
+            '`+ window.location.origin +`/api/trackdb/KRBr5PS7RmapaFr7ofpTBA, 
+            '`+ window.location.origin +`/api/trackdb/hB8Npdm1ST2gBwkbQThkVg', 
+            '`+ window.location.origin +`/api/trackdb/FOEM87nETMOCOglmm0sSsg' 
       ]
       ...
       [
