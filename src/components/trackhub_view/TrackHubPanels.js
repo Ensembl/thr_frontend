@@ -153,8 +153,8 @@ export default function TrackHubPanels({trackDbInfo}) {
                                 <Divider sx={styles.divider}/>
                                 <Box sx={styles.PanelContent}>
                                     <div><strong>Name:</strong> {trackDbInfo.hub.name}</div>
-                                    <div><strong>Short Label:</strong> {trackDbInfo.hub.short_label}</div>
-                                    <div><strong>Long Label:</strong> {parse(`${trackDbInfo.hub.long_label}`)}</div>
+                                    <div><strong>Short Label:</strong> {trackDbInfo.hub.shortLabel}</div>
+                                    <div><strong>Long Label:</strong> {parse(`${trackDbInfo.hub.longLabel}`)}</div>
                                     <div><strong>Assembly Hub:</strong>
                                         {trackDbInfo.hub.assembly || <CloseIcon sx={styles.largeIcon}/>}
                                     </div>

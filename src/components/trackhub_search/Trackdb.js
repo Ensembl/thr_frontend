@@ -69,12 +69,12 @@ const Trackdb = ({trackdb}) => {
             <Box sx={styles.paperContent}>
                 <Typography component="h3" variant="h6">
                     <Link to={`/search/trackhub_view/${trackdb.trackdb_id}`} target={'_blank'} rel="noreferrer">
-                        <InnerHTML html={trackdb.hub.short_label}/>
+                        <InnerHTML html={trackdb.hub.shortLabel}/>
                     </Link>
                 </Typography>
                 <Box sx={styles.PanelContent}>
                     {/* Fix HTML tags not being rendered properly*/}
-                    <InnerHTML html={trackdb.hub.long_label}/>
+                    <InnerHTML html={trackdb.hub.longLabel}/>
                     <br/>
                 </Box>
                 <Grid item xs={6} sm={6} md={12}>
