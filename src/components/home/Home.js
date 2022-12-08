@@ -21,6 +21,8 @@ import SearchForm from "./SearchForm";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import {Typography} from "@mui/material";
+import {Link} from "react-router-dom";
+import Alert from "@mui/material/Alert";
 
 
 function Home() {
@@ -28,6 +30,13 @@ function Home() {
     return (
         <>
             <CssBaseline/>
+            <Alert severity="info">
+                Trackhub Registry has been redeveloped! Due to this, if you have an account you will need
+                to <Link to='/forgot_password' variant="body2">reset your password </Link>
+                and will be prompted to do this when you first login.
+                There have been some minor essential changes to the API to improve security.
+                Please check the API documentation for further information.
+            </Alert>
             <Grid
                 container
                 direction="column"
