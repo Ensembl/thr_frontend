@@ -191,7 +191,7 @@ const SearchApiDocs = () => {
                                     <TableCell><strong>Example</strong></TableCell>
                                     <TableCell>
                                     <pre className={classes.codeBlock}>
-                                        {`{"query" : "monocyte male", assembly: "GRCh37"}`}
+                                        {`{"query" : "monocyte male", assembly: "ASM107743v1"}`}
                                     </pre>
                                     </TableCell>
                                 </TableRow>
@@ -206,7 +206,7 @@ const SearchApiDocs = () => {
                             `    POST `+ window.location.origin +`/api/search?page=1
     {
       "query": "monocyte male",
-      "assembly": "GRCh37"
+      "assembly": "ASM107743v1"
     }`
                         }
                     </pre>
@@ -216,36 +216,53 @@ const SearchApiDocs = () => {
     {
         `    HTTP/1.0 200 OK
     {
-      "total_entries":1,
-      "items":[
-               {
-                 "score":0.26635534,
-                        "id":"C7wK0Ov2Tf2-Ei8FaPRpvw",
-                  "version":"v1.0",
-                 "status":{
-                   "last_update":"1500768407",
-                   "message":"All is Well"
-                 },
-                 "hub":{
-                   "shortLabel":"Blueprint Hub",
-                   "url":"ftp://ftp.ebi.ac.uk/pub/databases/blueprint/releases/current_release/homo_sapiens/hub",
-                   "name":"Blueprint_Hub_20150128",
-                   "longLabel":"Blueprint Epigenomics Data Hub"
-                 },
-                 "species":{
-                   "scientific_name":"Homo sapiens",
-                   "common_name":"human",
-                   "tax_id":"9606"
-                 },
-                 "type":"genomics",
-                 "assembly":{
-                   "synonyms":"hg19",
-                   "long_name":"Genome Reference Consortium Human Build 37 (GRCh37)",
-                   "name":"GRCh37",
-                   "accession":"GCA_000001405.1"
-                 }
-               }
-             ]
+      "next": null,
+      "previous": null,
+      "total_entries": 2,
+      "items": [
+        {
+          "trackdb_id": 6503,
+          "source": {
+            "checksum": "81fd31116605f49853d4d1a5d6c3321e",
+            "url": "ftp://ftp.vectorbase.org/public_data/rnaseq_alignments/hubs/glossina_morsitans/VBRNAseq_group_1386/GmorY1/trackdb.txt"
+          },
+          "hub": {
+            "name": "VBRNAseq_group_1386",
+            "shortLabel": "SRP063744 Male accessory gland and testes",
+            "longLabel": "This collection of datasets are derived from male reproductive tissues from the tsetse fly (Glossina morsitans).",
+            "url": "ftp://ftp.vectorbase.org/public_data/rnaseq_alignments/hubs/glossina_morsitans/VBRNAseq_group_1386/hub.txt",
+            "description_url": null,
+            "email": null
+          },
+          "version": "v1.0",
+          "owner": "vb-trackhub",
+          "status": {
+            "last_update": 1670865945,
+            "tracks": {
+              "total": 14,
+              "with_data": {
+                "total": 12,
+                "total_ko": 0
+              }
+            },
+            "message": "All is Well"
+          },
+          "species": {
+            "taxon_id": 37546,
+            "scientific_name": "Glossina morsitans morsitans",
+            "common_name": null
+          },
+          "assembly": {
+            "accession": "GCA_001077435.1",
+            "name": "ASM107743v1",
+            "long_name": null,
+            "ucsc_synonym": "GmorY1"
+          },
+          "created": 1513007652,
+          "type": "transcriptomics",
+        },
+        ...
+      ]
     }`
     }
   </pre>
