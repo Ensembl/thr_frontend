@@ -66,24 +66,16 @@ const UpdateThWfDocs = () => {
                     <Typography id="thupdate" component="h4" variant="h5">
                         Updating Track Hubs
                     </Typography>
-                    <br/>
-                    <Alert severity="warning">
-                        This feature is not implemented yet, if you want to update one of your hubs, please delete
-                        the old one using the <a href="/docs/management/dashboard">dashboard</a> or <a
-                        href="/docs/api/registration/workflow/thdelete">DELETE API</a> and <a
-                        href="/docs/api/registration/workflow/thregister">submit</a> the newer version
-                        again.
-                    </Alert>
                     <p>
                         Suppose you've updated the structure or content of one of your remote public hubs registered
                         with us. You obviously want the changes to appear on the Registry as well.
                     </p>
                     <p>
-                        The procedure is simple and has been already explored in <a
+                        The procedure is similar to <a
                         href="/docs/api/registration/workflow/thregister">Registering Track Hubs</a>:
-                        simply POST the hub URL at <a
-                        href="/docs/api/registration/reference#post_trackhub">/api/trackhub</a> again. In
-                        case the track hub has already been submitted, the request is interpreted as a request to update
+                        simply <strong>PUT</strong> the hub URL at <a
+                        href="/docs/api/registration/reference#put_trackhub">/api/trackhub/:id</a>. In
+                        case the track hub has already been submitted, the request will update
                         the details of the registered track hub. The Registry will delete the existing stored trackDb
                         entities and replace them with the most up-to-date versions obtained by parsing the hub again.
                     </p>
@@ -105,16 +97,15 @@ const UpdateThWfDocs = () => {
                         Procedure
                     </Typography>
                     <ol>
-                        <li>Make a POST request to the <a
-                            href="/docs/api/registration/reference#post_trackhub">/api/trackhub</a> endpoint
+                        <li>Make a PUT request to the <a
+                            href="/docs/api/registration/reference#put_trackhub">/api/trackhub/:id</a> endpoint
                             that includes a <em>User</em> header with your username and
                             an <em>Auth-Token</em> header with the given authentication token;
                         </li>
                         <li>Examine the response. The response code indicates whether the request succeeded, or how it
                             failed;
                         </li>
-                        <li>A successful request returns an array of JSON objects, where each object is a translation of
-                            the configuration of a trackDb belonging to the track hub.
+                        <li>A successful request returns an success message stating that the hub was updated successfuly.
                         </li>
                     </ol>
 
@@ -132,7 +123,7 @@ const UpdateThWfDocs = () => {
                         Request:
                         <pre className={classes.codeBlock}>
                     {
-                        `      POST ` + window.location.origin + `/api/trackhub
+                        `      PUT ` + window.location.origin + `/api/trackhub/1
       User: exampleuser
       Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi
       {

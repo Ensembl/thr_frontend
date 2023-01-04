@@ -305,6 +305,13 @@ export default function ApisDocsMenu() {
                                         <ListItemText primary="POST /api/trackhub"/>
                                     </ListItem>
                                 </HashLink>
+                                <HashLink to="/docs/api/registration/reference#put_trackhub" className={classes.item}
+                                          underline="none">
+                                    <ListItem button className={classes.nestedLvl2} key='put_trackhub'>
+                                        <ListItemIcon><HttpIcon/></ListItemIcon>
+                                        <ListItemText primary="PUT /api/trackhub/:id"/>
+                                    </ListItem>
+                                </HashLink>
                                 <HashLink to="/docs/api/registration/reference#get_trackhub_id" className={classes.item}
                                           underline="none">
                                     <ListItem button className={classes.nestedLvl2} key='get_trackhub_id'>
