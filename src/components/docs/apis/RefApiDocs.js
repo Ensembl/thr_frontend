@@ -320,7 +320,7 @@ const RefApiDocs = () => {
                         POST /api/trackhub
                     </Typography>
                     <p>
-                        Register/Update a remote public track hub with the Registry. The message body specifies the
+                        Register a remote public track hub with the Registry. The message body specifies the
                         track hub remote URL (can be either the directory or hub.txt file URL), a map from assembly
                         names as specified in the hub to INSDC accessions (in case of assemblies not supported by UCSC,
                         see <a href="/docs/management/assembly_support">genome assembly support</a>),
@@ -331,10 +331,8 @@ const RefApiDocs = () => {
                         If the track hub at the specified URL has not been previously submitted, the Registry will
                         register it by translating its trackDb files into JSON documents adhering to a particular <a
                         href="/docs/management/modelling">JSON schema version</a>. If the track hub
-                        has already been submitted, the request is interpreted as a request to update the details of the
-                        registered track hub (e.g. the remote track hub has been updated and you want to keep its
-                        details in the Registry up to date). In this case, the Registry will delete the relevant trackDb
-                        documents and replace them with translations of their most up-to-date versions.
+                        has already been submitted, an error will be prompted to ask you to use PUT API to update the
+                        hub or letting you know that the hub is already submitted by another user.
                     </p>
                     <p>
                         If the request is successful, the response body is formatted as an array of JSON objects, where
@@ -470,6 +468,7 @@ const RefApiDocs = () => {
                     </pre>
 
                     <h4>Example Response</h4>
+                    <h5>When the hub is submitted succesfully</h5>
                     <pre className={classes.codeBlock}>
     {
         `    HTTP/1.0 201 OK
@@ -498,6 +497,18 @@ const RefApiDocs = () => {
                         The response body is an array of the three corresponding trackDb representations, with the
                         header Location reporting their respective URIs in the same order.
                     </p>
+
+                    <h5>When trying to submit hub (using POST) that exist already</h5>
+                    <pre className={classes.codeBlock}>
+    {
+        `    HTTP/1.0 201 OK
+    Content-type: application/json
+    {
+         "error": "This hub is already submitted, please use PUT /api/trackhubs/\<hub_id\> 
+          endpoint to update it, the hub ID is '8281'"
+    }`
+    }
+                    </pre>
 
                     <h4>HTTP Status Codes</h4>
                     <TableContainer component={Paper}>
@@ -556,6 +567,251 @@ const RefApiDocs = () => {
                                     <TableCell>Request cannot be fulfilled due to temporary overloading or maintenance
                                         of the
                                         server
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+
+                    <br/>
+                    <Typography id="put_trackhub" component="h4" variant="h6">
+                        PUT /api/trackhub/:id
+                    </Typography>
+                    <p>
+                        Update a remote public track hub with the Registry. The message body specifies the
+                        track hub remote URL (can be either the directory or hub.txt file URL), a map from assembly
+                        names as specified in the hub to INSDC accessions (in case of assemblies not supported by UCSC,
+                        see <a href="/docs/management/assembly_support">genome assembly support</a>),
+                        and, optionally, the hub assemblies data type (default: <em>genomics</em>). See <a
+                        href="#post_trackhub_msg_format">Message Format</a> for a list of possible types.
+                    </p>
+                    <p>
+                        If the track hub has already been submitted by the same user, the request will update the
+                        details of the registered track hub (e.g. the remote track hub has been updated and you want
+                        to keep its details in the Registry up to date). In this case, the Registry will delete the
+                        relevant trackDb documents and replace them with translations of their most up-to-date versions.
+                    </p>
+                    <p>
+                        If the request is successful, the response body will contain a success message letting the
+                        user know that the hub is updated successfully.
+                    </p>
+
+                    <h4>Resource Information</h4>
+                    <TableContainer component={Paper}>
+                        <Table className={classes.table} aria-label="simple table">
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell><strong>Response formats</strong></TableCell>
+                                    <TableCell>JSON</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell><strong>Authentication</strong></TableCell>
+                                    <TableCell>User+Auth-Token headers</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell><strong>Rate Limited</strong></TableCell>
+                                    <TableCell>No</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+
+                    <h4>Parameters</h4>
+                    <p>
+                        <ul>
+                            <li><em>version</em> (optional): JSON schema version of the registered trackDb documents for
+                                this hub (default: v1.0, see <a href="/docs/management/modelling">Modelling
+                                    Track Hubs</a> for a discussion)
+                            </li>
+                        </ul>
+                    </p>
+
+                    <h4>Message</h4>
+                    <TableContainer component={Paper}>
+                        <Table className={classes.table} aria-label="simple table">
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell><strong>Content-type</strong></TableCell>
+                                    <TableCell>application/json</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell id="post_trackhub_msg_format"><strong>Format</strong></TableCell>
+                                    <TableCell>
+                                    <pre className={classes.codeBlock}>
+            {
+                `            {
+              "type": "object",
+
+              "properties": {
+                "url":    { 
+                  "description": "The hub URL (i.e. location of the hub.txt file)",
+                  "type": "string", 
+                  "format": "uri"
+                },
+                "type":  {
+                  "description": "The main type of data contained in the hub",
+                  "type": "string", 
+                  "enum": [ "genomics", "epigenomics", "transcriptomics", "proteomics" ] 
+                },
+                "public": {
+                  "description": "Whether the hub is available for search (1) or not (0)",
+                  "type": "number"
+                },
+                "assemblies": {
+                  "type": "object",
+                  "patternProperties": {
+                    "[a-zA-z][a-zA-Z0-9]+$": { "type": "string", "pattern": "^G(CA|CF)_[0-9]+.[0-9]+$" }
+                  }
+                }
+              }
+
+              "required": [ "url" ]
+            }`
+            }
+                                    </pre>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell><strong>Example</strong></TableCell>
+                                    <TableCell>
+                                    <pre className={classes.codeBlock}>
+            {
+                `            { 
+              "url" : "http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt", 
+              "assemblies": {
+                "araTha1": 'GCA_000001735.1',
+                "ricCom1": 'GCA_000151685.2',
+                "braRap1": 'GCA_000309985.1'
+              }
+            }`
+            }
+                                    </pre>
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+
+                    <h4>Example Request</h4>
+                    <p>
+                        In this example, we are requesting to update the CSHL Biology of Genomes meeting 2013
+                        demonstration hub, which contains data for three assemblies referred to by the names "araTha1",
+                        "ricCom1" and "braRap1" respectively.
+                    </p>
+
+                    <h5><strong>Important Note</strong></h5>
+                    <p>
+                        As can be seen in the body of the following request, we're posting the mapping between the above
+                        hub assembly names and their respective INSDC accessions. This is because this is an assembly
+                        hub and there's no other way for the Registry to infer species/assembly information.
+                    </p>
+
+                    <pre className={classes.codeBlock}>
+    {
+        `    PUT `+ window.location.origin +`/api/trackhub/1
+    User: exampleuser
+    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi
+    {
+      "url": "http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt",
+      "assemblies": {
+        "araTha1": 'GCA_000001735.1',
+        "ricCom1": 'GCA_000151685.2',
+        "braRap1": 'GCA_000309985.1'
+      }
+    }`
+    }
+                    </pre>
+
+                    <h4>Example Response</h4>
+                    <h5>When the hub is updated succesfully</h5>
+                    <pre className={classes.codeBlock}>
+    {
+        `    HTTP/1.0 201 OK
+    Content-type: application/json
+    {
+	"success": "The hub is submitted/updated successfully"
+    }`
+    }
+                    </pre>
+
+                    <h5>When trying to update a hub which is already submitted by a different user</h5>
+                    <pre className={classes.codeBlock}>
+    {
+        `    HTTP/1.0 403 Forbidden
+    Content-type: application/json
+    {
+         "error": "The hub you're trying to update is submitted by a different user!"
+    }`
+    }
+                    </pre>
+
+                    <h5>When trying to update a hub that doesn't exist</h5>
+                    <pre className={classes.codeBlock}>
+    {
+        `    HTTP/1.0 401 Unauthorized
+    Content-type: application/json
+    {
+         "error": "Hub doesn't exist"
+    }`
+    }
+                    </pre>
+
+                    <h4>HTTP Status Codes</h4>
+                    <TableContainer component={Paper}>
+                        <Table className={classes.table} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell><strong>Code</strong></TableCell>
+                                    <TableCell><strong>Description</strong></TableCell>
+                                    <TableCell><strong>Reason</strong></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell>201</TableCell>
+                                    <TableCell>Created</TableCell>
+                                    <TableCell>Request successful, hub trackDb entities created</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>400</TableCell>
+                                    <TableCell>Bad Request</TableCell>
+                                    <TableCell>
+                                        Request cannot be fulfilled by the Registry. Possible reasons:
+                                        <ul>
+                                            <li>empty request body</li>
+                                            <li>invalid JSON schema version</li>
+                                            <li>request body does not specify remote hub URL</li>
+                                            <li>hub is not compliant with the UCSC hub specs</li>
+                                            <li>hub is not available or cannot be correctly parsed</li>
+                                            <li>one of the hub trackDb configurations cannot be translated to <a
+                                                href="/docs/management/modelling">valid JSON</a></li>
+                                            <li>one of the hub genome subdirectory names are not <a target="_blank"
+                                                                                                    href="https://genome.ucsc.edu/FAQ/FAQreleases.html#release1" rel="noreferrer">valid
+                                                UCSC DB names</a>, or cannot be translated to an existing NCBI assembly
+                                                identifier (e.g. assembly accession + version, e.g. <a target="_blank"
+                                                                                                       href="http://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.13/" rel="noreferrer">GCA_000001405.1</a>)
+                                            </li>
+                                        </ul>
+                                        See <a href="/docs/api/registration/workflow/thregister#errors">What
+                                        can possibly go wrong</a> for more details, in particular about the error
+                                        messages.
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>401</TableCell>
+                                    <TableCell>Unauthorized</TableCell>
+                                    <TableCell>The request requires user authentication</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>500</TableCell>
+                                    <TableCell>Internal Server Error</TableCell>
+                                    <TableCell>Request cannot be fulfilled due to unexpected condition</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>503</TableCell>
+                                    <TableCell>Service Unavailable</TableCell>
+                                    <TableCell>Request cannot be fulfilled due to temporary overloading or maintenance
+                                        of the server
                                     </TableCell>
                                 </TableRow>
                             </TableBody>
