@@ -54,119 +54,168 @@ const RegisteringThWfDocs = () => {
     const exampleClientsCode = [
         {
             tabTitle: `Perl`,
-            tabContent: `use strict;
+            tabContent: `#!/usr/bin/perl
+use strict;
 use warnings;
-
 use JSON;
-use HTTP::Request::Common;
 use LWP::UserAgent;
 
-my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
-my $server = '`+ window.location.origin +`';
+my $SERVER = '`+ window.location.origin +`';
+# Change these variables
 my $HUB_URL = 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt';
-my ($user, $pass, $auth_token) = ('exampleuser', 'examplepass');
-
-$auth_token = login($server, $user, $pass);
-
-my $request = POST("$server/api/trackhub",
-                   'Content-type' => 'application/json',
-                   'Content'      => to_json({ url => $HUB_URL,
-                                               assemblies => {
-                                                 araTha1 => 'GCA_000001735.1',
-                                                 ricCom1 => 'GCA_000151685.2',
-                                                  braRap1 => 'GCA_000309985.1'}}));
-$request->headers->header(user       => $user);
-$request->headers->header(auth_token => $auth_token);
-my $response = $ua->request($request);
-if ($response->is_success) {
-  print "I have registered hub at $HUB_URL\\n";
-} else {
-  die sprintf "Couldn't register hub at $HUB_URL: %s [%d]", $response->content, $response->code;
-} 
-
-logout($server, $user, $auth_token);
+my $USER = 'username';
+my $PASSWORD = 'password';
+# Provide assemblies mapping (Only if needed)
+my %ASSEMBLIES_MAPPING = (
+    'araTha1' => 'GCA_000001735.1',
+    'ricCom1' => 'GCA_000151685.2',
+    'braRap1' => 'GCA_000309985.1'
+);
 
 sub login {
-  my ($server, $user, $pass) = @_;
-
-  my $request = GET("$server/api/login");
-  $request->headers->authorization_basic($user, $pass);
-  
-  my $response = $ua->request($request);
-  my $auth_token;
-  if ($response->is_success) {
-    $auth_token = from_json($response->content)->{auth_token};
-    print "Logged in [$auth_token]\\n" if $auth_token;
-  } else {
-    die sprintf "Couldn't login: %s [%d]", $response->content, $response->code;
-  }
-
-  return $auth_token;
+    my ($server) = @_;
+    my $ua = LWP::UserAgent->new;
+    my $res = $ua->post(
+        "$server/api/login",
+        'Content-Type' => 'application/json',
+        Content => to_json({ username => $USER, password => $PASSWORD })
+    );
+    
+    if (!$res->is_success) {
+        print "Couldn't login, reason: ", $res->content, " [", $res->code, "]\\n";
+        exit;
+    }
+    my $json_response = from_json($res->content);
+    my $auth_token = $json_response->{'auth_token'};
+    print "Logged in [$auth_token]\\n";
+    return $auth_token;
 }
 
 sub logout {
-  my ($server, $user, $auth_token) = @_;
-
-  my $request = GET("$server/api/logout");
-  $request->headers->header(user       => $user);
-  $request->headers->header(auth_token => $auth_token);
-
-  my $response = $ua->request($request);
-  if ($response->is_success) {
+    my ($server, $headers) = @_;
+    my $ua = LWP::UserAgent->new;
+    my $res = $ua->post("$server/api/logout", %$headers);
+    
+    if (!$res->is_success) {
+        print "Couldn't logout, reason: ", $res->content, " [", $res->code, "]\\n";
+        exit;
+    }
     print "Logged out\\n";
-  } else {
-    die sprintf "Unable to logout: %s [%d]", $response->content, $response->code;
-  } 
-}`,
+}
+
+sub register_trackhub {
+    my ($server, $hub_url, $headers) = @_;
+    my $ua = LWP::UserAgent->new;
+    my $res = $ua->post(
+        "$server/api/trackhub",
+        'Content-Type' => 'application/json',
+        Content => to_json({ url => $hub_url, assemblies => \\%ASSEMBLIES_MAPPING }),
+        %$headers
+    );
+    
+    if (!$res->is_success) {
+        print "Couldn't register track hub at $hub_url, reason: ", $res->content, " [", $res->code, "]\\n";
+        exit;
+    }
+    print "I have registered hub at $hub_url\\n";
+}
+
+my $auth_token = login($SERVER);
+my %headers = (
+    'user' => $USER,
+    'Authorization' => "Token $auth_token"
+);
+register_trackhub($SERVER, $HUB_URL, \\%headers);
+logout($SERVER, \\%headers);`,
         },
         {
             tabTitle: `Python2`,
-            tabContent: `import requests, sys
+            tabContent: `from __future__ import print_function
+import requests
+import sys
 
-server = '`+ window.location.origin +`'
-hub_url = 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt'
-user = 'exampleuser'
-password = 'examplepass'
+SERVER = '`+ window.location.origin +`'
+# Change these variables
+HUB_URL = 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt'
+USER = 'username'
+PASSWORD = 'password'
+# Provide assemblies mapping (Only if needed)
+ASSEMBLIES_MAPPING = {
+    'araTha1': 'GCA_000001735.1',
+    'ricCom1': 'GCA_000151685.2',
+    'braRap1': 'GCA_000309985.1'
+}
 
-def login(server, user, password):
-    r = requests.get(server+'/api/login', auth=(user, password), verify=False)
+def login(server):
+    """Logs in to the server and returns the auth token."""
+    data = {
+        "username": USER,
+        "password": PASSWORD
+    }
+    headers = {"Content-Type": "application/json"}
+    r = requests.post(server+'/api/login', json=data, headers=headers, verify=True)
     if not r.ok:
-        print "Couldn't login, reason: %s [%d]" % (r.text, r.status_code)
-        sys.exit
+        print("Couldn't login, reason: %s [%d]" % (r.text, r.status_code))
+        sys.exit()
 
-    auth_token = r.json()[u'auth_token']
-    print 'Logged in [%s]' % auth_token
+    auth_token = r.json()['auth_token']
+    print('Logged in [%s]' % auth_token)
     return auth_token
 
-def logout(server, user, auth_token):
-    r = requests.get(server+'/api/logout', headers={ 'user': user, 'auth_token': auth_token })    
+def logout(server, headers):
+    """Logs out from the server."""
+    r = requests.post(server+'/api/logout', headers=headers)
     if not r.ok:
-       print "Couldn't logout, reason: %s [%d]" % (r.text, r.status_code)
-       sys.exit
-    print 'Logged out'
+       print("Couldn't logout, reason: %s [%d]" % (r.text, r.status_code))
+       sys.exit()
+    print('Logged out')
 
-auth_token = login(server, user, password)
-headers = { 'user': user, 'auth_token': auth_token }
-payload = { 'url': hub_url, 'assemblies': { 'araTha1': 'GCA_000001735.1', 'ricCom1': 'GCA_000151685.2', 'braRap1': 'GCA_000309985.1' } }
-r = requests.post(server+'/api/trackhub', headers=headers, json=payload, verify=False)
-if not r.ok:
-   print "Couldn't register track hub at %s, reason: %s [%d]" % (hub_url, r.text, r.status_code)
-   sys.exit
-print "I have registered hub at %s" % hub_url
+def register_trackhub(server, hub_url, headers):
+    """Registers a trackhub on the server."""
+    payload = {
+        'url': hub_url, 
+        'assemblies': ASSEMBLIES_MAPPING
+    }
+    r = requests.post(server+'/api/trackhub', headers=headers, json=payload, verify=True)
+    if not r.ok:
+        print("Couldn't register track hub at %s, reason: %s [%d]" % (hub_url, r.text, r.status_code))
+        sys.exit()
+    else:
+        print("I have registered hub at %s" % hub_url)
 
-logout(server, user, auth_token)`,
+auth_token = login(SERVER)
+headers = {
+    'user': USER,
+    'Authorization': 'Token {}'.format(auth_token)
+}
+register_trackhub(SERVER, HUB_URL, headers)
+logout(SERVER, headers)`,
         },
         {
             tabTitle: `Python3`,
-            tabContent: `import requests, sys
+            tabContent: `import requests
+import sys
 
-server = '`+ window.location.origin +`'
-hub_url = 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt'
-user = 'exampleuser'
-password = 'examplepass'
+SERVER = '`+ window.location.origin +`'
+# Change these variables
+HUB_URL = 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt'
+USER = 'username'
+PASSWORD = 'password'
+# Provide assemblies mapping (Only if needed)
+ASSEMBLIES_MAPPING = {
+    'araTha1': 'GCA_000001735.1',
+    'ricCom1': 'GCA_000151685.2',
+    'braRap1': 'GCA_000309985.1'
+}
 
-def login(server, user, password):
-    r = requests.get(server+'/api/login', auth=(user, password), verify=True)
+def login(server):
+    """Logs in to the server and returns the auth token."""
+    data = {
+        "username": USER,
+        "password": PASSWORD
+    }
+    headers = {"Content-Type": "application/json"}
+    r = requests.post(server+'/api/login', json=data, headers=headers, verify=True)
     if not r.ok:
         print("Couldn't login, reason: %s [%d]" % (r.text, r.status_code))
         sys.exit
@@ -175,92 +224,113 @@ def login(server, user, password):
     print('Logged in [%s]' % auth_token)
     return auth_token
 
-def logout(server, user, auth_token):
-    r = requests.get(server+'/api/logout', headers={ 'user': user, 'auth_token': auth_token })    
+def logout(server, headers):
+    """Logs out from the server."""
+    r = requests.post(server+'/api/logout', headers=headers)
     if not r.ok:
        print("Couldn't logout, reason: %s [%d]" % (r.text, r.status_code))
        sys.exit
     print('Logged out')
 
-auth_token = login(server, user, password)
-headers = { 'user': user, 'auth_token': auth_token }
-payload = { 'url': hub_url, 'assemblies': { 'araTha1': 'GCA_000001735.1', 'ricCom1': 'GCA_000151685.2', 'braRap1': 'GCA_000309985.1' } }
-r = requests.post(server+'/api/trackhub', headers=headers, json=payload, verify=True)
-if not r.ok:
-   print("Couldn't register track hub at %s, reason: %s [%d]" % (hub_url, r.text, r.status_code))
-   sys.exit
-print("I have registered hub at %s" % hub_url)
+def register_trackhub(server, hub_url, headers):
+    """Registers a trackhub on the server."""
+    payload = {
+        'url': hub_url, 
+        'assemblies': ASSEMBLIES_MAPPING
+    }
+    r = requests.post(server+'/api/trackhub', headers=headers, json=payload, verify=True)
+    if not r.ok:
+        print("Couldn't register track hub at %s, reason: %s [%d]" % (hub_url, r.text, r.status_code))
+        sys.exit
+    else:
+        print("I have registered hub at %s" % hub_url)
 
-logout(server, user, auth_token)`,
+
+auth_token = login(SERVER)
+headers = {
+    'user': USER,
+    'Authorization': f'Token {auth_token}'
+}
+register_trackhub(SERVER, HUB_URL, headers)
+logout(SERVER, headers)`,
         },
         {
             tabTitle: `Ruby`,
-            tabContent: `require 'net/https'
+            tabContent: `require 'net/http'
 require 'uri'
-
-require 'rubygems'
 require 'json'
 
-server = '`+ window.location.origin +`'
-hub_url = 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt'
-user = 'exampleuser'
-pass = 'examplepass'
+SERVER = '`+ window.location.origin +`'
+# Change these variables
+HUB_URL = 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt'
+USER = 'username'
+PASSWORD = 'password'
+# Provide assemblies mapping (Only if needed)
+ASSEMBLIES_MAPPING = {
+  'araTha1' => 'GCA_000001735.1',
+  'ricCom1' => 'GCA_000151685.2',
+  'braRap1' => 'GCA_000309985.1'
+}
 
-def login(user, pass)
-  request = Net::HTTP::Get.new('/api/login')
-  request.basic_auth(user, pass)
-  response = $http.request(request)
-  
-  if response.code != "200"
+def login(server)
+  uri = URI.parse("#{server}/api/login")
+  http = Net::HTTP.new(uri.host, uri.port)
+  request = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/json'})
+  request.body = {username: USER, password: PASSWORD}.to_json
+  response = http.request(request)
+
+  unless response.is_a?(Net::HTTPSuccess)
     puts "Couldn't login, reason: #{response.body} [#{response.code}]"
     exit
   end
 
-  result = JSON.parse(response.body)
-  puts "Logged in [#{result["auth_token"]}]"
-  
-  return result["auth_token"]
+  auth_token = JSON.parse(response.body)['auth_token']
+  puts "Logged in [#{auth_token}]"
+  auth_token
 end
 
-def logout(user, auth_token)
-  request = Net::HTTP::Get.new('/api/logout', { 'User' => user, 'Auth-Token' => auth_token })
-  response = $http.request(request)
- 
-  if response.code != "200"
-    puts "Invalid response: #{response.code}"
-    puts response.body
+def logout(server, headers)
+  uri = URI.parse("#{server}/api/logout")
+  http = Net::HTTP.new(uri.host, uri.port)
+  request = Net::HTTP::Post.new(uri.path, headers)
+  response = http.request(request)
+
+  unless response.is_a?(Net::HTTPSuccess)
+    puts "Couldn't logout, reason: #{response.body} [#{response.code}]"
     exit
   end
-
   puts 'Logged out'
 end
-      
-url = URI.parse(server)
-$http = Net::HTTP.new(url.host, url.port)
-$http.use_ssl = true
-$http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-auth_token = login(user, pass)
+def register_trackhub(server, hub_url, headers)
+  uri = URI.parse("#{server}/api/trackhub")
+  http = Net::HTTP.new(uri.host, uri.port)
+  request = Net::HTTP::Post.new(uri.path, headers.merge({'Content-Type' => 'application/json'}))
+  request.body = {url: hub_url, assemblies: ASSEMBLIES_MAPPING}.to_json
+  response = http.request(request)
 
-request = Net::HTTP::Post.new('/api/trackhub', { 'Content-Type' => 'application/json', 'User' => user, 'Auth-Token' => auth_token })
-request.body = { 'url' => hub_url, 'assemblies' => { 'araTha1' => 'GCA_000001735.1', 'ricCom1' => 'GCA_000151685.2', 'braRap1' => 'GCA_000309985.1' } }.to_json
-response = $http.request(request)
-if response.code != "201"
-  puts "Invalid response: #{response.code} #{response.body}"
-  exit
+  unless response.is_a?(Net::HTTPSuccess)
+    puts "Couldn't register track hub at #{hub_url}, reason: #{response.body} [#{response.code}]"
+    exit
+  end
+  puts "I have registered hub at #{hub_url}"
 end
 
-puts "I have registered hub at #{hub_url}" 
-
-logout(user, auth_token)`,
+auth_token = login(SERVER)
+headers = {
+  'user' => USER,
+  'Authorization' => "Token #{auth_token}"
+}
+register_trackhub(SERVER, HUB_URL, headers)
+logout(SERVER, headers)`,
         },
         {
             tabTitle: `Curl`,
             tabContent: `curl '`+ window.location.origin +`/api/trackhub' \\
     -H 'User: exampleuser' \\
-    -H 'Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi'\\
-    -X POST -d '{ "url": "http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt", \\
-                   "assemblies": { "araTha1": "GCA_000001735.1", "ricCom1": "GCA_000151685.2", "braRap1": "GCA_000309985.1" } }' \\
+    -H 'Authorization: Token 6l5/GuIiOSCywuSI9HF1VUMyxtjQBj497clwb/CXPDFS0uORZL8NY3Yhi'\\
+    -X POST \\
+    -d '{"url": "http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt", "assemblies": {"araTha1": "GCA_000001735.1", "ricCom1": "GCA_000151685.2", "braRap1": "GCA_000309985.1"}}' \\
     --header "Content-Type:application/json"`,
         },
     ]
@@ -435,9 +505,9 @@ logout(user, auth_token)`,
                                 `      201 Created
       Content-type: application/json; charset=utf-8
       Location: [ 
-            '`+ window.location.origin +`/api/trackdb/KRBr5PS7RmapaFr7ofpTBA, 
-            '`+ window.location.origin +`/api/trackdb/hB8Npdm1ST2gBwkbQThkVg', 
-            '`+ window.location.origin +`/api/trackdb/FOEM87nETMOCOglmm0sSsg' 
+        '`+ window.location.origin +`/api/trackdb/KRBr5PS7RmapaFr7ofpTBA, 
+        '`+ window.location.origin +`/api/trackdb/hB8Npdm1ST2gBwkbQThkVg', 
+        '`+ window.location.origin +`/api/trackdb/FOEM87nETMOCOglmm0sSsg' 
       ]
       ...
       [
@@ -445,55 +515,57 @@ logout(user, auth_token)`,
           // ricCom1 trackDb configuration
           'owner': 'exampleuser',
           'source': {
-                        'checksum': 'f9561ae6f7883add3698fad7abab7e13',
-                        'url': 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/ricCom1/trackDb.txt'
-                      },
+            'checksum': 'f9561ae6f7883add3698fad7abab7e13',
+            'url': 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/ricCom1/trackDb.txt'
+          },
           'hub': {
-                     'shortLabel': 'Plants',
-                     'name': 'cshl2013',
-                     'url': 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt',
-                     'longLabel': 'CSHL Biology of Genomes meeting 2013 demonstration assembly hub'
-                   },
+            'shortLabel': 'Plants',
+            'name': 'cshl2013',
+            'url': 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt',
+            'longLabel': 'CSHL Biology of Genomes meeting 2013 demonstration assembly hub'
+          },
           'species': {
-                         'scientific_name': 'Ricinus communis',
-                         'common_name': 'castor bean',
-                         'tax_id': '3988'
-                       },
+            'scientific_name': 'Ricinus communis',
+            'common_name': 'castor bean',
+            'tax_id': '3988'
+          },
           'assembly': {
-                          'synonyms': 'ricCom1',
-                          'name': 'JCVI_RCG_1.1',
-                          'accession': 'GCA_000151685.2'
-                        },
+            'synonyms': 'ricCom1',
+            'name': 'JCVI_RCG_1.1',
+            'accession': 'GCA_000151685.2'
+          },
           'configuration': {
-                               'repeatMasker_': {
-                                                    'priority': '149.1',
-                                                    'visibility': 'dense',
-                                                    'compositeTrack': 'on',
-                                                    'track': 'repeatMasker_',
-                                                    'shortLabel': 'RepeatMasker',
-          ...
+            'repeatMasker_': {
+              'priority': '149.1',
+              'visibility': 'dense',
+              'compositeTrack': 'on',
+              'track': 'repeatMasker_',
+              'shortLabel': 'RepeatMasker',
+            }
+            ...
+          }
           ... 
         },
         {
           // araTha1 trackDb configuration 
           ...
           'hub': {
-                     'shortLabel': 'Plants',
-                     'name': 'cshl2013',
-                     'url': 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt',
-                     'longLabel': 'CSHL Biology of Genomes meeting 2013 demonstration assembly hub'
-                   },
+            'shortLabel': 'Plants',
+            'name': 'cshl2013',
+            'url': 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt',
+            'longLabel': 'CSHL Biology of Genomes meeting 2013 demonstration assembly hub'
+          },
           ...
         },
         {
           // braRap1 trackDb configuration
           ...
           'hub': {
-                     'shortLabel': 'Plants',
-                     'name': 'cshl2013',
-                     'url': 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt',
-                     'longLabel': 'CSHL Biology of Genomes meeting 2013 demonstration assembly hub'
-                   },
+            'shortLabel': 'Plants',
+            'name': 'cshl2013',
+            'url': 'http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt',
+            'longLabel': 'CSHL Biology of Genomes meeting 2013 demonstration assembly hub'
+          },
           ...
         }
       ]`
