@@ -42,9 +42,10 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '5px',
         padding: '10px',
         background: '#eeeeee',
-        overflowX: 'scroll',
+        overflowX: 'scroll',  // Enable horizontal scrolling
         minWidth: '100px',
-        marginTop: '-10px'
+        marginTop: '-10px',
+        whiteSpace: 'pre-wrap'  // To wrap the lines but scroll horizontally if there's an overflow
     },
 }));
 
