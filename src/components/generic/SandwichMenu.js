@@ -216,6 +216,18 @@ function SandwichMenu(props) {
                                     <ListItemText primary="Help"/>
                                 </ListItemButton>
                             </ListItem>
+                            <ListItem button component="a"
+                                rel="noreferrer"
+                                color="inherit"
+                                target="_blank"
+                                href="https://www.ebi.ac.uk/long-term-data-preservation" disablePadding>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <InfoIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText primary="Data Preservation"/>
+                                </ListItemButton>
+                            </ListItem>
                         </List>
                         <Divider/>
                         <List>
