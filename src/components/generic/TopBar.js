@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import {AppBar, Toolbar, Typography, Button, Container} from '@mui/material';
+import {AppBar, Toolbar, Typography, Button, Container, Link} from '@mui/material';
 import SearchForm from "../home/SearchForm";
 import {useSelector} from "react-redux";
 import DocsDropdownMenu from "../docs/DocsDropdownMenu";
@@ -60,6 +60,12 @@ export default function TopBar() {
                             <DocsDropdownMenu/>
                             <Button color="inherit" href="/about">About</Button>
                             <Button color="inherit" href="/help">Help</Button>
+                            <Button
+                                href="https://www.ebi.ac.uk/long-term-data-preservation"
+                                rel="noreferrer"
+                                underline="hover"
+                                color="inherit"
+                                target="_blank">Data Preservation</Button>
                             <Typography sx={{flexGrow: 1}}/>
                             <SearchForm/>
                             {isLoggedIn ? null : <Button color="inherit" href="/register">Register</Button>}
