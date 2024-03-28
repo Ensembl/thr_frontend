@@ -60,12 +60,12 @@ export default function TopBar() {
                             <DocsDropdownMenu/>
                             <Button color="inherit" href="/about">About</Button>
                             <Button color="inherit" href="/help">Help</Button>
-                            <Link
+                            <Button
                                 href="https://www.ebi.ac.uk/long-term-data-preservation"
                                 rel="noreferrer"
                                 underline="hover"
                                 color="inherit"
-                                target="_blank">Data Preservation</Link>
+                                target="_blank">Data Preservation</Button>
                             <Typography sx={{flexGrow: 1}}/>
                             <SearchForm/>
                             {isLoggedIn ? null : <Button color="inherit" href="/register">Register</Button>}
