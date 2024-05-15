@@ -30,6 +30,15 @@ function Home() {
     return (
         <>
             <CssBaseline/>
+            <Alert severity="warning">
+                Do data resources managed by EMBL-EBI and our collaborators make a difference to your work?
+                Please take 10 minutes to <a href="https://www.surveymonkey.com/r/HJKYKTT?channel=[webpage]"
+                                             target="_blank"
+                                             rel="noreferrer">fill in our annual user survey</a>, and help us make the
+                case for why sustaining open data resources is critical for life sciences research.
+
+            </Alert>
+            <br/>
             <Alert severity="info">
                 Trackhub Registry has been redeveloped! Due to this, if you have an account you will need
                 to <Link to='/forgot_password' variant="body2">reset your password </Link>
