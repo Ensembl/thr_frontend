@@ -27,7 +27,7 @@ const styles = {
         '& > * + *': {
             marginTop: 2,
         },
-        marginTop: 3,
+        marginTop: 1,
         marginBottom: 3,
     },
 };
