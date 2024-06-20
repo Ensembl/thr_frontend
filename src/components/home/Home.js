@@ -14,35 +14,21 @@
  * limitations under the License.
  */
 
-import React, {Fragment} from 'react'
+import React from 'react'
 import CssBaseline from '@mui/material/CssBaseline';
 import NestedGrid from "./NestedGrid";
 import SearchForm from "./SearchForm";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
-import {AlertTitle, Stack, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import Alert from "@mui/material/Alert";
-import Alerts from "../generic/Alerts";
-import PublishIcon from "@mui/icons-material/Publish";
 
 function Home() {
 
     return (
         <>
             <CssBaseline/>
-            <Alerts
-                messageType={'warning'}
-                message={<Fragment>
-                    <AlertTitle><strong>EMBL-EBI User Survey 2024</strong></AlertTitle>
-                    Do data resources managed by EMBL-EBI and our collaborators make a difference to your work?
-                    <strong> Please take 10 minutes to <a href="https://www.surveymonkey.com/r/HJKYKTT?channel=[webpage]"
-                                                 target="_blank"
-                                                 rel="noreferrer">fill in our annual user survey</a></strong>, and help us make the
-                    case for why sustaining open data resources is critical for life sciences research.
-                </Fragment>}
-            ></Alerts>
-
             <Alert severity="info">
                 Trackhub Registry has been redeveloped! Due to this, if you have an account you will need
                 to <Link to='/forgot_password' variant="body2">reset your password </Link>
