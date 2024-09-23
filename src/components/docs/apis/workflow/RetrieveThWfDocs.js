@@ -245,7 +245,7 @@ logout(user, auth_token)`,
             tabTitle: `Curl`,
             tabContent: `curl -X GET "`+ window.location.origin +`/api/trackhub" \\
      -H "User: exampleuser" \\
-     -H "Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi"`,
+     -H "Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi"`,
         },
     ]
 
@@ -299,7 +299,7 @@ logout(user, auth_token)`,
                             <li>Make a GET request to the <a
                                 href="/docs/api/registration/reference#get_trackhub">/api/trackhub</a> endpoint
                                 that includes a <em>User</em> header with your username, and
-                                an <em>Auth-Token</em> header with the given authentication token;
+                                an <em>Authorization: Token</em> header with the given authentication token;
                             </li>
                             <li>Examine the response. The response code indicates whether the request succeeded, or how
                                 it failed;
@@ -325,7 +325,7 @@ logout(user, auth_token)`,
                         <pre className={classes.codeBlock}>
                             {
                                 `      User: [username]
-      Auth-Token: [valid token]`
+      Authorization: Token [valid token]`
                             }
                         </pre>
                     </p>
@@ -341,7 +341,7 @@ logout(user, auth_token)`,
                             {
                                 `      GET `+ window.location.origin +`/api/trackhub
       User: exampleuser
-      Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
+      Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                             }
                         </pre>
                     </p>

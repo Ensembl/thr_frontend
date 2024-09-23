@@ -100,7 +100,7 @@ const UpdateThWfDocs = () => {
                         <li>Make a PUT request to the <a
                             href="/docs/api/registration/reference#put_trackhub">/api/trackhub/:id</a> endpoint
                             that includes a <em>User</em> header with your username and
-                            an <em>Auth-Token</em> header with the given authentication token;
+                            an <em>Authorization: Token</em> header with the given authentication token;
                         </li>
                         <li>Examine the response. The response code indicates whether the request succeeded, or how it
                             failed;
@@ -125,7 +125,7 @@ const UpdateThWfDocs = () => {
                     {
                         `      PUT ` + window.location.origin + `/api/trackhub/1
       User: exampleuser
-      Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi
+      Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi
       {
         "url": "http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt"
       }`

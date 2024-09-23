@@ -215,8 +215,9 @@ curl -X POST ` + window.location.origin + `/api/login \\
                         Request:
                         <pre className={classes.codeBlock}>
                         {
-                            `POST ` + window.location.origin + `/api/login
-Authorization: Basic ZXhhbXBsZXVzZXI6ZXhhbXBsZXBhc3N3b3Jk`
+                            `curl -X POST ` + window.location.origin + `/api/login \\
+-d "username=exampleuser" \\
+-d "password=examplepassword"`
                         }
                         </pre>
 
@@ -243,7 +244,7 @@ Content-type: application/json; charset=utf-8
                                 response body is a JSON object with a single key (
                                 <em>auth_token</em>
                                 ), whose value is the access token. <u>This token must be included as
-                                an <em>Auth-Token</em> header in all subsequent requests</u>.
+                                an <em>Authorization: Token</em> header in all subsequent requests</u>.
                             </li>
                             <li>If the credentials supplied in the authentication header are invalid, the server returns
                                 HTTP response code 401.
