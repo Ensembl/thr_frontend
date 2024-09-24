@@ -242,7 +242,7 @@ logout(user, auth_token)`,
             tabTitle: `Curl`,
             tabContent: `curl -X DELETE "`+ window.location.origin +`/api/trackhub/cshl2013" \\
      -H "User: exampleuser" \\
-     -H "Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi"`,
+     -H "Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi"`,
         },
     ]
 
@@ -296,7 +296,7 @@ logout(user, auth_token)`,
                             <li>Make a request to the <a
                                 href="/docs/api/registration/reference#delete_trackhub_id">DELETE
                                 /api/trackhub/:id</a> endpoint that includes a User header with your username, and an
-                                Auth-Token header with the given authentication token; the :id parameter must be
+                                Authorization: Token header with the given authentication token; the :id parameter must be
                                 replaced with the name of the hub as it is known by the Registry;
                             </li>
                             <li>Examine the response. The response code indicates whether the request succeeded, or how
@@ -321,7 +321,7 @@ logout(user, auth_token)`,
                             {
                                 `      DELETE `+ window.location.origin +`/api/trackhub/1
       User: exampleuser
-      Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
+      Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                             }
 
                         </pre>
@@ -382,7 +382,7 @@ logout(user, auth_token)`,
                     {/*<h4>Procedure</h4>*/}
                     {/*<p>*/}
                     {/*  <ol>*/}
-                    {/*    <li>Make multiple requests to the <a href="/docs/api/registration/reference#delete_trackdb">DELETE /api/trackdb/:id</a> endpoint, each one with the URI of a trackDb associated with the track hub you want to delete. As usual, the request includes a <mark>User</mark> header with your username and an <mark>Auth-Token</mark> header with the given authentication token;</li>*/}
+                    {/*    <li>Make multiple requests to the <a href="/docs/api/registration/reference#delete_trackdb">DELETE /api/trackdb/:id</a> endpoint, each one with the URI of a trackDb associated with the track hub you want to delete. As usual, the request includes a <mark>User</mark> header with your username and an <mark>Authorization: Token</mark> header with the given authentication token;</li>*/}
                     {/*    <li>Examine the response. The response code indicates whether the request succeeded, or how it failed;</li>*/}
                     {/*    <li>Each successful request returns a JSON object representing the deleted trackDb.</li>*/}
                     {/*  </ol>*/}
@@ -398,7 +398,7 @@ logout(user, auth_token)`,
                     {/*  <pre>*/}
                     {/*    DELETE `+ window.location.origin +`/api/trackdb/KRBr5PS7RmapaFr7ofpTBA*/}
                     {/*    User: exampleuser*/}
-                    {/*    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi*/}
+                    {/*    Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi*/}
                     {/*  </pre>*/}
                     {/*  Response:*/}
                     {/*  <pre>*/}
@@ -413,7 +413,7 @@ logout(user, auth_token)`,
                     {/*  <pre>*/}
                     {/*    DELETE `+ window.location.origin +`/api/trackdb/FOEM87nETMOCOglmm0sSsg*/}
                     {/*    User: exampleuser*/}
-                    {/*    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi*/}
+                    {/*    Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi*/}
                     {/*  </pre>*/}
                     {/*  Response:*/}
                     {/*  <pre>*/}
@@ -428,7 +428,7 @@ logout(user, auth_token)`,
                     {/*  <pre>*/}
                     {/*    DELETE `+ window.location.origin +`/api/trackdb/hB8Npdm1ST2gBwkbQThkVg*/}
                     {/*    User: exampleuser*/}
-                    {/*    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi*/}
+                    {/*    Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi*/}
                     {/*  </pre>*/}
                     {/*  Response:*/}
                     {/*  <pre>*/}

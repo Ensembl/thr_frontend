@@ -168,7 +168,7 @@ const ThrApisDocs = () => {
                         HTTP communications between an API client and the server are secured with SSL. The
                         Registration API implements Basic HTTP Authentication, as defined by RFC 2617, to allow
                         clients to login and obtain an authentication token. Access tokens allow clients to send
-                        individual authorised HTTP requests by including an auth-token header in the request.
+                        individual authorised HTTP requests by including an Authorization: Token header in the request.
                     </p>
 
                     <Typography id="requestheaders" component="h4" variant="h6">
@@ -202,10 +202,10 @@ const ThrApisDocs = () => {
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell>Auth-Token</TableCell>
+                                    <TableCell>Authorization: Token</TableCell>
                                     <TableCell>
                                         Requests to the Registration API from authenticated clients must
-                                        include an API-key in the form of an Auth-Token header.
+                                        include an API-key in the form of an Authorization: Token header.
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>
@@ -285,8 +285,8 @@ const ThrApisDocs = () => {
                                     <TableCell>
                                         HTTP basic authentication failed (an Authorization header was
                                         expected but not found, or invalid user credentials), or token based
-                                        authorisation failed (User/Auth-Token headers were expected but not
-                                        found or invalid auth-token)
+                                        authorisation failed (User/Authorization: Token headers were expected but not
+                                        found or invalid token)
                                     </TableCell>
                                 </TableRow>
                                 <TableRow>

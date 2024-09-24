@@ -182,7 +182,7 @@ puts 'Logged out'`,
                     <p>Make a request to the <a
                         href="/docs/api/registration/reference#logout">/api/logout</a> endpoint by
                         specifying your username (resp. access token) with
-                        the <em>User</em> (resp. <em>Auth-Token</em>) header.
+                        the <em>User</em> (resp. <em>Authorization: Token</em>) header.
                     </p>
 
                     <Typography component="h4" variant="h6">

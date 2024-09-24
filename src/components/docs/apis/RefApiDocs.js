@@ -86,7 +86,7 @@ const RefApiDocs = () => {
                     <p>
                         If the request is successful, the response is formatted as a JSON object with a single key
                         (<em>auth_token</em>), whose value is the access token. <u>This token must be included as
-                        an <em>Auth-Token</em> header in all subsequent requests</u>.
+                        an <em>Authorization: Token</em> header in all subsequent requests</u>.
                     </p>
 
                     <h4>Resource Information</h4>
@@ -202,7 +202,7 @@ const RefApiDocs = () => {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Authentication</strong></TableCell>
-                                    <TableCell>User+Auth-Token headers</TableCell>
+                                    <TableCell>User+Authorization: Token headers</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Rate Limited</strong></TableCell>
@@ -220,7 +220,7 @@ const RefApiDocs = () => {
                         {
                             `    GET `+ window.location.origin +`/api/trackhub
     User: exampleuser
-    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
+    Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                         }
 
   </pre>
@@ -351,7 +351,7 @@ const RefApiDocs = () => {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Authentication</strong></TableCell>
-                                    <TableCell>User+Auth-Token headers</TableCell>
+                                    <TableCell>User+Authorization: Token headers</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Rate Limited</strong></TableCell>
@@ -455,7 +455,7 @@ const RefApiDocs = () => {
     {
         `    POST `+ window.location.origin +`/api/trackhub
     User: exampleuser
-    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi
+    Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi
     {
       "url": "http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt",
       "assemblies": {
@@ -606,7 +606,7 @@ const RefApiDocs = () => {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Authentication</strong></TableCell>
-                                    <TableCell>User+Auth-Token headers</TableCell>
+                                    <TableCell>User+Authorization: Token headers</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Rate Limited</strong></TableCell>
@@ -710,7 +710,7 @@ const RefApiDocs = () => {
     {
         `    PUT `+ window.location.origin +`/api/trackhub/1
     User: exampleuser
-    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi
+    Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi
     {
       "url": "http://genome-test.gi.ucsc.edu/~hiram/hubs/Plants/hub.txt",
       "assemblies": {
@@ -873,7 +873,7 @@ const RefApiDocs = () => {
                         {
                             `    GET `+ window.location.origin +`/api/trackhub/cshl2013
     User: exampleuser
-    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
+    Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                         }
 
                     </pre>
@@ -958,7 +958,7 @@ const RefApiDocs = () => {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Authentication</strong></TableCell>
-                                    <TableCell>User+Auth-Token headers</TableCell>
+                                    <TableCell>User+Authorization: Token headers</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Rate Limited</strong></TableCell>
@@ -995,7 +995,7 @@ const RefApiDocs = () => {
                         {
                             `    DELETE `+ window.location.origin +`/api/trackhub/cshl2013
     User: exampleuser
-    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
+    Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                         }
 
                     </pre>
@@ -1078,7 +1078,7 @@ const RefApiDocs = () => {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Authentication</strong></TableCell>
-                                    <TableCell>User+Auth-Token headers</TableCell>
+                                    <TableCell>User+Authorization: Token headers</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Rate Limited</strong></TableCell>
@@ -1115,7 +1115,7 @@ const RefApiDocs = () => {
                         {
                             `    GET `+ window.location.origin +`/api/trackdb/knB1GHPYSdmeypb-R8sxhA
     User: exampleuser
-    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
+    Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                         }
 
                     </pre>
@@ -1238,7 +1238,7 @@ const RefApiDocs = () => {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Authentication</strong></TableCell>
-                                    <TableCell>User+Auth-Token headers</TableCell>
+                                    <TableCell>User+Authorization: Token headers</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Rate Limited</strong></TableCell>
@@ -1275,7 +1275,7 @@ const RefApiDocs = () => {
                         {
                             `    DELETE `+ window.location.origin +`/api/trackdb/knB1GHPYSdmeypb-R8sxhA
     User: exampleuser
-    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
+    Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                         }
 
                     </pre>
@@ -1365,7 +1365,7 @@ const RefApiDocs = () => {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Authentication</strong></TableCell>
-                                    <TableCell>User+Auth-Token headers</TableCell>
+                                    <TableCell>User+Authorization: Token headers</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Rate Limited</strong></TableCell>
@@ -1383,7 +1383,7 @@ const RefApiDocs = () => {
                         {
                             `    GET `+ window.location.origin +`/api/logout
     User: exampleuser
-    Auth-Token: 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
+    Authorization: Token 6l5/GuIiOSCywuSI9HF1VU97clwb/CXPDFS0MyAB/HCZuxtjQBj4uORZL8NY3Yhi`
                         }
                     </pre>
 
