@@ -20,17 +20,6 @@ lint:
   script:
     - npm test
 
-## Build
-
-app-build:
-  stage: build
-  # needs: ["unit-test"]
-  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:18
-  script:
-    # fix: "Browserslist: caniuse-lite is outdated"
-    - npx browserslist@latest --update-db
-    - npm run build
-
 docker-build:
   stage: build
   # needs: ["unit-test"]
@@ -39,7 +28,7 @@ docker-build:
     - name: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:24-dind
       alias: docker
   variables:
-    DOCKER_HOST: tcp://docker:2375
+#    DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
     DOCKER_API_VERSION: "1.43"
     IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
