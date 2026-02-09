@@ -6,7 +6,7 @@ stages:
 before_script:
   # install dependencies
   - npm -v
-  - npm install
+  - npm ci --legacy-peer-deps
 
 lint:
   stage: lint

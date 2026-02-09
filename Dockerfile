@@ -22,13 +22,12 @@ FROM node:18-alpine AS builder
 WORKDIR /usr/src/app
 
 # install dependencies and avoid `node-gyp rebuild` errors
-COPY ./package.json .
+COPY ./package.json ./package-lock.json ./
 RUN apk add --no-cache --virtual .gyp \
         python3 \
         make \
         g++ \
-    && npm install \
-    && npm install moment@2.29.0 \
+    && npm ci --legacy-peer-deps \
     && apk del .gyp
 
 # copy our react project
