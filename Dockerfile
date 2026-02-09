@@ -16,7 +16,7 @@
 # tldr; we setup two stages, a first stage that builds the application and a second stage that runs it
 
 # Build stage:
-FROM node:14.17.3-alpine3.12 AS builder
+FROM node:18-alpine AS builder
 
 # set work directory
 WORKDIR /usr/src/app
@@ -48,7 +48,7 @@ RUN REACT_APP_API_SERVER=${API_SERVER} \
 
 
 # Final stage:
-FROM node:14.17.3-alpine3.12
+FROM node:18-alpine
 
 # set work directory
 WORKDIR /usr/src/app
