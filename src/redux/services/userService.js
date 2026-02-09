@@ -18,7 +18,7 @@ function login(username, password) {
         body: JSON.stringify({username, password})
     };
 
-    return fetch(`${settings.API_SERVER}/api/login`, requestOptions)
+    return fetch(`${settings.API_SERVER}/api/user/login`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -43,7 +43,7 @@ function logout() {
         };
 
         // remove the token for the DB by calling 'logout' API
-        return fetch(`${settings.API_SERVER}/api/logout`, requestOptions)
+        return fetch(`${settings.API_SERVER}/api/user/logout`, requestOptions)
             .then(handleResponse)
             .then(user => {
                 // remove user from local storage to log user out
@@ -67,7 +67,7 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(`${settings.API_SERVER}/api/register`, requestOptions).then(handleResponse);
+    return fetch(`${settings.API_SERVER}/api/user/register`, requestOptions).then(handleResponse);
 }
 
 function changePassword(old_password, new_password1, new_password2) {
@@ -81,7 +81,7 @@ function changePassword(old_password, new_password1, new_password2) {
         body: JSON.stringify({old_password, new_password1, new_password2})
     };
 
-    return fetch(`${settings.API_SERVER}/api/change_password`, requestOptions)
+    return fetch(`${settings.API_SERVER}/api/user/change_password`, requestOptions)
         .then(handleResponse)
         .then(user => {
             return user;
@@ -96,7 +96,7 @@ function verifyEmail(token) {
     };
 
     // send token in params url
-    return fetch(`${settings.API_SERVER}/api/email_verification?token=${token}`, requestOptions).then(handleResponse);
+    return fetch(`${settings.API_SERVER}/api/user/email_verification?token=${token}`, requestOptions).then(handleResponse);
 }
 
 function forgotPassword(email) {
@@ -107,7 +107,7 @@ function forgotPassword(email) {
     };
 
     // send verification URL to the provided email
-    return fetch(`${settings.API_SERVER}/api/reset_password_email`, requestOptions).then(handleResponse);
+    return fetch(`${settings.API_SERVER}/api/user/reset_password_email`, requestOptions).then(handleResponse);
 }
 
 function validateResetToken(uidb64, token) {
@@ -117,7 +117,7 @@ function validateResetToken(uidb64, token) {
     };
 
     // send uidb64 and token in params url
-    return fetch(`${settings.API_SERVER}/api/reset_password?uidb64=${uidb64}&token=${token}`, requestOptions).then(handleResponse);
+    return fetch(`${settings.API_SERVER}/api/user/reset_password?uidb64=${uidb64}&token=${token}`, requestOptions).then(handleResponse);
 }
 
 function resetPassword(new_password, new_password_confirm, uidb64, token) {
@@ -128,7 +128,7 @@ function resetPassword(new_password, new_password_confirm, uidb64, token) {
     };
 
     // send verification URL to the provided email
-    return fetch(`${settings.API_SERVER}/api/reset_password_complete`, requestOptions).then(handleResponse);
+    return fetch(`${settings.API_SERVER}/api/user/reset_password_complete`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
