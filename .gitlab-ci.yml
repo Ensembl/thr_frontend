@@ -1,5 +1,5 @@
 stages:
-  - test
+  - lint
   - build
 
 # KEEP IN MIND! global before_script is not executed when job has its own before_script
@@ -9,21 +9,8 @@ before_script:
   - npm -v
   - npm install
 
-# This fixes "error during connect: Post http://docker:2375/v1.40/auth: dial tcp: lookup docker on 192.168.65.5:53: no such host"
-variables:
-  # DOCKER_HOST variable tells docker how to connect to the daemon (a background service running inside the Docker VM)
-  DOCKER_HOST: tcp://docker:2375/
-  # Environemt Variable for docker:dind service explaining to use overlay2 as supporting driver for docker
-  # https://docs.docker.com/storage/storagedriver/overlayfs-driver/
-  DOCKER_DRIVER: overlay2
-  # We need to disable TLS (https://about.gitlab.com/blog/2019/07/31/docker-in-docker-with-docker-19-dot-03/#disable-tls)
-  # to fix the error "docker: Cannot connect to the Docker daemon at tcp://docker:2375. Is the docker daemon running?"
-  DOCKER_TLS_CERTDIR: ""
-
-## Test
-
-lint-test:
-  stage: test
+lint:
+  stage: lint
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:14.17.3
   script:
     - npm run lint
@@ -48,14 +35,18 @@ app-build:
 docker-build:
   stage: build
   # needs: ["unit-test"]
-  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:19.03.12
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:24
   services:
-    - name: docker:dind
+    - name: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:24-dind
+      alias: docker
   variables:
+#    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_API_VERSION: "1.43"
     IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   # By using before_script here we override the global one as we don't need npm ;)
   before_script:
-    - echo $CI_REGISTRY_TOKEN | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - echo "$CI_REGISTRY_TOKEN" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
   script:
-    - docker build -t $IMAGE_TAG .
-    - docker push $IMAGE_TAG
+    - docker build -t "$IMAGE_TAG" .
+    - docker push "$IMAGE_TAG"
