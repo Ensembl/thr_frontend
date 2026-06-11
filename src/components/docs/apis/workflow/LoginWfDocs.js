@@ -63,7 +63,7 @@ use LWP::UserAgent; # install LWP::Protocol::https as well
 my $ua = LWP::UserAgent->new(ssl_opts => { verify_hostname => 0 });
 my $payload = ['username' => 'exampleuser', 'password' => 'examplepass'];
 
-my $request = POST('` + window.location.origin + `/api/login', $payload);
+my $request = POST('` + window.location.origin + `/api/user/login', $payload);
 
 my $response = $ua->request($request);
 my $auth_token;
@@ -79,7 +79,7 @@ if ($response->is_success) {
             tabTitle: `Python2`,
             tabContent: `import requests, sys
 
-url = "` + window.location.origin + `/api/login"
+url = "` + window.location.origin + `/api/user/login"
 payload = {"username": "your_username", "password": "your_password"}
 
 response = requests.post(url, data=payload)
@@ -94,7 +94,7 @@ print 'Logged in [%s]' % auth_token`,
             tabTitle: `Python3`,
             tabContent: `import requests, sys
 
-url = "` + window.location.origin + `/api/login"
+url = "` + window.location.origin + `/api/user/login"
 payload = {"username": "your_username", "password": "your_password"}
 
 response = requests.post(url, data=payload)
@@ -111,7 +111,7 @@ print('Logged in [%s]' % auth_token)`,
 require 'uri'
  
 server='`+ window.location.origin +`'
-path = '/api/login'
+path = '/api/user/login'
  
 url = URI.parse(server)
 http = Net::HTTP.new(url.host, url.port)
@@ -136,14 +136,14 @@ puts "Logged in [#{result["auth_token"]}]"`,
         },
         {
             tabTitle: `Curl`,
-            tabContent: `curl -X POST ` + window.location.origin + `/api/login \\
+            tabContent: `curl -X POST ` + window.location.origin + `/api/user/login \\
   --header 'Content-Type: multipart/form-data' \\
   --form username=exampleuser \\
   --form password=examplepass      
 
 Another method:
 
-curl -X POST ` + window.location.origin + `/api/login \\
+curl -X POST ` + window.location.origin + `/api/user/login \\
      -H "Content-Type: application/json"  \\
      -d "{\\"username\\": \\"exampleuser\\", \\"password\\": \\"examplepass\\"}"`,
         },
@@ -177,10 +177,9 @@ curl -X POST ` + window.location.origin + `/api/login \\
                     </Typography>
                     <p>
                         <ol>
-                            <li>Make a GET request to the <a
-                                href="/docs/api/registration/reference#login">/api/login</a> endpoint
-                                that includes an Authorization header with your username and password in a MIME Base64
-                                encoding;
+                            <li>Make a POST request to the <a
+                                href="/docs/api/registration/reference#login">/api/user/login</a> endpoint
+                                with your username and password;
                             </li>
                             <li>Examine the response. The response code indicates whether the request succeeded, or how
                                 it failed;
@@ -196,17 +195,16 @@ curl -X POST ` + window.location.origin + `/api/login \\
                     </Typography>
                     <p>
                         A request to create a login session must supply the user's credentials in the following form:
-                        <pre className={classes.codeBlock}>user:password</pre>
+                        <pre className={classes.codeBlock}>username=exampleuser&password=examplepassword</pre>
                         <ul>
                             <li>
-                                <em>user</em> is the user's login name
+                                <em>username</em> is the user's login name
                             </li>
                             <li>
                                 <em>password</em> is the user's password
                             </li>
                         </ul>
-                        These credentials must be supplied in a MIME Base64 encoding with an Authorization header, as
-                        specified in RFC 1421.
+                        These credentials can be supplied as form data or JSON.
                     </p>
 
                     <p>
@@ -215,7 +213,7 @@ curl -X POST ` + window.location.origin + `/api/login \\
                         Request:
                         <pre className={classes.codeBlock}>
                         {
-                            `curl -X POST ` + window.location.origin + `/api/login \\
+                            `curl -X POST ` + window.location.origin + `/api/user/login \\
 -d "username=exampleuser" \\
 -d "password=examplepassword"`
                         }
