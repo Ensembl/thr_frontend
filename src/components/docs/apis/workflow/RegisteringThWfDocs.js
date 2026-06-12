@@ -76,7 +76,7 @@ sub login {
     my ($server) = @_;
     my $ua = LWP::UserAgent->new;
     my $res = $ua->post(
-        "$server/api/login",
+        "$server/api/user/login",
         'Content-Type' => 'application/json',
         Content => to_json({ username => $USER, password => $PASSWORD })
     );
@@ -153,7 +153,7 @@ def login(server):
         "password": PASSWORD
     }
     headers = {"Content-Type": "application/json"}
-    r = requests.post(server+'/api/login', json=data, headers=headers, verify=True)
+    r = requests.post(server+'/api/user/login', json=data, headers=headers, verify=True)
     if not r.ok:
         print("Couldn't login, reason: %s [%d]" % (r.text, r.status_code))
         sys.exit()
@@ -215,7 +215,7 @@ def login(server):
         "password": PASSWORD
     }
     headers = {"Content-Type": "application/json"}
-    r = requests.post(server+'/api/login', json=data, headers=headers, verify=True)
+    r = requests.post(server+'/api/user/login', json=data, headers=headers, verify=True)
     if not r.ok:
         print("Couldn't login, reason: %s [%d]" % (r.text, r.status_code))
         sys.exit
@@ -273,7 +273,7 @@ ASSEMBLIES_MAPPING = {
 }
 
 def login(server)
-  uri = URI.parse("#{server}/api/login")
+  uri = URI.parse("#{server}/api/user/login")
   http = Net::HTTP.new(uri.host, uri.port)
   request = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/json'})
   request.body = {username: USER, password: PASSWORD}.to_json

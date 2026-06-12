@@ -81,7 +81,7 @@ logout($server, $user, $auth_token);
 sub login {
   my ($server, $user, $pass) = @_;
 
-  my $request = GET("$server/api/login");
+  my $request = GET("$server/api/user/login");
   $request->headers->authorization_basic($user, $pass);
   
   my $response = $ua->request($request);
@@ -120,7 +120,7 @@ user = 'exampleuser'
 password = 'examplepass'
 
 def login(server, user, password):
-    r = requests.get(server+'/api/login', auth=(user, password), verify=False)
+    r = requests.get(server+'/api/user/login', auth=(user, password), verify=False)
     if not r.ok:
         print "Couldn't login, reason: %s [%d]" % (r.text, r.status_code)
         sys.exit
@@ -154,7 +154,7 @@ user = 'exampleuser'
 password = 'examplepass'
 
 def login(server, user, password):
-    r = requests.get(server+'/api/login', auth=(user, password), verify=True)
+    r = requests.get(server+'/api/user/login', auth=(user, password), verify=True)
     if not r.ok:
         print("Couldn't login, reason: %s [%d]" % (r.text, r.status_code))
         sys.exit
@@ -192,7 +192,7 @@ user = 'exampleuser'
 pass = 'examplepass'
 
 def login(user, pass)
-  request = Net::HTTP::Get.new('/api/login')
+  request = Net::HTTP::Get.new('/api/user/login')
   request.basic_auth(user, pass)
   response = $http.request(request)
   

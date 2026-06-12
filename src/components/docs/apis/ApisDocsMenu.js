@@ -288,7 +288,7 @@ export default function ApisDocsMenu() {
                                           underline="none">
                                     <ListItem button className={classes.nestedLvl2} key='login'>
                                         <ListItemIcon><HttpIcon/></ListItemIcon>
-                                        <ListItemText primary="GET /api/login"/>
+                                        <ListItemText primary="POST /api/user/login"/>
                                     </ListItem>
                                 </HashLink>
                                 <HashLink to="/docs/api/registration/reference#get_trackhub" className={classes.item}

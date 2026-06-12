@@ -73,11 +73,11 @@ const RefApiDocs = () => {
                     <p>
                         In all the following examples, it is assumed the client has successfully logged in as
                         user <em>exampleuser</em> and password <em>examplepassword</em> and therefore obtained a valid
-                        access token. This token is used in all the following endpoint examples except /api/login.
+                        access token. This token is used in all the following endpoint examples except /api/user/login.
                     </p>
 
                     <Typography id="login" component="h4" variant="h6">
-                        GET /api/login
+                        POST /api/user/login
                     </Typography>
                     <p>
                         Authenticate the client and obtain an access token in order to make subsequent requests to the
@@ -99,7 +99,7 @@ const RefApiDocs = () => {
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Authentication</strong></TableCell>
-                                    <TableCell>Basic, MIME Base64</TableCell>
+                                    <TableCell>Username and password</TableCell>
                                 </TableRow>
                                 <TableRow>
                                     <TableCell><strong>Rate Limited</strong></TableCell>
@@ -110,13 +110,37 @@ const RefApiDocs = () => {
                     </TableContainer>
 
                     <h4>Parameters</h4>
-                    <p>None.</p>
+                    <TableContainer component={Paper}>
+                        <Table className={classes.table} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell><strong>Name</strong></TableCell>
+                                    <TableCell><strong>Description</strong></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell>username</TableCell>
+                                    <TableCell>The user's login name</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>password</TableCell>
+                                    <TableCell>The user's password</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
 
                     <h4>Example Request</h4>
                     <pre className={classes.codeBlock}>
                         {
-                            `    GET `+ window.location.origin +`/api/login
-    Authorization: Basic ZXhhbXBsZXVzZXI6ZXhhbXBsZXBhc3N3b3Jk`
+                            `    POST `+ window.location.origin +`/api/user/login
+    Content-Type: application/json
+
+    {
+      "username": "exampleuser",
+      "password": "examplepassword"
+    }`
                         }
                     </pre>
 
